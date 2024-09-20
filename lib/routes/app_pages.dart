@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/modules/welcome/welcome_view.dart';
+import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
 import 'package:get/get.dart';
 part 'app_routes.dart';
 
@@ -6,8 +6,8 @@ abstract class AppPages {
   static var defaultTransition = Transition.noTransition;
   static final pages = [
     GetPage(
-      name: _Routes.welcome,
-      page: WelcomeView.new,
+      name: _Routes.login,
+      page: LoginScreen.new,
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

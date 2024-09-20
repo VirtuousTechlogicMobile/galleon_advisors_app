@@ -1,9 +1,9 @@
 part of 'app_pages.dart';
 
 abstract class AppRoutes {
-  static const welcome = _Routes.welcome;
+  static const login = _Routes.login;
 }
 
 abstract class _Routes {
-  static const welcome = '/welcome';
+  static const login = '/login';
 }
