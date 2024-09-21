@@ -5,14 +5,20 @@ class ManageStudiesController extends GetxController {
   final List<String> items = ["Option 1", "Option 2", "Option 3", "Option 4"];
   //RxString selectedValue = "".obs;
   var selectedValue = ''.obs;
+  RxBool isChecked = false.obs;
   final listOfDepartment = <String>['Option 1', 'Option 2', 'Option 3'].obs;
-
-  // Method to update the selected value
-  void updateListOfValue(String value) {
-    selectedValue.value = value;
-  }
 
   void updateValue(String value) {
     selectedValue.value = value; // Update the selected value
   }
+
+  void toggleCheckbox(bool? value) {
+    isChecked.value = value ?? false;
+  }
+
+  void toggleSelectAll(bool? value) {
+    isChecked.value = value ?? false;
+  }
+
+  //bool get areAllChecked => isChecked1.value && isChecked2.value;
 }
