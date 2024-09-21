@@ -20,9 +20,10 @@ void main() async {
 
 void runApplication() {
   AppUtility.log('Initializing App');
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
   ]);
   runApp(const MyApp());
   AppUtility.log('App Initialized');
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   String _handleAppInitialRoute() {
-    return AppRoutes.login;
+    return AppRoutes.home;
   }
 
   ThemeMode _handleAppTheme(String mode) {

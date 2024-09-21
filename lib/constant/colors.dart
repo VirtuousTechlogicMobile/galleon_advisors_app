@@ -7,7 +7,8 @@ abstract class ColorValues {
   static const Color darkDividerColor = Color.fromARGB(255, 70, 70, 70);
   static const Color darkGrayColor = Color.fromARGB(255, 120, 120, 120);
 
-  static const Color lightBgColor = Color.fromRGBO(250, 250, 250, 1);
+  // static const Color lightBgColor = Color.fromRGBO(250, 250, 250, 1);
+  static const Color lightBgColor = Color.fromRGBO(231, 230, 230, 1);
   static const Color lightDialogColor = Color.fromRGBO(252, 252, 252, 1);
   static const Color lightBodyTextColor = Color.fromARGB(255, 30, 30, 30);
   static const Color lightDividerColor = Color.fromARGB(255, 200, 200, 200);
@@ -27,4 +28,6 @@ abstract class ColorValues {
   static const Color blackColor = Color.fromRGBO(0, 0, 0, 1);
 
   static const Color whiteColor = Color.fromRGBO(255, 255, 255, 1);
+
+  static const Color green = Color.fromRGBO(1, 107, 84, 1);
 }
