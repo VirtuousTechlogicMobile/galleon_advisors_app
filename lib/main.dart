@@ -21,8 +21,8 @@ void main() async {
 void runApplication() {
   AppUtility.log('Initializing App');
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
   ]);
   runApp(const MyApp());
   AppUtility.log('App Initialized');
