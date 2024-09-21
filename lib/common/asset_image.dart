@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
@@ -34,10 +36,13 @@ class NxAssetImage extends StatelessWidget {
       child: Image.asset(
         imgAsset,
         fit: fit ?? BoxFit.contain,
-        errorBuilder: (ctx, url, err) => const Icon(
-          CupertinoIcons.info,
-          color: ColorValues.errorColor,
-        ),
+        errorBuilder: (ctx, url, err) {
+          log("Error to Load Image : $err");
+          return const Icon(
+            CupertinoIcons.info,
+            color: ColorValues.errorColor,
+          );
+        },
         width: width,
         height: height,
         scale: scale ?? 1.0,

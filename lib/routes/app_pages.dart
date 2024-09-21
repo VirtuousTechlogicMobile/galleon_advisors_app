@@ -1,3 +1,4 @@
+import 'package:galleon_advisors_app/modules/login/bindings/login_binding.dart';
 import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
 import 'package:get/get.dart';
 part 'app_routes.dart';
@@ -8,6 +9,7 @@ abstract class AppPages {
     GetPage(
       name: _Routes.login,
       page: LoginScreen.new,
+      binding: LoginBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),
