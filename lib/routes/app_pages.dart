@@ -1,10 +1,11 @@
 import 'package:galleon_advisors_app/modules/home/bindings/home_binding.dart';
 import 'package:galleon_advisors_app/modules/home/view/home_screen.dart';
-import 'package:galleon_advisors_app/modules/login/bindings/login_binding.dart';
 import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/bindings/manage_studies_binding.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/view/manage_studies_screen.dart';
 import 'package:get/get.dart';
+
+import '../modules/login/bindings/login_binding.dart';
 part 'app_routes.dart';
 
 abstract class AppPages {
@@ -13,7 +14,7 @@ abstract class AppPages {
     GetPage(
       name: _Routes.login,
       page: LoginScreen.new,
-      binding: LoginController(),
+      binding: LoginBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

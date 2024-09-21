@@ -7,10 +7,13 @@ import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/modules/login/controller/login_controller.dart';
+import 'package:galleon_advisors_app/routes/route_management.dart';
 import 'package:get/get.dart';
 
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
+import '../../../helper/validators.dart';
+import '../../../utility/utility.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -19,12 +22,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      child: Scaffold(
-        backgroundColor: ColorValues.appBgColor,
-        resizeToAvoidBottomInset: false,
-        body: Column(
+    return Scaffold(
+      backgroundColor: ColorValues.appBgColor,
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+        top: true,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -51,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               Flexible(
                                 flex: 1,
-                                child: Image.asset(AssetValues.loginPageAppLogoImage),
+                                child: Image.asset(AssetValues.appLogoImage),
                               ),
                               SizedBox(
                                 width: constraints.maxWidth / 9,
@@ -103,6 +106,19 @@ class LoginScreen extends StatelessWidget {
                                         btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
                                         margin: EdgeInsets.symmetric(vertical: Dimens.sixTeen),
+                                        onTap: () {
+                                          if (loginController.emailController.text.trim().isEmpty) {
+                                            AppUtility.showSnackBar(StringValues.pleaseEnterEmail.tr);
+                                          } else if (loginController.emailController.text.trim().isNotEmpty && !Validators.isValidEmail(loginController.emailController.text)) {
+                                            AppUtility.showSnackBar(StringValues.pleaseEnterValidEmail.tr);
+                                          } else if (loginController.passwordController.text.trim().isEmpty) {
+                                            AppUtility.showSnackBar(StringValues.pleaseEnterPassword.tr);
+                                          } else if (loginController.passwordController.text.trim().length < 6) {
+                                            AppUtility.showSnackBar(StringValues.passwordMustBeAtLeast6Characters.tr);
+                                          } else {
+                                            RouteManagement.goToHomePageScreen();
+                                          }
+                                        },
                                       ),
                                       CommonWidgets.autoSizeText(
                                         text: StringValues.forgotPassword.tr,

@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:galleon_advisors_app/common/common_widgets.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/generated/assets.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_advisors_app/routes/route_management.dart';
 import 'package:get/get.dart';
-
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
-import '../../../routes/app_pages.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,125 +15,118 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 8,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: Dimens.oneHundredTwentyFive,
-                vertical: Dimens.oneHundredFortySeven,
-              ),
-              margin: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(
-                  Dimens.thirtyTwo,
+      backgroundColor: ColorValues.appBgColor,
+      body: SafeArea(
+        top: true,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Container(
+                margin: EdgeInsets.all(Dimens.twentyFour),
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
+                ),
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Image.asset(
+                    AssetValues.leftToRightAppLogo,
+                  ),
                 ),
               ),
-              child: Image.asset(
-                AssetValues.aapLogo,
-              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
+            Expanded(flex: 1, child: menuLayout()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget menuLayout() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: Dimens.twentyFive,
+      ),
+      decoration: const BoxDecoration(
+        color: ColorValues.whiteColor,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          InkWell(
+            onTap: () {},
+            child: Row(
+              children: [
+                CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
+                CommonWidgets.autoSizeText(
+                  text: StringValues.newStudy.tr,
+                  minFontSize: 12,
+                  maxFontSize: 16,
+                  textStyle: AppStyles.style16Normal,
+                ).marginOnly(left: Dimens.eighteen),
+              ],
+            ),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.manageStudies);
+            },
+            child: Row(
+              children: [
+                CommonWidgets.fromSvg(svgAsset: SvgAssets.folderOutlinedIcon),
+                CommonWidgets.autoSizeText(
+                  text: StringValues.manageStudies.tr,
+                  minFontSize: 12,
+                  maxFontSize: 16,
+                  textStyle: AppStyles.style16Normal,
+                ).marginOnly(left: Dimens.sixTeen),
+              ],
+            ),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          InkWell(
+            child: Row(
+              children: [
+                CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
+                CommonWidgets.autoSizeText(
+                  text: StringValues.managePosition.tr,
+                  minFontSize: 12,
+                  maxFontSize: 16,
+                  textStyle: AppStyles.style16Normal,
+                ).marginOnly(left: Dimens.ten),
+              ],
+            ),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          GestureDetector(
+            onTap: () {
+              RouteManagement.goToLoginScreen();
+            },
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: Dimens.twentyFive,
-              ),
-              decoration: const BoxDecoration(
-                color: ColorValues.whiteColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              padding: EdgeInsets.all(Dimens.fourteen),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: ColorValues.green,
+                    width: 1.5,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    Dimens.eight,
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(Dimens.ten),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.add,
-                            color: ColorValues.blackColor,
-                          ),
-                          Dimens.boxWidth20,
-                          Text(
-                            StringValues.newStudy.tr,
-                            style: AppStyles.style16Black,
-                          ),
-                        ],
-                      ),
-                    ),
+                  CommonWidgets.fromSvg(
+                    svgAsset: SvgAssets.logout,
+                    width: Dimens.sixTeen,
+                    height: Dimens.sixTeen,
+                    boxFit: BoxFit.fill,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.manageStudies);
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(Dimens.ten),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.folder_copy_outlined,
-                            color: ColorValues.blackColor,
-                          ),
-                          Dimens.boxWidth20,
-                          Text(
-                            StringValues.manageStudies.tr,
-                            style: AppStyles.style16Black,
-                          ),
-                        ],
-                      ),
-                    ),
+                  Text(
+                    StringValues.logout.tr,
+                    style: AppStyles.style16Bold.copyWith(color: ColorValues.primaryGreenColor),
                   ),
-                  InkWell(
-                    child: Padding(
-                      padding: EdgeInsets.all(Dimens.ten),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.groups_outlined,
-                            color: ColorValues.blackColor,
-                          ),
-                          Dimens.boxWidth20,
-                          Text(
-                            StringValues.managePosition.tr,
-                            style: AppStyles.style16Black,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Dimens.boxHeight16,
-                  GestureDetector(
-                    child: Container(
-                      padding: EdgeInsets.all(Dimens.twelve),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorValues.green,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            Dimens.eight,
-                          )),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            SvgAssets.logout,
-                          ),
-                          Dimens.boxWidth24,
-                          Text(
-                            StringValues.logout.tr,
-                            style: AppStyles.style24Bold.copyWith(color: ColorValues.green),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const SizedBox.shrink(),
                 ],
               ),
             ),

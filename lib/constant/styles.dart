@@ -128,6 +128,13 @@ abstract class AppStyles {
     height: defaultFontHeight,
   );
 
+  static TextStyle style16SemiBold = TextStyle(
+    fontSize: Dimens.sixTeen,
+    fontWeight: FontWeight.w600,
+    fontFamily: defaultFontFamily,
+    height: defaultFontHeight,
+  );
+
   static TextStyle style18Bold = TextStyle(
     fontSize: Dimens.eighteen,
     fontWeight: FontWeight.w700,
