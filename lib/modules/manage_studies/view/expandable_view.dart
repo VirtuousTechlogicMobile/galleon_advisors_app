@@ -1,16 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
+import 'package:galleon_advisors_app/modules/manage_studies/controller/manage_studies_controller.dart';
+import 'package:get/get.dart';
 
+import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../constant/strings.dart';
+import '../../../constant/styles.dart';
 
-class ExpandableView extends StatefulWidget {
-  @override
-  _ExpandableViewState createState() => _ExpandableViewState();
-}
+class ExpandableView extends StatelessWidget {
+  ExpandableView({super.key});
 
-class _ExpandableViewState extends State<ExpandableView> {
-  bool isChecked1 = false;
-  bool isChecked2 = false;
+  final ManageStudiesController manageStudiesController = Get.find<ManageStudiesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,57 +26,63 @@ class _ExpandableViewState extends State<ExpandableView> {
           ),
         ),
 
-        title: const Row(
+        title: Row(
           children: [
             Text(
               "Food & Beverage - Barista",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: Dimens.sixTeen, fontWeight: FontWeight.w600),
             ),
-            SizedBox(width: 10),
+            Dimens.boxHeight12,
             CircleAvatar(
               backgroundColor: Colors.green,
-              radius: 5,
+              radius: Dimens.five,
             )
           ],
         ),
-        trailing: Icon(Icons.arrow_drop_down),
+        trailing: const Icon(Icons.keyboard_arrow_down),
 
         // This applies the shape and border radius directly to ExpansionTile
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12), // Rounded corners
-          side: BorderSide(color: Colors.grey), // Border color
+          borderRadius: BorderRadius.circular(Dimens.twelve), // Rounded corners
+          side: const BorderSide(color: ColorValues.lightBgColor), // Border color
         ),
 
         children: [
+          Obx(() {
+            return CheckboxListTile(
+              title: Text(
+                StringValues.selectAll.tr,
+                style: AppStyles.style18Bold.copyWith(
+                  color: ColorValues.blackColor,
+                  fontSize: Dimens.eighteen,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              value: manageStudiesController.isChecked.value.isNull ? null : manageStudiesController.isChecked.value,
+              onChanged: (bool? value) {
+                //setState(() {
+                manageStudiesController.isChecked.value = value!;
+                manageStudiesController.isChecked.value = value;
+                //});
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+            );
+          }),
           CheckboxListTile(
-            title: Text("Select All"),
-            value: isChecked1 && isChecked2,
+            title: Text(
+              "Study Name",
+            ),
+            secondary: Container(
+              child: Text("View"),
+            ),
+            value: manageStudiesController.isChecked.value,
             onChanged: (bool? value) {
-              setState(() {
-                isChecked1 = value!;
-                isChecked2 = value;
-              });
+              //setState(() {
+              manageStudiesController.isChecked.value = value!;
+              //});
             },
-          ),
-          CheckboxListTile(
-            title: Text("Study Name"),
-            value: isChecked1,
-            onChanged: (bool? value) {
-              setState(() {
-                isChecked1 = value!;
-              });
-            },
-            controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
-          ),
-          CheckboxListTile(
-            title: Text("Test"),
-            value: isChecked2,
-            onChanged: (bool? value) {
-              setState(() {
-                isChecked2 = value!;
-              });
-            },
-            controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+            controlAffinity: ListTileControlAffinity.leading,
+            // Checkbox on the left
           ),
         ],
       ),
