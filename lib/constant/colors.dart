@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 abstract class ColorValues {
+  static const Color primaryGreenColor = Color(0xFF016B54);
+  static const Color hintTextGreyColor = Color(0xFF7D7E87);
+  static const Color dividerBlackColor = Color(0xFF010B19);
+  static const Color appBgColor = Color(0xFFE7E6E6);
   static const Color darkBgColor = Color.fromARGB(255, 20, 20, 29);
   static const Color darkBodyTextColor = Color.fromARGB(255, 240, 240, 240);
   static const Color darkDialogColor = Color.fromARGB(255, 36, 36, 56);

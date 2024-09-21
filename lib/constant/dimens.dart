@@ -283,6 +283,7 @@ abstract class Dimens {
   static double twentySix = 26.r;
   static double twentyThree = 23.r;
   static double twentyTwo = 22.r;
+  static double twentyOne = 21.r;
   static double two = 2.r;
   static double zero = 0.r;
 

@@ -8,6 +8,10 @@ abstract class RouteManagement {
     Get.offAllNamed(AppRoutes.login);
   }
 
+  static void goToHomePageScreen() {
+    Get.offAllNamed(AppRoutes.home);
+  }
+
   /// Go to back Page / Close Pages --------------------------------------------
 
   static void goToBack() {
