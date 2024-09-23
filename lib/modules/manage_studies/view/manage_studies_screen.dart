@@ -126,7 +126,7 @@ class ManageStudiesScreen extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) {
-                            return Container(child: const DeleteStudies());
+                            return DeleteStudies();
                           },
                         );
                       },

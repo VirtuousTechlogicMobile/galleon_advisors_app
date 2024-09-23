@@ -7,6 +7,15 @@ class Assets {
   static const String fontsSFProMedium = 'assets/fonts/SF-Pro-Medium.otf';
   static const String fontsSFProRegular = 'assets/fonts/SF-Pro-Regular.otf';
   static const String fontsSFProSemiBold = 'assets/fonts/SF-Pro-SemiBold.otf';
+  static const String imagesLeftToRightAppLogo = 'assets/images/left_to_right_app_logo.png';
+  static const String imagesLoginPageAppLogo = 'assets/images/login_page_app_logo.png';
   static const String pngsLogo = 'assets/images/pngs/logo.png';
+  static const String svgsAddIcon = 'assets/svgs/add_icon.svg';
+  static const String svgsEyeClosedIcon = 'assets/svgs/eye_closed_icon.svg';
+  static const String svgsEyeOpenIcon = 'assets/svgs/eye_open_icon.svg';
+  static const String svgsFolderOutlinedIcon = 'assets/svgs/folder_outlined_icon.svg';
+  static const String svgsLoginPageAppLogo = 'assets/svgs/login_page_app_logo.svg';
   static const String svgsLogout = 'assets/svgs/logout.svg';
+  static const String svgsPause = 'assets/svgs/pause.svg';
+  static const String svgsPeoplesIcon = 'assets/svgs/peoples_icon.svg';
 }

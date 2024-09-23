@@ -18,4 +18,5 @@ abstract class SvgAssets {
   static const peoplesIcon = 'assets/svgs/peoples_icon.svg';
   static const folderOutlinedIcon = 'assets/svgs/folder_outlined_icon.svg';
   static const addIcon = 'assets/svgs/add_icon.svg';
+  static const pauseIcon = 'assets/svgs/pause.svg';
 }

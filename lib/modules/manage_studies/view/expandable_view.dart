@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:galleon_advisors_app/common/custom_primary_button.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/controller/manage_studies_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../common/common_widgets.dart';
+import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
@@ -72,18 +75,27 @@ class ExpandableView extends StatelessWidget {
             title: Text(
               "Study Name",
             ),
-            secondary: Container(
-              child: Text("View"),
+            secondary: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CommonWidgets.fromSvg(
+                  svgAsset: SvgAssets.pauseIcon,
+                ),
+                Dimens.boxWidth16,
+                CustomPrimaryButton(
+                  buttonWidth: Dimens.oneHundredFifty,
+                  btnText: "View",
+                  onTap: () {},
+                ),
+              ],
             ),
             value: manageStudiesController.isChecked.value,
             onChanged: (bool? value) {
-              //setState(() {
               manageStudiesController.isChecked.value = value!;
-              //});
             },
             controlAffinity: ListTileControlAffinity.leading,
-            // Checkbox on the left
           ),
+          Dimens.boxHeight12,
         ],
       ),
     );

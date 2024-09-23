@@ -9,6 +9,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final Color? btnTextColor;
   final TextStyle? btnTextStyle;
   final Color? buttonColor;
+  final Color? buttonBorderColor;
   final double? buttonWidth;
   final double? buttonHeight;
   final EdgeInsetsGeometry? margin;
@@ -24,6 +25,7 @@ class CustomPrimaryButton extends StatelessWidget {
     this.buttonHeight,
     this.onTap,
     this.buttonColor,
+    this.buttonBorderColor,
     this.borderRadius,
     this.contentPadding,
     this.btnTextColor,
@@ -38,6 +40,7 @@ class CustomPrimaryButton extends StatelessWidget {
           width: buttonWidth,
           height: buttonHeight,
           decoration: BoxDecoration(
+            border: Border.all(color: buttonBorderColor ?? ColorValues.transparent),
             color: buttonColor ?? ColorValues.primaryGreenColor,
             borderRadius: borderRadius ?? BorderRadius.circular(10),
           ),
