@@ -1,8 +1,12 @@
+import 'package:galleon_advisors_app/modules/create_new_study/bindings/create_new_study_binding.dart';
+import 'package:galleon_advisors_app/modules/create_new_study/view/create_new_study_screen.dart';
 import 'package:galleon_advisors_app/modules/home/bindings/home_binding.dart';
 import 'package:galleon_advisors_app/modules/home/view/home_screen.dart';
 import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/bindings/manage_studies_binding.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/view/manage_studies_screen.dart';
+import 'package:galleon_advisors_app/modules/study_screen/bindings/study_screen_binding.dart';
+import 'package:galleon_advisors_app/modules/study_screen/view/study_screen.dart';
 import 'package:get/get.dart';
 
 import '../modules/login/bindings/login_binding.dart';
@@ -29,6 +33,22 @@ abstract class AppPages {
       name: _Routes.manageStudies,
       page: ManageStudiesScreen.new,
       binding: ManageStudiesBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.createNewStudy,
+      page: CreateNewStudyScreen.new,
+      binding: CreateNewStudyBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.study,
+      page: StudyScreen.new,
+      binding: StudyScreenBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

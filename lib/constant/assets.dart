@@ -18,4 +18,9 @@ abstract class SvgAssets {
   static const peoplesIcon = 'assets/svgs/peoples_icon.svg';
   static const folderOutlinedIcon = 'assets/svgs/folder_outlined_icon.svg';
   static const addIcon = 'assets/svgs/add_icon.svg';
+  static const backIconOutlined = 'assets/svgs/back_icon_outlined.svg';
+  static const dropdownRightArrowIcon = 'assets/svgs/dropdown_right_arrow_icon.svg';
+  static const closeRoundedIcon = 'assets/svgs/close_rounded_icon.svg';
+  static const playRoundedIcon = 'assets/svgs/play_rounded_icon.svg';
+  static const studyRunningIcon = 'assets/svgs/study_running_icon.svg';
 }

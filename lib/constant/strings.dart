@@ -13,4 +13,19 @@ abstract class StringValues {
   static const pleaseEnterValidEmail = 'please_enter_valid_email';
   static const pleaseEnterPassword = 'please_enter_password';
   static const passwordMustBeAtLeast6Characters = 'password_must_be_at_least_6_characters';
+  static const createNewStudy = 'create_new_study';
+  static const department = 'department';
+  static const position = 'position';
+  static const create = 'create';
+  static const serviceActivities = 'service_activities';
+  static const opportunityThemes = 'opportunity_themes';
+  static const volume = 'volume';
+  static const studyTimeline = 'study_timeline';
+  static const comment = 'comment';
+  static const opportunityFlag = 'opportunity_flag';
+  static const activities = 'activities';
+  static const tipsAndTricks = 'tips_and_tricks';
+  static const operationalAnalysis = 'operational_analysis';
+  static const keyThemes = 'key_themes';
+  static const submit = 'submit';
 }

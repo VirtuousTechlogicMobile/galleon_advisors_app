@@ -14,8 +14,8 @@ abstract class Dimens {
   static SizedBox boxHeight24 = SizedBox(height: twentyFour);
   static SizedBox boxHeight32 = SizedBox(height: thirtyTwo);
   static SizedBox boxHeight4 = SizedBox(height: four);
-  static SizedBox boxHeight40 = SizedBox(height: fourty);
-  static SizedBox boxHeight48 = SizedBox(height: fourtyEight);
+  static SizedBox boxHeight40 = SizedBox(height: forty);
+  static SizedBox boxHeight48 = SizedBox(height: fortyEight);
   static SizedBox boxHeight60 = SizedBox(height: sixty);
   static SizedBox boxHeight64 = SizedBox(height: sixtyFour);
   static SizedBox boxHeight8 = SizedBox(height: eight);
@@ -28,7 +28,7 @@ abstract class Dimens {
   static SizedBox boxWidth24 = SizedBox(width: twentyFour);
   static SizedBox boxWidth32 = SizedBox(width: thirtyTwo);
   static SizedBox boxWidth4 = SizedBox(width: four);
-  static SizedBox boxWidth40 = SizedBox(width: fourty);
+  static SizedBox boxWidth40 = SizedBox(width: forty);
   static SizedBox boxWidth60 = SizedBox(width: sixty);
   static SizedBox boxWidth8 = SizedBox(width: eight);
   static SizedBox boxWidth80 = SizedBox(width: eighty);
@@ -227,6 +227,7 @@ abstract class Dimens {
   static double eight = 8.r;
   static double eighteen = 18.r;
   static double eighty = 80.r;
+  static double eightySix = 86.r;
   static double eleven = 11.r;
   static double fifteen = 15.r;
   static double fifty = 50.r;
@@ -235,15 +236,19 @@ abstract class Dimens {
   static double fiftySix = 56.r;
   static double five = 5.r;
   static double four = 4.r;
+  static double nine = 9.r;
   static double fourteen = 14.r;
-  static double fourty = 40.r;
-  static double fourtyEight = 48.r;
+  static double forty = 40.r;
+  static double fortyTwo = 42.r;
+  static double fortyThree = 43.r;
+  static double fortyEight = 48.r;
   static double hundred = 100.r;
   static double nineteen = 19.r;
   static double ninetyEight = 98.r;
   static double ninetyFive = 95.r;
   static double one = 1.r;
   static double oneHundredFifty = 150.r;
+  static double twoHundredEighteen = 218.r;
   static double oneHundredFortySeven = 147.r;
   static double oneHundredTwenty = 120.r;
   static double oneHundredTwentyFive = 125.r;
@@ -261,10 +266,11 @@ abstract class Dimens {
   static double seven = 7.r;
   static double seventy = 70.r;
   static double seventyEight = 78.r;
-  static SizedBox shrinkedBox = const SizedBox.shrink();
   static double six = 6.r;
   static double sixTeen = 16.r;
+  static double sevenTeen = 17.r;
   static double sixty = 60.r;
+  static double sixtyTwo = 62.r;
   static double sixtyFour = 64.r;
   static double ten = 10.r;
   static double thirteen = 13.r;
@@ -273,14 +279,18 @@ abstract class Dimens {
   static double thirtyFour = 34.r;
   static double thirtyNine = 39.r;
   static double thirtySix = 36.r;
+  static double thirtySeven = 37.r;
   static double thirtyTwo = 32.r;
+  static double thirtyThree = 33.r;
   static double three = 3.r;
   static double twelve = 12.r;
   static double twenty = 20.r;
   static double twentyEight = 28.r;
+  static double twentyNine = 29.r;
   static double twentyFive = 25.r;
   static double twentyFour = 24.r;
   static double twentySix = 26.r;
+  static double twentySeven = 27.r;
   static double twentyThree = 23.r;
   static double twentyTwo = 22.r;
   static double twentyOne = 21.r;
@@ -292,8 +302,4 @@ abstract class Dimens {
 
   /// Get the width with the percent value of the screen width.
   static double percentWidth(double percentValue) => percentValue.sw;
-
-  static SizedBox heightedBox(double height) => SizedBox(height: height);
-
-  static SizedBox widthedBox(double width) => SizedBox(width: width);
 }

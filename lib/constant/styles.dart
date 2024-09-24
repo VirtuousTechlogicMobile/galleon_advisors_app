@@ -248,42 +248,42 @@ abstract class AppStyles {
   );
 
   static TextStyle style40Black = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w900,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style40Bold = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w700,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style40Normal = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Black = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w900,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Bold = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w700,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Normal = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,

@@ -57,7 +57,9 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.createNewStudy);
+            },
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
@@ -66,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   minFontSize: 12,
                   maxFontSize: 16,
                   textStyle: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.eighteen),
+                ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
           ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),

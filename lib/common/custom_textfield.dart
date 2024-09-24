@@ -31,6 +31,7 @@ class CustomTextField extends StatelessWidget {
   final BorderSide? borderSide;
   final String? obscuringCharacter;
   final List<TextInputFormatter>? inputFormatters;
+  final Color? cursorColor;
 
   const CustomTextField({
     super.key,
@@ -59,6 +60,7 @@ class CustomTextField extends StatelessWidget {
     this.borderSide,
     this.inputFormatters,
     this.obscuringCharacter,
+    this.cursorColor,
   });
 
   @override
@@ -86,7 +88,8 @@ class CustomTextField extends StatelessWidget {
         obscureText: obscureText ?? false,
         obscuringCharacter: obscuringCharacter ?? '•',
         showCursor: !isReadOnly,
-        cursorColor: ColorValues.primaryGreenColor,
+        cursorWidth: Dimens.one,
+        cursorColor: cursorColor ?? ColorValues.primaryGreenColor,
         onTapOutside: onTapOutside,
         textAlign: textAlign ?? TextAlign.start,
         textAlignVertical: TextAlignVertical.center,
@@ -107,7 +110,6 @@ class CustomTextField extends StatelessWidget {
             }
             return fillColor ?? ColorValues.whiteColor;
           }),
-          /*fillColor ?? ColorValues.transparent*/
           hintText: hintText ?? '',
           hintStyle: hintStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
           focusedBorder: OutlineInputBorder(

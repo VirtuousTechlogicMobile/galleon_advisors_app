@@ -8,6 +8,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final String btnText;
   final Color? btnTextColor;
   final TextStyle? btnTextStyle;
+  final int? btnTextMaxLines;
   final Color? buttonColor;
   final double? buttonWidth;
   final double? buttonHeight;
@@ -15,6 +16,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final EdgeInsets? contentPadding;
   final Function()? onTap;
+  final BoxBorder? border;
 
   const CustomPrimaryButton({
     super.key,
@@ -22,12 +24,14 @@ class CustomPrimaryButton extends StatelessWidget {
     this.margin,
     this.buttonWidth,
     this.buttonHeight,
+    this.btnTextMaxLines,
     this.onTap,
     this.buttonColor,
     this.borderRadius,
     this.contentPadding,
     this.btnTextColor,
     this.btnTextStyle,
+    this.border,
   });
 
   @override
@@ -40,6 +44,7 @@ class CustomPrimaryButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: buttonColor ?? ColorValues.primaryGreenColor,
             borderRadius: borderRadius ?? BorderRadius.circular(10),
+            border: border,
           ),
           alignment: Alignment.center,
           margin: margin ?? EdgeInsets.zero,
@@ -49,7 +54,7 @@ class CustomPrimaryButton extends StatelessWidget {
             textStyle: btnTextStyle ?? AppStyles.style16Normal.copyWith(fontWeight: FontWeight.w500, color: btnTextColor ?? ColorValues.whiteColor),
             minFontSize: 10,
             maxFontSize: 16,
-            maxLines: 1,
+            maxLines: btnTextMaxLines ?? 1,
             textAlign: TextAlign.center,
           )),
     );

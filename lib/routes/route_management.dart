@@ -12,6 +12,10 @@ abstract class RouteManagement {
     Get.offAllNamed(AppRoutes.home);
   }
 
+  static void goToManageStudiesScreen() {
+    Get.offNamed(AppRoutes.manageStudies);
+  }
+
   /// Go to back Page / Close Pages --------------------------------------------
 
   static void goToBack() {
