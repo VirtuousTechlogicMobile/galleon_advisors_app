@@ -3,17 +3,19 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/common_widgets.dart';
 import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/assets.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_advisors_app/modules/study_screen/components/study_screen_bottom_bar.dart';
 import 'package:galleon_advisors_app/modules/study_screen/controller/study_screen_controller.dart';
 import 'package:galleon_advisors_app/utility/utility.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../routes/app_pages.dart';
 import '../components/list_wheel_scroll_picker.dart';
 import '../components/study_screen_appbar.dart';
+import '../model/operational_analysis_data_model.dart';
 
 class StudyScreen extends StatelessWidget {
   StudyScreen({super.key});
@@ -38,88 +40,24 @@ class StudyScreen extends StatelessWidget {
                 onPlayButtonTap: () {
                   studyController.isStudyStarted.value = !studyController.isStudyStarted.value;
                 },
+                onPressBackButton: () {
+                  studyController.onBackPressed();
+                },
               ),
             ),
             Expanded(
               child: Row(
                 children: [
-                  Flexible(
-                    flex: 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Obx(
-                                () => Flexible(
-                                  flex: 3,
-                                  child: studyController.opportunityTapped.value
-                                      ? ImageFiltered(
-                                          imageFilter: ImageFilter.blur(
-                                            sigmaX: 10,
-                                            sigmaY: 10,
-                                          ),
-                                          child: IgnorePointer(child: serviceActivitiesLayout()),
-                                        )
-                                      : serviceActivitiesLayout(),
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: volumeLayout(),
-                              ),
-                              Obx(
-                                () => Flexible(
-                                  flex: 3,
-                                  child: studyController.servicesTapped.value
-                                      ? ImageFiltered(
-                                          imageFilter: ImageFilter.blur(
-                                            sigmaX: 10,
-                                            sigmaY: 10,
-                                          ),
-                                          child: IgnorePointer(child: opportunityThemeLayout()),
-                                        )
-                                      : opportunityThemeLayout(),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        /// comment & opportunity flag button
-                        Row(
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: CustomPrimaryButton(
-                                margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
-                                btnText: StringValues.comment.tr,
-                                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                                buttonColor: ColorValues.softWhiteColor,
-                                borderRadius: BorderRadius.circular(Dimens.eight),
-                                contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
-                                btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              child: CustomPrimaryButton(
-                                margin: EdgeInsets.only(left: Dimens.eight, right: Dimens.twentySeven),
-                                btnText: StringValues.opportunityFlag.tr,
-                                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                                buttonColor: ColorValues.softWhiteColor,
-                                borderRadius: BorderRadius.circular(Dimens.eight),
-                                contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
-                                btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                              ),
-                            ),
-                          ],
-                        ).marginOnly(bottom: Dimens.nine),
-                      ],
+                  Obx(
+                    () => Flexible(
+                      flex: 2,
+                      child: studyController.getCurrentTabIndex() == 0
+                          ? activitiesLayout()
+                          : studyController.getCurrentTabIndex() == 2
+                              ? tipsAndTricksLayout()
+                              : studyController.getCurrentTabIndex() == 3
+                                  ? operationalAnalysisLayout()
+                                  : keyThemesLayout(),
                     ),
                   ),
                   Flexible(
@@ -136,166 +74,464 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget bottomBar() {
-    return Container(
-      color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.eight, right: Dimens.fourteen, left: Dimens.fourteen),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 3,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: CustomPrimaryButton(
-                    margin: EdgeInsets.only(right: Dimens.seven),
-                    btnText: StringValues.activities.tr,
-                    buttonHeight: Dimens.fiftySix,
-                    borderRadius: BorderRadius.circular(Dimens.eight),
-                    btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
-                    buttonColor: ColorValues.darkSlateGrayColor,
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.only(right: Dimens.seven),
-                    width: Dimens.eightySix,
-                    height: Dimens.fiftySix,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimens.eight),
-                      color: ColorValues.softGrayColor,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: Dimens.ten),
-                      decoration: BoxDecoration(
-                        color: ColorValues.whiteColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: ColorValues.blackColor.withOpacity(0.12),
-                            offset: const Offset(0, 0),
-                            blurRadius: 16,
-                            spreadRadius: 0,
+  Widget activitiesLayout() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Obx(
+          () => Flexible(
+            child: studyController.selectedActivitiesSubTab.value == 'comments'
+                ? commentsLayout()
+                : studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
+                    ? opportunityLayout()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => Flexible(
+                              flex: 3,
+                              child: studyController.opportunityTapped.value
+                                  ? ImageFiltered(
+                                      imageFilter: ImageFilter.blur(
+                                        sigmaX: 10,
+                                        sigmaY: 10,
+                                      ),
+                                      child: IgnorePointer(child: serviceActivitiesLayout()),
+                                    )
+                                  : serviceActivitiesLayout(),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 2,
+                            child: volumeLayout(),
+                          ),
+                          Obx(
+                            () => Flexible(
+                              flex: 3,
+                              child: studyController.servicesTapped.value
+                                  ? ImageFiltered(
+                                      imageFilter: ImageFilter.blur(
+                                        sigmaX: 10,
+                                        sigmaY: 10,
+                                      ),
+                                      child: IgnorePointer(child: opportunityThemeLayout()),
+                                    )
+                                  : opportunityThemeLayout(),
+                            ),
                           ),
                         ],
-                      ),
-                      child: CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
-                    ),
-                  ),
+                      ).marginSymmetric(horizontal: Dimens.fourteen),
+          ),
+        ),
+
+        /// comment & opportunity flag button
+        Row(
+          children: [
+            Obx(
+              () => Flexible(
+                flex: 1,
+                child: CustomPrimaryButton(
+                  margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
+                  btnText: StringValues.comment.tr,
+                  border: studyController.selectedActivitiesSubTab.value == 'comments'
+                      ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
+                      : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                  buttonColor: studyController.selectedActivitiesSubTab.value == 'comments' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.eight),
+                  contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comments' ? Dimens.four : Dimens.eight),
+                  btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                  onTap: () {
+                    studyController.onChangeActivitiesSubTab(0);
+                  },
                 ),
-              ],
-            ).marginOnly(right: Dimens.twentySix),
-          ),
-          Expanded(
-            flex: 2,
-            child: CustomPrimaryButton(
-              margin: EdgeInsets.only(right: Dimens.nineteen),
-              buttonHeight: Dimens.fiftySix,
-              btnText: StringValues.tipsAndTricks.tr,
-              borderRadius: BorderRadius.circular(Dimens.eight),
-              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-              btnTextMaxLines: 2,
-              contentPadding: EdgeInsets.zero,
-              buttonColor: ColorValues.softGrayColor,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: CustomPrimaryButton(
-              margin: EdgeInsets.only(right: Dimens.nineteen),
-              buttonHeight: Dimens.fiftySix,
-              contentPadding: EdgeInsets.zero,
-              btnText: StringValues.operationalAnalysis.tr,
-              borderRadius: BorderRadius.circular(Dimens.eight),
-              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-              btnTextMaxLines: 2,
-              buttonColor: ColorValues.softGrayColor,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: CustomPrimaryButton(
-              margin: EdgeInsets.only(right: Dimens.twentyNine),
-              buttonHeight: Dimens.fiftySix,
-              contentPadding: EdgeInsets.zero,
-              btnText: StringValues.keyThemes.tr,
-              borderRadius: BorderRadius.circular(Dimens.eight),
-              btnTextStyle: AppStyles.style18Normal.copyWith(color: ColorValues.blackColor),
-              btnTextMaxLines: 2,
-              buttonColor: ColorValues.lightGrayColor.withOpacity(0.80),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Obx(
-              () => CustomPrimaryButton(
-                margin: EdgeInsets.zero,
-                btnText: StringValues.submit.tr,
-                buttonHeight: Dimens.fiftySix,
-                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null
-                    ? ColorValues.primaryGreenColor
-                    : ColorValues.lightGrayColor.withOpacity(0.50),
-                borderRadius: BorderRadius.circular(Dimens.eight),
-                contentPadding: EdgeInsets.zero,
-                btnTextStyle: AppStyles.style16Normal.copyWith(
-                  color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null
-                      ? ColorValues.whiteColor
-                      : ColorValues.blackColor,
-                ),
-                onTap: () {},
               ),
             ),
+            Obx(
+              () => Flexible(
+                flex: 1,
+                child: studyController.servicesTapped.value
+                    ? ClipRect(
+                        child: ImageFiltered(
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: 10,
+                            sigmaY: 10,
+                          ),
+                          child: IgnorePointer(
+                            child: CustomPrimaryButton(
+                              margin: EdgeInsets.zero,
+                              btnText: StringValues.opportunityFlag.tr,
+                              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                              buttonColor: ColorValues.softWhiteColor,
+                              borderRadius: BorderRadius.circular(Dimens.eight),
+                              contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
+                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                            ),
+                          ).marginOnly(left: Dimens.eight, right: Dimens.twentySeven),
+                        ),
+                      )
+                    : CustomPrimaryButton(
+                        margin: EdgeInsets.only(left: Dimens.eight, right: Dimens.twentySeven),
+                        btnText: StringValues.opportunityFlag.tr,
+                        border: studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
+                            ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
+                            : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                        buttonColor:
+                            studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                        borderRadius: BorderRadius.circular(Dimens.eight),
+                        contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? Dimens.four : Dimens.eight),
+                        btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                        onTap: () {
+                          studyController.onChangeActivitiesSubTab(1);
+                        },
+                      ),
+              ),
+            ),
+          ],
+        ).marginOnly(bottom: Dimens.nine),
+      ],
+    );
+  }
+
+  Widget commentsLayout() {
+    return Container(
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
+      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
+      decoration: BoxDecoration(
+        color: ColorValues.whiteColor,
+        border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+      ),
+    );
+  }
+
+  Widget opportunityLayout() {
+    return Container(
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
+      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
+      decoration: BoxDecoration(
+        color: ColorValues.whiteColor,
+        border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+      ),
+    );
+  }
+
+  Widget tipsAndTricksLayout() {
+    return Container(
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
+      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
+      decoration: BoxDecoration(
+        color: ColorValues.whiteColor,
+        border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CommonWidgets.autoSizeRichText(textSpans: [
+            TextSpan(
+              text: StringValues.server.tr,
+              style: AppStyles.style16Normal.copyWith(
+                color: ColorValues.blackColor,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            TextSpan(
+              text: StringValues.role.tr,
+              style: AppStyles.style16Normal.copyWith(
+                color: ColorValues.blackColor,
+              ),
+            ),
+          ], minFontSize: 10, maxFontSize: 16),
+          Flexible(
+            child: customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
+          ),
+          Flexible(
+            child: customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
+          ),
+          CommonWidgets.autoSizeText(
+            text: StringValues.processOpportunities.tr,
+            textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+            minFontSize: 10,
+            maxFontSize: 16,
+          ).marginOnly(top: Dimens.fifteen),
+          Flexible(
+            child: customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
+          ),
+          Flexible(
+            child: customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
+          ),
+          Flexible(
+            child: customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
           ),
         ],
       ),
     );
   }
 
-  Widget serviceActivitiesLayout() {
+  Widget customListElement({required String text, TextStyle? textStyle}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CommonWidgets.autoSizeText(
+          text: '•',
+          textStyle: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
+          minFontSize: 10,
+          maxFontSize: 13,
+        ).marginOnly(top: Dimens.one, right: Dimens.ten),
+        Flexible(
+          child: CommonWidgets.autoSizeText(
+            text: text,
+            textStyle: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            minFontSize: 10,
+            maxLines: 5,
+            maxFontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget operationalAnalysisLayout() {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, left: Dimens.fourteen, bottom: Dimens.eighteen),
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
+      padding: EdgeInsets.only(top: Dimens.sixTeen),
       decoration: BoxDecoration(
         color: ColorValues.softWhiteColor,
         border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
-        boxShadow: [
-          BoxShadow(
-            color: ColorValues.blackColor.withOpacity(0.25),
-            offset: const Offset(0, 4),
-            spreadRadius: 0,
-            blurRadius: 4,
-          ),
-        ],
+        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: Dimens.three),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
-              color: ColorValues.deepGreenColor.withOpacity(0.25),
+              color: ColorValues.deepYellowColor.withOpacity(0.40),
             ),
-            child: Text(
-              StringValues.serviceActivities.tr,
-              style: AppStyles.style14Normal.copyWith(
-                color: ColorValues.blackColor,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Analysis Name',
+                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                  ).marginOnly(left: Dimens.twentySeven),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Data Inputs',
+                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                  ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    'Sample',
+                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                  ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: Obx(
-              () => ClipRRect(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+            child: LayoutBuilder(builder: (context, constraints) {
+              double rowHeight = Dimens.sixty;
+              int requiredRows = (constraints.maxHeight ~/ rowHeight);
+              while (studyController.tableData.length < requiredRows) {
+                studyController.tableData.add(OperationalAnalysisDataModel(analysisName: '', dataInputs: '', sample: ''));
+              }
+              return Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  /// table data
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(top: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
+                    ),
+                    child: ListView.builder(
+                      itemCount: studyController.tableData.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: Dimens.sixty,
+                          decoration: BoxDecoration(
+                            color: index % 2 == 0 ? ColorValues.transparent : ColorValues.whiteColor,
+                          ),
+                          child: buildTableRow(
+                            operationalAnalysisDataModel: studyController.tableData[index],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  /// table divider
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            height: constraints.maxHeight,
+                            color: ColorValues.fontLightGrayColor.withOpacity(0.25),
+                            width: Dimens.four,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            height: constraints.maxHeight,
+                            color: ColorValues.fontLightGrayColor.withOpacity(0.25),
+                            width: Dimens.four,
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTableRow({required OperationalAnalysisDataModel operationalAnalysisDataModel}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Text(
+            operationalAnalysisDataModel.analysisName,
+            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+          ).marginOnly(left: Dimens.twentySeven),
+        ),
+        Expanded(
+          flex: 1,
+          child: Text(
+            operationalAnalysisDataModel.dataInputs,
+            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+          ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
+        ),
+        if (operationalAnalysisDataModel.sample.isNotEmpty)
+          Expanded(
+            flex: 1,
+            child: customListElement(
+              text: operationalAnalysisDataModel.sample,
+              textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
+          ),
+      ],
+    );
+  }
+
+  Widget keyThemesLayout() {
+    return Container(
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
+      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.fifteen, left: Dimens.twentyNine, bottom: Dimens.ten),
+      decoration: BoxDecoration(
+        color: ColorValues.whiteColor,
+        border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Flexible(
+            child: customListElement(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+          ),
+          Flexible(
+            child: customListElement(text: 'Ut in velit a sapien eleifend dictum.'),
+          ),
+          Flexible(
+            child: customListElement(text: 'Cras convallis leo eu mauris egestas lobortis.'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget bottomBar() {
+    return StudyScreenBottomBar(
+      onTapActivitiesButton: () {
+        studyController.onChangeTab(1);
+      },
+      onTapAddButton: () {
+        Get.toNamed(AppRoutes.createNewStudy);
+      },
+      onTapTipsAndTricksButton: () {
+        studyController.onChangeTab(2);
+      },
+      onTapOperationAnalysisButton: () {
+        studyController.onChangeTab(3);
+      },
+      onTapKeyThemesButton: () {
+        studyController.onChangeTab(4);
+      },
+      onTapSubmitButton: () {
+        studyController.onSubmitStudy();
+      },
+    );
+  }
+
+  Widget serviceActivitiesLayout() {
+    return Obx(
+      () => Container(
+        margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.eighteen),
+        decoration: BoxDecoration(
+          color: ColorValues.softWhiteColor,
+          border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
+          borderRadius: studyController.servicesTapped.value || studyController.opportunityTapped.value
+              ? BorderRadius.circular(Dimens.twenty)
+              : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+          boxShadow: [
+            BoxShadow(
+              color: ColorValues.blackColor.withOpacity(0.25),
+              offset: const Offset(0, 4),
+              spreadRadius: 0,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: studyController.servicesTapped.value ? Dimens.fourteen : Dimens.zero),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
+                color: ColorValues.deepGreenColor.withOpacity(0.25),
+              ),
+              child: Text(
+                StringValues.serviceActivities.tr,
+                style: AppStyles.style14Normal.copyWith(
+                  color: ColorValues.blackColor,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: studyController.servicesTapped.value || studyController.opportunityTapped.value
+                    ? BorderRadius.circular(Dimens.twenty)
+                    : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
                 child: ListWheelScrollPicker(
                   itemsList: studyController.serviceActivitiesItems,
                   selectedIndex: studyController.selectedServiceActivities.value ?? 0,
@@ -307,50 +543,55 @@ class StudyScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget volumeLayout() {
-    return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, left: Dimens.nine, bottom: Dimens.eighteen, right: Dimens.seven),
-      decoration: BoxDecoration(
-        color: ColorValues.softWhiteColor,
-        border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
-        boxShadow: [
-          BoxShadow(
-            color: ColorValues.blackColor.withOpacity(0.25),
-            offset: const Offset(0, 4),
-            spreadRadius: 0,
-            blurRadius: 4,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
-              color: ColorValues.deepYellowColor.withOpacity(0.40),
+    return Obx(
+      () => Container(
+        margin: EdgeInsets.only(top: Dimens.twenty, left: Dimens.nine, bottom: Dimens.eighteen, right: Dimens.seven),
+        decoration: BoxDecoration(
+          color: ColorValues.softWhiteColor,
+          border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
+          borderRadius: studyController.servicesTapped.value || studyController.opportunityTapped.value
+              ? BorderRadius.circular(Dimens.twenty)
+              : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+          boxShadow: [
+            BoxShadow(
+              color: ColorValues.blackColor.withOpacity(0.25),
+              offset: const Offset(0, 4),
+              spreadRadius: 0,
+              blurRadius: 4,
             ),
-            child: Text(
-              StringValues.volume.tr,
-              style: AppStyles.style14Normal.copyWith(
-                color: ColorValues.blackColor,
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(top: studyController.servicesTapped.value || studyController.opportunityTapped.value ? Dimens.fourteen : Dimens.zero),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
+                color: ColorValues.deepYellowColor.withOpacity(0.40),
+              ),
+              child: Text(
+                StringValues.volume.tr,
+                style: AppStyles.style14Normal.copyWith(
+                  color: ColorValues.blackColor,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Obx(
-              () => ClipRRect(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: studyController.servicesTapped.value || studyController.opportunityTapped.value
+                    ? BorderRadius.circular(Dimens.twenty)
+                    : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
                 child: ListWheelScrollPicker(
                   itemsList: studyController.volumeItems,
                   selectedIndex: studyController.selectedVolume.value,
@@ -361,50 +602,55 @@ class StudyScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget opportunityThemeLayout() {
-    return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.eighteen, right: Dimens.eighteen),
-      decoration: BoxDecoration(
-        color: ColorValues.softWhiteColor,
-        border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
-        boxShadow: [
-          BoxShadow(
-            color: ColorValues.blackColor.withOpacity(0.25),
-            offset: const Offset(0, 4),
-            spreadRadius: 0,
-            blurRadius: 4,
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
-              color: ColorValues.deepGreyColor.withOpacity(0.25),
+    return Obx(
+      () => Container(
+        margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.eighteen),
+        decoration: BoxDecoration(
+          color: ColorValues.softWhiteColor,
+          border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
+          borderRadius: studyController.opportunityTapped.value
+              ? BorderRadius.circular(Dimens.twenty)
+              : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+          boxShadow: [
+            BoxShadow(
+              color: ColorValues.blackColor.withOpacity(0.25),
+              offset: const Offset(0, 4),
+              spreadRadius: 0,
+              blurRadius: 4,
             ),
-            child: Text(
-              StringValues.opportunityThemes.tr,
-              style: AppStyles.style14Normal.copyWith(
-                color: ColorValues.blackColor,
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: studyController.opportunityTapped.value ? Dimens.fourteen : Dimens.zero),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(width: Dimens.four, color: ColorValues.whiteColor)),
+                color: ColorValues.deepGreyColor.withOpacity(0.25),
+              ),
+              child: Text(
+                StringValues.opportunityThemes.tr,
+                style: AppStyles.style14Normal.copyWith(
+                  color: ColorValues.blackColor,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Obx(
-              () => ClipRRect(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: studyController.opportunityTapped.value
+                    ? BorderRadius.circular(Dimens.twenty)
+                    : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
                 child: ListWheelScrollPicker(
                   itemsList: studyController.opportunityThemes,
                   selectedIndex: studyController.selectedOpportunityTheme.value ?? 0,
@@ -416,15 +662,15 @@ class StudyScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget studyTimeLineLayout() {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, left: Dimens.fourteen, bottom: Dimens.eleven, right: Dimens.nine),
+      margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.eleven, right: Dimens.nine),
       decoration: BoxDecoration(
         color: ColorValues.appBgColor,
         border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
@@ -458,14 +704,14 @@ class StudyScreen extends StatelessWidget {
           ),
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.fifteen), bottomRight: Radius.circular(Dimens.fifteen)),
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: studyController.studyTimeLineData.length,
-                padding: EdgeInsets.only(top: Dimens.two),
+                padding: EdgeInsets.symmetric(vertical: Dimens.four),
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.only(top: Dimens.six, bottom: Dimens.five),
+                    margin: EdgeInsets.only(top: Dimens.four, bottom: Dimens.five),
                     color: ColorValues.whiteColor,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -513,14 +759,7 @@ class StudyScreen extends StatelessWidget {
                   );
                 },
               ),
-            ), /*Column(
-              children: List.generate(
-                studyController.studyTimeLineData.length,
-                (index) {
-
-                },
-              ),
-            ).paddingOnly(top: Dimens.two),*/
+            ),
           ),
         ],
       ),

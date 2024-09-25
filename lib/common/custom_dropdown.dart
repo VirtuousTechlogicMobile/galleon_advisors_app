@@ -100,15 +100,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
           elevation: 0,
           offset: Offset(0, Dimens.fortyTwo),
         ),
-        /*dropdownStyleData: DropdownStyleData(
-          maxHeight: Dimens.screenHeight / 3.3,
-          padding: EdgeInsets.zero,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimens.seven),
-            color: ColorValues.whiteColor,
-            boxShadow: [BoxShadow(color: ColorValues.blackColor.withOpacity(0.08), blurRadius: 36, spreadRadius: 0, offset: const Offset(0, 0))],
-          ),
-        ),*/
       ),
     );
   }

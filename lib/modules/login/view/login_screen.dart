@@ -98,14 +98,14 @@ class LoginScreen extends StatelessWidget {
                                             maxLines: 1,
                                           ),
                                         ),
-                                      ).marginOnly(top: Dimens.sixTeen),
+                                      ).marginOnly(top: Dimens.twentyFour),
                                       CustomPrimaryButton(
                                         btnText: StringValues.logIn.tr,
                                         buttonWidth: smallConstraints.maxWidth / 1.9,
                                         borderRadius: BorderRadius.circular(Dimens.thirty),
                                         btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
-                                        margin: EdgeInsets.symmetric(vertical: Dimens.sixTeen),
+                                        margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),
                                         onTap: () {
                                           if (loginController.emailController.text.trim().isEmpty) {
                                             AppUtility.showSnackBar(StringValues.pleaseEnterEmail.tr);

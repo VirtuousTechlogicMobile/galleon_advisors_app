@@ -29,5 +29,13 @@ final Map<String, String> enUs = {
   'operational_analysis': 'Operational\nAnalysis',
   'key_themes': 'Key\nThemes',
   'submit': 'Submit',
+  'server': 'Server',
+  'role': ' (Role)',
+  'in_this_role_when_we_observe_we_are_counting_covers': 'In this role when we observe, we are counting ´covers´.',
+  'covers_are_the_number_of_guests_that_are_seated_at_the_table': '´Covers´ are the number of guests that are seated at the table',
+  'process_opportunities': 'Process Opportunities:',
+  'look_out_for_how_servers_are_navigating_across_sections_Are_they_closing_stations': 'Look out for how servers are navigating across sections. Are they closing stations?',
+  'take_note_of_where_the_bussing_stations_are_can_this_be_improved': 'Take note of where the bussing stations are. Can this be improved?',
+  'do_bussing_stations_have_par_stocks_or_images_of_what_the_setup_should_look_like': 'Do bussing stations have par stocks or images of what the setup should look like?',
   'Create': 'Create',
 };

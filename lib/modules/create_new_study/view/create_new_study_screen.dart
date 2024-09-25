@@ -42,9 +42,9 @@ class CreateNewStudyScreen extends StatelessWidget {
                   width: MediaQuery.sizeOf(context).width / 3.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const Spacer(),
                       Obx(
                         () => CustomDropdown(
                           dropDownItemsList: createNewStudyController.programDropDownItemsList,
@@ -75,6 +75,8 @@ class CreateNewStudyScreen extends StatelessWidget {
                           selectedItem: createNewStudyController.selectedPosition.value,
                         ).marginOnly(bottom: Dimens.eighteen),
                       ),
+                      const Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),

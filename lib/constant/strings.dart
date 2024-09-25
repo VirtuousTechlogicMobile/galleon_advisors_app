@@ -28,4 +28,12 @@ abstract class StringValues {
   static const operationalAnalysis = 'operational_analysis';
   static const keyThemes = 'key_themes';
   static const submit = 'submit';
+  static const server = 'server';
+  static const role = 'role';
+  static const inThisRoleWhenWeObserveWeAreCountingCovers = 'in_this_role_when_we_observe_we_are_counting_covers';
+  static const coversAreTheNumberOfQuestsThatAreSeatedAtTheTable = 'covers_are_the_number_of_guests_that_are_seated_at_the_table';
+  static const processOpportunities = 'process_opportunities';
+  static const lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations = 'look_out_for_how_servers_are_navigating_across_sections_Are_they_closing_stations';
+  static const takeNoteOfWhereTheBussingStationsAreCanThisBeImproved = 'take_note_of_where_the_bussing_stations_are_can_this_be_improved';
+  static const doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike = 'do_bussing_stations_have_par_stocks_or_images_of_what_the_setup_should_look_like';
 }
