@@ -126,7 +126,7 @@ class StudyScreenBottomBar extends StatelessWidget {
                 margin: EdgeInsets.only(right: Dimens.twentyNine),
                 buttonHeight: Dimens.fiftySix,
                 contentPadding: EdgeInsets.zero,
-                btnText: StringValues.keyThemes.tr,
+                btnText: StringValues.keyBackSlashNThemes.tr,
                 borderRadius: BorderRadius.circular(Dimens.eight),
                 btnTextStyle: AppStyles.style18Normal.copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,

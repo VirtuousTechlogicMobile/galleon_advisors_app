@@ -233,6 +233,7 @@ abstract class Dimens {
   static double fifty = 50.r;
   static double fiftyFive = 55.r;
   static double fiftyFour = 54.r;
+  static double fiftyTwo = 52.r;
   static double fiftySix = 56.r;
   static double five = 5.r;
   static double four = 4.r;
@@ -240,6 +241,7 @@ abstract class Dimens {
   static double fourteen = 14.r;
   static double forty = 40.r;
   static double fortyTwo = 42.r;
+  static double fortyOne = 41.r;
   static double fortyThree = 43.r;
   static double fortySix = 46.r;
   static double fortyEight = 48.r;
@@ -248,9 +250,12 @@ abstract class Dimens {
   static double ninetyEight = 98.r;
   static double ninetyFive = 95.r;
   static double one = 1.r;
+  static double oneHundredForty = 140.r;
+  static double oneHundredFortyOne = 141.r;
   static double oneHundredFifty = 150.r;
   static double twoHundredEighteen = 218.r;
   static double twoHundredForty = 240.r;
+  static double twoHundredTwenty = 220.r;
   static double oneHundredFortySeven = 147.r;
   static double oneHundredTwenty = 120.r;
   static double oneHundredTwentyFive = 125.r;

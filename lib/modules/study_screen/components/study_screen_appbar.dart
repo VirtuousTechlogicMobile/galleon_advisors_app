@@ -11,11 +11,19 @@ class StudyScreenAppbar extends StatelessWidget {
   final String time;
   final Function() onPlayButtonTap;
   final Function() onPressBackButton;
+  final Function() onPressStopButton;
   final bool isStudyPlay;
   final bool isShowEndButton;
 
-  const StudyScreenAppbar(
-      {super.key, required this.time, required this.onPlayButtonTap, required this.isStudyPlay, required this.isShowEndButton, required this.onPressBackButton});
+  const StudyScreenAppbar({
+    super.key,
+    required this.time,
+    required this.onPlayButtonTap,
+    required this.isStudyPlay,
+    required this.isShowEndButton,
+    required this.onPressBackButton,
+    required this.onPressStopButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +67,14 @@ class StudyScreenAppbar extends StatelessWidget {
                     minFontSize: 12,
                     maxFontSize: 16,
                   ).marginOnly(right: Dimens.thirteen),
+                  if (isShowEndButton)
+                    InkWell(
+                      onTap: () => onPressStopButton(),
+                      child: CommonWidgets.fromSvg(
+                        svgAsset: SvgAssets.stopStudyIcon,
+                        margin: EdgeInsets.only(left: Dimens.nineteen, right: Dimens.thirty),
+                      ),
+                    )
                 ],
               ),
             ),

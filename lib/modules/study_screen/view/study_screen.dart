@@ -15,6 +15,7 @@ import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
 import '../components/list_wheel_scroll_picker.dart';
 import '../components/study_screen_appbar.dart';
+import '../components/study_screen_components.dart';
 import '../model/operational_analysis_data_model.dart';
 
 class StudyScreen extends StatelessWidget {
@@ -44,6 +45,14 @@ class StudyScreen extends StatelessWidget {
                 },
                 onPressBackButton: () {
                   studyController.onBackPressed();
+                },
+                onPressStopButton: () {
+                  StudyScreenComponents.stopStudyDialog(
+                    context: context,
+                    onComplete: () {
+                      Get.offNamed(AppRoutes.endStudySummary);
+                    },
+                  );
                 },
               ),
             ),
@@ -342,10 +351,10 @@ class StudyScreen extends StatelessWidget {
             ),
           ], minFontSize: 10, maxFontSize: 16),
           Flexible(
-            child: customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
+            child: StudyScreenComponents.customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
           ),
           Flexible(
-            child: customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
+            child: StudyScreenComponents.customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
           ),
           CommonWidgets.autoSizeText(
             text: StringValues.processOpportunities.tr,
@@ -354,40 +363,16 @@ class StudyScreen extends StatelessWidget {
             maxFontSize: 16,
           ).marginOnly(top: Dimens.fifteen),
           Flexible(
-            child: customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
+            child: StudyScreenComponents.customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
           ),
           Flexible(
-            child: customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
+            child: StudyScreenComponents.customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
           ),
           Flexible(
-            child: customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
+            child: StudyScreenComponents.customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
           ),
         ],
       ),
-    );
-  }
-
-  Widget customListElement({required String text, TextStyle? textStyle}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CommonWidgets.autoSizeText(
-          text: '•',
-          textStyle: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
-          minFontSize: 10,
-          maxFontSize: 13,
-        ).marginOnly(top: Dimens.one, right: Dimens.ten),
-        Flexible(
-          child: CommonWidgets.autoSizeText(
-            text: text,
-            textStyle: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 10,
-            maxLines: 5,
-            maxFontSize: 16,
-          ),
-        ),
-      ],
     );
   }
 
@@ -527,7 +512,7 @@ class StudyScreen extends StatelessWidget {
         if (operationalAnalysisDataModel.sample.isNotEmpty)
           Expanded(
             flex: 1,
-            child: customListElement(
+            child: StudyScreenComponents.customListElement(
               text: operationalAnalysisDataModel.sample,
               textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
             ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
@@ -549,13 +534,13 @@ class StudyScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: customListElement(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+            child: StudyScreenComponents.customListElement(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
           ),
           Flexible(
-            child: customListElement(text: 'Ut in velit a sapien eleifend dictum.'),
+            child: StudyScreenComponents.customListElement(text: 'Ut in velit a sapien eleifend dictum.'),
           ),
           Flexible(
-            child: customListElement(text: 'Cras convallis leo eu mauris egestas lobortis.'),
+            child: StudyScreenComponents.customListElement(text: 'Cras convallis leo eu mauris egestas lobortis.'),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:galleon_advisors_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../model/operational_analysis_data_model.dart';
@@ -14,7 +15,7 @@ class StudyScreenController extends GetxController {
   RxBool servicesTapped = false.obs;
   RxBool opportunityTapped = false.obs;
 
-  List<String> studyStartTime = [];
+  RxList<String> studyStartTime = <String>[].obs;
   RxBool isStudyStarted = false.obs;
 
   RxString selectedTab = 'activities'.obs;

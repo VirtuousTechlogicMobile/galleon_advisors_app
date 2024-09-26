@@ -26,6 +26,7 @@ abstract class StringValues {
   static const activities = 'activities';
   static const tipsAndTricks = 'tips_and_tricks';
   static const operationalAnalysis = 'operational_analysis';
+  static const keyBackSlashNThemes = 'key_backslash_n_themes';
   static const keyThemes = 'key_themes';
   static const submit = 'submit';
   static const server = 'server';
@@ -37,4 +38,14 @@ abstract class StringValues {
   static const lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations = 'look_out_for_how_servers_are_navigating_across_sections_Are_they_closing_stations';
   static const takeNoteOfWhereTheBussingStationsAreCanThisBeImproved = 'take_note_of_where_the_bussing_stations_are_can_this_be_improved';
   static const doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike = 'do_bussing_stations_have_par_stocks_or_images_of_what_the_setup_should_look_like';
+  static const doYouWantToStopStudyName = 'do_you_want_to_stop_study_name';
+  static const areYouSureYouWantToStopTheStudyYouWillBeUnableToReturnToTheStudyIfYouAreReturningToTheStudyUseThePauseFunction =
+      'are_you_sure_you_want_to_stop_the_study_you_will_be_unable_to_return_to_the_study_if_you_are_returning_to_the_study_use_the_pause_function';
+  static const cancel = 'cancel';
+  static const complete = 'complete';
+  static const end = 'end';
+  static const serviceVsOpportunity = 'service_vs_opportunity';
+  static const timeObserved = 'time_observed';
+  static const activityDuration = 'activity_duration';
+  static const activity = 'activity';
 }

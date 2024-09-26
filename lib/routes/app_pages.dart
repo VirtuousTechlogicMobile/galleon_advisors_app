@@ -1,5 +1,7 @@
 import 'package:galleon_advisors_app/modules/create_new_study/bindings/create_new_study_binding.dart';
 import 'package:galleon_advisors_app/modules/create_new_study/view/create_new_study_screen.dart';
+import 'package:galleon_advisors_app/modules/end_study_summary/bindings/end_study_summary_binding.dart';
+import 'package:galleon_advisors_app/modules/end_study_summary/view/end_study_summary_screen.dart';
 import 'package:galleon_advisors_app/modules/home/bindings/home_binding.dart';
 import 'package:galleon_advisors_app/modules/home/view/home_screen.dart';
 import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
@@ -49,6 +51,14 @@ abstract class AppPages {
       name: _Routes.study,
       page: StudyScreen.new,
       binding: StudyScreenBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.endStudySummary,
+      page: EndStudySummaryScreen.new,
+      binding: EndStudySummaryBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

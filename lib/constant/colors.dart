@@ -10,6 +10,7 @@ abstract class ColorValues {
   static const Color dividerBlackColor = Color(0xFF010B19);
   static const Color appBgColor = Color(0xFFE7E6E6);
   static const Color lightGrayColor = Color(0xFFD6D6D6);
+  static const Color charcoalGrayColor = Color(0xFF3C3C3C);
   static const Color softGrayColor = Color(0xFFEEEEEE);
   static const Color darkSlateGrayColor = Color(0xFF3F3F3F);
   static const Color fontLightGrayColor = Color(0xFF8C8C8C);
