@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class ColorValues {
   static const Color primaryGreenColor = Color(0xFF016B54);
-  static const Color primaryDarkGreenColor = Color(0xFF0EC162);
+  static const Color primaryGreenAccentColor = Color(0xFF0EC162);
   static const Color deepGreenColor = Color(0xFF09745F);
   static const Color deepYellowColor = Color(0xFFC5B357);
   static const Color deepGreyColor = Color(0xFF2D2D2D);

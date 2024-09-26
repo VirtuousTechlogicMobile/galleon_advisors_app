@@ -8,9 +8,13 @@ class StudyScreenController extends GetxController {
   Rxn<int> selectedOpportunityTheme = Rxn<int>();
   RxInt selectedVolume = 0.obs;
 
+  List<String> opportunityFlagList = ['Revenue', 'Cost', 'Employee Satisfaction', 'Safety & Sustainability'];
+  Rxn<int> selectedOpportunityFlag = Rxn<int>();
+
   RxBool servicesTapped = false.obs;
   RxBool opportunityTapped = false.obs;
 
+  List<String> studyStartTime = [];
   RxBool isStudyStarted = false.obs;
 
   RxString selectedTab = 'activities'.obs;
@@ -81,8 +85,8 @@ class StudyScreenController extends GetxController {
   }
 
   onSubmitStudy() {
-    selectedServiceActivities.value = null;
-    selectedOpportunityTheme.value = null;
+    // selectedServiceActivities.value = null;
+    // selectedOpportunityTheme.value = null;
     servicesTapped.value = false;
     opportunityTapped.value = false;
   }
@@ -108,6 +112,11 @@ class StudyScreenController extends GetxController {
   onBackPressed() {
     if (selectedActivitiesSubTab.isNotEmpty) {
       selectedActivitiesSubTab.value = '';
+    } else if (selectedServiceActivities.value != null || selectedOpportunityTheme.value != null) {
+      selectedServiceActivities.value = null;
+      selectedOpportunityTheme.value = null;
+      servicesTapped.value = false;
+      opportunityTapped.value = false;
     } else {
       Get.back();
     }

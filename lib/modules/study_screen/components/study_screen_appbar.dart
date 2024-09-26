@@ -12,8 +12,10 @@ class StudyScreenAppbar extends StatelessWidget {
   final Function() onPlayButtonTap;
   final Function() onPressBackButton;
   final bool isStudyPlay;
+  final bool isShowEndButton;
 
-  const StudyScreenAppbar({super.key, required this.time, required this.onPlayButtonTap, required this.isStudyPlay, required this.onPressBackButton});
+  const StudyScreenAppbar(
+      {super.key, required this.time, required this.onPlayButtonTap, required this.isStudyPlay, required this.isShowEndButton, required this.onPressBackButton});
 
   @override
   Widget build(BuildContext context) {

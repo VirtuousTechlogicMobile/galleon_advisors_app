@@ -56,7 +56,7 @@ class ListWheelScrollPicker extends StatelessWidget {
                 height: Dimens.fortyThree,
                 // margin: EdgeInsets.only(bottom: Dimens.forty),
                 width: double.infinity,
-                color: ColorValues.primaryDarkGreenColor.withOpacity(0.20),
+                color: ColorValues.primaryGreenAccentColor.withOpacity(0.20),
               ),
             ),
           ],

@@ -30,6 +30,7 @@ abstract class StringValues {
   static const submit = 'submit';
   static const server = 'server';
   static const role = 'role';
+  static const identifier = 'identifier';
   static const inThisRoleWhenWeObserveWeAreCountingCovers = 'in_this_role_when_we_observe_we_are_counting_covers';
   static const coversAreTheNumberOfQuestsThatAreSeatedAtTheTable = 'covers_are_the_number_of_guests_that_are_seated_at_the_table';
   static const processOpportunities = 'process_opportunities';

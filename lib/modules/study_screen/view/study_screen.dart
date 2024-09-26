@@ -37,7 +37,9 @@ class StudyScreen extends StatelessWidget {
               () => StudyScreenAppbar(
                 time: '10:49:05 Tue, 30 Apr 24',
                 isStudyPlay: studyController.isStudyStarted.value,
+                isShowEndButton: studyController.studyStartTime.isNotEmpty && !studyController.isStudyStarted.value,
                 onPlayButtonTap: () {
+                  studyController.studyStartTime.add(DateTime.now().toString());
                   studyController.isStudyStarted.value = !studyController.isStudyStarted.value;
                 },
                 onPressBackButton: () {
@@ -81,7 +83,7 @@ class StudyScreen extends StatelessWidget {
       children: [
         Obx(
           () => Flexible(
-            child: studyController.selectedActivitiesSubTab.value == 'comments'
+            child: studyController.selectedActivitiesSubTab.value == 'comment'
                 ? commentsLayout()
                 : studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
                     ? opportunityLayout()
@@ -135,12 +137,12 @@ class StudyScreen extends StatelessWidget {
                 child: CustomPrimaryButton(
                   margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
                   btnText: StringValues.comment.tr,
-                  border: studyController.selectedActivitiesSubTab.value == 'comments'
+                  border: studyController.selectedActivitiesSubTab.value == 'comment'
                       ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
                       : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  buttonColor: studyController.selectedActivitiesSubTab.value == 'comments' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                  buttonColor: studyController.selectedActivitiesSubTab.value == 'comment' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
                   borderRadius: BorderRadius.circular(Dimens.eight),
-                  contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comments' ? Dimens.four : Dimens.eight),
+                  contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comment' ? Dimens.four : Dimens.eight),
                   btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                   onTap: () {
                     studyController.onChangeActivitiesSubTab(0);
@@ -196,26 +198,120 @@ class StudyScreen extends StatelessWidget {
 
   Widget commentsLayout() {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
-      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
+      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
+      padding: EdgeInsets.only(right: Dimens.ten),
       decoration: BoxDecoration(
         color: ColorValues.whiteColor,
         border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
         borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 1,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: Dimens.one),
+                      color: ColorValues.deepYellowColor.withOpacity(0.40),
+                      width: constraints.maxWidth / 2,
+                      alignment: Alignment.topCenter,
+                      child: CommonWidgets.autoSizeText(
+                        text: StringValues.comment.tr,
+                        textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                        minFontSize: 12,
+                        maxFontSize: 14,
+                      ),
+                    ),
+                    CommonWidgets.autoSizeText(
+                      text: 'Free Text as well as auto-safe.',
+                      textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                      minFontSize: 12,
+                      maxFontSize: 16,
+                    ).marginOnly(top: Dimens.twentySix, left: Dimens.twentyNine),
+                  ],
+                ).marginOnly(top: Dimens.sevenTeen, bottom: Dimens.ten);
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: Dimens.four),
+            decoration: BoxDecoration(border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor)),
+          ),
+          Expanded(
+            flex: 1,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: Dimens.one),
+                      width: constraints.maxWidth / 2,
+                      alignment: Alignment.topCenter,
+                      color: ColorValues.deepYellowColor.withOpacity(0.40),
+                      child: CommonWidgets.autoSizeText(
+                        text: StringValues.identifier.tr,
+                        textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                        minFontSize: 12,
+                        maxFontSize: 14,
+                      ),
+                    ),
+                  ],
+                ).marginOnly(top: Dimens.sevenTeen, bottom: Dimens.ten);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget opportunityLayout() {
-    return Container(
-      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
-      padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
-      decoration: BoxDecoration(
-        color: ColorValues.whiteColor,
-        border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
-        borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
-      ),
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+        width: constraints.maxWidth,
+        height: constraints.maxHeight,
+        padding: EdgeInsets.symmetric(vertical: Dimens.eighteen),
+        margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
+        decoration: BoxDecoration(
+          color: ColorValues.whiteColor,
+          border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+          borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: List.generate(
+              studyController.opportunityFlagList.length,
+              (index) {
+                return Obx(
+                  () => CustomPrimaryButton(
+                    btnText: studyController.opportunityFlagList[index],
+                    buttonWidth: Dimens.twoHundredForty,
+                    contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
+                    margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
+                    borderRadius: BorderRadius.circular(Dimens.eight),
+                    onTap: () {
+                      studyController.selectedOpportunityFlag.value = index;
+                    },
+                    border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                    buttonColor: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenAccentColor.withOpacity(0.25) : ColorValues.whiteColor,
+                    btnTextStyle:
+                        AppStyles.style16Normal.copyWith(color: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   Widget tipsAndTricksLayout() {

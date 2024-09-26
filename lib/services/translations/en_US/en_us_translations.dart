@@ -31,6 +31,7 @@ final Map<String, String> enUs = {
   'submit': 'Submit',
   'server': 'Server',
   'role': ' (Role)',
+  'identifier': 'Identifier',
   'in_this_role_when_we_observe_we_are_counting_covers': 'In this role when we observe, we are counting ´covers´.',
   'covers_are_the_number_of_guests_that_are_seated_at_the_table': '´Covers´ are the number of guests that are seated at the table',
   'process_opportunities': 'Process Opportunities:',
