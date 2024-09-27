@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_advisors_app/utility/utility.dart';
 import 'package:get/get.dart';
 
 import '../model/operational_analysis_data_model.dart';
@@ -12,6 +12,12 @@ class StudyScreenController extends GetxController {
   List<String> opportunityFlagList = ['Revenue', 'Cost', 'Employee Satisfaction', 'Safety & Sustainability'];
   Rxn<int> selectedOpportunityFlag = Rxn<int>();
 
+  RxBool isDialogOpen = false.obs;
+
+  RxBool isStudyTimeLineSelected = false.obs;
+  RxList<int> selectedStudyTimelinesList = <int>[].obs;
+  Rxn<int> currentSelectedStudyTimeline = Rxn<int>();
+
   RxBool servicesTapped = false.obs;
   RxBool opportunityTapped = false.obs;
 
@@ -20,6 +26,34 @@ class StudyScreenController extends GetxController {
 
   RxString selectedTab = 'activities'.obs;
   RxString selectedActivitiesSubTab = ''.obs;
+
+  onSelectedStudyTimeLine(int selectedItemIndex) {
+    if (isStudyStarted.value) {
+      isStudyTimeLineSelected.value = true;
+      if (selectedStudyTimelinesList.isNotEmpty) {
+        if (currentSelectedStudyTimeline.value == selectedItemIndex) {
+          /// if user tapped on same index item ---- split timelines
+          selectedStudyTimelinesList.clear();
+          selectedStudyTimelinesList.add(selectedItemIndex);
+        } else {
+          /// if user tapped on another item ---- merge timelines
+          selectedStudyTimelinesList.clear();
+          selectedStudyTimelinesList.add(selectedItemIndex);
+          selectedStudyTimelinesList.add(currentSelectedStudyTimeline.value ?? selectedItemIndex);
+        }
+      } else {
+        /// select 3 items on users tap on study timeline item
+        if (selectedItemIndex == 0) {
+          selectedStudyTimelinesList.addAll([0, 1, 2]);
+        } else if (selectedItemIndex == (studyTimeLineData.length - 1)) {
+          selectedStudyTimelinesList.addAll([selectedItemIndex - 2, selectedItemIndex - 1, selectedItemIndex]);
+        } else {
+          selectedStudyTimelinesList.addAll([selectedItemIndex - 1, selectedItemIndex, selectedItemIndex + 1]);
+        }
+      }
+      currentSelectedStudyTimeline.value = selectedItemIndex;
+    }
+  }
 
   List<String> serviceActivitiesItems = [
     'answer phone call',
@@ -92,9 +126,9 @@ class StudyScreenController extends GetxController {
     opportunityTapped.value = false;
   }
 
-  List<StudyTimelineDataModel> studyTimeLineData = [
+  RxList<StudyTimelineDataModel> studyTimeLineData = [
     StudyTimelineDataModel(heading: 'Answer Phone Call', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
-    StudyTimelineDataModel(heading: 'Complete Guest Inquiry', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
+    StudyTimelineDataModel(heading: 'Complete Guest Inquiry', fromTime: '10:51:26', toTime: '10:52:26', type: 'service'),
     StudyTimelineDataModel(heading: 'Export Loading', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
     StudyTimelineDataModel(heading: 'Create An Estimate', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
     StudyTimelineDataModel(heading: 'Guest Meeting', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
@@ -108,11 +142,15 @@ class StudyScreenController extends GetxController {
     StudyTimelineDataModel(heading: 'Export Loading', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
     StudyTimelineDataModel(heading: 'Create An Estimate', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
     StudyTimelineDataModel(heading: 'Guest Meeting', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
-  ];
+  ].obs;
 
   onBackPressed() {
     if (selectedActivitiesSubTab.isNotEmpty) {
       selectedActivitiesSubTab.value = '';
+    } else if (selectedStudyTimelinesList.isNotEmpty) {
+      isStudyTimeLineSelected.value = false;
+      currentSelectedStudyTimeline.value = null;
+      selectedStudyTimelinesList.clear();
     } else if (selectedServiceActivities.value != null || selectedOpportunityTheme.value != null) {
       selectedServiceActivities.value = null;
       selectedOpportunityTheme.value = null;
@@ -120,6 +158,26 @@ class StudyScreenController extends GetxController {
       opportunityTapped.value = false;
     } else {
       Get.back();
+    }
+  }
+
+  onMergeStudies() {
+    if (studyTimeLineData[selectedStudyTimelinesList.first].type == studyTimeLineData[selectedStudyTimelinesList.last].type) {
+      selectedStudyTimelinesList.sort();
+      studyTimeLineData.replaceRange(selectedStudyTimelinesList.first, selectedStudyTimelinesList.last + 1, [
+        StudyTimelineDataModel(
+          fromTime: studyTimeLineData[selectedStudyTimelinesList.first].fromTime,
+          toTime: studyTimeLineData[selectedStudyTimelinesList.last].toTime,
+          heading: 'Merged',
+          type: studyTimeLineData[selectedStudyTimelinesList.first].type,
+        )
+      ]);
+      studyTimeLineData.refresh();
+      isStudyTimeLineSelected.value = false;
+      currentSelectedStudyTimeline.value = null;
+      selectedStudyTimelinesList.clear();
+    } else {
+      AppUtility.showSnackBar('Failed to Merge');
     }
   }
 }

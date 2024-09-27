@@ -49,5 +49,7 @@ final Map<String, String> enUs = {
   'time_observed': 'Time Observed',
   'activity_duration': 'Activity Duration',
   'activity': 'Activity',
+  'merge': 'Merge',
+  'split': 'Split',
   'Create': 'Create',
 };

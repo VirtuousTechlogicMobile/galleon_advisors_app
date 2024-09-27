@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/custom_primary_button.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
+import 'package:galleon_advisors_app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';

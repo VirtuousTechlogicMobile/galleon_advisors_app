@@ -47,35 +47,53 @@ class StudyScreen extends StatelessWidget {
                   studyController.onBackPressed();
                 },
                 onPressStopButton: () {
+                  studyController.isDialogOpen.value = true;
                   StudyScreenComponents.stopStudyDialog(
                     context: context,
-                    onComplete: () {
+                    onCompleteButtonTapped: () {
                       Get.offNamed(AppRoutes.endStudySummary);
+                    },
+                    whenComplete: () {
+                      studyController.isDialogOpen.value = false;
                     },
                   );
                 },
               ),
             ),
             Expanded(
-              child: Row(
-                children: [
-                  Obx(
-                    () => Flexible(
-                      flex: 2,
-                      child: studyController.getCurrentTabIndex() == 0
-                          ? activitiesLayout()
-                          : studyController.getCurrentTabIndex() == 2
-                              ? tipsAndTricksLayout()
-                              : studyController.getCurrentTabIndex() == 3
-                                  ? operationalAnalysisLayout()
-                                  : keyThemesLayout(),
-                    ),
+              child: Obx(
+                () => ImageFiltered(
+                  enabled: studyController.isDialogOpen.value,
+                  imageFilter: ImageFilter.blur(
+                    sigmaX: 10,
+                    sigmaY: 10,
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: studyTimeLineLayout(),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: ImageFiltered(
+                          enabled: studyController.selectedStudyTimelinesList.length == 2,
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: 10,
+                            sigmaY: 10,
+                          ),
+                          child: studyController.getCurrentTabIndex() == 0
+                              ? activitiesLayout()
+                              : studyController.getCurrentTabIndex() == 2
+                                  ? tipsAndTricksLayout()
+                                  : studyController.getCurrentTabIndex() == 3
+                                      ? operationalAnalysisLayout()
+                                      : keyThemesLayout(),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: studyTimeLineLayout(),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             bottomBar(),
@@ -114,9 +132,13 @@ class StudyScreen extends StatelessWidget {
                                   : serviceActivitiesLayout(),
                             ),
                           ),
-                          Flexible(
-                            flex: 2,
-                            child: volumeLayout(),
+                          Obx(
+                            () => studyController.selectedStudyTimelinesList.isNotEmpty && studyController.selectedStudyTimelinesList.length < 2
+                                ? SizedBox(width: Dimens.nine)
+                                : Flexible(
+                                    flex: 2,
+                                    child: volumeLayout(),
+                                  ),
                           ),
                           Obx(
                             () => Flexible(
@@ -137,72 +159,82 @@ class StudyScreen extends StatelessWidget {
           ),
         ),
 
-        /// comment & opportunity flag button
-        Row(
-          children: [
-            Obx(
-              () => Flexible(
-                flex: 1,
-                child: CustomPrimaryButton(
-                  margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
-                  btnText: StringValues.comment.tr,
-                  border: studyController.selectedActivitiesSubTab.value == 'comment'
-                      ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
-                      : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  buttonColor: studyController.selectedActivitiesSubTab.value == 'comment' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.eight),
-                  contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comment' ? Dimens.four : Dimens.eight),
-                  btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                  onTap: () {
-                    studyController.onChangeActivitiesSubTab(0);
-                  },
-                ),
-              ),
-            ),
-            Obx(
-              () => Flexible(
-                flex: 1,
-                child: studyController.servicesTapped.value
-                    ? ClipRect(
-                        child: ImageFiltered(
-                          imageFilter: ImageFilter.blur(
-                            sigmaX: 10,
-                            sigmaY: 10,
-                          ),
-                          child: IgnorePointer(
-                            child: CustomPrimaryButton(
-                              margin: EdgeInsets.zero,
-                              btnText: StringValues.opportunityFlag.tr,
-                              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                              buttonColor: ColorValues.softWhiteColor,
-                              borderRadius: BorderRadius.circular(Dimens.eight),
-                              contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
-                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                            ),
-                          ).marginOnly(left: Dimens.eight, right: Dimens.twentySeven),
-                        ),
-                      )
-                    : CustomPrimaryButton(
-                        margin: EdgeInsets.only(left: Dimens.eight, right: Dimens.twentySeven),
-                        btnText: StringValues.opportunityFlag.tr,
-                        border: studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
-                            ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
-                            : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                        buttonColor:
-                            studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-                        borderRadius: BorderRadius.circular(Dimens.eight),
-                        contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? Dimens.four : Dimens.eight),
-                        btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                        onTap: () {
-                          studyController.onChangeActivitiesSubTab(1);
-                        },
-                      ),
-              ),
-            ),
-          ],
-        ).marginOnly(bottom: Dimens.nine),
+        /// comment & opportunity flag buttons
+        Obx(
+          () => studyController.selectedStudyTimelinesList.length == 1 ? splitStudyLayout() : commentOppFlagButtonsLayout(),
+        ),
       ],
     );
+  }
+
+  Widget splitStudyLayout() {
+    return Container();
+  }
+
+  Widget commentOppFlagButtonsLayout() {
+    return Row(
+      children: [
+        Obx(
+          () => Flexible(
+            flex: 1,
+            child: CustomPrimaryButton(
+              margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
+              btnText: StringValues.comment.tr,
+              border: studyController.selectedActivitiesSubTab.value == 'comment'
+                  ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
+                  : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+              buttonColor: studyController.selectedActivitiesSubTab.value == 'comment' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+              borderRadius: BorderRadius.circular(Dimens.eight),
+              contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comment' ? Dimens.four : Dimens.eight),
+              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              onTap: () {
+                studyController.onChangeActivitiesSubTab(0);
+              },
+            ),
+          ),
+        ),
+        Obx(
+          () => Flexible(
+            flex: 1,
+            child: studyController.servicesTapped.value
+                ? ClipRect(
+                    child: ImageFiltered(
+                      imageFilter: ImageFilter.blur(
+                        sigmaX: 10,
+                        sigmaY: 10,
+                      ),
+                      child: IgnorePointer(
+                        child: CustomPrimaryButton(
+                          margin: EdgeInsets.zero,
+                          btnText: StringValues.opportunityFlag.tr,
+                          border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                          buttonColor: ColorValues.softWhiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.eight),
+                          contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
+                          btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                        ),
+                      ).marginOnly(left: Dimens.eight, right: Dimens.twentySeven),
+                    ),
+                  )
+                : CustomPrimaryButton(
+                    margin: EdgeInsets.only(left: Dimens.eight, right: Dimens.twentySeven),
+                    btnText: StringValues.opportunityFlag.tr,
+                    border: studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
+                        ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
+                        : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                    buttonColor:
+                        studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                    borderRadius: BorderRadius.circular(Dimens.eight),
+                    contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? Dimens.four : Dimens.eight),
+                    btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                    onTap: () {
+                      studyController.onChangeActivitiesSubTab(1);
+                    },
+                  ),
+          ),
+        ),
+      ],
+    ).marginOnly(bottom: Dimens.nine);
   }
 
   Widget commentsLayout() {
@@ -425,9 +457,7 @@ class StudyScreen extends StatelessWidget {
           ),
           Expanded(
             child: LayoutBuilder(builder: (context, constraints) {
-              double rowHeight = Dimens.sixty;
-              int requiredRows = (constraints.maxHeight ~/ rowHeight);
-              while (studyController.tableData.length < requiredRows) {
+              while (studyController.tableData.length < (constraints.maxHeight ~/ Dimens.sixty)) {
                 studyController.tableData.add(OperationalAnalysisDataModel(analysisName: '', dataInputs: '', sample: ''));
               }
               return Stack(
@@ -548,25 +578,34 @@ class StudyScreen extends StatelessWidget {
   }
 
   Widget bottomBar() {
-    return StudyScreenBottomBar(
-      onTapActivitiesButton: () {
-        studyController.onChangeTab(1);
-      },
-      onTapAddButton: () {
-        Get.toNamed(AppRoutes.createNewStudy);
-      },
-      onTapTipsAndTricksButton: () {
-        studyController.onChangeTab(2);
-      },
-      onTapOperationAnalysisButton: () {
-        studyController.onChangeTab(3);
-      },
-      onTapKeyThemesButton: () {
-        studyController.onChangeTab(4);
-      },
-      onTapSubmitButton: () {
-        studyController.onSubmitStudy();
-      },
+    return Obx(
+      () => StudyScreenBottomBar(
+        onTapActivitiesButton: () {
+          studyController.onChangeTab(1);
+        },
+        onTapAddButton: () {
+          Get.toNamed(AppRoutes.createNewStudy);
+        },
+        onTapTipsAndTricksButton: () {
+          studyController.onChangeTab(2);
+        },
+        onTapOperationAnalysisButton: () {
+          studyController.onChangeTab(3);
+        },
+        onTapKeyThemesButton: () {
+          studyController.onChangeTab(4);
+        },
+        onTapSubmitButton: () {
+          if (studyController.selectedStudyTimelinesList.length == 2) {
+            studyController.onMergeStudies();
+          } else if (studyController.selectedStudyTimelinesList.length == 1) {
+          } else {
+            studyController.onSubmitStudy();
+          }
+        },
+        isMerge: studyController.selectedStudyTimelinesList.length == 2,
+        isSplit: studyController.selectedStudyTimelinesList.length == 1,
+      ),
     );
   }
 
@@ -616,7 +655,7 @@ class StudyScreen extends StatelessWidget {
                 child: ListWheelScrollPicker(
                   itemsList: studyController.serviceActivitiesItems,
                   selectedIndex: studyController.selectedServiceActivities.value ?? 0,
-                  isScroll: studyController.isStudyStarted.value,
+                  isScroll: studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.isNotEmpty,
                   onSelectedItemChanged: (selectedValue) {
                     studyController.servicesTapped.value = true;
                     studyController.selectedServiceActivities.value = selectedValue;
@@ -735,7 +774,7 @@ class StudyScreen extends StatelessWidget {
                 child: ListWheelScrollPicker(
                   itemsList: studyController.opportunityThemes,
                   selectedIndex: studyController.selectedOpportunityTheme.value ?? 0,
-                  isScroll: studyController.isStudyStarted.value,
+                  isScroll: studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.isNotEmpty,
                   onSelectedItemChanged: (selectedValue) {
                     studyController.opportunityTapped.value = true;
                     studyController.selectedOpportunityTheme.value = selectedValue;
@@ -767,9 +806,10 @@ class StudyScreen extends StatelessWidget {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
+            height: Dimens.thirty,
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -786,59 +826,104 @@ class StudyScreen extends StatelessWidget {
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.fifteen), bottomRight: Radius.circular(Dimens.fifteen)),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: studyController.studyTimeLineData.length,
-                padding: EdgeInsets.symmetric(vertical: Dimens.four),
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.only(top: Dimens.four, bottom: Dimens.five),
-                    color: ColorValues.whiteColor,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: Dimens.thirtyThree,
-                          height: Dimens.thirtyTwo,
-                          margin: EdgeInsets.only(right: Dimens.fifteen),
-                          decoration: BoxDecoration(
-                            color: studyController.studyTimeLineData[index].type == 'service'
-                                ? ColorValues.primaryGreenColor.withOpacity(0.25)
-                                : ColorValues.deepGreyColor.withOpacity(0.25),
-                            border: Border.all(
-                              color: ColorValues.darkSlateGrayColor,
-                              width: Dimens.one,
+              child: Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  physics: studyController.selectedStudyTimelinesList.isNotEmpty ? const NeverScrollableScrollPhysics() : const AlwaysScrollableScrollPhysics(),
+                  itemCount: studyController.studyTimeLineData.length,
+                  itemBuilder: (context, index) {
+                    /// apply ignore pointer and image filter when study splitting or merging
+                    return IgnorePointer(
+                      ignoring: studyController.isStudyTimeLineSelected.value && !studyController.selectedStudyTimelinesList.contains(index),
+                      child: InkWell(
+                        onTap: () {
+                          studyController.onSelectedStudyTimeLine(index);
+                        },
+                        child: ImageFiltered(
+                          enabled: studyController.isStudyTimeLineSelected.value && !studyController.selectedStudyTimelinesList.contains(index),
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: 15,
+                            sigmaY: 15,
+                          ),
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: Dimens.four),
+                            decoration: BoxDecoration(
+                              color: ColorValues.whiteColor,
+                              border: studyController.selectedStudyTimelinesList.length == 2
+                                  ? Border(
+                                      left: BorderSide(
+                                          width: Dimens.four,
+                                          color: studyController.selectedStudyTimelinesList.contains(index) ? ColorValues.primaryGreenAccentColor : ColorValues.whiteColor),
+                                      right: BorderSide(
+                                          width: Dimens.four,
+                                          color: studyController.selectedStudyTimelinesList.contains(index) ? ColorValues.primaryGreenAccentColor : ColorValues.whiteColor),
+                                    )
+                                  : Border(
+                                      left: BorderSide(
+                                          width: Dimens.four,
+                                          color: studyController.currentSelectedStudyTimeline.value == index ? ColorValues.primaryGreenAccentColor : ColorValues.whiteColor),
+                                      right: BorderSide(
+                                          width: Dimens.four,
+                                          color: studyController.currentSelectedStudyTimeline.value == index ? ColorValues.primaryGreenAccentColor : ColorValues.whiteColor),
+                                    ),
                             ),
-                            borderRadius: BorderRadius.circular(Dimens.eight),
-                          ),
-                        ),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CommonWidgets.autoSizeText(
-                                text: "${studyController.studyTimeLineData[index].fromTime} - ${studyController.studyTimeLineData[index].toTime} "
-                                    "(${AppUtility.getTimeDifference(studyController.studyTimeLineData[index].fromTime, studyController.studyTimeLineData[index].toTime)})",
-                                textStyle: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.80)),
-                                minFontSize: 12,
-                                maxLines: 1,
-                                maxFontSize: 12,
-                              ).marginOnly(bottom: Dimens.three),
-                              CommonWidgets.autoSizeText(
-                                text: studyController.studyTimeLineData[index].heading,
-                                textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                                maxLines: 1,
-                                minFontSize: 16,
-                                maxFontSize: 16,
+                            child: ImageFiltered(
+                              enabled: studyController.isStudyTimeLineSelected.value && !studyController.selectedStudyTimelinesList.contains(index),
+                              imageFilter: ImageFilter.blur(
+                                sigmaX: 15,
+                                sigmaY: 15,
                               ),
-                            ],
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: Dimens.thirtyThree,
+                                    height: Dimens.thirtyTwo,
+                                    margin: EdgeInsets.only(right: Dimens.fifteen),
+                                    decoration: BoxDecoration(
+                                      color: studyController.studyTimeLineData[index].type == 'service'
+                                          ? ColorValues.primaryGreenColor.withOpacity(0.25)
+                                          : ColorValues.deepGreyColor.withOpacity(0.25),
+                                      border: Border.all(
+                                        color: ColorValues.darkSlateGrayColor,
+                                        width: Dimens.one,
+                                      ),
+                                      borderRadius: BorderRadius.circular(Dimens.eight),
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        CommonWidgets.autoSizeText(
+                                          text: "${studyController.studyTimeLineData[index].fromTime} - ${studyController.studyTimeLineData[index].toTime} "
+                                              "(${AppUtility.getTimeDifference(studyController.studyTimeLineData[index].fromTime, studyController.studyTimeLineData[index].toTime)})",
+                                          textStyle: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.80)),
+                                          minFontSize: 12,
+                                          maxLines: 1,
+                                          maxFontSize: 12,
+                                        ).marginOnly(bottom: Dimens.three),
+                                        CommonWidgets.autoSizeText(
+                                          text: studyController.studyTimeLineData[index].heading,
+                                          textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                                          maxLines: 1,
+                                          minFontSize: 16,
+                                          maxFontSize: 16,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ).paddingOnly(left: Dimens.sixTeen, right: Dimens.eight, top: Dimens.six, bottom: Dimens.six),
+                            ),
                           ),
-                        )
-                      ],
-                    ).paddingOnly(left: Dimens.sixTeen, right: Dimens.eight, top: Dimens.six, bottom: Dimens.six),
-                  );
-                },
+                        ).marginSymmetric(
+                            horizontal: studyController.isStudyTimeLineSelected.value && !studyController.selectedStudyTimelinesList.contains(index) ? Dimens.four : Dimens.zero),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),

@@ -17,6 +17,8 @@ class StudyScreenBottomBar extends StatelessWidget {
   final Function() onTapKeyThemesButton;
   final Function() onTapActivitiesButton;
   final Function() onTapAddButton;
+  final bool isMerge;
+  final bool isSplit;
 
   StudyScreenBottomBar({
     super.key,
@@ -26,6 +28,8 @@ class StudyScreenBottomBar extends StatelessWidget {
     required this.onTapKeyThemesButton,
     required this.onTapActivitiesButton,
     required this.onTapAddButton,
+    required this.isMerge,
+    required this.isSplit,
   });
 
   final studyController = Get.find<StudyScreenController>();
@@ -139,16 +143,20 @@ class StudyScreenBottomBar extends StatelessWidget {
               child: Obx(
                 () => CustomPrimaryButton(
                   margin: EdgeInsets.zero,
-                  btnText: StringValues.submit.tr,
+                  btnText: isMerge
+                      ? StringValues.merge.tr
+                      : isSplit
+                          ? StringValues.split.tr
+                          : StringValues.submit.tr,
                   buttonHeight: Dimens.fiftySix,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null
+                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
                       ? ColorValues.primaryGreenColor
                       : ColorValues.lightGrayColor.withOpacity(0.50),
                   borderRadius: BorderRadius.circular(Dimens.eight),
                   contentPadding: EdgeInsets.zero,
                   btnTextStyle: AppStyles.style16Normal.copyWith(
-                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null
+                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
                         ? ColorValues.whiteColor
                         : ColorValues.blackColor,
                   ),

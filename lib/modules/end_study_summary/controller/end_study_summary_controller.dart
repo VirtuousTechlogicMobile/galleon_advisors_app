@@ -1,5 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constant/colors.dart';
+import '../../../constant/dimens.dart';
+import '../../../routes/app_pages.dart';
 import '../model/service_activities_model.dart';
 
 class EndStudySummaryController extends GetxController {
@@ -19,4 +24,57 @@ class EndStudySummaryController extends GetxController {
     ServiceActivitiesModel(activity: 'Answer Guest Call', timeObserved: '5 min and 09 sec', volume: '9', activityDuration: '15 min and 8 Seconds'),
     ServiceActivitiesModel(activity: 'Answer Guest Call', timeObserved: '8 min and 25 sec', volume: '10', activityDuration: '11 min and 6 Seconds'),
   ];
+
+  List<BarChartGroupData> getBarGroups() {
+    return [
+      BarChartGroupData(
+        barsSpace: 0,
+        x: 0,
+        barRods: [
+          BarChartRodData(
+            toY: 4800,
+            color: ColorValues.charcoalGrayColor,
+            borderRadius: BorderRadius.zero,
+            width: 20,
+          ),
+        ],
+      ),
+      BarChartGroupData(
+        barsSpace: 0,
+        x: 1,
+        barRods: [
+          BarChartRodData(
+            toY: 4400,
+            color: ColorValues.charcoalGrayColor,
+            borderRadius: BorderRadius.zero,
+            width: 20,
+          ),
+        ],
+      ),
+      BarChartGroupData(
+        barsSpace: 0,
+        x: 2,
+        barRods: [
+          BarChartRodData(
+            toY: 3250,
+            color: ColorValues.charcoalGrayColor,
+            borderRadius: BorderRadius.zero,
+            width: 20,
+          ),
+        ],
+      ),
+      BarChartGroupData(
+        barsSpace: 0,
+        x: 3,
+        barRods: [
+          BarChartRodData(
+            toY: 500,
+            color: ColorValues.charcoalGrayColor,
+            borderRadius: BorderRadius.zero,
+            width: 20,
+          ),
+        ],
+      ),
+    ];
+  }
 }

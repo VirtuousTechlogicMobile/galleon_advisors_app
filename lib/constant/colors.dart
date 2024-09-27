@@ -16,6 +16,7 @@ abstract class ColorValues {
   static const Color fontLightGrayColor = Color(0xFF8C8C8C);
   static const Color textGrayColor = Color(0xFF808080);
   static const Color textFieldLightGrayColor = Color(0xFFf0f0f0);
+  static const Color chartDividerGreyColor = Color(0xFFD1D1D1);
   static const Color softWhiteColor = Color(0xFFf8f8f8);
   static const Color darkBgColor = Color.fromARGB(255, 20, 20, 29);
   static const Color darkBodyTextColor = Color.fromARGB(255, 240, 240, 240);

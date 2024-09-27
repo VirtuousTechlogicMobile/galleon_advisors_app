@@ -250,6 +250,7 @@ abstract class Dimens {
   static double ninetyEight = 98.r;
   static double ninetyFive = 95.r;
   static double one = 1.r;
+  static double onePointFive = 1.5.r;
   static double oneHundredForty = 140.r;
   static double oneHundredFortyOne = 141.r;
   static double oneHundredFifty = 150.r;

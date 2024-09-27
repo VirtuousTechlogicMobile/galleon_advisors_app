@@ -48,4 +48,6 @@ abstract class StringValues {
   static const timeObserved = 'time_observed';
   static const activityDuration = 'activity_duration';
   static const activity = 'activity';
+  static const merge = 'merge';
+  static const split = 'split';
 }
