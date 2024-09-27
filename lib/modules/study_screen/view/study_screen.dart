@@ -161,7 +161,18 @@ class StudyScreen extends StatelessWidget {
 
         /// comment & opportunity flag buttons
         Obx(
-          () => studyController.selectedStudyTimelinesList.length == 1 ? splitStudyLayout() : commentOppFlagButtonsLayout(),
+          () => studyController.selectedStudyTimelinesList.length == 1
+              ? splitStudyLayout()
+              : ClipRect(
+                  child: ImageFiltered(
+                    enabled: studyController.selectedStudyTimelinesList.length == 3,
+                    imageFilter: ImageFilter.blur(
+                      sigmaX: 10,
+                      sigmaY: 10,
+                    ),
+                    child: commentOppFlagButtonsLayout(),
+                  ),
+                ),
         ),
       ],
     );
