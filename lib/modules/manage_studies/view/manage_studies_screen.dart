@@ -8,12 +8,12 @@ import 'package:galleon_advisors_app/modules/manage_studies/controller/manage_st
 import 'package:get/get.dart';
 
 import '../../../constant/assets.dart';
-import 'expandable_view.dart';
+import '../components/custom_expansion_tile_widget.dart';
 
 class ManageStudiesScreen extends StatelessWidget {
   ManageStudiesScreen({super.key});
 
-  final ManageStudiesController manageStudiesController = Get.find<ManageStudiesController>();
+  final manageStudiesController = Get.find<ManageStudiesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,50 @@ class ManageStudiesScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Flexible(
-              child: ExpandableView(),
+            Expanded(
+              child: Column(
+                children: [
+                  Flexible(
+                    child: ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        print("mansi : ${manageStudiesController.expandedListTileIndex.value}");
+                        return Obx(
+                          () => CustomExpansionTileWidget(
+                            isExpanded: manageStudiesController.expandedListTileIndex.value == index,
+                            onTap: () {
+                              if (manageStudiesController.expandedListTileIndex.value == index) {
+                                manageStudiesController.expandedListTileIndex.value = null; // Collapse if tapped again
+                              } else {
+                                manageStudiesController.expandedListTileIndex.value = index; // Expand the tapped one
+                              }
+                            },
+                            children: [
+                              CheckboxListTile(
+                                title: Text("Select All"),
+                                value: true,
+                                onChanged: (bool? value) {},
+                              ),
+                              CheckboxListTile(
+                                title: Text("Study Name"),
+                                value: false,
+                                onChanged: (bool? value) {},
+                                controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+                              ),
+                              CheckboxListTile(
+                                title: Text("Test"),
+                                value: false,
+                                onChanged: (bool? value) {},
+                                controlAffinity: ListTileControlAffinity.leading, // Checkbox on the left
+                              ),
+                            ],
+                          ).marginOnly(bottom: Dimens.eleven),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ).paddingOnly(left: Dimens.twentyFour, top: Dimens.twentyFour, bottom: Dimens.thirty, right: Dimens.twentyFour),
             ),
           ],
         ),

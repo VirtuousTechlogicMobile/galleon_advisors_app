@@ -4,7 +4,6 @@ import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
-import 'package:galleon_advisors_app/routes/route_management.dart';
 import 'package:get/get.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
@@ -103,7 +102,7 @@ class HomeScreen extends StatelessWidget {
           ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
           GestureDetector(
             onTap: () {
-              RouteManagement.goToLoginScreen();
+              Get.offAllNamed(AppRoutes.login);
             },
             child: Container(
               padding: EdgeInsets.all(Dimens.fourteen),

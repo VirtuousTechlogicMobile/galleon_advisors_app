@@ -234,6 +234,7 @@ abstract class Dimens {
   static double fiftyFive = 55.r;
   static double fiftyFour = 54.r;
   static double fiftyTwo = 52.r;
+  static double fiftyOne = 51.r;
   static double fiftySix = 56.r;
   static double five = 5.r;
   static double four = 4.r;
@@ -273,6 +274,7 @@ abstract class Dimens {
   static double screenWidth = Get.size.width;
   static double seven = 7.r;
   static double seventy = 70.r;
+  static double seventyFive = 75.r;
   static double seventyEight = 78.r;
   static double six = 6.r;
   static double sixTeen = 16.r;
@@ -289,6 +291,7 @@ abstract class Dimens {
   static double thirtySix = 36.r;
   static double thirtySeven = 37.r;
   static double thirtyTwo = 32.r;
+  static double thirtyOne = 31.r;
   static double thirtyThree = 33.r;
   static double three = 3.r;
   static double twelve = 12.r;

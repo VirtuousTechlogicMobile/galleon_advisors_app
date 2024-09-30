@@ -27,7 +27,7 @@ class CreateNewStudyScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NewStudyAppbar(
-              searchController: TextEditingController(),
+              studyNameController: TextEditingController(),
               time: '10:49:05 Tue, 30 Apr 24',
             ),
             Expanded(

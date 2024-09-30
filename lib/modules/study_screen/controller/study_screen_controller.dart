@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:galleon_advisors_app/utility/utility.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../model/operational_analysis_data_model.dart';
 import '../model/study_timeline_data_model.dart';
@@ -8,6 +11,29 @@ class StudyScreenController extends GetxController {
   Rxn<int> selectedServiceActivities = Rxn<int>();
   Rxn<int> selectedOpportunityTheme = Rxn<int>();
   RxInt selectedVolume = 0.obs;
+  RxInt selectedStudyIndex = 0.obs;
+
+  RxString currentTime = ''.obs;
+  Timer? timer;
+  getCurrentDateTime() {
+    currentTime.value = DateFormat('HH:mm:ss EEE, dd MMM yy').format(DateTime.now());
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
+      getCurrentDateTime();
+    });
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    timer?.cancel();
+  }
+
+  RxDouble splitSliderValue = 50.0.obs;
 
   List<String> opportunityFlagList = ['Revenue', 'Cost', 'Employee Satisfaction', 'Safety & Sustainability'];
   Rxn<int> selectedOpportunityFlag = Rxn<int>();
@@ -28,7 +54,7 @@ class StudyScreenController extends GetxController {
   RxString selectedActivitiesSubTab = ''.obs;
 
   onSelectedStudyTimeLine(int selectedItemIndex) {
-    if (isStudyStarted.value) {
+    if (isStudyStarted.value && !opportunityTapped.value && !servicesTapped.value) {
       isStudyTimeLineSelected.value = true;
       if (selectedStudyTimelinesList.isNotEmpty) {
         if (currentSelectedStudyTimeline.value == selectedItemIndex) {
@@ -65,12 +91,21 @@ class StudyScreenController extends GetxController {
     'complete guest inquiry 2',
     'guest meeting 2'
   ];
+  List<String> dualStudiesList = ['Test', 'Default Study 2', 'Default Study 3', 'Default Study 4'];
   List<String> opportunityThemes = ['learn excel', 'learn export', 'opportunity 1', 'opportunity 2 ', 'Item 1', 'Item 2', "opportunity 3", 'opportunity 4', 'Item 3'];
   List<String> volumeItems = ['1 7', '2 8', '3 9', '4 1', '5 2', '6 3', '7 4', '8 5', '9 6'];
 
   List<OperationalAnalysisDataModel> tableData = [
     OperationalAnalysisDataModel(analysisName: 'Server Travel Analysis', dataInputs: '•  Capture travel between sections', sample: '<hyperlink to image > or image attachment')
   ];
+
+  onChangeStudyIndex() {
+    if (selectedStudyIndex.value < (dualStudiesList.length - 1)) {
+      selectedStudyIndex.value = selectedStudyIndex.value + 1;
+    } else {
+      selectedStudyIndex.value = 0;
+    }
+  }
 
   onChangeTab(int tabNo) {
     switch (tabNo) {
@@ -120,14 +155,12 @@ class StudyScreenController extends GetxController {
   }
 
   onSubmitStudy() {
-    // selectedServiceActivities.value = null;
-    // selectedOpportunityTheme.value = null;
     servicesTapped.value = false;
     opportunityTapped.value = false;
   }
 
   RxList<StudyTimelineDataModel> studyTimeLineData = [
-    StudyTimelineDataModel(heading: 'Answer Phone Call', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
+    StudyTimelineDataModel(heading: 'Answer Phone Call', fromTime: '10:51:14', toTime: '11:51:26', type: 'service'),
     StudyTimelineDataModel(heading: 'Complete Guest Inquiry', fromTime: '10:51:26', toTime: '10:52:26', type: 'service'),
     StudyTimelineDataModel(heading: 'Export Loading', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
     StudyTimelineDataModel(heading: 'Create An Estimate', fromTime: '10:51:14', toTime: '10:51:26', type: 'service'),
@@ -151,9 +184,7 @@ class StudyScreenController extends GetxController {
       isStudyTimeLineSelected.value = false;
       currentSelectedStudyTimeline.value = null;
       selectedStudyTimelinesList.clear();
-    } else if (selectedServiceActivities.value != null || selectedOpportunityTheme.value != null) {
-      selectedServiceActivities.value = null;
-      selectedOpportunityTheme.value = null;
+    } else if (servicesTapped.value || opportunityTapped.value) {
       servicesTapped.value = false;
       opportunityTapped.value = false;
     } else {
@@ -179,5 +210,50 @@ class StudyScreenController extends GetxController {
     } else {
       AppUtility.showSnackBar('Failed to Merge');
     }
+  }
+
+  void splitStudies() {
+    int index = studyTimeLineData.indexOf(studyTimeLineData[selectedStudyTimelinesList.first]);
+    if (index >= studyTimeLineData.length) return;
+
+    int percentage = splitSliderValue.value.toInt();
+    StudyTimelineDataModel originalData = studyTimeLineData[index];
+
+    DateFormat timeFormat = DateFormat('HH:mm:ss');
+    DateTime fromTime = timeFormat.parse(originalData.fromTime);
+    DateTime toTime = timeFormat.parse(originalData.toTime);
+
+    Duration totalDuration = toTime.difference(fromTime);
+
+    // Calculate the split point
+    Duration splitDuration = totalDuration * (percentage / 100);
+
+    // Calculate the new times for the two parts
+    DateTime splitTime = fromTime.add(splitDuration);
+
+    // Create the two new timeline entries
+    StudyTimelineDataModel firstPart = StudyTimelineDataModel(
+      heading: originalData.heading,
+      fromTime: originalData.fromTime,
+      toTime: timeFormat.format(splitTime),
+      type: originalData.type,
+    );
+
+    StudyTimelineDataModel secondPart = StudyTimelineDataModel(
+      heading: originalData.heading,
+      fromTime: timeFormat.format(splitTime),
+      toTime: originalData.toTime,
+      type: originalData.type,
+    );
+
+    // Replace the original entry and insert the second part
+    studyTimeLineData[index] = firstPart;
+    studyTimeLineData.insert(index + 1, secondPart);
+
+    // clear the selected items list and unFocus
+    studyTimeLineData.refresh();
+    isStudyTimeLineSelected.value = false;
+    currentSelectedStudyTimeline.value = null;
+    selectedStudyTimelinesList.clear();
   }
 }

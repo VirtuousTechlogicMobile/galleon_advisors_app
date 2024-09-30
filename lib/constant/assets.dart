@@ -24,4 +24,5 @@ abstract class SvgAssets {
   static const playRoundedIcon = 'assets/svgs/play_rounded_icon.svg';
   static const studyRunningIcon = 'assets/svgs/study_running_icon.svg';
   static const stopStudyIcon = 'assets/svgs/stop_study_icon.svg';
+  static const downArrowIcon = 'assets/svgs/down_arrow_icon.svg';
 }

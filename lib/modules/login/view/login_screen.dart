@@ -7,12 +7,12 @@ import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/modules/login/controller/login_controller.dart';
-import 'package:galleon_advisors_app/routes/route_management.dart';
 import 'package:get/get.dart';
 
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
 import '../../../helper/validators.dart';
+import '../../../routes/app_pages.dart';
 import '../../../utility/utility.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                                           } else if (loginController.passwordController.text.trim().length < 6) {
                                             AppUtility.showSnackBar(StringValues.passwordMustBeAtLeast6Characters.tr);
                                           } else {
-                                            RouteManagement.goToHomePageScreen();
+                                            Get.offAllNamed(AppRoutes.home);
                                           }
                                         },
                                       ),

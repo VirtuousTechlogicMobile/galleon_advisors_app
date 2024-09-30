@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
+import '../components/custom_split_slider_widget.dart';
 import '../components/list_wheel_scroll_picker.dart';
 import '../components/study_screen_appbar.dart';
 import '../components/study_screen_components.dart';
@@ -34,32 +35,7 @@ class StudyScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(
-              () => StudyScreenAppbar(
-                time: '10:49:05 Tue, 30 Apr 24',
-                isStudyPlay: studyController.isStudyStarted.value,
-                isShowEndButton: studyController.studyStartTime.isNotEmpty && !studyController.isStudyStarted.value,
-                onPlayButtonTap: () {
-                  studyController.studyStartTime.add(DateTime.now().toString());
-                  studyController.isStudyStarted.value = !studyController.isStudyStarted.value;
-                },
-                onPressBackButton: () {
-                  studyController.onBackPressed();
-                },
-                onPressStopButton: () {
-                  studyController.isDialogOpen.value = true;
-                  StudyScreenComponents.stopStudyDialog(
-                    context: context,
-                    onCompleteButtonTapped: () {
-                      Get.offNamed(AppRoutes.endStudySummary);
-                    },
-                    whenComplete: () {
-                      studyController.isDialogOpen.value = false;
-                    },
-                  );
-                },
-              ),
-            ),
+            StudyScreenAppbar(),
             Expanded(
               child: Obx(
                 () => ImageFiltered(
@@ -72,19 +48,22 @@ class StudyScreen extends StatelessWidget {
                     children: [
                       Flexible(
                         flex: 2,
-                        child: ImageFiltered(
-                          enabled: studyController.selectedStudyTimelinesList.length == 2,
-                          imageFilter: ImageFilter.blur(
-                            sigmaX: 10,
-                            sigmaY: 10,
+                        child: IgnorePointer(
+                          ignoring: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                          child: ImageFiltered(
+                            enabled: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                            imageFilter: ImageFilter.blur(
+                              sigmaX: 10,
+                              sigmaY: 10,
+                            ),
+                            child: studyController.getCurrentTabIndex() == 0
+                                ? activitiesLayout()
+                                : studyController.getCurrentTabIndex() == 2
+                                    ? tipsAndTricksLayout()
+                                    : studyController.getCurrentTabIndex() == 3
+                                        ? operationalAnalysisLayout()
+                                        : keyThemesLayout(),
                           ),
-                          child: studyController.getCurrentTabIndex() == 0
-                              ? activitiesLayout()
-                              : studyController.getCurrentTabIndex() == 2
-                                  ? tipsAndTricksLayout()
-                                  : studyController.getCurrentTabIndex() == 3
-                                      ? operationalAnalysisLayout()
-                                      : keyThemesLayout(),
                         ),
                       ),
                       Flexible(
@@ -179,7 +158,14 @@ class StudyScreen extends StatelessWidget {
   }
 
   Widget splitStudyLayout() {
-    return Container();
+    return Obx(
+      () => CustomSplitSliderWidget(
+        sliderValue: studyController.splitSliderValue.value,
+        onChangeSliderValue: (value) {
+          studyController.splitSliderValue.value = value;
+        },
+      ),
+    );
   }
 
   Widget commentOppFlagButtonsLayout() {
@@ -595,7 +581,7 @@ class StudyScreen extends StatelessWidget {
           studyController.onChangeTab(1);
         },
         onTapAddButton: () {
-          Get.toNamed(AppRoutes.createNewStudy);
+          Get.toNamed(AppRoutes.createDualStudy);
         },
         onTapTipsAndTricksButton: () {
           studyController.onChangeTab(2);
@@ -610,6 +596,7 @@ class StudyScreen extends StatelessWidget {
           if (studyController.selectedStudyTimelinesList.length == 2) {
             studyController.onMergeStudies();
           } else if (studyController.selectedStudyTimelinesList.length == 1) {
+            studyController.splitStudies();
           } else {
             studyController.onSubmitStudy();
           }
@@ -666,8 +653,16 @@ class StudyScreen extends StatelessWidget {
                 child: ListWheelScrollPicker(
                   itemsList: studyController.serviceActivitiesItems,
                   selectedIndex: studyController.selectedServiceActivities.value ?? 0,
-                  isScroll: studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.isNotEmpty,
+
+                  /// applied condition for is study started and if not split and merge
+                  isScroll:
+                      studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.length != 1 && studyController.selectedStudyTimelinesList.length != 2,
                   onSelectedItemChanged: (selectedValue) {
+                    if (studyController.selectedStudyTimelinesList.isNotEmpty) {
+                      studyController.isStudyTimeLineSelected.value = false;
+                      studyController.currentSelectedStudyTimeline.value = null;
+                      studyController.selectedStudyTimelinesList.clear();
+                    }
                     studyController.servicesTapped.value = true;
                     studyController.selectedServiceActivities.value = selectedValue;
                   },
@@ -785,8 +780,16 @@ class StudyScreen extends StatelessWidget {
                 child: ListWheelScrollPicker(
                   itemsList: studyController.opportunityThemes,
                   selectedIndex: studyController.selectedOpportunityTheme.value ?? 0,
-                  isScroll: studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.isNotEmpty,
+
+                  /// applied condition for is study started and if not split and merge
+                  isScroll:
+                      studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.length != 1 && studyController.selectedStudyTimelinesList.length != 2,
                   onSelectedItemChanged: (selectedValue) {
+                    if (studyController.selectedStudyTimelinesList.isNotEmpty) {
+                      studyController.isStudyTimeLineSelected.value = false;
+                      studyController.currentSelectedStudyTimeline.value = null;
+                      studyController.selectedStudyTimelinesList.clear();
+                    }
                     studyController.opportunityTapped.value = true;
                     studyController.selectedOpportunityTheme.value = selectedValue;
                   },
