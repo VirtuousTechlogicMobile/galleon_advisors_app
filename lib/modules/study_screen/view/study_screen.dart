@@ -92,7 +92,7 @@ class StudyScreen extends StatelessWidget {
             child: studyController.selectedActivitiesSubTab.value == 'comment'
                 ? commentsLayout()
                 : studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
-                    ? opportunityLayout()
+                    ? opportunityFlagLayout()
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,45 +311,47 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget opportunityLayout() {
-    return LayoutBuilder(builder: (context, constraints) {
-      return Container(
-        width: constraints.maxWidth,
-        height: constraints.maxHeight,
-        padding: EdgeInsets.symmetric(vertical: Dimens.eighteen),
-        margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
-        decoration: BoxDecoration(
-          color: ColorValues.whiteColor,
-          border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
-          borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: List.generate(
-              studyController.opportunityFlagList.length,
-              (index) {
-                return Obx(
-                  () => CustomPrimaryButton(
-                    btnText: studyController.opportunityFlagList[index],
-                    buttonWidth: Dimens.twoHundredForty,
-                    contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
-                    margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
-                    borderRadius: BorderRadius.circular(Dimens.eight),
-                    onTap: () {
-                      studyController.selectedOpportunityFlag.value = index;
-                    },
-                    border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                    buttonColor: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenAccentColor.withOpacity(0.25) : ColorValues.whiteColor,
-                    btnTextStyle:
-                        AppStyles.style16Normal.copyWith(color: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
-                  ),
-                );
-              },
+  Widget opportunityFlagLayout() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          width: constraints.maxWidth,
+          height: constraints.maxHeight,
+          padding: EdgeInsets.symmetric(vertical: Dimens.eighteen),
+          margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
+          decoration: BoxDecoration(
+            color: ColorValues.whiteColor,
+            border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
+            borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: List.generate(
+                studyController.opportunityFlagList.length,
+                (index) {
+                  return Obx(
+                    () => CustomPrimaryButton(
+                      btnText: studyController.opportunityFlagList[index],
+                      buttonWidth: Dimens.twoHundredForty,
+                      contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
+                      margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
+                      borderRadius: BorderRadius.circular(Dimens.eight),
+                      onTap: () {
+                        studyController.selectedOpportunityFlag.value = index;
+                      },
+                      border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                      buttonColor: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenAccentColor.withOpacity(0.25) : ColorValues.whiteColor,
+                      btnTextStyle:
+                          AppStyles.style16Normal.copyWith(color: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget tipsAndTricksLayout() {

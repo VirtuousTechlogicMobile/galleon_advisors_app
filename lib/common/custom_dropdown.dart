@@ -1,16 +1,26 @@
+import 'dart:math' as math;
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/common_widgets.dart';
 import 'package:galleon_advisors_app/constant/assets.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
-import 'dart:math' as math;
+
 import '../constant/dimens.dart';
 
 class CustomDropdown extends StatefulWidget {
   final List<DropDownMenuItem> dropDownItemsList;
   final String? hintText;
   final DropDownMenuItem? selectedItem;
+  final String? dropdownIcon;
+  final Size? dropDownIconSize;
+  final EdgeInsetsGeometry? buttonPadding;
+  final bool isButtonTxtAlignEnd;
+  final BoxBorder? border;
+  final double? buttonHeight;
+  final TextStyle? dropDownMenuItemStyle;
+  final TextStyle? dropDowButtonTextStyle;
   final Function(DropDownMenuItem? selectedDropDownItem) onItemSelected;
 
   const CustomDropdown({
@@ -18,7 +28,15 @@ class CustomDropdown extends StatefulWidget {
     required this.dropDownItemsList,
     required this.onItemSelected,
     this.hintText,
+    this.dropDownIconSize,
+    this.dropdownIcon,
     this.selectedItem,
+    this.isButtonTxtAlignEnd = false,
+    this.buttonPadding,
+    this.buttonHeight,
+    this.dropDownMenuItemStyle,
+    this.dropDowButtonTextStyle,
+    this.border,
   });
 
   @override
@@ -26,6 +44,8 @@ class CustomDropdown extends StatefulWidget {
 }
 
 class _CustomDropdownState extends State<CustomDropdown> {
+  final GlobalKey buttonKey = GlobalKey();
+  double? buttonHeight;
   DropDownMenuItem? selectedItem;
 
   @override
@@ -33,6 +53,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
     // TODO: implement initState
     super.initState();
     selectedItem = widget.selectedItem;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final RenderBox? renderBox = buttonKey.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox != null) {
+        setState(() {
+          buttonHeight = renderBox.size.height;
+        });
+      }
+    });
   }
 
   @override
@@ -47,10 +75,15 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(item.itemName, style: AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
+                  Text(item.itemName, style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
                   Transform.rotate(
                     angle: (math.pi / 2),
-                    child: CommonWidgets.fromSvg(svgAsset: SvgAssets.dropdownRightArrowIcon, height: Dimens.thirteen, width: Dimens.thirteen, boxFit: BoxFit.fill),
+                    child: CommonWidgets.fromSvg(
+                      svgAsset: widget.dropdownIcon ?? SvgAssets.dropdownRightArrowIcon,
+                      height: widget.dropDownIconSize?.height ?? Dimens.thirteen,
+                      width: widget.dropDownIconSize?.width ?? Dimens.thirteen,
+                      boxFit: BoxFit.fill,
+                    ),
                   ),
                 ],
               ),
@@ -58,7 +91,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           } else {
             return DropdownMenuItem<DropDownMenuItem>(
               value: item,
-              child: Text(item.itemName, style: AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
+              child: Text(item.itemName, style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
             );
           }
         }).toList(),
@@ -71,21 +104,32 @@ class _CustomDropdownState extends State<CustomDropdown> {
           selectedItem = value;
         },
         customButton: Container(
-          padding: EdgeInsets.only(top: Dimens.eight, left: Dimens.fifteen, bottom: Dimens.fifteen, right: Dimens.thirteen),
+          key: buttonKey,
+          padding: widget.buttonPadding ?? EdgeInsets.only(top: Dimens.eight, left: Dimens.fifteen, bottom: Dimens.fifteen, right: Dimens.thirteen),
+          height: widget.buttonHeight,
           decoration: BoxDecoration(
             color: ColorValues.whiteColor,
             borderRadius: BorderRadius.circular(Dimens.seven),
+            border: widget.border,
             boxShadow: [BoxShadow(color: ColorValues.blackColor.withOpacity(0.08), blurRadius: 36, spreadRadius: 0, offset: const Offset(0, 0))],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: widget.isButtonTxtAlignEnd ? CrossAxisAlignment.center : CrossAxisAlignment.end,
             children: [
               Text(
                 widget.selectedItem?.itemName ?? widget.hintText ?? '',
-                style: AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
+                // style for separate hint text style and selected item text style
+                style: widget.selectedItem?.itemName != null
+                    ? widget.dropDowButtonTextStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)
+                    : AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
               ),
-              CommonWidgets.fromSvg(svgAsset: SvgAssets.dropdownRightArrowIcon, height: Dimens.fourteen, width: Dimens.fifteen, boxFit: BoxFit.fill),
+              CommonWidgets.fromSvg(
+                svgAsset: widget.dropdownIcon ?? SvgAssets.dropdownRightArrowIcon,
+                height: widget.dropDownIconSize?.height ?? Dimens.fourteen,
+                width: widget.dropDownIconSize?.width ?? Dimens.fifteen,
+                boxFit: BoxFit.fill,
+              ),
             ],
           ),
         ),
@@ -98,7 +142,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             boxShadow: [BoxShadow(color: ColorValues.blackColor.withOpacity(0.08), blurRadius: 36, spreadRadius: 0, offset: const Offset(0, 0))],
           ),
           elevation: 0,
-          offset: Offset(0, Dimens.fortyTwo),
+          offset: Offset(0, buttonHeight ?? Dimens.forty),
         ),
       ),
     );

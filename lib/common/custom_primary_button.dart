@@ -17,6 +17,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final Function()? onTap;
   final BoxBorder? border;
+  final AlignmentGeometry? textAlignment;
 
   const CustomPrimaryButton({
     super.key,
@@ -31,6 +32,7 @@ class CustomPrimaryButton extends StatelessWidget {
     this.contentPadding,
     this.btnTextColor,
     this.btnTextStyle,
+    this.textAlignment,
     this.border,
   });
 
@@ -46,7 +48,7 @@ class CustomPrimaryButton extends StatelessWidget {
             borderRadius: borderRadius ?? BorderRadius.circular(10),
             border: border,
           ),
-          alignment: Alignment.center,
+          alignment: textAlignment ?? Alignment.center,
           margin: margin ?? EdgeInsets.zero,
           padding: contentPadding ?? EdgeInsets.symmetric(vertical: Dimens.fifteen),
           child: CommonWidgets.autoSizeText(

@@ -24,6 +24,7 @@ abstract class StringValues {
   static const comment = 'comment';
   static const opportunityFlag = 'opportunity_flag';
   static const activities = 'activities';
+  static const tipsAndTricksWithSlashN = 'tips_and_tricks_with_slash_n';
   static const tipsAndTricks = 'tips_and_tricks';
   static const operationalAnalysis = 'operational_analysis';
   static const keyBackSlashNThemes = 'key_backslash_n_themes';
@@ -50,4 +51,19 @@ abstract class StringValues {
   static const activity = 'activity';
   static const merge = 'merge';
   static const split = 'split';
+  static const view = 'view';
+  static const selectAll = 'select_all';
+  static const deleteStudies = 'delete_studies';
+  static const youAreAboutToDeleteTheStudies = 'you_are_about_to_delete_the_studies';
+  static const delete = 'delete';
+  static const upload = 'upload';
+  static const searchStudyName = 'search_study_name';
+  static const doYouWantToUpload = 'do_you_want_to_upload';
+  static const youAreAboutToUploadTheStudiesTo = 'you_are_about_to_upload_the_studies_to';
+  static const areYouSureYouWantToDoThisThisActionCannotBeUndone = 'are_you_sure_you_want_to_do_this_this_action_cannot_be_undone';
+  static const searchPositionName = 'search_position_name';
+  static const createNewPosition = 'create_new_position';
+  static const typeName = 'type_name';
+  static const template = 'template';
+  static const next = 'next';
 }

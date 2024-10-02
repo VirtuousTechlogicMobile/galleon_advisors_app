@@ -8,6 +8,10 @@ abstract class AppRoutes {
   static const study = _Routes.study;
   static const endStudySummary = _Routes.endStudySummary;
   static const createDualStudy = _Routes.createDualStudy;
+  static const managePositions = _Routes.managePositions;
+  static const managePositionsDetail = _Routes.managePositionsDetail;
+  static const createNewPosition = _Routes.createNewPosition;
+  static const createPositionAddServiceAndOpp = _Routes.createPositionAddServiceAndOpp;
 }
 
 abstract class _Routes {
@@ -18,4 +22,8 @@ abstract class _Routes {
   static const study = '/study';
   static const endStudySummary = '/study-endStudy';
   static const createDualStudy = '/create-dual-study';
+  static const managePositions = '/manage-positions';
+  static const managePositionsDetail = '/position-detail';
+  static const createNewPosition = '/create-position';
+  static const createPositionAddServiceAndOpp = '/create-position-add-service-opportunities';
 }

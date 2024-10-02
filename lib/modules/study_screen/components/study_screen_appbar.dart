@@ -79,7 +79,7 @@ class StudyScreenAppbar extends StatelessWidget {
                           StudyScreenComponents.stopStudyDialog(
                             context: context,
                             onCompleteButtonTapped: () {
-                              Get.offNamed(AppRoutes.endStudySummary);
+                              Get.toNamed(AppRoutes.endStudySummary, parameters: {'studyId': '1234'});
                             },
                             whenComplete: () {
                               studyController.isDialogOpen.value = false;

@@ -94,7 +94,7 @@ class StudyScreenComponents {
                         buttonColor: ColorValues.whiteColor,
                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                         borderRadius: BorderRadius.circular(Dimens.twelve),
-                        buttonWidth: MediaQuery.of(context).size.width / 8,
+                        buttonWidth: Dimens.oneHundredForty,
                         btnTextStyle: AppStyles.style18Bold.copyWith(color: ColorValues.primaryGreenColor),
                         margin: EdgeInsets.only(right: Dimens.twenty),
                         onTap: () {
@@ -106,7 +106,7 @@ class StudyScreenComponents {
                         buttonColor: ColorValues.primaryGreenColor,
                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                         borderRadius: BorderRadius.circular(Dimens.twelve),
-                        buttonWidth: MediaQuery.of(context).size.width / 8,
+                        buttonWidth: Dimens.oneHundredForty,
                         btnTextStyle: AppStyles.style18Bold.copyWith(color: ColorValues.whiteColor),
                         margin: EdgeInsets.only(left: Dimens.twenty),
                         onTap: () => onCompleteButtonTapped(),

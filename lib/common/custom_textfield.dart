@@ -31,6 +31,8 @@ class CustomTextField extends StatelessWidget {
   final BorderSide? borderSide;
   final String? obscuringCharacter;
   final List<TextInputFormatter>? inputFormatters;
+  final Function(String)? onSubmit;
+  final double? textFieldHeight;
   final Color? cursorColor;
 
   const CustomTextField({
@@ -61,11 +63,14 @@ class CustomTextField extends StatelessWidget {
     this.inputFormatters,
     this.obscuringCharacter,
     this.cursorColor,
+    this.textFieldHeight,
+    this.onSubmit,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: textFieldHeight,
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(color: ColorValues.blackColor.withOpacity(0.08), blurRadius: 36, spreadRadius: 0, offset: const Offset(0, 0))],
       ),
@@ -81,7 +86,7 @@ class CustomTextField extends StatelessWidget {
           if (states.contains(WidgetState.focused)) {
             return textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor);
           }
-          return AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50));
+          return textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50));
         }),
         maxLength: length,
         maxLines: maxLines,
@@ -90,7 +95,10 @@ class CustomTextField extends StatelessWidget {
         showCursor: !isReadOnly,
         cursorWidth: Dimens.one,
         cursorColor: cursorColor ?? ColorValues.primaryGreenColor,
-        onTapOutside: onTapOutside,
+        onTapOutside: onTapOutside ??
+            (event) {
+              FocusScope.of(context).unfocus();
+            },
         textAlign: textAlign ?? TextAlign.start,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
@@ -123,6 +131,11 @@ class CustomTextField extends StatelessWidget {
         ),
         focusNode: focusNode,
         onTap: onTap,
+        onFieldSubmitted: (value) {
+          if (onSubmit != null) {
+            onSubmit!(value);
+          }
+        },
         onChanged: (value) => (onChange != null) ? onChange!(value) : null,
       ),
     );

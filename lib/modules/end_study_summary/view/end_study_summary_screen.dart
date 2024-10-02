@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/common_widgets.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/controller/end_study_summary_controller.dart';
-import 'package:galleon_advisors_app/modules/study_screen/controller/study_screen_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
@@ -13,10 +12,10 @@ import '../../study_screen/components/study_screen_components.dart';
 import '../components/end_study_summary_screen_appbar.dart';
 
 class EndStudySummaryScreen extends StatelessWidget {
-  EndStudySummaryScreen({super.key});
+  final String studyId;
+  EndStudySummaryScreen({super.key, required this.studyId});
 
   final endStudySummaryController = Get.find<EndStudySummaryController>();
-  final studyController = Get.find<StudyScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +31,9 @@ class EndStudySummaryScreen extends StatelessWidget {
               time: '(03:11:42)',
               programName: 'Test',
               onEndButtonTap: () {
-                studyController.isStudyStarted.value = false;
-                studyController.studyStartTime.clear();
                 Get.back();
               },
+              isShowEndButton: studyId.isNotEmpty,
             ),
             Flexible(
               child: Row(
@@ -70,10 +68,10 @@ class EndStudySummaryScreen extends StatelessWidget {
                     ).marginOnly(left: Dimens.thirteen),
                   ),
                 ],
-              ),
+              ).paddingOnly(bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.sixTeen),
             ),
           ],
-        ).paddingOnly(top: Dimens.twenty, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.sixTeen),
+        ),
       ),
     );
   }

@@ -101,7 +101,7 @@ class StudyScreenBottomBar extends StatelessWidget {
               child: CustomPrimaryButton(
                 margin: EdgeInsets.only(right: Dimens.nineteen),
                 buttonHeight: Dimens.fiftySix,
-                btnText: StringValues.tipsAndTricks.tr,
+                btnText: StringValues.tipsAndTricksWithSlashN.tr,
                 borderRadius: BorderRadius.circular(Dimens.eight),
                 btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'tips&tricks' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,

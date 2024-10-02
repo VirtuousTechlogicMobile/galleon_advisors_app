@@ -88,6 +88,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
           InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.managePositions);
+            },
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
