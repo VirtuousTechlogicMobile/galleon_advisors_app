@@ -86,11 +86,12 @@ class CreateNewStudyScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
-                buttonHeight: Dimens.fiftySix,
-                buttonWidth: Dimens.twoHundredEighteen,
+                // buttonHeight: Dimens.fiftySix,
+                buttonWidth: Dimens.twoHundredFifty,
                 btnText: StringValues.create.tr,
                 margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
                 borderRadius: BorderRadius.circular(Dimens.eight),
+                contentPadding: EdgeInsets.symmetric(vertical: Dimens.twentyOne),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                 onTap: () {

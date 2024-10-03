@@ -121,7 +121,7 @@ class CreateNewPositionScreen extends StatelessWidget {
                       : ColorValues.softGrayColor,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                   onTap: () {
-                    if (createNewPositionController.positionText.isNotEmpty && createNewPositionController.selectedDept.value != null) {
+                    if (createNewPositionController.selectedDept.value != null) {
                       Get.toNamed(AppRoutes.createPositionAddServiceAndOpp);
                     }
                   },

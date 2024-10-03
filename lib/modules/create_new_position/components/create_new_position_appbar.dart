@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/common/custom_textfield.dart';
 import 'package:galleon_advisors_app/constant/assets.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
@@ -10,7 +9,8 @@ import 'package:get/get.dart';
 import '../../../constant/dimens.dart';
 
 class CreateNewPositionAppbar extends StatelessWidget {
-  const CreateNewPositionAppbar({super.key});
+  final String? positionName;
+  const CreateNewPositionAppbar({super.key, this.positionName});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,15 @@ class CreateNewPositionAppbar extends StatelessWidget {
             },
             child: CommonWidgets.fromSvg(svgAsset: SvgAssets.closeRoundedIcon),
           ),
-          CommonWidgets.autoSizeText(
-            text: StringValues.createNewStudy.tr,
-            textStyle: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
-          ).marginOnly(left: Dimens.twentySix),
+          Text(
+            StringValues.createNewPosition.tr,
+            style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
+          ).marginOnly(left: Dimens.thirtyNine),
+          if (positionName != null)
+            Text(
+              positionName ?? '',
+              style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
+            ).marginOnly(left: Dimens.fortyEight),
         ],
       ),
     );

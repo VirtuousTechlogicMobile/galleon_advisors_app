@@ -40,17 +40,13 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
               },
               child: CommonWidgets.fromSvg(svgAsset: SvgAssets.backIconOutlined).marginOnly(right: Dimens.twentyFive, bottom: Dimens.five),
             ),
-          CommonWidgets.autoSizeText(
-            text: time,
-            textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            time,
+            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
           ),
-          CommonWidgets.autoSizeText(
-            text: programName,
-            textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            programName,
+            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
           ).marginOnly(left: Dimens.sixTeen),
           const Spacer(),
           if (isShowEndButton)

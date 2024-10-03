@@ -30,11 +30,10 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
             },
             child: CommonWidgets.fromSvg(svgAsset: SvgAssets.closeRoundedIcon).marginOnly(right: Dimens.fourteen),
           ),
-          CommonWidgets.autoSizeText(
-            text: '(00:00:00)',
-            textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            '(00:00:00)',
+            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twentySeven),
           SizedBox(
             width: MediaQuery.sizeOf(context).width / 3.3,
@@ -51,11 +50,9 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
           ).marginOnly(left: Dimens.nine),
           const Spacer(),
           Obx(
-            () => CommonWidgets.autoSizeText(
-              text: createNewStudySameProgramController.currentTime.value,
-              textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-              minFontSize: 12,
-              maxFontSize: 16,
+            () => Text(
+              createNewStudySameProgramController.currentTime.value,
+              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
             ),
           ),
         ],

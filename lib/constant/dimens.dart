@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../utility/responsive.dart';
+
 /// Contains the dimensions and padding used
 /// all over the application.
 abstract class Dimens {
@@ -256,7 +258,11 @@ abstract class Dimens {
   static double oneHundredForty = 140.r;
   static double oneHundredFortyOne = 141.r;
   static double oneHundredFifty = 150.r;
+  static double oneHundredFiftyEight = 158.r;
+  static double oneHundredSixty = 160.r;
   static double twoHundredEighteen = 218.r;
+  static double twoHundredThirty = 230.r;
+  static double twoHundredFifty = 250.r;
   static double twoHundredForty = 240.r;
   static double twoHundredTwenty = 220.r;
   static double oneHundredFortySeven = 147.r;
@@ -275,6 +281,7 @@ abstract class Dimens {
   static double screenWidth = Get.size.width;
   static double seven = 7.r;
   static double seventy = 70.r;
+  static double seventyTwo = 72.r;
   static double seventyThree = 73.r;
   static double seventyFive = 75.r;
   static double seventyEight = 78.r;

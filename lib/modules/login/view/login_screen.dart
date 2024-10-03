@@ -8,7 +8,6 @@ import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/modules/login/controller/login_controller.dart';
 import 'package:get/get.dart';
-
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
 import '../../../helper/validators.dart';
@@ -101,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                       ).marginOnly(top: Dimens.twentyFour),
                                       CustomPrimaryButton(
                                         btnText: StringValues.logIn.tr,
-                                        buttonWidth: smallConstraints.maxWidth / 1.9,
+                                        buttonWidth: Dimens.oneHundredFiftyEight,
                                         borderRadius: BorderRadius.circular(Dimens.thirty),
                                         btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
@@ -120,11 +119,9 @@ class LoginScreen extends StatelessWidget {
                                           }
                                         },
                                       ),
-                                      CommonWidgets.autoSizeText(
-                                        text: StringValues.forgotPassword.tr,
-                                        textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
-                                        minFontSize: 16,
-                                        maxFontSize: 16,
+                                      Text(
+                                        StringValues.forgotPassword.tr,
+                                        style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
                                       )
                                     ],
                                   );

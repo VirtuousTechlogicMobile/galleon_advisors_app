@@ -37,10 +37,14 @@ class ListWheelScrollPicker extends StatelessWidget {
               childDelegate: ListWheelChildBuilderDelegate(
                 builder: (context, index) {
                   return Container(
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.eight),
                     color: ColorValues.softWhiteColor,
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: Text(
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       itemsList[index % itemsList.length],
                       style: selectedIndex == (index % itemsList.length)
                           ? AppStyles.style16SemiBold.copyWith(color: ColorValues.primaryGreenColor)

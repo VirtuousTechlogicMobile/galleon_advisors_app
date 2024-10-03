@@ -42,22 +42,18 @@ class ManageStudiesDialogs {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
-                      text: "${StringValues.doYouWantToUpload.tr}$studyName",
-                      textStyle: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
-                      minFontSize: 15,
-                      maxFontSize: 24,
+                    child: Text(
+                      "${StringValues.doYouWantToUpload.tr}$studyName",
+                      style: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
                     ),
                   ),
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
+                    child: Text(
                       // TODO: add dynamic position name
-                      text: "${StringValues.youAreAboutToUploadTheStudiesTo.tr}$positionName.${StringValues.areYouSureYouWantToDoThisThisActionCannotBeUndone.tr}",
-                      textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                      "${StringValues.youAreAboutToUploadTheStudiesTo.tr}$positionName.${StringValues.areYouSureYouWantToDoThisThisActionCannotBeUndone.tr}",
+                      style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                       maxLines: 3,
                       textAlign: TextAlign.center,
-                      minFontSize: 10,
-                      maxFontSize: 16,
                     ).marginOnly(top: Dimens.twentySeven, bottom: Dimens.twentyFour),
                   ),
                   Row(
@@ -136,22 +132,18 @@ class ManageStudiesDialogs {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
-                      text: StringValues.deleteStudies.tr,
-                      textStyle: AppStyles.style24Bold.copyWith(color: ColorValues.redColor),
-                      minFontSize: 15,
-                      maxFontSize: 24,
+                    child: Text(
+                      StringValues.deleteStudies.tr,
+                      style: AppStyles.style24Bold.copyWith(color: ColorValues.redColor),
                     ),
                   ),
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
+                    child: Text(
                       // TODO: add dynamic position name
-                      text: StringValues.youAreAboutToDeleteTheStudies.tr,
-                      textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.redColor),
+                      StringValues.youAreAboutToDeleteTheStudies.tr,
+                      style: AppStyles.style16Normal.copyWith(color: ColorValues.redColor),
                       maxLines: 3,
                       textAlign: TextAlign.center,
-                      minFontSize: 10,
-                      maxFontSize: 16,
                     ).marginOnly(top: Dimens.twentySeven, bottom: Dimens.twentyFour),
                   ),
                   Row(

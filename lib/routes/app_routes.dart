@@ -12,6 +12,8 @@ abstract class AppRoutes {
   static const managePositionsDetail = _Routes.managePositionsDetail;
   static const createNewPosition = _Routes.createNewPosition;
   static const createPositionAddServiceAndOpp = _Routes.createPositionAddServiceAndOpp;
+  static const addOpportunityFlags = _Routes.addOpportunityFlags;
+  static const createPositionTipsAndTricks = _Routes.createPositionTipsAndTricks;
 }
 
 abstract class _Routes {
@@ -26,4 +28,6 @@ abstract class _Routes {
   static const managePositionsDetail = '/position-detail';
   static const createNewPosition = '/create-position';
   static const createPositionAddServiceAndOpp = '/create-position-add-service-opportunities';
+  static const addOpportunityFlags = '/add-opportunity_flags';
+  static const createPositionTipsAndTricks = '/create-position-Tips&Tricks';
 }

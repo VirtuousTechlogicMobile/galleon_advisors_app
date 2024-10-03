@@ -16,7 +16,7 @@ class CommonWidgets {
     );
   }
 
-  static Widget autoSizeText({
+/*  static Widget autoSizeText({
     required String text,
     required TextStyle textStyle,
     TextAlign? textAlign,
@@ -36,7 +36,7 @@ class CommonWidgets {
       maxLines: maxLines ?? 1,
       overflow: TextOverflow.ellipsis,
     );
-  }
+  }*/
 
   static Widget autoSizeRichText({
     required List<TextSpan> textSpans,

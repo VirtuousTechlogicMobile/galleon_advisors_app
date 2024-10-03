@@ -16,19 +16,15 @@ class StudyScreenComponents {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CommonWidgets.autoSizeText(
-          text: '•',
-          textStyle: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
-          minFontSize: 10,
-          maxFontSize: 13,
+        Text(
+          '•',
+          style: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
         ).marginOnly(top: Dimens.one, right: Dimens.ten),
         Flexible(
-          child: CommonWidgets.autoSizeText(
-            text: text,
-            textStyle: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 10,
+          child: Text(
+            text,
+            style: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
             maxLines: 5,
-            maxFontSize: 16,
           ),
         ),
       ],
@@ -66,21 +62,17 @@ class StudyScreenComponents {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
-                      text: StringValues.doYouWantToStopStudyName.tr,
-                      textStyle: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
-                      minFontSize: 15,
-                      maxFontSize: 24,
+                    child: Text(
+                      StringValues.doYouWantToStopStudyName.tr,
+                      style: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
                     ),
                   ),
                   Flexible(
-                    child: CommonWidgets.autoSizeText(
-                      text: StringValues.areYouSureYouWantToStopTheStudyYouWillBeUnableToReturnToTheStudyIfYouAreReturningToTheStudyUseThePauseFunction.tr,
-                      textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                    child: Text(
+                      StringValues.areYouSureYouWantToStopTheStudyYouWillBeUnableToReturnToTheStudyIfYouAreReturningToTheStudyUseThePauseFunction.tr,
+                      style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                       maxLines: 3,
                       textAlign: TextAlign.center,
-                      minFontSize: 10,
-                      maxFontSize: 16,
                     ).marginOnly(top: Dimens.fifteen, bottom: Dimens.sevenTeen),
                   ),
                   Row(

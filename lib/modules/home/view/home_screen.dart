@@ -5,6 +5,7 @@ import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
 import 'package:get/get.dart';
+
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
 
@@ -62,11 +63,9 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.newStudy.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
+                Text(
+                  StringValues.newStudy.tr,
+                  style: AppStyles.style16Normal,
                 ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
@@ -78,11 +77,9 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.folderOutlinedIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.manageStudies.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
+                Text(
+                  StringValues.manageStudies.tr,
+                  style: AppStyles.style16Normal,
                 ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
@@ -94,11 +91,9 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.managePosition.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
+                Text(
+                  StringValues.managePosition.tr,
+                  style: AppStyles.style16Normal,
                 ).marginOnly(left: Dimens.ten),
               ],
             ),
@@ -110,13 +105,14 @@ class HomeScreen extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(Dimens.fourteen),
               decoration: BoxDecoration(
-                  border: Border.all(
-                    color: ColorValues.green,
-                    width: 1.5,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    Dimens.eight,
-                  )),
+                border: Border.all(
+                  color: ColorValues.green,
+                  width: 1.5,
+                ),
+                borderRadius: BorderRadius.circular(
+                  Dimens.eight,
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

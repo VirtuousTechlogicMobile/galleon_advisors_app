@@ -245,11 +245,9 @@ class ManagePositionDetailScreen extends StatelessWidget {
               style: AppStyles.style16Normal,
             ),
           ),
-          CommonWidgets.autoSizeText(
-            text: StringValues.processOpportunities.tr,
-            textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            StringValues.processOpportunities.tr,
+            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
           ).marginOnly(top: Dimens.fifteen),
           Flexible(
             child: Text(

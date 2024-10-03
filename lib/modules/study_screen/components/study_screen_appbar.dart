@@ -20,9 +20,10 @@ class StudyScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.eight),
+      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.six, bottom: Dimens.three, right: Dimens.eight),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -32,44 +33,39 @@ class StudyScreenAppbar extends StatelessWidget {
               onTap: () {
                 studyController.onBackPressed();
               },
-              child: CommonWidgets.fromSvg(svgAsset: SvgAssets.closeRoundedIcon).marginOnly(right: Dimens.fourteen),
+              child: CommonWidgets.fromSvg(svgAsset: studyController.studyStartTime.isNotEmpty ? SvgAssets.backIconOutlined : SvgAssets.closeRoundedIcon)
+                  .marginOnly(right: Dimens.fourteen),
             ),
             Flexible(
               child: Container(
-                padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.seven),
+                // padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.seven),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimens.eight),
                   color: studyController.isStudyStarted.value ? ColorValues.primaryGreenColor : ColorValues.transparent,
                 ),
                 child: Row(
                   children: [
-                    CommonWidgets.autoSizeText(
-                      text: '(00:00:00)',
-                      textStyle: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
-                      minFontSize: 12,
-                      maxFontSize: 16,
-                    ).marginOnly(right: Dimens.nineteen, left: Dimens.thirteen),
+                    Text(
+                      '(00:00:00)',
+                      style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
+                    ).marginOnly(right: Dimens.nineteen, left: Dimens.thirteen, top: Dimens.eight, bottom: Dimens.seven),
                     InkWell(
                       onTap: () {
                         studyController.onChangeStudyIndex();
                       },
                       child: Obx(
-                        () => CommonWidgets.autoSizeText(
-                          text: studyController.dualStudiesList[studyController.selectedStudyIndex.value],
-                          textStyle: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
-                          minFontSize: 12,
-                          maxFontSize: 16,
+                        () => Text(
+                          studyController.dualStudiesList[studyController.selectedStudyIndex.value],
+                          style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
                         ),
                       ),
-                    ),
+                    ).marginOnly(top: Dimens.eight, bottom: Dimens.seven),
                     const Spacer(),
                     Obx(
-                      () => CommonWidgets.autoSizeText(
-                        text: studyController.currentTime.value,
-                        textStyle: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
-                        minFontSize: 12,
-                        maxFontSize: 16,
-                      ).marginOnly(right: Dimens.thirteen),
+                      () => Text(
+                        studyController.currentTime.value,
+                        style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
+                      ).marginOnly(right: Dimens.thirteen, top: Dimens.eight, bottom: Dimens.seven),
                     ),
                     // show end button condition
                     if (studyController.studyStartTime.isNotEmpty && !studyController.isStudyStarted.value)

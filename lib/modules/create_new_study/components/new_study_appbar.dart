@@ -18,7 +18,7 @@ class NewStudyAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
+      // height: Dimens.fifty,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),
@@ -32,11 +32,9 @@ class NewStudyAppbar extends StatelessWidget {
             },
             child: CommonWidgets.fromSvg(svgAsset: SvgAssets.backIconOutlined),
           ),
-          CommonWidgets.autoSizeText(
-            text: StringValues.createNewStudy.tr,
-            textStyle: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            StringValues.createNewStudy.tr,
+            style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
           ).marginOnly(left: Dimens.twentySix),
           SizedBox(
             width: MediaQuery.sizeOf(context).width / 3.3,
@@ -52,11 +50,9 @@ class NewStudyAppbar extends StatelessWidget {
             ),
           ).marginOnly(left: Dimens.sevenTeen),
           const Spacer(),
-          CommonWidgets.autoSizeText(
-            text: time,
-            textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-            minFontSize: 12,
-            maxFontSize: 16,
+          Text(
+            time,
+            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
           ),
         ],
       ),

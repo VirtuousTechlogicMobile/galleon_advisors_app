@@ -66,4 +66,5 @@ abstract class StringValues {
   static const typeName = 'type_name';
   static const template = 'template';
   static const next = 'next';
+  static const add = 'add';
 }

@@ -5,6 +5,9 @@ import 'package:galleon_advisors_app/modules/create_new_position/view/create_new
 import 'package:galleon_advisors_app/modules/create_new_study/bindings/create_new_study_binding.dart';
 import 'package:galleon_advisors_app/modules/create_new_study/view/create_new_study_screen.dart';
 import 'package:galleon_advisors_app/modules/create_position_add_opp_and_service/bindings/create_position_add_opp_and_service_binding.dart';
+import 'package:galleon_advisors_app/modules/create_position_add_opp_flag/bindings/create_position_add_opp_flag_binding.dart';
+import 'package:galleon_advisors_app/modules/create_position_tips_tricks/bindings/create_position_tips_tricks_binding.dart';
+import 'package:galleon_advisors_app/modules/create_position_tips_tricks/view/create_position_tips_tricks_screen.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/bindings/end_study_summary_binding.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/view/end_study_summary_screen.dart';
 import 'package:galleon_advisors_app/modules/home/bindings/home_binding.dart';
@@ -21,6 +24,7 @@ import 'package:galleon_advisors_app/modules/study_screen/view/study_screen.dart
 import 'package:get/get.dart';
 
 import '../modules/create_position_add_opp_and_service/view/create_position_add_opp_and_service_screen.dart';
+import '../modules/create_position_add_opp_flag/view/create_position_add_opp_flag_screen.dart';
 import '../modules/login/bindings/login_binding.dart';
 part 'app_routes.dart';
 
@@ -109,6 +113,30 @@ abstract class AppPages {
       name: _Routes.createPositionAddServiceAndOpp,
       page: CreatePositionAddOppAndServiceScreen.new,
       binding: CreatePositionAddOppAndServiceBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.createPositionAddServiceAndOpp,
+      page: CreatePositionAddOppAndServiceScreen.new,
+      binding: CreatePositionAddOppAndServiceBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.addOpportunityFlags,
+      page: CreatePositionAddOppFlagScreen.new,
+      binding: CreatePositionAddOppFlagBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+
+    GetPage(
+      name: _Routes.createPositionTipsAndTricks,
+      page: CreatePositionTipsTricksScreen.new,
+      binding: CreatePositionTipsTricksBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

@@ -50,11 +50,9 @@ class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CommonWidgets.autoSizeText(
-          text: widget.labelText,
-          textStyle: AppStyles.style16Normal.copyWith(color: isFocused ? ColorValues.primaryGreenColor.withOpacity(0.50) : ColorValues.blackColor.withOpacity(0.50)),
-          minFontSize: 16,
-          maxFontSize: 16,
+        Text(
+          widget.labelText,
+          style: AppStyles.style16Normal.copyWith(color: isFocused ? ColorValues.primaryGreenColor.withOpacity(0.50) : ColorValues.blackColor.withOpacity(0.50)),
         ).marginOnly(bottom: Dimens.ten),
         widget.textField,
       ],

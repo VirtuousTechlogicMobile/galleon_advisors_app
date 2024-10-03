@@ -67,5 +67,6 @@ final Map<String, String> enUs = {
   'type_name': 'Type Name',
   'template': 'Template',
   'next': 'Next',
+  'add': 'Add',
   'Create': 'Create',
 };

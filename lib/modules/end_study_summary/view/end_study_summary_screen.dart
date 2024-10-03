@@ -122,13 +122,11 @@ class EndStudySummaryScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(vertical: Dimens.nine),
                     color: ColorValues.deepGreenColor,
-                    child: CommonWidgets.autoSizeText(
-                      text: "(${endStudySummaryController.servicePer.toStringAsFixed(1)}%)",
-                      textStyle: AppStyles.style12Normal.copyWith(
+                    child: Text(
+                      "(${endStudySummaryController.servicePer.toStringAsFixed(1)}%)",
+                      style: AppStyles.style12Normal.copyWith(
                         color: ColorValues.whiteColor,
                       ),
-                      maxFontSize: 12,
-                      minFontSize: 8,
                     ),
                   ),
                   Container(
@@ -136,13 +134,11 @@ class EndStudySummaryScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: Dimens.nine),
                     alignment: Alignment.center,
                     color: ColorValues.charcoalGrayColor,
-                    child: CommonWidgets.autoSizeText(
-                      text: "(${endStudySummaryController.oppPer.toStringAsFixed(1)}%)",
-                      textStyle: AppStyles.style12Normal.copyWith(
+                    child: Text(
+                      "(${endStudySummaryController.oppPer.toStringAsFixed(1)}%)",
+                      style: AppStyles.style12Normal.copyWith(
                         color: ColorValues.whiteColor,
                       ),
-                      maxFontSize: 12,
-                      minFontSize: 8,
                     ),
                   ),
                 ],

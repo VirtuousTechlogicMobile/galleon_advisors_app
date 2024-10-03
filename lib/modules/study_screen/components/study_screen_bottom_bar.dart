@@ -37,6 +37,7 @@ class StudyScreenBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 70,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.eight, right: Dimens.fourteen, left: Dimens.fourteen),
       child: Obx(
