@@ -58,7 +58,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                   child: Obx(
                     () => CustomDropdown(
                       dropDownItemsList: manageStudiesController.programDropDownItemsList,
-                      hintText: StringValues.position.tr,
+                      hintText: StringValues.program.tr,
                       onItemSelected: (selectedDropDownItem) {
                         manageStudiesController.selectedProgram.value = selectedDropDownItem;
                       },

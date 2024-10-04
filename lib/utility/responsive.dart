@@ -33,6 +33,7 @@ class GetResponsiveDimens {
   static double seventyFiveAndOneHundredFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.oneHundredFifty : Dimens.seventyFive;
   static double twentyNineAndFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.fifty : Dimens.twentyNine;
   static double sixAndFour(BuildContext context) => Responsive.isMobile(context) ? Dimens.six : Dimens.four;
+  static double ninetyAndSixty(BuildContext context) => Responsive.isMobile(context) ? Dimens.ninety : Dimens.sixty;
   static double twentyFiveAndTwentyOne(BuildContext context) => Responsive.isMobile(context) ? Dimens.twentyFive : Dimens.twentyOne;
   static double widthDivThreeAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 3.5 : Dimens.twoHundredForty;
   static double widthDivFourAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 4.2 : Dimens.twoHundredForty;

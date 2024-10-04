@@ -8,6 +8,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../routes/app_pages.dart';
 import '../../study_screen/components/study_screen_components.dart';
 import '../components/end_study_summary_screen_appbar.dart';
 
@@ -31,7 +32,7 @@ class EndStudySummaryScreen extends StatelessWidget {
               time: '(03:11:42)',
               programName: 'Test',
               onEndButtonTap: () {
-                Get.back();
+                Get.toNamed(AppRoutes.study);
               },
               isShowEndButton: studyId.isNotEmpty,
             ),

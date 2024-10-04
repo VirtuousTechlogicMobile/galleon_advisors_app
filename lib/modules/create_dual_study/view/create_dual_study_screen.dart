@@ -76,8 +76,8 @@ class CreateDualStudyScreen extends StatelessWidget {
                   buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                   btnText: StringValues.create.tr,
                   margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
-                  borderRadius: BorderRadius.circular(Dimens.eight),
-                  contentPadding: EdgeInsets.zero,
+                  borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                  contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                   buttonColor: createDualStudyController.selectedPosition.value != null && createDualStudyController.selectedDept.value != null
                       ? ColorValues.primaryGreenColor
                       : ColorValues.softGrayColor,

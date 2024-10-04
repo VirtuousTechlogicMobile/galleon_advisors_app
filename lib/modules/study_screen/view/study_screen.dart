@@ -307,7 +307,7 @@ class StudyScreen extends StatelessWidget {
                   return Obx(
                     () => CustomPrimaryButton(
                       btnText: studyController.opportunityFlagList[index],
-                      buttonWidth: GetResponsiveDimens.widthDivThreeAndTwoHundredForty(context),
+                      buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                       contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
                       margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
                       borderRadius: BorderRadius.circular(Dimens.eight),
@@ -338,8 +338,7 @@ class StudyScreen extends StatelessWidget {
         border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
         borderRadius: BorderRadius.only(topRight: Radius.circular(Dimens.twenty), topLeft: Radius.circular(Dimens.twenty)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           CommonWidgets.autoSizeRichText(textSpans: [
             TextSpan(
@@ -356,25 +355,15 @@ class StudyScreen extends StatelessWidget {
               ),
             ),
           ], minFontSize: 10, maxFontSize: 16),
-          Flexible(
-            child: StudyScreenComponents.customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
-          ),
-          Flexible(
-            child: StudyScreenComponents.customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
-          ),
+          StudyScreenComponents.customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
+          StudyScreenComponents.customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
           Text(
             StringValues.processOpportunities.tr,
             style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
           ).marginOnly(top: Dimens.fifteen),
-          Flexible(
-            child: StudyScreenComponents.customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
-          ),
-          Flexible(
-            child: StudyScreenComponents.customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
-          ),
-          Flexible(
-            child: StudyScreenComponents.customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
-          ),
+          StudyScreenComponents.customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
+          StudyScreenComponents.customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
+          StudyScreenComponents.customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
         ],
       ),
     );
@@ -445,7 +434,7 @@ class StudyScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Container(
-                          height: Dimens.sixty,
+                          height: GetResponsiveDimens.ninetyAndSixty(context),
                           decoration: BoxDecoration(
                             color: index % 2 == 0 ? ColorValues.transparent : ColorValues.whiteColor,
                           ),
@@ -502,7 +491,7 @@ class StudyScreen extends StatelessWidget {
           child: Text(
             operationalAnalysisDataModel.analysisName,
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
-          ).marginOnly(left: Dimens.twentySeven),
+          ).marginOnly(left: Dimens.twentySeven, right: Dimens.twenty),
         ),
         Expanded(
           flex: 1,

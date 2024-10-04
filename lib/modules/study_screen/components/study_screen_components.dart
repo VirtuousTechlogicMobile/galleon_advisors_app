@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/custom_primary_button.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:get/get.dart';
-
-import '../../../common/common_widgets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
@@ -19,7 +17,7 @@ class StudyScreenComponents {
         Text(
           '•',
           style: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
-        ).marginOnly(top: Dimens.one, right: Dimens.ten),
+        ).marginOnly(top: Dimens.five, right: Dimens.ten),
         Flexible(
           child: Text(
             text,
