@@ -8,6 +8,7 @@ import '../../../common/custom_dropdown.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utility/responsive.dart';
 import '../components/new_study_appbar.dart';
 
 class CreateNewStudyScreen extends StatelessWidget {
@@ -87,11 +88,11 @@ class CreateNewStudyScreen extends StatelessWidget {
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
                 // buttonHeight: Dimens.fiftySix,
-                buttonWidth: Dimens.twoHundredFifty,
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                 btnText: StringValues.create.tr,
-                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(Dimens.eight),
-                contentPadding: EdgeInsets.symmetric(vertical: Dimens.twentyOne),
+                margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                 onTap: () {

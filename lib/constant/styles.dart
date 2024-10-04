@@ -78,6 +78,12 @@ abstract class AppStyles {
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
+  static TextStyle style14SemiBold = TextStyle(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w600,
+    fontFamily: defaultFontFamily,
+    height: defaultFontHeight,
+  );
 
   static TextStyle style14Normal = TextStyle(
     fontSize: Dimens.fourteen,
@@ -144,6 +150,13 @@ abstract class AppStyles {
 
   static TextStyle style18Normal = TextStyle(
     fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w400,
+    fontFamily: defaultFontFamily,
+    height: defaultFontHeight,
+  );
+
+  static TextStyle style19Normal = TextStyle(
+    fontSize: Dimens.nineteen,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,

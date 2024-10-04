@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 
 import '../../../constant/dimens.dart';
 
@@ -28,7 +29,7 @@ class ListWheelScrollPicker extends StatelessWidget {
             ListWheelScrollView.useDelegate(
               controller: FixedExtentScrollController(initialItem: selectedIndex),
               physics: isScroll ? const FixedExtentScrollPhysics() : const NeverScrollableScrollPhysics(),
-              itemExtent: Dimens.sixty,
+              itemExtent: GetResponsiveDimens.eightyAndSixty(context),
               diameterRatio: 100,
               onSelectedItemChanged: (index) {
                 // Use modulo to loop around the index for infinite scrolling
@@ -38,6 +39,7 @@ class ListWheelScrollPicker extends StatelessWidget {
                 builder: (context, index) {
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: Dimens.eight),
+                    margin: EdgeInsets.only(top: GetResponsiveDimens.eightAndZero(context)),
                     color: ColorValues.softWhiteColor,
                     width: double.infinity,
                     alignment: Alignment.center,
@@ -57,8 +59,8 @@ class ListWheelScrollPicker extends StatelessWidget {
             ),
             IgnorePointer(
               child: Container(
-                height: Dimens.fortyThree,
-                // margin: EdgeInsets.only(bottom: Dimens.forty),
+                height: GetResponsiveDimens.fortyThreeAndSeventy(context),
+                margin: EdgeInsets.only(top: GetResponsiveDimens.eightAndZero(context)),
                 width: double.infinity,
                 color: ColorValues.primaryGreenAccentColor.withOpacity(0.20),
               ),

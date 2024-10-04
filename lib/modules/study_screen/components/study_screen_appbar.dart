@@ -8,6 +8,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utility/responsive.dart';
 import '../controller/study_screen_controller.dart';
 
 class StudyScreenAppbar extends StatelessWidget {
@@ -23,7 +24,9 @@ class StudyScreenAppbar extends StatelessWidget {
       height: 50,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.six, bottom: Dimens.three, right: Dimens.eight),
+      padding: Responsive.isMobile(context)
+          ? EdgeInsets.only(left: Dimens.eighteen, top: Dimens.seven, bottom: Dimens.four, right: Dimens.twelve)
+          : EdgeInsets.only(left: Dimens.fourteen, top: Dimens.six, bottom: Dimens.three, right: Dimens.eight),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -38,9 +41,8 @@ class StudyScreenAppbar extends StatelessWidget {
             ),
             Flexible(
               child: Container(
-                // padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.seven),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimens.eight),
+                  borderRadius: BorderRadius.circular(Responsive.isMobile(context) ? Dimens.ten : Dimens.eight),
                   color: studyController.isStudyStarted.value ? ColorValues.primaryGreenColor : ColorValues.transparent,
                 ),
                 child: Row(
@@ -48,7 +50,11 @@ class StudyScreenAppbar extends StatelessWidget {
                     Text(
                       '(00:00:00)',
                       style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
-                    ).marginOnly(right: Dimens.nineteen, left: Dimens.thirteen, top: Dimens.eight, bottom: Dimens.seven),
+                    ).marginOnly(
+                        right: Dimens.nineteen,
+                        left: Responsive.isMobile(context) ? Dimens.fifteen : Dimens.thirteen,
+                        top: Responsive.isMobile(context) ? Dimens.ten : Dimens.eight,
+                        bottom: Responsive.isMobile(context) ? Dimens.seven : Dimens.nine),
                     InkWell(
                       onTap: () {
                         studyController.onChangeStudyIndex();
@@ -59,13 +65,16 @@ class StudyScreenAppbar extends StatelessWidget {
                           style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
                         ),
                       ),
-                    ).marginOnly(top: Dimens.eight, bottom: Dimens.seven),
+                    ).marginOnly(top: Responsive.isMobile(context) ? Dimens.ten : Dimens.eight, bottom: Responsive.isMobile(context) ? Dimens.seven : Dimens.nine),
                     const Spacer(),
                     Obx(
                       () => Text(
                         studyController.currentTime.value,
                         style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
-                      ).marginOnly(right: Dimens.thirteen, top: Dimens.eight, bottom: Dimens.seven),
+                      ).marginOnly(
+                          right: Responsive.isMobile(context) ? Dimens.fifteen : Dimens.thirteen,
+                          top: Responsive.isMobile(context) ? Dimens.ten : Dimens.eight,
+                          bottom: Responsive.isMobile(context) ? Dimens.seven : Dimens.nine),
                     ),
                     // show end button condition
                     if (studyController.studyStartTime.isNotEmpty && !studyController.isStudyStarted.value)

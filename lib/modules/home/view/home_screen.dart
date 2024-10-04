@@ -4,6 +4,7 @@ import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/assets.dart';
@@ -19,36 +20,40 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         top: true,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
+              // flex: Responsive.isMobile(context) ? 5 : 3,
               child: Container(
+                height: Dimens.screenHeight,
                 margin: EdgeInsets.all(Dimens.twentyFour),
                 decoration: BoxDecoration(
                   color: ColorValues.whiteColor,
                   borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
                 ),
-                child: Transform.scale(
-                  scale: 1.5,
-                  child: Image.asset(
-                    AssetValues.leftToRightAppLogo,
-                  ),
-                ),
+                child: Responsive.isMobile(context)
+                    ? Image.asset(
+                        AssetValues.leftToRightAppLogo,
+                      ).paddingSymmetric(horizontal: Dimens.hundred)
+                    : Transform.scale(
+                        scale: 1.5,
+                        child: Image.asset(
+                          AssetValues.leftToRightAppLogo,
+                        ),
+                      ),
               ),
             ),
-            Expanded(flex: 1, child: menuLayout()),
+            IntrinsicWidth(child: menuLayout(context)),
           ],
         ),
       ),
     );
   }
 
-  Widget menuLayout() {
+  Widget menuLayout(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimens.twentyFive,
-      ),
+      padding: EdgeInsets.only(left: Dimens.twenty, right: Dimens.thirty),
       decoration: const BoxDecoration(
         color: ColorValues.whiteColor,
       ),
@@ -66,10 +71,10 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   StringValues.newStudy.tr,
                   style: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.sixTeen),
+                ).marginOnly(left: Dimens.eighteen),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven),
           InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.manageStudies);
@@ -83,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                 ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven),
           InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.managePositions);
@@ -94,23 +99,24 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   StringValues.managePosition.tr,
                   style: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.ten),
+                ).marginOnly(left: Dimens.thirteen),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven, right: Responsive.isMobile(context) ? Dimens.sixty : Dimens.forty),
           GestureDetector(
             onTap: () {
               Get.offAllNamed(AppRoutes.login);
             },
             child: Container(
-              padding: EdgeInsets.all(Dimens.fourteen),
+              margin: Responsive.isMobile(context) ? EdgeInsets.symmetric(horizontal: Dimens.ten) : EdgeInsets.zero,
+              padding: EdgeInsets.all(Dimens.twelve),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: ColorValues.green,
-                  width: 1.5,
+                  width: Dimens.two,
                 ),
                 borderRadius: BorderRadius.circular(
-                  Dimens.eight,
+                  Dimens.nine,
                 ),
               ),
               child: Row(

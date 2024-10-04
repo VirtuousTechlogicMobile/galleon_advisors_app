@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/dimens.dart';
@@ -13,19 +14,19 @@ class CustomSplitSliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.thirtyFive,
+      height: GetResponsiveDimens.sixtyAndThirtyFive(context),
       alignment: Alignment.center,
       margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.twentySix, bottom: Dimens.nine),
       decoration: BoxDecoration(
         border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-        borderRadius: BorderRadius.circular(Dimens.eight),
+        borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
         color: ColorValues.whiteColor,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: Dimens.seventyFive,
+            width: GetResponsiveDimens.seventyFiveAndOneHundredFifty(context),
             child: Align(
               alignment: Alignment.center,
               child: Text(
@@ -45,7 +46,7 @@ class CustomSplitSliderWidget extends StatelessWidget {
                 overlayShape: SliderComponentShape.noOverlay,
                 showValueIndicator: ShowValueIndicator.never,
                 inactiveTrackColor: Colors.transparent,
-                thumbShape: CustomOverlayShape(),
+                thumbShape: CustomOverlayShape(context),
                 overlayColor: Colors.transparent,
               ),
               child: Slider(
@@ -59,7 +60,7 @@ class CustomSplitSliderWidget extends StatelessWidget {
             ).paddingOnly(top: Dimens.five),
           ),
           SizedBox(
-            width: Dimens.seventyFive,
+            width: GetResponsiveDimens.seventyFiveAndOneHundredFifty(context),
             child: Align(
               alignment: Alignment.center,
               child: Text(
@@ -75,6 +76,8 @@ class CustomSplitSliderWidget extends StatelessWidget {
 }
 
 class CustomOverlayShape extends SliderComponentShape {
+  BuildContext buildContext;
+  CustomOverlayShape(this.buildContext);
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
     return Size(Dimens.ten, Dimens.fifty); // Custom size for the overlay
@@ -96,11 +99,11 @@ class CustomOverlayShape extends SliderComponentShape {
     required Size sizeWithOverflow,
   }) {
     final Canvas canvas = context.canvas;
-
+    final Offset shiftedCenter = center.translate(0, -Dimens.three);
     final Rect overlayRect = Rect.fromCenter(
-      center: center,
+      center: shiftedCenter,
       width: Dimens.four, // The width of the vertical bar
-      height: Dimens.thirtyFive, // The height of the vertical bar
+      height: GetResponsiveDimens.sixtyAndThirtyFive(buildContext) - Dimens.two, // The height of the vertical bar
     );
 
     final Paint paint = Paint()..color = ColorValues.primaryGreenColor;

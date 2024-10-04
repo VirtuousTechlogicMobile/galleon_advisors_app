@@ -5,6 +5,7 @@ import 'package:galleon_advisors_app/constant/assets.dart';
 import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/dimens.dart';
@@ -18,10 +19,13 @@ class NewStudyAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: Dimens.fifty,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),
+      padding: EdgeInsets.only(
+          left: Dimens.fourteen,
+          top: GetResponsiveDimens.sevenAndNine(context),
+          bottom: GetResponsiveDimens.fiveAndSeven(context),
+          right: GetResponsiveDimens.thirtyAndTwentyEight(context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,20 +39,22 @@ class NewStudyAppbar extends StatelessWidget {
           Text(
             StringValues.createNewStudy.tr,
             style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
-          ).marginOnly(left: Dimens.twentySix),
+          ).marginOnly(left: Responsive.isMobile(context) ? Dimens.thirty : Dimens.twentySix),
           SizedBox(
             width: MediaQuery.sizeOf(context).width / 3.3,
             child: CustomTextField(
               controller: studyNameController,
               fillColor: ColorValues.textFieldLightGrayColor.withOpacity(0.50),
-              borderRadius: BorderRadius.circular(Dimens.eight),
+              borderRadius: BorderRadius.circular(Responsive.isMobile(context) ? Dimens.nine : Dimens.eight),
               borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-              contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+              contentPadding: Responsive.isMobile(context)
+                  ? EdgeInsets.symmetric(vertical: Dimens.nine, horizontal: Dimens.fifteen)
+                  : EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
               textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
               cursorColor: ColorValues.blackColor,
               maxLines: 1,
             ),
-          ).marginOnly(left: Dimens.sevenTeen),
+          ).marginOnly(left: Responsive.isMobile(context) ? Dimens.forty : Dimens.sevenTeen),
           const Spacer(),
           Text(
             time,

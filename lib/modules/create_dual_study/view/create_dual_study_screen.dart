@@ -8,6 +8,7 @@ import '../../../common/custom_primary_button.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
+import '../../../utility/responsive.dart';
 import '../controller/create_dual_study_controller.dart';
 
 class CreateDualStudyScreen extends StatelessWidget {
@@ -72,11 +73,11 @@ class CreateDualStudyScreen extends StatelessWidget {
               color: ColorValues.whiteColor,
               child: Obx(
                 () => CustomPrimaryButton(
-                  buttonHeight: Dimens.fiftySix,
-                  buttonWidth: Dimens.twoHundredEighteen,
+                  buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                   btnText: StringValues.create.tr,
-                  margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+                  margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
                   borderRadius: BorderRadius.circular(Dimens.eight),
+                  contentPadding: EdgeInsets.zero,
                   buttonColor: createDualStudyController.selectedPosition.value != null && createDualStudyController.selectedDept.value != null
                       ? ColorValues.primaryGreenColor
                       : ColorValues.softGrayColor,

@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utility/responsive.dart';
 import '../components/custom_split_slider_widget.dart';
 import '../components/list_wheel_scroll_picker.dart';
 import '../components/study_screen_appbar.dart';
@@ -57,7 +58,7 @@ class StudyScreen extends StatelessWidget {
                               sigmaY: 10,
                             ),
                             child: studyController.getCurrentTabIndex() == 0
-                                ? activitiesLayout()
+                                ? activitiesLayout(context)
                                 : studyController.getCurrentTabIndex() == 2
                                     ? tipsAndTricksLayout()
                                     : studyController.getCurrentTabIndex() == 3
@@ -82,7 +83,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget activitiesLayout() {
+  Widget activitiesLayout(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +91,7 @@ class StudyScreen extends StatelessWidget {
         Obx(
           () => Flexible(
             child: studyController.selectedActivitiesSubTab.value == 'comment'
-                ? commentsLayout()
+                ? commentsLayout(context)
                 : studyController.selectedActivitiesSubTab.value == 'opportunityFlag'
                     ? opportunityFlagLayout()
                     : Row(
@@ -99,7 +100,7 @@ class StudyScreen extends StatelessWidget {
                         children: [
                           Flexible(
                             flex: 3,
-                            child: serviceActivitiesLayout(),
+                            child: serviceActivitiesLayout(context),
                           ),
                           Obx(
                             () => studyController.selectedStudyTimelinesList.isNotEmpty && studyController.selectedStudyTimelinesList.length < 2
@@ -214,7 +215,7 @@ class StudyScreen extends StatelessWidget {
     ).marginOnly(bottom: Dimens.nine);
   }
 
-  Widget commentsLayout() {
+  Widget commentsLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
       padding: EdgeInsets.only(right: Dimens.ten),
@@ -247,15 +248,15 @@ class StudyScreen extends StatelessWidget {
                     Text(
                       'Free Text as well as auto-safe.',
                       style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                    ).marginOnly(top: Dimens.twentySix, left: Dimens.twentyNine),
+                    ).marginOnly(top: Dimens.twentySix, left: GetResponsiveDimens.twentyNineAndFifty(context), right: Dimens.forty),
                   ],
                 ).marginOnly(top: Dimens.sevenTeen, bottom: Dimens.ten);
               },
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: Dimens.four),
-            decoration: BoxDecoration(border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor)),
+            margin: EdgeInsets.symmetric(horizontal: GetResponsiveDimens.sixAndFour(context)),
+            decoration: BoxDecoration(border: Border.all(width: GetResponsiveDimens.sixAndFour(context), color: ColorValues.softWhiteColor)),
           ),
           Expanded(
             flex: 1,
@@ -306,7 +307,7 @@ class StudyScreen extends StatelessWidget {
                   return Obx(
                     () => CustomPrimaryButton(
                       btnText: studyController.opportunityFlagList[index],
-                      buttonWidth: Dimens.twoHundredForty,
+                      buttonWidth: GetResponsiveDimens.widthDivThreeAndTwoHundredForty(context),
                       contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
                       margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
                       borderRadius: BorderRadius.circular(Dimens.eight),
@@ -581,7 +582,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceActivitiesLayout() {
+  Widget serviceActivitiesLayout(BuildContext context) {
     return Obx(
       () => IgnorePointer(
         ignoring: studyController.opportunityTapped.value,
@@ -896,7 +897,7 @@ class StudyScreen extends StatelessWidget {
                                 children: [
                                   Container(
                                     width: Dimens.thirtyTwo,
-                                    height: Dimens.thirtyThree,
+                                    height: GetResponsiveDimens.thirtyTwoAndThirtyThree(context),
                                     margin: EdgeInsets.only(right: Dimens.fifteen),
                                     decoration: BoxDecoration(
                                       color: studyController.studyTimeLineData[index].type == 'service'

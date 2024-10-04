@@ -6,6 +6,7 @@ import 'package:galleon_advisors_app/constant/colors.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:get/get.dart';
 import '../../../constant/dimens.dart';
+import '../../../utility/responsive.dart';
 import '../controller/create_dual_study_controller.dart';
 
 class CreateDualStudyScreenAppbar extends StatelessWidget {
@@ -16,10 +17,14 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
       width: MediaQuery.sizeOf(context).width,
+      padding: EdgeInsets.only(
+          left: Dimens.fourteen,
+          top: GetResponsiveDimens.sevenAndNine(context),
+          bottom: GetResponsiveDimens.fiveAndSeven(context),
+          right: GetResponsiveDimens.thirtyAndTwentyEight(context)),
       color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),
+      // padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +39,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
             '(00:00:00)',
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
             overflow: TextOverflow.ellipsis,
-          ).marginOnly(left: Dimens.twentySeven),
+          ).marginOnly(left: Dimens.twenty),
           SizedBox(
             width: MediaQuery.sizeOf(context).width / 3.3,
             child: CustomTextField(
@@ -47,7 +52,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
               cursorColor: ColorValues.blackColor,
               maxLines: 1,
             ),
-          ).marginOnly(left: Dimens.nine),
+          ).marginOnly(left: Dimens.ten),
           const Spacer(),
           Obx(
             () => Text(
