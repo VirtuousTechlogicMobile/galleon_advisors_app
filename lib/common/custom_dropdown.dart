@@ -76,7 +76,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(item.itemName, style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
+                  Flexible(
+                    child: Text(
+                      item.itemName,
+                      style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   Transform.rotate(
                     angle: (math.pi / 2),
                     child: CommonWidgets.fromSvg(

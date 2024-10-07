@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../utility/responsive.dart';
 import '../components/manage_positions_appbar.dart';
 
 class ManagePositionsScreen extends StatelessWidget {
@@ -36,9 +37,9 @@ class ManagePositionsScreen extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.only(bottom: Dimens.sevenTeen),
                       alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.symmetric(horizontal: Dimens.sevenTeen),
-                      height: Dimens.fiftyOne,
-                      decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+                      padding: EdgeInsets.symmetric(horizontal: Dimens.twenty),
+                      height: GetResponsiveDimens.hundredTenAndFiftyOne(context),
+                      decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.ten)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -54,9 +55,9 @@ class ManagePositionsScreen extends StatelessWidget {
                           if (managePositionsController.positionsDataList[index].status == 'pending')
                             Icon(
                               Icons.star,
-                              size: Dimens.twentyTwo,
+                              size: GetResponsiveDimens.fiftyAndTwentyTwo(context),
                               color: ColorValues.primaryGreenColor,
-                            ).marginOnly(left: Dimens.four)
+                            ).marginOnly(left: Dimens.five)
                         ],
                       ),
                     ),

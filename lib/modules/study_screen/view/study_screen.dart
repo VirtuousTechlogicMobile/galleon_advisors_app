@@ -130,7 +130,7 @@ class StudyScreen extends StatelessWidget {
                       sigmaX: 10,
                       sigmaY: 10,
                     ),
-                    child: commentOppFlagButtonsLayout(),
+                    child: commentOppFlagButtonsLayout(context),
                   ),
                 ),
         ),
@@ -149,20 +149,20 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget commentOppFlagButtonsLayout() {
+  Widget commentOppFlagButtonsLayout(BuildContext context) {
     return Row(
       children: [
         Obx(
           () => Flexible(
             flex: 1,
             child: CustomPrimaryButton(
-              margin: EdgeInsets.only(left: Dimens.twentyTwo, right: Dimens.eight),
+              margin: EdgeInsets.only(left: Dimens.twentyTwo, right: GetResponsiveDimens.tenAndEight(context)),
               btnText: StringValues.comment.tr,
               border: studyController.selectedActivitiesSubTab.value == 'comment'
                   ? Border.all(color: ColorValues.whiteColor, width: Dimens.four)
                   : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
               buttonColor: studyController.selectedActivitiesSubTab.value == 'comment' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-              borderRadius: BorderRadius.circular(Dimens.eight),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.sevenAndNine(context)),
               contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comment' ? Dimens.four : Dimens.eight),
               btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
               onTap: () {
@@ -191,7 +191,7 @@ class StudyScreen extends StatelessWidget {
                           contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
                           btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                         ),
-                      ).marginOnly(left: Dimens.eight, right: Dimens.twentySeven),
+                      ).marginOnly(left: GetResponsiveDimens.tenAndEight(context), right: Dimens.twentySeven),
                     ),
                   )
                 : CustomPrimaryButton(
@@ -202,7 +202,7 @@ class StudyScreen extends StatelessWidget {
                         : Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                     buttonColor:
                         studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-                    borderRadius: BorderRadius.circular(Dimens.eight),
+                    borderRadius: BorderRadius.circular(GetResponsiveDimens.sevenAndNine(context)),
                     contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? Dimens.four : Dimens.eight),
                     btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                     onTap: () {
@@ -491,6 +491,8 @@ class StudyScreen extends StatelessWidget {
           child: Text(
             operationalAnalysisDataModel.analysisName,
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twentySeven, right: Dimens.twenty),
         ),
         Expanded(
@@ -498,6 +500,8 @@ class StudyScreen extends StatelessWidget {
           child: Text(
             operationalAnalysisDataModel.dataInputs,
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
         ),
         if (operationalAnalysisDataModel.sample.isNotEmpty)
@@ -506,6 +510,7 @@ class StudyScreen extends StatelessWidget {
             child: StudyScreenComponents.customListElement(
               text: operationalAnalysisDataModel.sample,
               textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+              maxLines: 3,
             ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
           ),
       ],

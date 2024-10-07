@@ -56,6 +56,7 @@ class CustomPrimaryButton extends StatelessWidget {
             style: btnTextStyle ?? AppStyles.style16Normal.copyWith(fontWeight: FontWeight.w500, color: btnTextColor ?? ColorValues.whiteColor),
             maxLines: btnTextMaxLines ?? 1,
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
           )),
     );
   }

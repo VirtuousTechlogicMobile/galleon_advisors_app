@@ -61,9 +61,8 @@ class StudyScreenBottomBar extends StatelessWidget {
                     child: CustomPrimaryButton(
                       margin: EdgeInsets.only(right: Dimens.seven),
                       btnText: StringValues.activities.tr,
-                      // buttonHeight: Dimens.fiftySix,
-                      borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
-                      btnTextStyle: GetResponsiveFontSize.getStyle20And18Normal(context)
+                      borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                      btnTextStyle: GetResponsiveFontStyle.getStyle20And18Normal(context)
                           .copyWith(color: studyController.selectedTab.value == 'activities' ? ColorValues.whiteColor : ColorValues.blackColor),
                       contentPadding: EdgeInsets.zero,
                       buttonColor: studyController.selectedTab.value == 'activities' ? ColorValues.darkSlateGrayColor : ColorValues.softGrayColor,
@@ -75,11 +74,8 @@ class StudyScreenBottomBar extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => onTapAddButton(),
                       child: Container(
-                        // width: Dimens.eightySix,
-                        // height: Dimens.fiftySix,
-                        // padding: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.twentyFive),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                          borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                           color: ColorValues.softGrayColor,
                         ),
                         child: Container(
@@ -108,9 +104,8 @@ class StudyScreenBottomBar extends StatelessWidget {
               flex: 2,
               child: CustomPrimaryButton(
                 margin: EdgeInsets.only(right: Dimens.nineteen, left: GetResponsiveDimens.sevenAndNine(context)),
-                // buttonHeight: Dimens.fiftySix,
                 btnText: StringValues.tipsAndTricksWithSlashN.tr,
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                 btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'tips&tricks' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,
                 contentPadding: EdgeInsets.zero,
@@ -122,10 +117,9 @@ class StudyScreenBottomBar extends StatelessWidget {
               flex: 2,
               child: CustomPrimaryButton(
                 margin: EdgeInsets.only(right: Dimens.nineteen),
-                // buttonHeight: Dimens.fiftySix,
                 contentPadding: EdgeInsets.zero,
                 btnText: StringValues.operationalAnalysis.tr,
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                 btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'operationAnalysis' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,
                 buttonColor: studyController.selectedTab.value == 'operationAnalysis' ? ColorValues.darkSlateGrayColor : ColorValues.softGrayColor,
@@ -136,11 +130,10 @@ class StudyScreenBottomBar extends StatelessWidget {
               flex: 2,
               child: CustomPrimaryButton(
                 margin: EdgeInsets.only(right: Dimens.twentyNine),
-                // buttonHeight: Dimens.fiftySix,
                 contentPadding: EdgeInsets.zero,
                 btnText: StringValues.keyBackSlashNThemes.tr,
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
-                btnTextStyle: GetResponsiveFontSize.getStyle20And18Normal(context)
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                btnTextStyle: GetResponsiveFontStyle.getStyle20And18Normal(context)
                     .copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.darkSlateGrayColor),
                 btnTextMaxLines: 2,
                 buttonColor: studyController.selectedTab.value == 'keyThemes' ? ColorValues.darkSlateGrayColor : ColorValues.lightGrayColor.withOpacity(0.80),
@@ -157,12 +150,11 @@ class StudyScreenBottomBar extends StatelessWidget {
                       : isSplit
                           ? StringValues.split.tr
                           : StringValues.submit.tr,
-                  // buttonHeight: Dimens.fiftySix,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                   buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
                       ? ColorValues.primaryGreenColor
                       : ColorValues.lightGrayColor.withOpacity(0.50),
-                  borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
+                  borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                   contentPadding: EdgeInsets.zero,
                   btnTextStyle: AppStyles.style16Normal.copyWith(
                     color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge

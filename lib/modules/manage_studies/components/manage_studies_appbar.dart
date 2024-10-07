@@ -9,6 +9,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../utility/responsive.dart';
 import '../controller/manage_studies_controller.dart';
 
 class ManageStudiesAppbar extends StatelessWidget {
@@ -19,8 +20,11 @@ class ManageStudiesAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
-      padding: EdgeInsets.only(right: Dimens.sevenTeen),
+      padding: EdgeInsets.only(
+        right: Dimens.sevenTeen,
+        top: GetResponsiveDimens.sevenAndNine(context),
+        bottom: GetResponsiveDimens.fiveAndSeven(context),
+      ),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,
       child: Row(
@@ -28,7 +32,7 @@ class ManageStudiesAppbar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            flex: 2,
+            flex: GetResponsiveFlex.threeAndTwo(context),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,19 +43,19 @@ class ManageStudiesAppbar extends StatelessWidget {
                       Get.back();
                     },
                     child: CommonWidgets.fromSvg(svgAsset: SvgAssets.backIconOutlined),
-                  ).marginOnly(left: Dimens.twentyFour, right: Dimens.twentyNine),
+                  ).marginOnly(left: Dimens.twentyFour, right: Dimens.twentyFour),
                 ),
-                Flexible(
-                  child: Text(
-                    StringValues.manageStudies.tr,
-                    style: AppStyles.style18Bold,
-                  ),
+                Text(
+                  StringValues.manageStudies.tr,
+                  style: AppStyles.style16Bold,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: GetResponsiveFlex.fourAndThree(context),
             child: Row(
               children: [
                 Flexible(
@@ -68,7 +72,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                       dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                       buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                       dropDownIconSize: Size(Dimens.ten, Dimens.ten),
-                    ).marginOnly(right: Dimens.thirtyOne, top: Dimens.nine, bottom: Dimens.eleven),
+                    ).marginOnly(right: Dimens.thirtyOne),
                   ),
                 ),
                 Flexible(
@@ -85,14 +89,14 @@ class ManageStudiesAppbar extends StatelessWidget {
                       dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                       buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                       dropDownIconSize: Size(Dimens.ten, Dimens.ten),
-                    ).marginOnly(right: Dimens.thirtyTwo, top: Dimens.nine, bottom: Dimens.eleven),
+                    ).marginOnly(right: Dimens.thirtyTwo),
                   ),
                 ),
               ],
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: GetResponsiveFlex.twoAndOne(context),
             child: Align(
               alignment: Alignment.centerRight,
               child: Obx(
@@ -116,8 +120,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                         },
                         child: Container(
                           margin: EdgeInsets.only(right: Dimens.ten),
-                          height: Dimens.fortyThree,
-                          width: Dimens.seventyThree,
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.twenty, vertical: Dimens.seven),
                           decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
                           alignment: Alignment.center,
                           child: Container(
@@ -158,8 +161,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                         },
                         child: Container(
                           margin: EdgeInsets.only(left: Dimens.ten),
-                          height: Dimens.fortyThree,
-                          width: Dimens.seventyThree,
+                          padding: EdgeInsets.only(left: Dimens.twenty, right: Dimens.twenty, top: Dimens.seven, bottom: Dimens.eight),
                           decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
                           alignment: Alignment.center,
                           child: Container(

@@ -11,6 +11,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../utility/responsive.dart';
 
 class ManagePositionsAppbar extends StatelessWidget {
   ManagePositionsAppbar({super.key});
@@ -20,8 +21,11 @@ class ManagePositionsAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
-      padding: EdgeInsets.only(right: Dimens.sevenTeen),
+      padding: EdgeInsets.only(
+        right: Dimens.twenty,
+        top: GetResponsiveDimens.fiveAndNine(context),
+        bottom: GetResponsiveDimens.fourAndSeven(context),
+      ),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,
       child: Row(
@@ -40,18 +44,18 @@ class ManagePositionsAppbar extends StatelessWidget {
                       Get.back();
                     },
                     child: CommonWidgets.fromSvg(svgAsset: SvgAssets.backIconOutlined),
-                  ).marginOnly(left: Dimens.twentyFour, right: Dimens.twentyNine),
+                  ).marginOnly(left: Dimens.twentyFour, right: Dimens.thirty),
                 ),
-                Flexible(
-                  child: Text(
-                    StringValues.managePosition.tr,
-                    style: AppStyles.style18Bold,
-                  ),
+                Text(
+                  StringValues.managePosition.tr,
+                  style: AppStyles.style16Bold,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
-          const Spacer(),
+          // const Spacer(),
           Expanded(
             flex: 2,
             child: Obx(
@@ -67,7 +71,7 @@ class ManagePositionsAppbar extends StatelessWidget {
                 dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                 buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                 dropDownIconSize: Size(Dimens.ten, Dimens.ten),
-              ).marginOnly(right: Dimens.fiftyTwo, top: Dimens.ten, bottom: Dimens.ten),
+              ).marginOnly(right: Dimens.forty),
             ),
           ),
           Expanded(
@@ -82,27 +86,25 @@ class ManagePositionsAppbar extends StatelessWidget {
                       controller: TextEditingController(),
                       fillColor: ColorValues.textFieldLightGrayColor.withOpacity(0.50),
                       hintText: StringValues.searchPositionName.tr,
-                      borderRadius: BorderRadius.circular(Dimens.eight),
+                      borderRadius: BorderRadius.circular(Dimens.seven),
                       borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-                      contentPadding: EdgeInsets.symmetric(vertical: Dimens.six, horizontal: Dimens.nineteen),
+                      contentPadding: EdgeInsets.only(top: Dimens.seven, bottom: Dimens.seven, right: Dimens.nineteen, left: Dimens.twentyEight),
                       textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
                       cursorColor: ColorValues.blackColor,
                       maxLines: 1,
-                    ).marginOnly(top: Dimens.ten, bottom: Dimens.ten),
+                    ),
                   ),
                   InkWell(
                     onTap: () {
                       Get.toNamed(AppRoutes.createNewPosition);
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: Dimens.twentyNine),
-                      height: Dimens.fortyThree,
-                      width: Dimens.seventyThree,
-                      decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+                      margin: EdgeInsets.only(left: Dimens.twentyFive),
+                      padding: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.twentyFour),
+                      decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.ten)),
                       alignment: Alignment.center,
                       child: Container(
-                        height: Dimens.thirty,
-                        width: Dimens.thirty,
+                        padding: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.nine),
                         decoration: BoxDecoration(
                           color: ColorValues.whiteColor,
                           shape: BoxShape.circle,

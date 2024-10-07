@@ -15,7 +15,6 @@ class ManagePositionDetailAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
       padding: EdgeInsets.only(right: Dimens.sevenTeen),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,

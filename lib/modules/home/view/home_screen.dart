@@ -71,10 +71,10 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   StringValues.newStudy.tr,
                   style: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.eighteen),
+                ).marginOnly(left: Dimens.twenty),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.fourteen),
           InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.manageStudies);
@@ -99,10 +99,10 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   StringValues.managePosition.tr,
                   style: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.thirteen),
+                ).marginOnly(left: Dimens.fifteen),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven, right: Responsive.isMobile(context) ? Dimens.sixty : Dimens.forty),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.nine, right: Responsive.isMobile(context) ? Dimens.sixty : Dimens.forty),
           GestureDetector(
             onTap: () {
               Get.offAllNamed(AppRoutes.login);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/common/custom_primary_button.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';
@@ -8,7 +9,6 @@ import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
-import '../../../routes/app_pages.dart';
 
 class EndStudySummaryScreenAppbar extends StatelessWidget {
   final String time;
@@ -27,9 +27,15 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
-      padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.six, bottom: Dimens.three, right: Dimens.eight),
+      padding: EdgeInsets.only(
+        left: Dimens.fourteen,
+        top: GetResponsiveDimens.eightAndSix(context),
+        bottom: GetResponsiveDimens.sixAndThree(context),
+        right: GetResponsiveDimens.tenAndEight(context),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,12 +58,11 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
           const Spacer(),
           if (isShowEndButton)
             CustomPrimaryButton(
-              buttonWidth: Dimens.oneHundredFortyOne,
+              buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
               btnText: StringValues.end.tr,
-              buttonHeight: Dimens.fortyOne,
               contentPadding: EdgeInsets.zero,
-              btnTextStyle: AppStyles.style18Normal.copyWith(color: ColorValues.whiteColor),
-              borderRadius: BorderRadius.circular(Dimens.eight),
+              btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
               onTap: () => onEndButtonTap(),
             ),
         ],

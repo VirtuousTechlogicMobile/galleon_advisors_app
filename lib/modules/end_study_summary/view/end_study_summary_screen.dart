@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/controller/end_study_summary_controller.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
@@ -32,7 +32,7 @@ class EndStudySummaryScreen extends StatelessWidget {
               time: '(03:11:42)',
               programName: 'Test',
               onEndButtonTap: () {
-                Get.toNamed(AppRoutes.study);
+                Get.offAllNamed(AppRoutes.study);
               },
               isShowEndButton: studyId.isNotEmpty,
             ),
@@ -46,7 +46,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                       children: [
                         serviceVsOppLayout(),
                         Expanded(
-                          child: chartLayout(),
+                          child: chartLayout(context),
                         ),
                       ],
                     ),
@@ -58,18 +58,18 @@ class EndStudySummaryScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          flex: 1,
-                          child: keyThemesLayout(),
+                          flex: GetResponsiveFlex.threeAndOne(context),
+                          child: keyThemesLayout(context),
                         ),
                         Expanded(
-                          flex: 2,
+                          flex: GetResponsiveFlex.fourAndTwo(context),
                           child: serviceActivitiesLayout(),
                         ),
                       ],
                     ).marginOnly(left: Dimens.thirteen),
                   ),
                 ],
-              ).paddingOnly(bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.sixTeen),
+              ).paddingOnly(bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.sixTeen),
             ),
           ],
         ),
@@ -151,9 +151,9 @@ class EndStudySummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget keyThemesLayout() {
+  Widget keyThemesLayout(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nineteen),
+      margin: EdgeInsets.only(top: Dimens.twenty, bottom: GetResponsiveDimens.eightAndZero(context)),
       decoration: BoxDecoration(
         color: ColorValues.whiteColor,
         boxShadow: [
@@ -208,6 +208,7 @@ class EndStudySummaryScreen extends StatelessWidget {
 
   Widget serviceActivitiesLayout() {
     return Container(
+      margin: EdgeInsets.only(top: Dimens.nineteen),
       decoration: BoxDecoration(
         color: ColorValues.softWhiteColor,
         border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
@@ -263,6 +264,8 @@ class EndStudySummaryScreen extends StatelessWidget {
                                 style: AppStyles.style14Normal.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
@@ -279,6 +282,8 @@ class EndStudySummaryScreen extends StatelessWidget {
                                 style: AppStyles.style14Normal.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
@@ -295,6 +300,8 @@ class EndStudySummaryScreen extends StatelessWidget {
                                 style: AppStyles.style14Normal.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
@@ -311,6 +318,8 @@ class EndStudySummaryScreen extends StatelessWidget {
                                 style: AppStyles.style14Normal.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
@@ -445,7 +454,7 @@ class EndStudySummaryScreen extends StatelessWidget {
     ).marginOnly(bottom: Dimens.ten);
   }
 
-  Widget chartLayout() {
+  Widget chartLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.sixTeen),
       decoration: BoxDecoration(
@@ -554,16 +563,16 @@ class EndStudySummaryScreen extends StatelessWidget {
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 40,
+                      reservedSize: 46,
                       interval: 1000,
-                      getTitlesWidget: (value, _) => Text('${value.toInt()}'),
+                      getTitlesWidget: (value, _) => Text('${value.toInt()}').marginOnly(left: Dimens.eight),
                     ),
                   ),
                   topTitles: const AxisTitles(),
                   rightTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: Dimens.fortySix,
+                      reservedSize: GetResponsiveDimens.eightyAndFortySix(context),
                       interval: 1000,
                       getTitlesWidget: (value, _) {
                         return Text(

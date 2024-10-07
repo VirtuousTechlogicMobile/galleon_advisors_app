@@ -9,6 +9,7 @@ import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
 import 'package:galleon_advisors_app/modules/manage_studies/controller/manage_studies_controller.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';
@@ -64,17 +65,17 @@ class ManageStudiesScreen extends StatelessWidget {
                                 children: [
                                   CustomCheckbox(
                                     isChecked: manageStudiesController.getTotalUnStartedStudyCount(index) == manageStudiesController.selectedStudyCheckBoxIndex.length,
-                                    checkBoxWidth: Dimens.twentyThree,
-                                    checkBoxHeight: Dimens.twentyFour,
-                                    paddingBetween: Dimens.eight,
+                                    checkBoxWidth: GetResponsiveDimens.fiftyTwoAndTwentyThree(context),
+                                    checkBoxHeight: GetResponsiveDimens.fiftyFiveAndTwentyThree(context),
+                                    paddingBetween: GetResponsiveDimens.tenAndEight(context),
                                     child: Text(
                                       'Select All',
-                                      style: AppStyles.style18Bold.copyWith(color: ColorValues.blackColor),
+                                      style: GetResponsiveFontStyle.getStyle20And18Bold(context).copyWith(color: ColorValues.blackColor),
                                     ),
                                     onValueChange: (value) {
                                       manageStudiesController.onSelectedAll(index);
                                     },
-                                  ).marginOnly(bottom: Dimens.eighteen),
+                                  ).marginOnly(bottom: Dimens.twenty, top: Dimens.five),
                                   ...List.generate(
                                     manageStudiesController.studyData[index].studyData.length,
                                     (studyIndex) {
@@ -86,7 +87,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                               isShowCheckBox: manageStudiesController.studyData[index].studyData[studyIndex].isStart != true,
                                               isChecked:
                                                   manageStudiesController.selectedStudyCheckBoxIndex.contains(manageStudiesController.studyData[index].studyData[studyIndex]),
-                                              paddingBetween: Dimens.nine,
+                                              paddingBetween: GetResponsiveDimens.elevenAndNine(context),
                                               // switch between text field and text for rename
                                               child: manageStudiesController.renameStudyById.value == manageStudiesController.studyData[index].studyData[studyIndex].studyId
                                                   ? SizedBox(
@@ -95,10 +96,10 @@ class ManageStudiesScreen extends StatelessWidget {
                                                         controller: manageStudiesController.renameStudyController,
                                                         maxLines: 1,
                                                         contentPadding: EdgeInsets.symmetric(
-                                                          vertical: Dimens.eight,
+                                                          vertical: GetResponsiveDimens.tenAndEight(context),
                                                           horizontal: Dimens.fourteen,
                                                         ),
-                                                        borderRadius: BorderRadius.circular(Dimens.eight),
+                                                        borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                                                         fillColor: ColorValues.softGrayColor.withOpacity(0.40),
                                                         textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
                                                         borderSide: BorderSide(color: ColorValues.lightGrayColor, width: Dimens.one),
@@ -127,7 +128,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                                       },
                                                       child: Text(
                                                         manageStudiesController.studyData[index].studyData[studyIndex].studyName,
-                                                        style: AppStyles.style18Normal.copyWith(color: ColorValues.darkSlateGrayColor),
+                                                        style: GetResponsiveFontStyle.getStyle20And18Normal(context).copyWith(color: ColorValues.darkSlateGrayColor),
                                                       ),
                                                     ),
                                               onValueChange: (value) {
@@ -140,13 +141,13 @@ class ManageStudiesScreen extends StatelessWidget {
                                             ),
                                           ),
                                           const Spacer(),
-                                          viewButton(isStudyStart: manageStudiesController.studyData[index].studyData[studyIndex].isStart),
+                                          viewButton(isStudyStart: manageStudiesController.studyData[index].studyData[studyIndex].isStart, context: context),
                                         ],
                                       ).marginOnly(
                                         bottom: studyIndex != (manageStudiesController.studyData[index].studyData.length - 1) ? Dimens.ten : Dimens.zero,
                                       );
                                     },
-                                  )
+                                  ),
                                 ],
                               ).marginOnly(bottom: Dimens.eleven),
                             );
@@ -164,22 +165,21 @@ class ManageStudiesScreen extends StatelessWidget {
     );
   }
 
-  Widget viewButton({required bool isStudyStart}) {
+  Widget viewButton({required bool isStudyStart, required BuildContext context}) {
     return !isStudyStart
         ? CustomPrimaryButton(
             btnText: StringValues.view.tr,
-            borderRadius: BorderRadius.circular(Dimens.eight),
-            contentPadding: EdgeInsets.zero,
-            buttonHeight: Dimens.thirtySix,
+            borderRadius: BorderRadius.circular(Dimens.eleven),
+            contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
+            buttonWidth: GetResponsiveDimens.threeHundredFiftyAndOneHundredFifty(context),
             btnTextStyle: AppStyles.style16Bold.copyWith(color: ColorValues.whiteColor),
-            buttonWidth: Dimens.oneHundredFifty,
             buttonColor: ColorValues.primaryGreenColor,
             onTap: () {
               Get.toNamed(AppRoutes.endStudySummary, parameters: {'studyId': ''});
             },
           )
         : SizedBox(
-            width: Dimens.oneHundredFifty,
+            width: GetResponsiveDimens.threeHundredFiftyAndOneHundredFifty(context),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,14 +189,14 @@ class ManageStudiesScreen extends StatelessWidget {
                     onTap: () {
                       Get.toNamed(AppRoutes.study);
                     },
-                    child: CommonWidgets.fromSvg(svgAsset: SvgAssets.studyRunningIcon, height: Dimens.thirtySix, width: Dimens.thirtyFour, boxFit: BoxFit.fill)),
+                    child: CommonWidgets.fromSvg(svgAsset: SvgAssets.studyRunningIcon, /*height: Dimens.thirtySix, width: Dimens.thirtyFour, */ boxFit: BoxFit.fill)),
                 Expanded(
                   child: CustomPrimaryButton(
                     margin: EdgeInsets.only(left: Dimens.five),
                     btnText: StringValues.view.tr,
-                    borderRadius: BorderRadius.circular(Dimens.eight),
-                    contentPadding: EdgeInsets.only(left: Dimens.fifteen),
-                    buttonHeight: Dimens.thirtySix,
+                    borderRadius: BorderRadius.circular(Dimens.eleven),
+                    contentPadding: EdgeInsets.only(top: Dimens.twelve, bottom: Dimens.twelve, left: Dimens.fifteen),
+                    // buttonHeight: Dimens.thirtySix,
                     btnTextStyle: AppStyles.style16Bold.copyWith(color: ColorValues.whiteColor),
                     buttonColor: ColorValues.primaryGreenColor,
                     textAlignment: Alignment.centerLeft,

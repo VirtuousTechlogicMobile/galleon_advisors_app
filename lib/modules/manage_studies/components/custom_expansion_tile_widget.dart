@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';
@@ -30,13 +31,14 @@ class CustomExpansionTileWidget extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: Dimens.three, vertical: Dimens.four),
             decoration: BoxDecoration(
               color: ColorValues.whiteColor,
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(Dimens.eight), bottomRight: Radius.circular(Dimens.eight)),
+              borderRadius:
+                  BorderRadius.only(bottomLeft: Radius.circular(GetResponsiveDimens.tenAndEight(context)), bottomRight: Radius.circular(GetResponsiveDimens.tenAndEight(context))),
             ),
             child: isExpanded
                 ? Column(
                     children: children ?? [],
                   ).paddingOnly(
-                    top: padding?.top ?? Dimens.eighteen,
+                    top: padding?.top ?? GetResponsiveDimens.eightyAndEighteen(context),
                     left: padding?.left ?? Dimens.sixTeen,
                     bottom: padding?.bottom ?? Dimens.sixTeen,
                     right: padding?.right ?? Dimens.twentyTwo,
@@ -47,12 +49,12 @@ class CustomExpansionTileWidget extends StatelessWidget {
         InkWell(
           onTap: () => onTap(),
           child: Container(
-            height: Dimens.fiftyOne,
+            height: GetResponsiveDimens.hundredTenAndFiftyOne(context),
             padding: EdgeInsets.only(left: Dimens.fifteen, right: Dimens.twenty),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: ColorValues.whiteColor,
-              borderRadius: BorderRadius.circular(Dimens.eight),
+              borderRadius: BorderRadius.circular(Dimens.ten),
               boxShadow: [
                 if (isExpanded)
                   BoxShadow(
@@ -74,16 +76,14 @@ class CustomExpansionTileWidget extends StatelessWidget {
                 if (isShowGreenDot)
                   Container(
                     margin: EdgeInsets.only(left: Dimens.fifteen),
-                    width: Dimens.eighteen,
-                    height: Dimens.eighteen,
+                    width: GetResponsiveDimens.thirtySixAndEighteen(context),
+                    height: GetResponsiveDimens.thirtySixAndEighteen(context),
                     decoration: const BoxDecoration(color: ColorValues.primaryGreenColor, shape: BoxShape.circle),
                   ),
                 const Spacer(),
                 if (isExpanded)
                   CommonWidgets.fromSvg(
                     svgAsset: SvgAssets.downArrowIcon,
-                    height: Dimens.eight,
-                    width: Dimens.eight,
                     boxFit: BoxFit.fill,
                   ),
               ],

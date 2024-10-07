@@ -39,7 +39,7 @@ class ListWheelScrollPicker extends StatelessWidget {
                 builder: (context, index) {
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: Dimens.eight),
-                    margin: EdgeInsets.only(top: GetResponsiveDimens.eightAndZero(context)),
+                    margin: const EdgeInsets.only(top: 15),
                     color: ColorValues.softWhiteColor,
                     width: double.infinity,
                     alignment: Alignment.center,
