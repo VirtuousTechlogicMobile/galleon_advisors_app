@@ -108,7 +108,7 @@ class ManageStudiesDialogs {
     required Function() whenComplete,
   }) {
     Get.dialog(
-      barrierColor: ColorValues.darkSlateGrayColor,
+      barrierColor: ColorValues.transparent,
       Align(
         alignment: Alignment.center,
         child: SizedBox(

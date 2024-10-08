@@ -3,6 +3,7 @@ import 'package:galleon_advisors_app/common/custom_primary_button.dart';
 import 'package:galleon_advisors_app/constant/strings.dart';
 import 'package:galleon_advisors_app/modules/create_new_position/components/create_new_position_appbar.dart';
 import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_advisors_app/utility/responsive.dart';
 import 'package:get/get.dart';
 import '../../../common/custom_textfield.dart';
 import '../../../constant/colors.dart';
@@ -29,26 +30,28 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
             const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.six, left: Dimens.fourteen, right: Dimens.fifteen),
+                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
                 padding: EdgeInsets.only(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: ColorValues.whiteColor,
                   borderRadius: BorderRadius.circular(Dimens.sixTeen),
                 ),
-                child: serviceFlagsLayout(),
+                child: serviceFlagsLayout(context),
               ),
             ),
+            // bottom bar
             Container(
+              height: 70,
               alignment: Alignment.centerRight,
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
-                buttonHeight: Dimens.fiftySix,
-                buttonWidth: Dimens.twoHundredEighteen,
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                 btnText: StringValues.next.tr,
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                 btnTextColor: ColorValues.whiteColor,
                 margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(Dimens.eight),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                 onTap: () {
@@ -62,18 +65,18 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceFlagsLayout() {
+  Widget serviceFlagsLayout(BuildContext context) {
     return Container(
-      width: Dimens.screenWidth / 2,
-      height: Dimens.screenWidth / 3.5,
+      width: Dimens.screenWidth / 1.8,
+      height: Responsive.isMobile(context) ? null : Dimens.screenWidth / 3.5,
       alignment: Alignment.center,
       margin: EdgeInsets.only(right: Dimens.fourPointFive, bottom: Dimens.nineteen),
       padding: EdgeInsets.only(top: Dimens.eight),
       decoration: BoxDecoration(
         color: ColorValues.primaryGreenColor.withOpacity(0.25),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(Dimens.eight),
-          topRight: Radius.circular(Dimens.eight),
+          topLeft: Radius.circular(Dimens.seven),
+          topRight: Radius.circular(Dimens.seven),
         ),
       ),
       child: Column(
@@ -98,13 +101,12 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
                 replacement: CustomTextField(
                   controller: createPositionAddOppFlagController.oppFlagController,
                   fillColor: ColorValues.softWhiteColor,
-                  textFieldHeight: Dimens.thirtyFive,
                   hintText: StringValues.typeName.tr,
                   borderRadius: BorderRadius.circular(Dimens.eight),
                   autofocus: true,
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-                  contentPadding: EdgeInsets.only(top: Dimens.seven, bottom: Dimens.nine, left: Dimens.sixTeen, right: Dimens.twelve),
+                  contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
                   textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
@@ -122,16 +124,15 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
           Expanded(
             child: Obx(
               () => ListView.builder(
-                padding: EdgeInsets.only(left: Dimens.thirteen, right: Dimens.thirteen, bottom: Dimens.twentyThree),
+                padding: EdgeInsets.only(left: Dimens.fifteen, right: Dimens.fifteen, bottom: Dimens.twentyThree),
                 shrinkWrap: true,
                 itemCount: createPositionAddOppFlagController.opportunityFlagList.length,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.only(bottom: Dimens.five),
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.sevenTeen),
-                    height: Dimens.thirtySeven,
-                    decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.nineteen, vertical: Dimens.eleven),
+                    decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.seven)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,11 +169,10 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: Dimens.five, left: Dimens.thirteen),
+          margin: EdgeInsets.only(bottom: Dimens.five, left: Dimens.fifteen),
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: Dimens.eleven),
-          height: Dimens.thirtySeven,
-          decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+          padding: EdgeInsets.symmetric(horizontal: Dimens.eighteen, vertical: Dimens.eleven),
+          decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.seven)),
           child: Text(
             "${StringValues.add.tr} +",
             maxLines: 1,

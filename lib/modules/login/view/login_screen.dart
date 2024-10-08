@@ -119,9 +119,14 @@ class LoginScreen extends StatelessWidget {
                                           }
                                         },
                                       ),
-                                      Text(
-                                        StringValues.forgotPassword.tr,
-                                        style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.toNamed(AppRoutes.forgotPassword);
+                                        },
+                                        child: Text(
+                                          StringValues.forgotPassword.tr,
+                                          style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+                                        ),
                                       )
                                     ],
                                   );

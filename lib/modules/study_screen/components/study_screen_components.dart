@@ -49,7 +49,7 @@ class StudyScreenComponents {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimens.fifty)),
             elevation: 0,
             content: Container(
-              padding: EdgeInsets.only(bottom: Dimens.twentyFour, top: Dimens.twentyFour, left: Dimens.twentyEight, right: Dimens.twentyEight),
+              padding: EdgeInsets.only(bottom: Dimens.twenty, top: Dimens.twentyFour, left: Dimens.twentyEight, right: Dimens.twentyEight),
               width: GetResponsiveDimens.widthDivTwoAndOnePointFive(context),
               decoration: BoxDecoration(
                 border: Border.all(color: ColorValues.primaryGreenColor, width: Dimens.two),
@@ -85,7 +85,7 @@ class StudyScreenComponents {
                           btnText: StringValues.cancel.tr,
                           border: Border.all(color: ColorValues.primaryGreenColor, width: Dimens.three),
                           buttonColor: ColorValues.whiteColor,
-                          contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.fourteenAndFifteen(context)),
+                          contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.thirteenAndFifteen(context)),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
                           buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredSixty(context),
                           btnTextStyle: const TextStyle(fontSize: 17, color: ColorValues.primaryGreenColor, fontWeight: FontWeight.w700),
@@ -97,7 +97,8 @@ class StudyScreenComponents {
                         CustomPrimaryButton(
                           btnText: StringValues.complete.tr,
                           buttonColor: ColorValues.primaryGreenColor,
-                          contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
+                          border: Border.all(color: ColorValues.primaryGreenColor, width: Dimens.three),
+                          contentPadding: EdgeInsets.symmetric(vertical: Dimens.thirteen),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
                           buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredSixty(context),
                           btnTextStyle: const TextStyle(fontSize: 17, color: ColorValues.whiteColor, fontWeight: FontWeight.w700),
@@ -105,7 +106,7 @@ class StudyScreenComponents {
                           onTap: () => onCompleteButtonTapped(),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

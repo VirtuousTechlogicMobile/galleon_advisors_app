@@ -67,7 +67,6 @@ class ManagePositionsAppbar extends StatelessWidget {
                 },
                 selectedItem: managePositionsController.selectedDept.value,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                isButtonTxtAlignEnd: true,
                 dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                 buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                 dropDownIconSize: Size(Dimens.ten, Dimens.ten),

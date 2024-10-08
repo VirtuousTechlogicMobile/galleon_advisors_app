@@ -29,4 +29,5 @@ abstract class SvgAssets {
   static const uploadRoundedIcon = 'assets/svgs/upload_rounded_icon.svg';
   static const deleteRoundedIcon = 'assets/svgs/delete_rounded_icon.svg';
   static const downloadIcon = 'assets/svgs/download_icon.svg';
+  static const bottomBarAddIcon = 'assets/svgs/bottombar_add_icon.svg';
 }

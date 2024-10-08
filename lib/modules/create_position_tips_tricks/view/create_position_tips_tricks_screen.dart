@@ -9,6 +9,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utility/responsive.dart';
 
 class CreatePositionTipsTricksScreen extends StatelessWidget {
   CreatePositionTipsTricksScreen({super.key});
@@ -30,7 +31,7 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 width: Dimens.screenWidth,
-                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.six, left: Dimens.fourteen, right: Dimens.fifteen),
+                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
                 padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
                 decoration: BoxDecoration(
                   color: ColorValues.whiteColor,
@@ -39,16 +40,18 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
                 child: tipsAndTricksLayout(),
               ),
             ),
+            // bottom bar
             Container(
+              height: 70,
               alignment: Alignment.centerRight,
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
-                buttonHeight: Dimens.fiftySix,
-                buttonWidth: Dimens.twoHundredEighteen,
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                 btnText: StringValues.create.tr,
                 btnTextColor: ColorValues.whiteColor,
                 margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(Dimens.eight),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                 onTap: () {
@@ -63,8 +66,7 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
   }
 
   Widget tipsAndTricksLayout() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
         Text(
           StringValues.tipsAndTricks.tr,
@@ -85,39 +87,29 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
             ),
           ),
         ], minFontSize: 12, maxFontSize: 16),
-        Flexible(
-          child: Text(
-            "- ${StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr}",
-            style: AppStyles.style16Normal,
-          ),
+        Text(
+          "- ${StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr}",
+          style: AppStyles.style16Normal,
         ),
-        Flexible(
-          child: Text(
-            "- ${StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr}",
-            style: AppStyles.style16Normal,
-          ),
+        Text(
+          "- ${StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr}",
+          style: AppStyles.style16Normal,
         ),
         Text(
           StringValues.processOpportunities.tr,
           style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
         ).marginOnly(top: Dimens.fifteen),
-        Flexible(
-          child: Text(
-            "- ${StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr}",
-            style: AppStyles.style16Normal,
-          ),
+        Text(
+          "- ${StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr}",
+          style: AppStyles.style16Normal,
         ),
-        Flexible(
-          child: Text(
-            "- ${StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr}",
-            style: AppStyles.style16Normal,
-          ),
+        Text(
+          "- ${StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr}",
+          style: AppStyles.style16Normal,
         ),
-        Flexible(
-          child: Text(
-            "- ${StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr}",
-            style: AppStyles.style16Normal,
-          ),
+        Text(
+          "- ${StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr}",
+          style: AppStyles.style16Normal,
         ),
       ],
     );

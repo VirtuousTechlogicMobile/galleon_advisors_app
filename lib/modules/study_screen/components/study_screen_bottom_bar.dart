@@ -38,7 +38,7 @@ class StudyScreenBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: Responsive.isMobile(context) ? 70 : Dimens.seventy,
+      height: 70,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(
           top: GetResponsiveDimens.tenAndEight(context),
@@ -69,17 +69,18 @@ class StudyScreenBottomBar extends StatelessWidget {
                       onTap: () => onTapActivitiesButton(),
                     ),
                   ),
-                  Flexible(
+                  Expanded(
                     flex: 1,
                     child: GestureDetector(
                       onTap: () => onTapAddButton(),
                       child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 9.5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                           color: ColorValues.softGrayColor,
                         ),
                         child: Container(
-                          margin: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.twentyFive),
+                          padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 7),
                           decoration: BoxDecoration(
                             color: ColorValues.whiteColor,
                             shape: BoxShape.circle,
@@ -92,7 +93,7 @@ class StudyScreenBottomBar extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon, margin: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.eleven)),
+                          child: CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
                         ),
                       ),
                     ),
@@ -133,8 +134,7 @@ class StudyScreenBottomBar extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 btnText: StringValues.keyBackSlashNThemes.tr,
                 borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                btnTextStyle: GetResponsiveFontStyle.getStyle20And18Normal(context)
-                    .copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.darkSlateGrayColor),
+                btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.darkSlateGrayColor),
                 btnTextMaxLines: 2,
                 buttonColor: studyController.selectedTab.value == 'keyThemes' ? ColorValues.darkSlateGrayColor : ColorValues.lightGrayColor.withOpacity(0.80),
                 onTap: () => onTapKeyThemesButton(),

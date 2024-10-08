@@ -15,7 +15,7 @@ class CreateNewPositionAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Dimens.fifty,
+      height: 50,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),

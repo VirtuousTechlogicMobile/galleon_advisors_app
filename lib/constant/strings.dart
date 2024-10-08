@@ -3,6 +3,7 @@ abstract class StringValues {
   static const email = 'email';
   static const password = 'password';
   static const logIn = 'log_in';
+  static const resetPassword = 'reset_password';
   static const forgotPassword = 'forgot_password';
   static const newStudy = 'new_study';
   static const manageStudies = 'manage_studies';
@@ -67,4 +68,6 @@ abstract class StringValues {
   static const template = 'template';
   static const next = 'next';
   static const add = 'add';
+  static const pleaseSelectDepartment = 'please_select_department';
+  static const pleaseEnterName = 'please_enter_name';
 }

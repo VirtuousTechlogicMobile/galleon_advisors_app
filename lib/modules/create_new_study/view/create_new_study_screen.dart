@@ -87,7 +87,6 @@ class CreateNewStudyScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
-                // buttonHeight: Dimens.fiftySix,
                 buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                 btnText: StringValues.create.tr,
                 margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),

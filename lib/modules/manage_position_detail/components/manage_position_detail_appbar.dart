@@ -5,6 +5,7 @@ import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../utility/responsive.dart';
 import '../controller/manage_position_detail_controller.dart';
 
 class ManagePositionDetailAppbar extends StatelessWidget {
@@ -15,7 +16,12 @@ class ManagePositionDetailAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: Dimens.sevenTeen),
+      height: 50,
+      padding: EdgeInsets.only(
+        right: Dimens.twenty,
+        top: GetResponsiveDimens.fiveAndNine(context),
+        bottom: GetResponsiveDimens.fourAndSeven(context),
+      ),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,
       child: Row(
@@ -33,22 +39,20 @@ class ManagePositionDetailAppbar extends StatelessWidget {
             child: CommonWidgets.fromSvg(svgAsset: SvgAssets.backIconOutlined),
           ).marginOnly(left: Dimens.twentyFour, right: Dimens.twentyNine),
           Expanded(
-            child: Obx(
-              () => Text(
-                managePositionDetailController.positionData.value?.positionName ?? '',
-                style: AppStyles.style18Bold,
-              ),
+            child: Text(
+              managePositionDetailController.positionData.value?.positionName ?? '',
+              style: AppStyles.style16Bold,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Container(
             margin: EdgeInsets.only(left: Dimens.twentyNine),
-            height: Dimens.fortyThree,
-            width: Dimens.seventyThree,
-            decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+            padding: EdgeInsets.symmetric(vertical: Dimens.seven, horizontal: Dimens.twenty),
+            decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.ten)),
             alignment: Alignment.center,
             child: Container(
-              height: Dimens.thirty,
-              width: Dimens.thirty,
+              padding: EdgeInsets.symmetric(vertical: Dimens.six, horizontal: Dimens.eleven),
               decoration: BoxDecoration(
                 color: ColorValues.whiteColor,
                 shape: BoxShape.circle,

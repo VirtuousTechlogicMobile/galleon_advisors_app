@@ -4,9 +4,9 @@ import 'package:galleon_advisors_app/constant/styles.dart';
 import '../constant/dimens.dart';
 
 class Responsive {
-  static bool isMobile(BuildContext context) => MediaQuery.of(context).size.width < 850;
+  static bool isMobile(BuildContext context) => MediaQuery.of(context).size.width < 900 /*850*/;
 
-  static bool isTablet(BuildContext context) => MediaQuery.of(context).size.width < 1100 && MediaQuery.of(context).size.width >= 850;
+  static bool isTablet(BuildContext context) => MediaQuery.of(context).size.width < 1100 && MediaQuery.of(context).size.width >= 900 /*850*/;
 
   static bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 1100;
 }
@@ -43,13 +43,14 @@ class GetResponsiveDimens {
   static double fortyThreeAndSeventy(BuildContext context) => Responsive.isMobile(context) ? Dimens.seventy : Dimens.fortyThree;
   static double thirtyTwoAndThirtyThree(BuildContext context) => Responsive.isMobile(context) ? Dimens.thirtyTwo : Dimens.thirtyThree;
   static double sixtyAndThirtyFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.sixty : Dimens.thirtyFive;
+  static double eightyAndThirtyFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.eighty : Dimens.thirtyFive;
   static double seventyFiveAndOneHundredFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.oneHundredFifty : Dimens.seventyFive;
   static double threeHundredFiftyAndOneHundredFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.threeHundredFifty : Dimens.oneHundredFifty;
   static double twentyNineAndFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.fifty : Dimens.twentyNine;
   static double eightyAndFortySix(BuildContext context) => Responsive.isMobile(context) ? Dimens.eighty : Dimens.fortySix;
   static double sixAndFour(BuildContext context) => Responsive.isMobile(context) ? Dimens.six : Dimens.four;
   static double ninetyAndSixty(BuildContext context) => Responsive.isMobile(context) ? Dimens.ninetyFive : Dimens.sixty;
-  static double fourteenAndFifteen(BuildContext context) => Responsive.isMobile(context) ? Dimens.fourteen : Dimens.fifteen;
+  static double thirteenAndFifteen(BuildContext context) => Responsive.isMobile(context) ? Dimens.thirteen : Dimens.fifteen;
   static double twentyAndSevenTeen(BuildContext context) => Responsive.isMobile(context) ? Dimens.twenty : Dimens.sevenTeen;
   static double hundredTenAndFiftyOne(BuildContext context) => Responsive.isMobile(context) ? Dimens.oneHundredTen : Dimens.fiftyOne;
   static double twentyFiveAndTwentyOne(BuildContext context) => Responsive.isMobile(context) ? Dimens.twentyFive : Dimens.twentyOne;
@@ -63,6 +64,8 @@ class GetResponsiveDimens {
   static double widthDivThreeAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 3.5 : Dimens.twoHundredForty;
   static double widthDivFourAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 4 : Dimens.twoHundredForty;
   static double widthDivTwoAndOnePointFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 1.5 : Dimens.screenWidth / 2;
+  static double widthDivTwoAndTwoPointEight(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 2 : Dimens.screenWidth / 2.8;
+  static double widthDivTwoPointFiveAndThreePointThree(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenWidth / 2.5 : Dimens.screenWidth / 3.3;
 }
 
 class GetResponsiveFlex {

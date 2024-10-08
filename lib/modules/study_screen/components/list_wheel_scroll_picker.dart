@@ -23,13 +23,15 @@ class ListWheelScrollPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        double availableHeight = constraints.maxHeight;
+        double itemExtent = availableHeight / 5;
         return Stack(
           alignment: Alignment.center,
           children: [
             ListWheelScrollView.useDelegate(
               controller: FixedExtentScrollController(initialItem: selectedIndex),
               physics: isScroll ? const FixedExtentScrollPhysics() : const NeverScrollableScrollPhysics(),
-              itemExtent: GetResponsiveDimens.eightyAndSixty(context),
+              itemExtent: itemExtent /*GetResponsiveDimens.eightyAndSixty(context)*/,
               diameterRatio: 100,
               onSelectedItemChanged: (index) {
                 // Use modulo to loop around the index for infinite scrolling
@@ -39,7 +41,6 @@ class ListWheelScrollPicker extends StatelessWidget {
                 builder: (context, index) {
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: Dimens.eight),
-                    margin: const EdgeInsets.only(top: 15),
                     color: ColorValues.softWhiteColor,
                     width: double.infinity,
                     alignment: Alignment.center,

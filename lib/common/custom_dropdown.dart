@@ -17,7 +17,6 @@ class CustomDropdown extends StatefulWidget {
   final String? dropdownIcon;
   final Size? dropDownIconSize;
   final EdgeInsetsGeometry? buttonPadding;
-  final bool isButtonTxtAlignEnd;
   final BoxBorder? border;
   final double? buttonHeight;
   final TextStyle? dropDownMenuItemStyle;
@@ -32,7 +31,6 @@ class CustomDropdown extends StatefulWidget {
     this.dropDownIconSize,
     this.dropdownIcon,
     this.selectedItem,
-    this.isButtonTxtAlignEnd = false,
     this.buttonPadding,
     this.buttonHeight,
     this.dropDownMenuItemStyle,
@@ -113,7 +111,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         },
         customButton: Container(
           key: buttonKey,
-          padding: widget.buttonPadding ?? EdgeInsets.only(top: Dimens.eight, left: Dimens.fifteen, bottom: Dimens.fifteen, right: Dimens.thirteen),
+          padding: widget.buttonPadding ?? EdgeInsets.only(top: Dimens.ten, left: Dimens.fifteen, bottom: Dimens.fourteen, right: Dimens.thirteen),
           height: widget.buttonHeight,
           decoration: BoxDecoration(
             color: ColorValues.whiteColor,
@@ -123,7 +121,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: widget.isButtonTxtAlignEnd ? CrossAxisAlignment.center : CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 widget.selectedItem?.itemName ?? widget.hintText ?? '',

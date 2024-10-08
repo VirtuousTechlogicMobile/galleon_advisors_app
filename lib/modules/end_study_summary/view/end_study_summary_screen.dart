@@ -32,7 +32,7 @@ class EndStudySummaryScreen extends StatelessWidget {
               time: '(03:11:42)',
               programName: 'Test',
               onEndButtonTap: () {
-                Get.offAllNamed(AppRoutes.study);
+                Get.offNamed(AppRoutes.study);
               },
               isShowEndButton: studyId.isNotEmpty,
             ),

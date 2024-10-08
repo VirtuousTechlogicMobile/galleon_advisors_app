@@ -25,7 +25,7 @@ class StudyScreenAppbar extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: Responsive.isMobile(context)
-          ? EdgeInsets.only(left: Dimens.eighteen, top: Dimens.seven, bottom: Dimens.four, right: Dimens.twelve)
+          ? EdgeInsets.only(left: Dimens.eighteen, /*top: Dimens.seven, bottom: Dimens.five,*/ right: Dimens.twelve)
           : EdgeInsets.only(left: Dimens.fourteen, top: Dimens.six, bottom: Dimens.three, right: Dimens.eight),
       child: Obx(
         () => Row(
@@ -54,7 +54,7 @@ class StudyScreenAppbar extends StatelessWidget {
                         right: Dimens.nineteen,
                         left: Responsive.isMobile(context) ? Dimens.fifteen : Dimens.thirteen,
                         top: Responsive.isMobile(context) ? Dimens.ten : Dimens.eight,
-                        bottom: Responsive.isMobile(context) ? Dimens.seven : Dimens.nine),
+                        bottom: Responsive.isMobile(context) ? Dimens.eleven : Dimens.nine),
                     InkWell(
                       onTap: () {
                         studyController.onChangeStudyIndex();
@@ -84,7 +84,13 @@ class StudyScreenAppbar extends StatelessWidget {
                           StudyScreenComponents.stopStudyDialog(
                             context: context,
                             onCompleteButtonTapped: () {
-                              Get.toNamed(AppRoutes.endStudySummary, parameters: {'studyId': '1234'});
+                              Get.toNamed(AppRoutes.endStudySummary, parameters: {'studyId': '1234'})?.whenComplete(
+                                () {
+                                  studyController.isDialogOpen.value = false;
+                                  studyController.isStudyStarted.value = false;
+                                  studyController.studyStartTime.clear();
+                                },
+                              );
                             },
                             whenComplete: () {
                               studyController.isDialogOpen.value = false;
@@ -107,7 +113,7 @@ class StudyScreenAppbar extends StatelessWidget {
               },
               child:
                   studyController.isStudyStarted.value ? CommonWidgets.fromSvg(svgAsset: SvgAssets.studyRunningIcon) : CommonWidgets.fromSvg(svgAsset: SvgAssets.playRoundedIcon),
-            ).marginOnly(left: Dimens.fourteen),
+            ).marginOnly(left: Dimens.twelve),
           ],
         ),
       ),

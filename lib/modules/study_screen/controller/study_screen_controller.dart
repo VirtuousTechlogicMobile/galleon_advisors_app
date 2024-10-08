@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:galleon_advisors_app/routes/app_pages.dart';
 import 'package:galleon_advisors_app/utility/utility.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -188,7 +189,7 @@ class StudyScreenController extends GetxController {
       servicesTapped.value = false;
       opportunityTapped.value = false;
     } else {
-      Get.back();
+      Get.offNamed(AppRoutes.home);
     }
   }
 

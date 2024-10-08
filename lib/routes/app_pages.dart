@@ -10,6 +10,8 @@ import 'package:galleon_advisors_app/modules/create_position_tips_tricks/binding
 import 'package:galleon_advisors_app/modules/create_position_tips_tricks/view/create_position_tips_tricks_screen.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/bindings/end_study_summary_binding.dart';
 import 'package:galleon_advisors_app/modules/end_study_summary/view/end_study_summary_screen.dart';
+import 'package:galleon_advisors_app/modules/forgot_password/bindings/forgot_password_binding.dart';
+import 'package:galleon_advisors_app/modules/forgot_password/view/forgot_password_screen.dart';
 import 'package:galleon_advisors_app/modules/home/bindings/home_binding.dart';
 import 'package:galleon_advisors_app/modules/home/view/home_screen.dart';
 import 'package:galleon_advisors_app/modules/login/view/login_screen.dart';
@@ -35,6 +37,13 @@ abstract class AppPages {
       name: _Routes.login,
       page: LoginScreen.new,
       binding: LoginBinding(),
+      transitionDuration: transitionDuration,
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: _Routes.forgotPassword,
+      page: ForgotPasswordScreen.new,
+      binding: ForgotPasswordBinding(),
       transitionDuration: transitionDuration,
       transition: defaultTransition,
     ),

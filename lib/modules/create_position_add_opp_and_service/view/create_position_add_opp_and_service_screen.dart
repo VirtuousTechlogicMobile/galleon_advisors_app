@@ -9,6 +9,7 @@ import '../../../common/custom_textfield.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../utility/responsive.dart';
 import '../controller/create_position_add_opp_and_service_controller.dart';
 
 class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
             const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.six, left: Dimens.fourteen, right: Dimens.fifteen),
+                margin: EdgeInsets.only(top: Dimens.sevenTeen, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.fifteen),
                 decoration: BoxDecoration(
                   color: ColorValues.whiteColor,
                   borderRadius: BorderRadius.circular(Dimens.sixTeen),
@@ -49,16 +50,18 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                 ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
               ),
             ),
+            // bottom bar
             Container(
+              height: 70,
               alignment: Alignment.centerRight,
               color: ColorValues.whiteColor,
               child: CustomPrimaryButton(
-                buttonHeight: Dimens.fiftySix,
-                buttonWidth: Dimens.twoHundredEighteen,
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
                 btnText: StringValues.next.tr,
                 btnTextColor: ColorValues.whiteColor,
-                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(Dimens.eight),
+                margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                 onTap: () {
@@ -79,8 +82,8 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorValues.primaryGreenColor.withOpacity(0.25),
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(Dimens.eight),
-          topRight: Radius.circular(Dimens.eight),
+          topLeft: Radius.circular(Dimens.nine),
+          topRight: Radius.circular(Dimens.nine),
         ),
       ),
       child: Column(
@@ -105,13 +108,13 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                 replacement: CustomTextField(
                   controller: createPositionAddOppAndServiceController.positionNameController,
                   fillColor: ColorValues.softWhiteColor,
-                  textFieldHeight: Dimens.thirtyFive,
+                  // textFieldHeight: Dimens.thirtyFive,
                   hintText: StringValues.typeName.tr,
-                  borderRadius: BorderRadius.circular(Dimens.eight),
+                  borderRadius: BorderRadius.circular(Dimens.seven),
                   autofocus: true,
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-                  contentPadding: EdgeInsets.only(top: Dimens.seven, bottom: Dimens.nine, left: Dimens.sixTeen, right: Dimens.twelve),
+                  contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
                   textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
@@ -181,13 +184,12 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                 replacement: CustomTextField(
                   controller: createPositionAddOppAndServiceController.opportunityController,
                   fillColor: ColorValues.softWhiteColor,
-                  textFieldHeight: Dimens.thirtyFive,
                   hintText: StringValues.typeName.tr,
-                  borderRadius: BorderRadius.circular(Dimens.eight),
+                  borderRadius: BorderRadius.circular(Dimens.seven),
                   autofocus: true,
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-                  contentPadding: EdgeInsets.only(top: Dimens.seven, bottom: Dimens.nine, left: Dimens.sixTeen, right: Dimens.twelve),
+                  contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
                   textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
@@ -226,9 +228,8 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: Dimens.five),
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(horizontal: Dimens.sevenTeen),
-      height: Dimens.thirtySeven,
-      decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+      padding: EdgeInsets.symmetric(horizontal: Dimens.eighteen, vertical: Dimens.eleven),
+      decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.seven)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -260,9 +261,8 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(bottom: Dimens.five, left: Dimens.thirteen),
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: Dimens.eleven),
-          height: Dimens.thirtySeven,
-          decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.eight)),
+          padding: EdgeInsets.symmetric(horizontal: Dimens.eighteen, vertical: Dimens.eleven),
+          decoration: BoxDecoration(color: ColorValues.whiteColor, borderRadius: BorderRadius.circular(Dimens.seven)),
           child: Text(
             "${StringValues.add.tr} +",
             maxLines: 1,

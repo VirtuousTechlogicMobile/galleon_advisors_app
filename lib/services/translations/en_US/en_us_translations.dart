@@ -4,6 +4,7 @@ final Map<String, String> enUs = {
   'email': 'Email',
   'password': 'Password',
   'log_in': 'Log In',
+  'reset_password': 'Reset Password',
   'forgot_password': 'Forgot Password',
   'please_enter_valid_email': 'Please enter valid email',
   'please_enter_email': 'Please enter email',
@@ -68,5 +69,7 @@ final Map<String, String> enUs = {
   'template': 'Template',
   'next': 'Next',
   'add': 'Add',
+  'please_select_department': 'Please select department',
+  'please_enter_name': 'Please enter name',
   'Create': 'Create',
 };
