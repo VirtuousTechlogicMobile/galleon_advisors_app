@@ -2,11 +2,11 @@ import 'dart:math' as math;
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/constant/assets.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/constant/assets.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/utility/responsive.dart';
 
 import '../constant/dimens.dart';
 

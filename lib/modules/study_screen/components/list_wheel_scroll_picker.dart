@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/utility/responsive.dart';
 
 import '../../../constant/dimens.dart';
 

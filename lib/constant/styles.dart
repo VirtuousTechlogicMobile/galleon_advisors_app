@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/constant/dimens.dart';
+import 'package:galleon_user/constant/dimens.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppStyles {

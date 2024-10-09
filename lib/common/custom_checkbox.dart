@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/textfield_with_label.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
+import 'package:galleon_user/common/textfield_with_label.dart';
+import 'package:galleon_user/constant/colors.dart';
 import 'package:get/get.dart';
 
 import '../constant/dimens.dart';

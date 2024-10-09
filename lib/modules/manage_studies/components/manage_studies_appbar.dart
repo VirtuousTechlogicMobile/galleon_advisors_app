@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_dropdown.dart';
-import 'package:galleon_advisors_app/modules/manage_studies/components/manage_studies_dialogs.dart';
+import 'package:galleon_user/common/custom_dropdown.dart';
+import 'package:galleon_user/modules/manage_studies/components/manage_studies_dialogs.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';
@@ -20,10 +20,11 @@ class ManageStudiesAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: GetResponsiveDimens.getAppBarHeight(context),
       padding: EdgeInsets.only(
         right: Dimens.sevenTeen,
         top: GetResponsiveDimens.sevenAndNine(context),
-        bottom: GetResponsiveDimens.fiveAndSeven(context),
+        bottom: GetResponsiveDimens.fourAndSeven(context),
       ),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,
@@ -71,7 +72,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                       dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                       buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                       dropDownIconSize: Size(Dimens.ten, Dimens.ten),
-                    ).marginOnly(right: Dimens.thirtyOne),
+                    ).marginOnly(right: Dimens.fifteen),
                   ),
                 ),
                 Flexible(
@@ -87,103 +88,96 @@ class ManageStudiesAppbar extends StatelessWidget {
                       dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,
                       buttonPadding: EdgeInsets.only(top: Dimens.five, bottom: Dimens.five, left: Dimens.twelve, right: Dimens.twelve),
                       dropDownIconSize: Size(Dimens.ten, Dimens.ten),
-                    ).marginOnly(right: Dimens.thirtyTwo),
+                    ).marginOnly(left: Dimens.fifteen),
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(
+          Flexible(
             flex: GetResponsiveFlex.twoAndOne(context),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (manageStudiesController.expandedListTileIndex.value != null)
-                      InkWell(
-                        onTap: () {
-                          manageStudiesController.isDialogOpen.value = true;
-                          ManageStudiesDialogs.deleteStudiesDialog(
-                            context: context,
-                            whenComplete: () {
-                              manageStudiesController.isDialogOpen.value = false;
-                            },
-                            onTapDeleteButton: () {
-                              Get.back();
-                            },
-                          );
-                        },
+            child: Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (manageStudiesController.expandedListTileIndex.value != null)
+                    InkWell(
+                      onTap: () {
+                        manageStudiesController.isDialogOpen.value = true;
+                        ManageStudiesDialogs.deleteStudiesDialog(
+                          context: context,
+                          whenComplete: () {
+                            manageStudiesController.isDialogOpen.value = false;
+                          },
+                          onTapDeleteButton: () {
+                            Get.back();
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(right: Dimens.seven),
+                        padding: EdgeInsets.symmetric(horizontal: Dimens.twenty),
+                        decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.seven)),
+                        alignment: Alignment.center,
                         child: Container(
-                          margin: EdgeInsets.only(right: Dimens.ten),
-                          padding: EdgeInsets.symmetric(horizontal: Dimens.twenty, vertical: Dimens.seven),
-                          decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
-                          alignment: Alignment.center,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: ColorValues.whiteColor,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorValues.blackColor.withOpacity(0.12),
-                                  offset: const Offset(0, 0),
-                                  blurRadius: 16,
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                            child: CommonWidgets.fromSvg(
-                              svgAsset: SvgAssets.deleteRoundedIcon,
-                            ),
+                          decoration: BoxDecoration(
+                            color: ColorValues.whiteColor,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorValues.blackColor.withOpacity(0.12),
+                                offset: const Offset(0, 0),
+                                blurRadius: 16,
+                                spreadRadius: 0,
+                              )
+                            ],
                           ),
+                          child: CommonWidgets.fromSvg(svgAsset: SvgAssets.deleteIcon, margin: EdgeInsets.symmetric(horizontal: Dimens.seven, vertical: Dimens.seven)),
                         ),
                       ),
-                    if (manageStudiesController.expandedListTileIndex.value != null)
-                      InkWell(
-                        onTap: () {
-                          manageStudiesController.isDialogOpen.value = true;
-                          // TODO: add dynamic study name here
-                          ManageStudiesDialogs.uploadStudyDialog(
-                            context: context,
-                            studyName: 'Test',
-                            positionName: 'LowCode',
-                            onTapUploadButton: () {
-                              Get.back();
-                            },
-                            whenComplete: () {
-                              manageStudiesController.isDialogOpen.value = false;
-                            },
-                          );
-                        },
+                    ),
+                  if (manageStudiesController.expandedListTileIndex.value != null)
+                    InkWell(
+                      onTap: () {
+                        manageStudiesController.isDialogOpen.value = true;
+                        // TODO: add dynamic study name here
+                        ManageStudiesDialogs.uploadStudyDialog(
+                          context: context,
+                          studyName: 'Test',
+                          positionName: 'LowCode',
+                          onTapUploadButton: () {
+                            Get.back();
+                          },
+                          whenComplete: () {
+                            manageStudiesController.isDialogOpen.value = false;
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: Dimens.seven),
+                        padding: EdgeInsets.symmetric(horizontal: Dimens.twenty),
+                        decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.seven)),
+                        alignment: Alignment.center,
                         child: Container(
-                          margin: EdgeInsets.only(left: Dimens.ten),
-                          padding: EdgeInsets.only(left: Dimens.twenty, right: Dimens.twenty, top: Dimens.seven, bottom: Dimens.eight),
-                          decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.eight)),
-                          alignment: Alignment.center,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: ColorValues.whiteColor,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: ColorValues.blackColor.withOpacity(0.12),
-                                  offset: const Offset(0, 0),
-                                  blurRadius: 16,
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                            child: CommonWidgets.fromSvg(
-                              svgAsset: SvgAssets.uploadRoundedIcon,
-                            ),
+                          decoration: BoxDecoration(
+                            color: ColorValues.whiteColor,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorValues.blackColor.withOpacity(0.12),
+                                offset: const Offset(0, 0),
+                                blurRadius: 16,
+                                spreadRadius: 0,
+                              ),
+                            ],
                           ),
+                          child: CommonWidgets.fromSvg(svgAsset: SvgAssets.uploadIcon, margin: EdgeInsets.symmetric(horizontal: Dimens.seven, vertical: Dimens.seven)),
                         ),
                       ),
-                  ],
-                ),
-              ),
+                    ),
+                ],
+              ).marginOnly(left: Dimens.twenty),
             ),
           ),
         ],

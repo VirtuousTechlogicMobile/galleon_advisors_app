@@ -1,4 +1,4 @@
-name: galleon_advisors_app
+name: galleon_user
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -60,6 +60,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   fl_chart: ^0.69.0
   dotted_border: ^2.1.0
+  flutter_native_splash: ^2.4.1
 
 
 dev_dependencies:
@@ -73,6 +74,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
 
+flutter_native_splash:
+  image: assets/images/login_page_app_logo.png
+  color: "#ffffff"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -1,13 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/modules/study_screen/components/study_screen_bottom_bar.dart';
-import 'package:galleon_advisors_app/modules/study_screen/controller/study_screen_controller.dart';
-import 'package:galleon_advisors_app/utility/utility.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/modules/study_screen/components/study_screen_bottom_bar.dart';
+import 'package:galleon_user/modules/study_screen/controller/study_screen_controller.dart';
+import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
@@ -30,55 +30,52 @@ class StudyScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            StudyScreenAppbar(),
-            Expanded(
-              child: Obx(
-                () => ImageFiltered(
-                  enabled: studyController.isDialogOpen.value,
-                  imageFilter: ImageFilter.blur(
-                    sigmaX: 10,
-                    sigmaY: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: IgnorePointer(
-                          ignoring: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
-                          child: ImageFiltered(
-                            enabled: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
-                            imageFilter: ImageFilter.blur(
-                              sigmaX: 10,
-                              sigmaY: 10,
-                            ),
-                            child: studyController.getCurrentTabIndex() == 0
-                                ? activitiesLayout(context)
-                                : studyController.getCurrentTabIndex() == 2
-                                    ? tipsAndTricksLayout()
-                                    : studyController.getCurrentTabIndex() == 3
-                                        ? operationalAnalysisLayout()
-                                        : keyThemesLayout(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          StudyScreenAppbar(),
+          Expanded(
+            child: Obx(
+              () => ImageFiltered(
+                enabled: studyController.isDialogOpen.value,
+                imageFilter: ImageFilter.blur(
+                  sigmaX: 10,
+                  sigmaY: 10,
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: IgnorePointer(
+                        ignoring: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                        child: ImageFiltered(
+                          enabled: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: 10,
+                            sigmaY: 10,
                           ),
+                          child: studyController.getCurrentTabIndex() == 0
+                              ? activitiesLayout(context)
+                              : studyController.getCurrentTabIndex() == 2
+                                  ? tipsAndTricksLayout()
+                                  : studyController.getCurrentTabIndex() == 3
+                                      ? operationalAnalysisLayout()
+                                      : keyThemesLayout(),
                         ),
                       ),
-                      Flexible(
-                        flex: 1,
-                        child: studyTimeLineLayout(),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: studyTimeLineLayout(),
+                    ),
+                  ],
                 ),
               ),
             ),
-            bottomBar(),
-          ],
-        ),
+          ),
+          bottomBar(),
+        ],
       ),
     );
   }
@@ -217,7 +214,7 @@ class StudyScreen extends StatelessWidget {
 
   Widget commentsLayout(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
+      margin: EdgeInsets.only(top: Dimens.seven, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
       padding: EdgeInsets.only(right: Dimens.ten),
       decoration: BoxDecoration(
         color: ColorValues.whiteColor,
@@ -293,7 +290,7 @@ class StudyScreen extends StatelessWidget {
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           padding: EdgeInsets.symmetric(vertical: Dimens.eighteen),
-          margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
+          margin: EdgeInsets.only(top: Dimens.seven, left: Dimens.twentyTwo, bottom: Dimens.eight, right: Dimens.twentySix),
           decoration: BoxDecoration(
             color: ColorValues.whiteColor,
             border: Border.all(width: Dimens.four, color: ColorValues.softWhiteColor),
@@ -662,6 +659,7 @@ class StudyScreen extends StatelessWidget {
             left: Dimens.nine,
             bottom: Dimens.eighteen,
             right: Dimens.seven),
+        padding: EdgeInsets.symmetric(vertical: Dimens.two),
         decoration: BoxDecoration(
           color: ColorValues.softWhiteColor,
           border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
@@ -797,7 +795,16 @@ class StudyScreen extends StatelessWidget {
 
   Widget studyTimeLineLayout() {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.eleven, right: Dimens.nine),
+      margin: EdgeInsets.only(
+        top: studyController.servicesTapped.value ||
+                studyController.opportunityTapped.value ||
+                studyController.selectedActivitiesSubTab.value.isNotEmpty ||
+                studyController.getCurrentTabIndex() != 0
+            ? Dimens.seven
+            : Dimens.twenty,
+        bottom: Dimens.seven,
+        right: Dimens.nine,
+      ),
       decoration: BoxDecoration(
         color: ColorValues.appBgColor,
         border: Border.all(width: Dimens.four, color: ColorValues.whiteColor),
@@ -818,7 +825,7 @@ class StudyScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: Dimens.thirty,
+            padding: EdgeInsets.symmetric(vertical: Dimens.three),
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -830,7 +837,7 @@ class StudyScreen extends StatelessWidget {
             ),
             child: Text(
               StringValues.studyTimeline.tr,
-              style: AppStyles.style16Normal.copyWith(
+              style: AppStyles.style14Normal.copyWith(
                 color: ColorValues.whiteColor,
               ),
             ),
@@ -901,7 +908,7 @@ class StudyScreen extends StatelessWidget {
                                         color: ColorValues.darkSlateGrayColor,
                                         width: Dimens.one,
                                       ),
-                                      borderRadius: BorderRadius.circular(Dimens.eight),
+                                      borderRadius: BorderRadius.circular(Dimens.seven),
                                     ),
                                   ),
                                   Flexible(

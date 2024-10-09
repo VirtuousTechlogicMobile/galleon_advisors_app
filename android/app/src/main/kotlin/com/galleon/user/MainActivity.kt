@@ -1,4 +1,4 @@
-package com.galleon.app.galleon_advisors_app
+package com.galleon.user
 
 import io.flutter.embedding.android.FlutterActivity
 

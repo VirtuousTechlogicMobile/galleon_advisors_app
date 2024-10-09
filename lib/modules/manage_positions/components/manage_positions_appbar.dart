@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_dropdown.dart';
-import 'package:galleon_advisors_app/modules/manage_positions/controller/manage_positions_controller.dart';
-import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_user/common/custom_dropdown.dart';
+import 'package:galleon_user/modules/manage_positions/controller/manage_positions_controller.dart';
+import 'package:galleon_user/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';

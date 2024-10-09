@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/modules/create_new_position/components/create_new_position_appbar.dart';
-import 'package:galleon_advisors_app/routes/app_pages.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/modules/create_new_position/components/create_new_position_appbar.dart';
+import 'package:galleon_user/routes/app_pages.dart';
+import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 import '../../../common/custom_textfield.dart';
 import '../../../constant/colors.dart';
@@ -21,46 +21,43 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
-                padding: EdgeInsets.only(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: ColorValues.whiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
-                ),
-                child: serviceFlagsLayout(context),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
+              padding: EdgeInsets.only(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: ColorValues.whiteColor,
+                borderRadius: BorderRadius.circular(Dimens.sixTeen),
               ),
+              child: serviceFlagsLayout(context),
             ),
-            // bottom bar
-            Container(
-              height: 70,
-              alignment: Alignment.centerRight,
-              color: ColorValues.whiteColor,
-              child: CustomPrimaryButton(
-                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-                btnText: StringValues.next.tr,
-                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-                btnTextColor: ColorValues.whiteColor,
-                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                buttonColor: ColorValues.primaryGreenColor,
-                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                onTap: () {
-                  Get.toNamed(AppRoutes.createPositionTipsAndTricks);
-                },
-              ),
+          ),
+          // bottom bar
+          Container(
+            height: 70,
+            alignment: Alignment.centerRight,
+            color: ColorValues.whiteColor,
+            child: CustomPrimaryButton(
+              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+              btnText: StringValues.next.tr,
+              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+              btnTextColor: ColorValues.whiteColor,
+              margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+              buttonColor: ColorValues.primaryGreenColor,
+              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+              onTap: () {
+                Get.toNamed(AppRoutes.createPositionTipsAndTricks);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

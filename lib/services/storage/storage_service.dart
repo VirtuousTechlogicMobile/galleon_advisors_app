@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/utility/utility.dart';
+import 'package:galleon_user/utility/utility.dart';
 import 'package:get_storage/get_storage.dart';
 
 abstract class StorageService {

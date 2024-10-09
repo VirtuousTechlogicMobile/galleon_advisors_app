@@ -1,6 +1,6 @@
 final Map<String, String> enUs = {
   'hi': 'Hi',
-  'app_name': 'Rippl',
+  'app_name': 'Galleon User',
   'email': 'Email',
   'password': 'Password',
   'log_in': 'Log In',

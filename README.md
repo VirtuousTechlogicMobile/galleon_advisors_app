@@ -1,4 +1,4 @@
-# galleon_advisors_app
+# galleon_user
 
 A new Flutter project.
 

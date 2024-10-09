@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
+import 'package:galleon_user/constant/colors.dart';
 
 import '../constant/dimens.dart';
 import '../constant/styles.dart';

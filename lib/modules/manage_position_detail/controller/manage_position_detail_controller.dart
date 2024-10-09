@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/modules/manage_positions/model/manage_positions_data_model.dart';
+import 'package:galleon_user/modules/manage_positions/model/manage_positions_data_model.dart';
 import 'package:get/get.dart';
 
 class ManagePositionDetailController extends GetxController {

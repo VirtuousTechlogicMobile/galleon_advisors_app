@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/common/custom_textfield.dart';
-import 'package:galleon_advisors_app/constant/assets.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/common/custom_textfield.dart';
+import 'package:galleon_user/constant/assets.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/styles.dart';
 import 'package:get/get.dart';
 import '../../../constant/dimens.dart';
 import '../../../utility/responsive.dart';

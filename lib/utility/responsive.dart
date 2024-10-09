@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
+import 'package:galleon_user/constant/styles.dart';
 
 import '../constant/dimens.dart';
 
@@ -19,6 +19,7 @@ class GetResponsiveFontStyle {
 }
 
 class GetResponsiveDimens {
+  static double getAppBarHeight(BuildContext context) => Responsive.isMobile(context) ? 50 : Dimens.fifty;
   static double sixteenAndFourteen(BuildContext context) => Responsive.isMobile(context) ? Dimens.sixTeen : Dimens.fourteen;
   static double tenAndEight(BuildContext context) => Responsive.isMobile(context) ? Dimens.ten : Dimens.eight;
   static double nineAndEight(BuildContext context) => Responsive.isMobile(context) ? Dimens.nine : Dimens.eight;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/modules/create_new_position/components/create_new_position_appbar.dart';
-import 'package:galleon_advisors_app/routes/app_pages.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/modules/create_new_position/components/create_new_position_appbar.dart';
+import 'package:galleon_user/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 import '../../../common/custom_textfield.dart';
@@ -22,55 +22,52 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: Dimens.sevenTeen, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.fifteen),
-                decoration: BoxDecoration(
-                  color: ColorValues.whiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: serviceActivitiesLayout(),
-                    ),
-                    Expanded(
-                      child: oppThemesLayout(),
-                    ),
-                  ],
-                ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(top: Dimens.sevenTeen, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.fifteen),
+              decoration: BoxDecoration(
+                color: ColorValues.whiteColor,
+                borderRadius: BorderRadius.circular(Dimens.sixTeen),
               ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: serviceActivitiesLayout(),
+                  ),
+                  Expanded(
+                    child: oppThemesLayout(),
+                  ),
+                ],
+              ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
             ),
-            // bottom bar
-            Container(
-              height: 70,
-              alignment: Alignment.centerRight,
-              color: ColorValues.whiteColor,
-              child: CustomPrimaryButton(
-                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-                btnText: StringValues.next.tr,
-                btnTextColor: ColorValues.whiteColor,
-                margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-                buttonColor: ColorValues.primaryGreenColor,
-                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                onTap: () {
-                  Get.toNamed(AppRoutes.addOpportunityFlags);
-                },
-              ),
+          ),
+          // bottom bar
+          Container(
+            height: 70,
+            alignment: Alignment.centerRight,
+            color: ColorValues.whiteColor,
+            child: CustomPrimaryButton(
+              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+              btnText: StringValues.next.tr,
+              btnTextColor: ColorValues.whiteColor,
+              margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+              buttonColor: ColorValues.primaryGreenColor,
+              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+              onTap: () {
+                Get.toNamed(AppRoutes.addOpportunityFlags);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

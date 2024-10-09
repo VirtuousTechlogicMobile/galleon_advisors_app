@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/dimens.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/dimens.dart';
 import 'package:flutter/cupertino.dart';
 
 class NxFileImage extends StatelessWidget {

@@ -30,4 +30,6 @@ abstract class SvgAssets {
   static const deleteRoundedIcon = 'assets/svgs/delete_rounded_icon.svg';
   static const downloadIcon = 'assets/svgs/download_icon.svg';
   static const bottomBarAddIcon = 'assets/svgs/bottombar_add_icon.svg';
+  static const uploadIcon = 'assets/svgs/upload_icon.svg';
+  static const deleteIcon = 'assets/svgs/delete_icon.svg';
 }

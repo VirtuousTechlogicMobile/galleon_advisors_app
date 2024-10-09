@@ -1,7 +1,7 @@
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/dimens.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/extension/string_extensions.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/dimens.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/extension/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talker_flutter/talker_flutter.dart';

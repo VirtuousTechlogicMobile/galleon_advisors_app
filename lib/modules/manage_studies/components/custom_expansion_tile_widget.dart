@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../common/common_widgets.dart';
@@ -15,8 +15,18 @@ class CustomExpansionTileWidget extends StatelessWidget {
   final List<Widget>? children;
   final String title;
   final bool isShowGreenDot;
+  final bool isShowStar;
 
-  const CustomExpansionTileWidget({super.key, required this.title, required this.isExpanded, required this.onTap, this.children, this.isShowGreenDot = false, this.padding});
+  const CustomExpansionTileWidget({
+    super.key,
+    required this.title,
+    required this.isExpanded,
+    required this.onTap,
+    this.children,
+    this.isShowGreenDot = false,
+    this.isShowStar = false,
+    this.padding,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +83,15 @@ class CustomExpansionTileWidget extends StatelessWidget {
                   title,
                   style: AppStyles.style16Normal.copyWith(color: ColorValues.darkSlateGrayColor),
                 ),
+                if (isShowStar)
+                  Icon(
+                    Icons.star,
+                    size: GetResponsiveDimens.fiftyAndTwentyTwo(context),
+                    color: ColorValues.primaryGreenColor,
+                  ).marginOnly(left: Dimens.five),
                 if (isShowGreenDot)
                   Container(
-                    margin: EdgeInsets.only(left: Dimens.fifteen),
+                    margin: EdgeInsets.only(left: Dimens.seven),
                     width: GetResponsiveDimens.thirtySixAndEighteen(context),
                     height: GetResponsiveDimens.thirtySixAndEighteen(context),
                     decoration: const BoxDecoration(color: ColorValues.primaryGreenColor, shape: BoxShape.circle),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/modules/create_new_position/components/create_new_position_appbar.dart';
-import 'package:galleon_advisors_app/modules/create_position_tips_tricks/controller/create_position_tips_tricks_controller.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/modules/create_new_position/components/create_new_position_appbar.dart';
+import 'package:galleon_user/modules/create_position_tips_tricks/controller/create_position_tips_tricks_controller.dart';
 import 'package:get/get.dart';
 import '../../../common/common_widgets.dart';
 import '../../../constant/colors.dart';
@@ -21,46 +21,43 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        top: true,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-            Expanded(
-              child: Container(
-                width: Dimens.screenWidth,
-                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
-                padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
-                decoration: BoxDecoration(
-                  color: ColorValues.whiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
-                ),
-                child: tipsAndTricksLayout(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+          Expanded(
+            child: Container(
+              width: Dimens.screenWidth,
+              margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
+              padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
+              decoration: BoxDecoration(
+                color: ColorValues.whiteColor,
+                borderRadius: BorderRadius.circular(Dimens.sixTeen),
               ),
+              child: tipsAndTricksLayout(),
             ),
-            // bottom bar
-            Container(
-              height: 70,
-              alignment: Alignment.centerRight,
-              color: ColorValues.whiteColor,
-              child: CustomPrimaryButton(
-                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-                btnText: StringValues.create.tr,
-                btnTextColor: ColorValues.whiteColor,
-                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-                buttonColor: ColorValues.primaryGreenColor,
-                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                onTap: () {
-                  Get.toNamed(AppRoutes.createNewStudy);
-                },
-              ),
+          ),
+          // bottom bar
+          Container(
+            height: 70,
+            alignment: Alignment.centerRight,
+            color: ColorValues.whiteColor,
+            child: CustomPrimaryButton(
+              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+              btnText: StringValues.create.tr,
+              btnTextColor: ColorValues.whiteColor,
+              margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+              buttonColor: ColorValues.primaryGreenColor,
+              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+              onTap: () {
+                Get.toNamed(AppRoutes.createNewStudy);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

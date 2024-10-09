@@ -1,8 +1,8 @@
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/services/translations/app_translations.dart';
-import 'package:galleon_advisors_app/theme/theme_controller.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/services/translations/app_translations.dart';
+import 'package:galleon_user/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/utility/utility.dart';
+import 'package:galleon_user/utility/utility.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'constant/hive_box_names.dart';
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
       builder: (ctx, child) {
         return GlobalLoaderOverlay(
           child: GetMaterialApp(
-            title: StringValues.appName,
+            title: StringValues.appName.tr,
             debugShowCheckedModeBanner: false,
             themeMode: _handleAppTheme(appController.themeMode),
             theme: appController.getLightThemeData(context),

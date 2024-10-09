@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/routes/app_pages.dart';
-import 'package:galleon_advisors_app/utility/responsive.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/routes/app_pages.dart';
+import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/assets.dart';
@@ -17,36 +17,33 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
-      body: SafeArea(
-        top: true,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              // flex: Responsive.isMobile(context) ? 5 : 3,
-              child: Container(
-                height: Dimens.screenHeight,
-                margin: EdgeInsets.all(Dimens.twentyFour),
-                decoration: BoxDecoration(
-                  color: ColorValues.whiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
-                ),
-                child: Responsive.isMobile(context)
-                    ? Image.asset(
-                        AssetValues.leftToRightAppLogo,
-                      ).paddingSymmetric(horizontal: Dimens.hundred)
-                    : Transform.scale(
-                        scale: 1.5,
-                        child: Image.asset(
-                          AssetValues.leftToRightAppLogo,
-                        ),
-                      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            // flex: Responsive.isMobile(context) ? 5 : 3,
+            child: Container(
+              height: Dimens.screenHeight,
+              margin: EdgeInsets.all(Dimens.twentyFour),
+              decoration: BoxDecoration(
+                color: ColorValues.whiteColor,
+                borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
               ),
+              child: Responsive.isMobile(context)
+                  ? Image.asset(
+                      AssetValues.leftToRightAppLogo,
+                    ).paddingSymmetric(horizontal: Dimens.hundred)
+                  : Transform.scale(
+                      scale: 1.5,
+                      child: Image.asset(
+                        AssetValues.leftToRightAppLogo,
+                      ),
+                    ),
             ),
-            IntrinsicWidth(child: menuLayout(context)),
-          ],
-        ),
+          ),
+          IntrinsicWidth(child: menuLayout(context)),
+        ],
       ),
     );
   }

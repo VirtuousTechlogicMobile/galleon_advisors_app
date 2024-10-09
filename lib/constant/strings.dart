@@ -1,5 +1,5 @@
 abstract class StringValues {
-  static const appName = 'galleon advisors';
+  static const appName = 'app_name';
   static const email = 'email';
   static const password = 'password';
   static const logIn = 'log_in';
