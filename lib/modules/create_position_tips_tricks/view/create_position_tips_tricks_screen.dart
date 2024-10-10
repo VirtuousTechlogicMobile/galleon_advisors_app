@@ -21,43 +21,46 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-          Expanded(
-            child: Container(
-              width: Dimens.screenWidth,
-              margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
-              padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(Dimens.sixTeen),
+      body: SafeArea(
+        left: false,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+            Expanded(
+              child: Container(
+                width: Dimens.screenWidth,
+                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
+                padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
+                ),
+                child: tipsAndTricksLayout(),
               ),
-              child: tipsAndTricksLayout(),
             ),
-          ),
-          // bottom bar
-          Container(
-            height: 70,
-            alignment: Alignment.centerRight,
-            color: ColorValues.whiteColor,
-            child: CustomPrimaryButton(
-              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-              btnText: StringValues.create.tr,
-              btnTextColor: ColorValues.whiteColor,
-              margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-              buttonColor: ColorValues.primaryGreenColor,
-              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-              onTap: () {
-                Get.toNamed(AppRoutes.createNewStudy);
-              },
+            // bottom bar
+            Container(
+              height: GetResponsiveDimens.getBottomBarButtonHeight(context),
+              alignment: Alignment.centerRight,
+              color: ColorValues.whiteColor,
+              child: CustomPrimaryButton(
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+                btnText: StringValues.create.tr,
+                btnTextColor: ColorValues.whiteColor,
+                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+                buttonColor: ColorValues.primaryGreenColor,
+                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                onTap: () {
+                  Get.toNamed(AppRoutes.createNewStudy);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

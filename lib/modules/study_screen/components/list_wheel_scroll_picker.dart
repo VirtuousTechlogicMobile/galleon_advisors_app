@@ -24,7 +24,7 @@ class ListWheelScrollPicker extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         double availableHeight = constraints.maxHeight;
-        double itemExtent = availableHeight / 5;
+        double itemExtent = Responsive.isMobile(context) ? availableHeight / 5 : availableHeight / 9;
         return Stack(
           alignment: Alignment.center,
           children: [

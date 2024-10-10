@@ -30,52 +30,55 @@ class StudyScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          StudyScreenAppbar(),
-          Expanded(
-            child: Obx(
-              () => ImageFiltered(
-                enabled: studyController.isDialogOpen.value,
-                imageFilter: ImageFilter.blur(
-                  sigmaX: 10,
-                  sigmaY: 10,
-                ),
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: IgnorePointer(
-                        ignoring: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
-                        child: ImageFiltered(
-                          enabled: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
-                          imageFilter: ImageFilter.blur(
-                            sigmaX: 10,
-                            sigmaY: 10,
+      body: SafeArea(
+        left: false,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            StudyScreenAppbar(),
+            Expanded(
+              child: Obx(
+                () => ImageFiltered(
+                  enabled: studyController.isDialogOpen.value,
+                  imageFilter: ImageFilter.blur(
+                    sigmaX: 10,
+                    sigmaY: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: IgnorePointer(
+                          ignoring: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                          child: ImageFiltered(
+                            enabled: studyController.selectedStudyTimelinesList.length == 2 && studyController.getCurrentTabIndex() == 0,
+                            imageFilter: ImageFilter.blur(
+                              sigmaX: 10,
+                              sigmaY: 10,
+                            ),
+                            child: studyController.getCurrentTabIndex() == 0
+                                ? activitiesLayout(context)
+                                : studyController.getCurrentTabIndex() == 2
+                                    ? tipsAndTricksLayout()
+                                    : studyController.getCurrentTabIndex() == 3
+                                        ? operationalAnalysisLayout()
+                                        : keyThemesLayout(),
                           ),
-                          child: studyController.getCurrentTabIndex() == 0
-                              ? activitiesLayout(context)
-                              : studyController.getCurrentTabIndex() == 2
-                                  ? tipsAndTricksLayout()
-                                  : studyController.getCurrentTabIndex() == 3
-                                      ? operationalAnalysisLayout()
-                                      : keyThemesLayout(),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: studyTimeLineLayout(),
-                    ),
-                  ],
+                      Flexible(
+                        flex: 1,
+                        child: studyTimeLineLayout(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          bottomBar(),
-        ],
+            bottomBar(),
+          ],
+        ),
       ),
     );
   }

@@ -18,7 +18,7 @@ class StudyScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: Responsive.isMobile(context) ? 50 : Dimens.fifty,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: Responsive.isMobile(context)

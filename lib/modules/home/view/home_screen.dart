@@ -17,33 +17,36 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            // flex: Responsive.isMobile(context) ? 5 : 3,
-            child: Container(
-              height: Dimens.screenHeight,
-              margin: EdgeInsets.all(Dimens.twentyFour),
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
-              ),
-              child: Responsive.isMobile(context)
-                  ? Image.asset(
-                      AssetValues.leftToRightAppLogo,
-                    ).paddingSymmetric(horizontal: Dimens.hundred)
-                  : Transform.scale(
-                      scale: 1.5,
-                      child: Image.asset(
+      body: SafeArea(
+        left: false,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              // flex: Responsive.isMobile(context) ? 5 : 3,
+              child: Container(
+                height: Dimens.screenHeight,
+                margin: EdgeInsets.all(Dimens.twentyFour),
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
+                ),
+                child: Responsive.isMobile(context)
+                    ? Image.asset(
                         AssetValues.leftToRightAppLogo,
+                      ).paddingSymmetric(horizontal: Dimens.hundred)
+                    : Transform.scale(
+                        scale: 1.5,
+                        child: Image.asset(
+                          AssetValues.leftToRightAppLogo,
+                        ),
                       ),
-                    ),
+              ),
             ),
-          ),
-          IntrinsicWidth(child: menuLayout(context)),
-        ],
+            IntrinsicWidth(child: menuLayout(context)),
+          ],
+        ),
       ),
     );
   }

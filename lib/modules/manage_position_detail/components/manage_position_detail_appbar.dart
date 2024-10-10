@@ -16,7 +16,7 @@ class ManagePositionDetailAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: Responsive.isMobile(context) ? 50 : Dimens.fifty,
       padding: EdgeInsets.only(
         right: Dimens.twenty,
         top: GetResponsiveDimens.fiveAndNine(context),

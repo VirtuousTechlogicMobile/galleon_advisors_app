@@ -22,9 +22,9 @@ class ManageStudiesAppbar extends StatelessWidget {
     return Container(
       height: GetResponsiveDimens.getAppBarHeight(context),
       padding: EdgeInsets.only(
-        right: Dimens.sevenTeen,
-        top: GetResponsiveDimens.sevenAndNine(context),
-        bottom: GetResponsiveDimens.fourAndSeven(context),
+        right: Dimens.fifteen,
+        top: Dimens.seven,
+        bottom: Dimens.four,
       ),
       alignment: Alignment.centerLeft,
       color: ColorValues.whiteColor,

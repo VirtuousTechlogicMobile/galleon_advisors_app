@@ -23,53 +23,56 @@ class EndStudySummaryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          EndStudySummaryScreenAppbar(
-            time: '(03:11:42)',
-            programName: 'Test',
-            onEndButtonTap: () {
-              Get.offNamed(AppRoutes.study);
-            },
-            isShowEndButton: studyId.isNotEmpty,
-          ),
-          Flexible(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: Column(
-                    children: [
-                      serviceVsOppLayout(),
-                      Expanded(
-                        child: chartLayout(context),
-                      ),
-                    ],
+      body: SafeArea(
+        left: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            EndStudySummaryScreenAppbar(
+              time: '(03:11:42)',
+              programName: 'Test',
+              onEndButtonTap: () {
+                Get.offNamed(AppRoutes.study);
+              },
+              isShowEndButton: studyId.isNotEmpty,
+            ),
+            Flexible(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    flex: 4,
+                    child: Column(
+                      children: [
+                        serviceVsOppLayout(),
+                        Expanded(
+                          child: chartLayout(context),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: GetResponsiveFlex.threeAndOne(context),
-                        child: keyThemesLayout(context),
-                      ),
-                      Expanded(
-                        flex: GetResponsiveFlex.fourAndTwo(context),
-                        child: serviceActivitiesLayout(),
-                      ),
-                    ],
-                  ).marginOnly(left: Dimens.thirteen),
-                ),
-              ],
-            ).paddingOnly(bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.sixTeen),
-          ),
-        ],
+                  Flexible(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: GetResponsiveFlex.threeAndOne(context),
+                          child: keyThemesLayout(context),
+                        ),
+                        Expanded(
+                          flex: GetResponsiveFlex.fourAndTwo(context),
+                          child: serviceActivitiesLayout(),
+                        ),
+                      ],
+                    ).marginOnly(left: Dimens.thirteen),
+                  ),
+                ],
+              ).paddingOnly(bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.sixTeen),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -23,89 +23,92 @@ class ManagePositionDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ManagePositionDetailAppbar(),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.thirty, left: Dimens.fifteen, right: Dimens.fifteen),
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(Dimens.sixTeen),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Obx(
-                    () => Expanded(
-                      child: managePositionDetailController.selectedActivityTab.value == 1
-                          ? tipsAndTricksLayout()
-                          : managePositionDetailController.selectedActivityTab.value == 0
-                              ? opportunityFlagLayout(context)
-                              : Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: serviceActivitiesLayout(),
-                                    ),
-                                    Expanded(
-                                      child: oppThemesLayout(),
-                                    ),
-                                  ],
-                                ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
+      body: SafeArea(
+        left: false,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ManagePositionDetailAppbar(),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.thirty, left: Dimens.fifteen, right: Dimens.fifteen),
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Obx(
+                      () => Expanded(
+                        child: managePositionDetailController.selectedActivityTab.value == 1
+                            ? tipsAndTricksLayout()
+                            : managePositionDetailController.selectedActivityTab.value == 0
+                                ? opportunityFlagLayout(context)
+                                : Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: serviceActivitiesLayout(),
+                                      ),
+                                      Expanded(
+                                        child: oppThemesLayout(),
+                                      ),
+                                    ],
+                                  ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
+                      ),
                     ),
-                  ),
 
-                  /// Opportunity Flag && Tips & Tricks buttons
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Obx(
-                          () => CustomPrimaryButton(
-                            margin: EdgeInsets.only(left: Dimens.twelve, right: Dimens.thirteen, top: Dimens.twenty),
-                            btnText: StringValues.opportunityFlag.tr,
-                            border: Border.all(
-                                color: managePositionDetailController.selectedActivityTab.value == 0 ? ColorValues.whiteColor : ColorValues.lightGrayColor, width: Dimens.one),
-                            buttonColor:
-                                managePositionDetailController.selectedActivityTab.value == 0 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-                            borderRadius: BorderRadius.circular(Dimens.eight),
-                            contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
-                            btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                            onTap: () {
-                              managePositionDetailController.selectedActivityTab.value = 0;
-                            },
+                    /// Opportunity Flag && Tips & Tricks buttons
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => CustomPrimaryButton(
+                              margin: EdgeInsets.only(left: Dimens.twelve, right: Dimens.thirteen, top: Dimens.twenty),
+                              btnText: StringValues.opportunityFlag.tr,
+                              border: Border.all(
+                                  color: managePositionDetailController.selectedActivityTab.value == 0 ? ColorValues.whiteColor : ColorValues.lightGrayColor, width: Dimens.one),
+                              buttonColor:
+                                  managePositionDetailController.selectedActivityTab.value == 0 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                              borderRadius: BorderRadius.circular(Dimens.eight),
+                              contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
+                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                              onTap: () {
+                                managePositionDetailController.selectedActivityTab.value = 0;
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Obx(
-                          () => CustomPrimaryButton(
-                            margin: EdgeInsets.only(left: Dimens.twelve, right: Dimens.twelve, top: Dimens.twenty),
-                            btnText: StringValues.tipsAndTricks.tr,
-                            border: Border.all(
-                                color: managePositionDetailController.selectedActivityTab.value == 1 ? ColorValues.whiteColor : ColorValues.lightGrayColor, width: Dimens.one),
-                            buttonColor:
-                                managePositionDetailController.selectedActivityTab.value == 1 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
-                            borderRadius: BorderRadius.circular(Dimens.eight),
-                            contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
-                            btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
-                            onTap: () {
-                              managePositionDetailController.selectedActivityTab.value = 1;
-                            },
+                        Expanded(
+                          child: Obx(
+                            () => CustomPrimaryButton(
+                              margin: EdgeInsets.only(left: Dimens.twelve, right: Dimens.twelve, top: Dimens.twenty),
+                              btnText: StringValues.tipsAndTricks.tr,
+                              border: Border.all(
+                                  color: managePositionDetailController.selectedActivityTab.value == 1 ? ColorValues.whiteColor : ColorValues.lightGrayColor, width: Dimens.one),
+                              buttonColor:
+                                  managePositionDetailController.selectedActivityTab.value == 1 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
+                              borderRadius: BorderRadius.circular(Dimens.eight),
+                              contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
+                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                              onTap: () {
+                                managePositionDetailController.selectedActivityTab.value = 1;
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ).marginOnly(bottom: Dimens.eleven),
-                ],
+                      ],
+                    ).marginOnly(bottom: Dimens.eleven),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

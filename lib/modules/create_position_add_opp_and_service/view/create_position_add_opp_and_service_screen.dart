@@ -22,52 +22,55 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: Dimens.sevenTeen, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.fifteen),
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(Dimens.sixTeen),
+      body: SafeArea(
+        left: false,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: Dimens.sevenTeen, bottom: Dimens.eight, left: Dimens.fourteen, right: Dimens.fifteen),
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: serviceActivitiesLayout(),
+                    ),
+                    Expanded(
+                      child: oppThemesLayout(),
+                    ),
+                  ],
+                ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
               ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: serviceActivitiesLayout(),
-                  ),
-                  Expanded(
-                    child: oppThemesLayout(),
-                  ),
-                ],
-              ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
             ),
-          ),
-          // bottom bar
-          Container(
-            height: 70,
-            alignment: Alignment.centerRight,
-            color: ColorValues.whiteColor,
-            child: CustomPrimaryButton(
-              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-              btnText: StringValues.next.tr,
-              btnTextColor: ColorValues.whiteColor,
-              margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
-              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-              buttonColor: ColorValues.primaryGreenColor,
-              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-              onTap: () {
-                Get.toNamed(AppRoutes.addOpportunityFlags);
-              },
+            // bottom bar
+            Container(
+              height: GetResponsiveDimens.getBottomBarButtonHeight(context),
+              alignment: Alignment.centerRight,
+              color: ColorValues.whiteColor,
+              child: CustomPrimaryButton(
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+                btnText: StringValues.next.tr,
+                btnTextColor: ColorValues.whiteColor,
+                margin: EdgeInsets.symmetric(vertical: GetResponsiveDimens.tenAndEight(context), horizontal: GetResponsiveDimens.twentyAndFourteen(context)),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+                buttonColor: ColorValues.primaryGreenColor,
+                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                onTap: () {
+                  Get.toNamed(AppRoutes.addOpportunityFlags);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

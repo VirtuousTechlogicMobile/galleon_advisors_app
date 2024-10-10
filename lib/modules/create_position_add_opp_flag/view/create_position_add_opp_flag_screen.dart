@@ -21,43 +21,46 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
-              padding: EdgeInsets.only(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: ColorValues.whiteColor,
-                borderRadius: BorderRadius.circular(Dimens.sixTeen),
+      body: SafeArea(
+        left: false,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
+                padding: EdgeInsets.only(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: ColorValues.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.sixTeen),
+                ),
+                child: serviceFlagsLayout(context),
               ),
-              child: serviceFlagsLayout(context),
             ),
-          ),
-          // bottom bar
-          Container(
-            height: 70,
-            alignment: Alignment.centerRight,
-            color: ColorValues.whiteColor,
-            child: CustomPrimaryButton(
-              buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
-              btnText: StringValues.next.tr,
-              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
-              btnTextColor: ColorValues.whiteColor,
-              margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-              borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-              buttonColor: ColorValues.primaryGreenColor,
-              border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-              onTap: () {
-                Get.toNamed(AppRoutes.createPositionTipsAndTricks);
-              },
+            // bottom bar
+            Container(
+              height: GetResponsiveDimens.getBottomBarButtonHeight(context),
+              alignment: Alignment.centerRight,
+              color: ColorValues.whiteColor,
+              child: CustomPrimaryButton(
+                buttonWidth: GetResponsiveDimens.widthDivFourAndTwoHundredForty(context),
+                btnText: StringValues.next.tr,
+                contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
+                btnTextColor: ColorValues.whiteColor,
+                margin: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+                borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
+                buttonColor: ColorValues.primaryGreenColor,
+                border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
+                onTap: () {
+                  Get.toNamed(AppRoutes.createPositionTipsAndTricks);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

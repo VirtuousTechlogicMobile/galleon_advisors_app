@@ -83,7 +83,7 @@ class StudyScreenComponents {
                       children: [
                         CustomPrimaryButton(
                           btnText: StringValues.cancel.tr,
-                          border: Border.all(color: ColorValues.primaryGreenColor, width: Dimens.three),
+                          border: Border.all(color: ColorValues.primaryGreenColor, width: GetResponsiveDimens.threeAndTwo(context)),
                           buttonColor: ColorValues.whiteColor,
                           contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.thirteenAndFifteen(context)),
                           borderRadius: BorderRadius.circular(Dimens.twelve),

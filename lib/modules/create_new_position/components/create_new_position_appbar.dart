@@ -7,6 +7,7 @@ import 'package:galleon_user/constant/styles.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/dimens.dart';
+import '../../../utility/responsive.dart';
 
 class CreateNewPositionAppbar extends StatelessWidget {
   final String? positionName;
@@ -15,7 +16,7 @@ class CreateNewPositionAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: Responsive.isMobile(context) ? 50 : Dimens.fifty,
       width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(left: Dimens.fourteen, top: Dimens.nine, bottom: Dimens.seven, right: Dimens.twentyEight),

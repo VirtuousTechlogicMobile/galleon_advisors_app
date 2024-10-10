@@ -20,10 +20,12 @@ class GetResponsiveFontStyle {
 
 class GetResponsiveDimens {
   static double getAppBarHeight(BuildContext context) => Responsive.isMobile(context) ? 50 : Dimens.fifty;
+  static double? getBottomBarButtonHeight(BuildContext context) => Responsive.isMobile(context) ? 70 : null;
   static double sixteenAndFourteen(BuildContext context) => Responsive.isMobile(context) ? Dimens.sixTeen : Dimens.fourteen;
   static double tenAndEight(BuildContext context) => Responsive.isMobile(context) ? Dimens.ten : Dimens.eight;
+  static double threeAndTwo(BuildContext context) => Responsive.isMobile(context) ? Dimens.three : Dimens.two;
   static double nineAndEight(BuildContext context) => Responsive.isMobile(context) ? Dimens.nine : Dimens.eight;
-  static double nineAndFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.nine : Dimens.fiftyEight;
+  static double nineAndFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.nine : Dimens.five;
   static double fiveAndSeven(BuildContext context) => Responsive.isMobile(context) ? Dimens.five : Dimens.seven;
   static double fourAndSeven(BuildContext context) => Responsive.isMobile(context) ? Dimens.four : Dimens.seven;
   static double sevenAndFive(BuildContext context) => Responsive.isMobile(context) ? Dimens.seven : Dimens.five;
