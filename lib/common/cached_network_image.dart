@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/dimens.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,10 +28,10 @@ class NxNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? Dimens.screenWidth,
+      width: width ?? Get.width,
       height: height,
       constraints: BoxConstraints(
-        maxWidth: maxWidth ?? Dimens.screenWidth,
+        maxWidth: maxWidth ?? Get.width,
         maxHeight: maxHeight ?? Dimens.screenHeight,
       ),
       child: ClipRRect(

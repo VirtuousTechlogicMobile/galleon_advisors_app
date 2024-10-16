@@ -67,8 +67,8 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
 
   Widget serviceFlagsLayout(BuildContext context) {
     return Container(
-      width: Dimens.screenWidth / 1.8,
-      height: Responsive.isMobile(context) ? null : Dimens.screenWidth / 3.5,
+      width: Get.width / 1.8,
+      height: GetResponsiveDimens.widthDivTheePointFive(context),
       alignment: Alignment.center,
       margin: EdgeInsets.only(right: Dimens.fourPointFive, bottom: Dimens.nineteen),
       padding: EdgeInsets.only(top: Dimens.eight),

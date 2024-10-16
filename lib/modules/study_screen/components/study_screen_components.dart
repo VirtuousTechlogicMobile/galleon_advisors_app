@@ -41,8 +41,8 @@ class StudyScreenComponents {
       Align(
         alignment: Alignment.center,
         child: SizedBox(
-          height: MediaQuery.of(context).size.height - (Dimens.eighty * 2), // minus appbar and bottom bar height
-          width: MediaQuery.of(context).size.width,
+          height: Dimens.screenHeight - (Dimens.eighty * 2), // minus appbar and bottom bar height
+          width: Get.width,
           child: AlertDialog(
             alignment: Alignment.topCenter,
             contentPadding: EdgeInsets.zero,

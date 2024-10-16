@@ -19,7 +19,6 @@ class NewStudyAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(
           left: Dimens.fourteen,
@@ -39,22 +38,20 @@ class NewStudyAppbar extends StatelessWidget {
           Text(
             StringValues.createNewStudy.tr,
             style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
-          ).marginOnly(left: Responsive.isMobile(context) ? Dimens.thirty : Dimens.twentySix),
+          ).marginOnly(left: GetResponsiveDimens.thirtyAndTwentySix(context)),
           SizedBox(
-            width: MediaQuery.sizeOf(context).width / 3.3,
+            width: Get.width / 3.3,
             child: CustomTextField(
               controller: studyNameController,
               fillColor: ColorValues.textFieldLightGrayColor.withOpacity(0.50),
-              borderRadius: BorderRadius.circular(Responsive.isMobile(context) ? Dimens.nine : Dimens.eight),
+              borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
               borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
-              contentPadding: Responsive.isMobile(context)
-                  ? EdgeInsets.symmetric(vertical: Dimens.nine, horizontal: Dimens.fifteen)
-                  : EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
+              contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.nineAndEight(context), horizontal: GetResponsiveDimens.fifteenAndFourteen(context)),
               textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
               cursorColor: ColorValues.blackColor,
               maxLines: 1,
             ),
-          ).marginOnly(left: Responsive.isMobile(context) ? Dimens.forty : Dimens.sevenTeen),
+          ).marginOnly(left: GetResponsiveDimens.fortyAndSevenTeen(context)),
           const Spacer(),
           Text(
             time,

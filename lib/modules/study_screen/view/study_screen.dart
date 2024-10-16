@@ -561,13 +561,13 @@ class StudyScreen extends StatelessWidget {
         onTapKeyThemesButton: () {
           studyController.onChangeTab(4);
         },
-        onTapSubmitButton: () {
+        onTapSubmitButton: () async {
           if (studyController.selectedStudyTimelinesList.length == 2) {
             studyController.onMergeStudies();
           } else if (studyController.selectedStudyTimelinesList.length == 1) {
             studyController.splitStudies();
           } else {
-            studyController.onSubmitStudy();
+            await studyController.onSubmitStudy();
           }
         },
         isMerge: studyController.selectedStudyTimelinesList.length == 2,
@@ -630,17 +630,22 @@ class StudyScreen extends StatelessWidget {
                     child: ListWheelScrollPicker(
                       itemsList: studyController.serviceActivitiesItems,
                       selectedIndex: studyController.selectedServiceActivities.value ?? 0,
+                      scrollController: studyController.servicesScrollController,
 
                       /// applied condition for is study started and if not split and merge
                       isScroll:
                           studyController.isStudyStarted.value && studyController.selectedStudyTimelinesList.length != 1 && studyController.selectedStudyTimelinesList.length != 2,
-                      onSelectedItemChanged: (selectedValue) {
+                      onSelectedItemChanged: (selectedValue) async {
                         if (studyController.selectedStudyTimelinesList.isNotEmpty) {
+                          /// if any value selected from study timeline then remove it...
                           studyController.isStudyTimeLineSelected.value = false;
                           studyController.currentSelectedStudyTimeline.value = null;
                           studyController.selectedStudyTimelinesList.clear();
                         }
-                        studyController.servicesTapped.value = true;
+                        if (!studyController.servicesTapped.value) {
+                          print("");
+                          studyController.servicesTapped.value = true;
+                        }
                         studyController.selectedServiceActivities.value = selectedValue;
                       },
                     ),
@@ -705,6 +710,7 @@ class StudyScreen extends StatelessWidget {
                 child: ListWheelScrollPicker(
                   itemsList: studyController.volumeItems,
                   selectedIndex: studyController.selectedVolume.value,
+                  scrollController: studyController.volumeScrollController,
                   isScroll: studyController.isStudyStarted.value,
                   onSelectedItemChanged: (selectedValue) {
                     studyController.selectedVolume.value = selectedValue;
@@ -772,6 +778,7 @@ class StudyScreen extends StatelessWidget {
                     child: ListWheelScrollPicker(
                       itemsList: studyController.opportunityThemes,
                       selectedIndex: studyController.selectedOpportunityTheme.value ?? 0,
+                      scrollController: studyController.oppThemeScrollController,
 
                       /// applied condition for is study started and if not split and merge
                       isScroll:

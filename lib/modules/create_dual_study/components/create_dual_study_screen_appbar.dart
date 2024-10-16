@@ -17,7 +17,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width,
+      width: Get.width,
       padding: EdgeInsets.only(
           left: Dimens.fourteen,
           top: GetResponsiveDimens.sevenAndNine(context),
@@ -41,7 +41,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twenty),
           SizedBox(
-            width: MediaQuery.sizeOf(context).width / 3.3,
+            width: Get.width / 3.3,
             child: CustomTextField(
               controller: createNewStudySameProgramController.studyNameController,
               fillColor: ColorValues.textFieldLightGrayColor.withOpacity(0.50),

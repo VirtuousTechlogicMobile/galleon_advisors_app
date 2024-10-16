@@ -27,8 +27,8 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Responsive.isMobile(context) ? 50 : Dimens.fifty,
-      width: MediaQuery.sizeOf(context).width,
+      height: GetResponsiveDimens.getAppBarHeight(context),
+      width: Get.width,
       color: ColorValues.whiteColor,
       padding: EdgeInsets.only(
         left: Dimens.fourteen,

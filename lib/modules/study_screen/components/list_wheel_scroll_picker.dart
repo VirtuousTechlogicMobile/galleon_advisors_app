@@ -9,14 +9,15 @@ class ListWheelScrollPicker extends StatelessWidget {
   final List<String> itemsList;
   final Function(int selectedValue) onSelectedItemChanged;
   final int selectedIndex;
+  final FixedExtentScrollController scrollController;
   final bool isScroll;
-
   const ListWheelScrollPicker({
     super.key,
     required this.itemsList,
     required this.onSelectedItemChanged,
     required this.selectedIndex,
     this.isScroll = true,
+    required this.scrollController,
   });
 
   @override
@@ -29,8 +30,8 @@ class ListWheelScrollPicker extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             ListWheelScrollView.useDelegate(
-              controller: FixedExtentScrollController(initialItem: selectedIndex),
-              physics: isScroll ? const FixedExtentScrollPhysics() : const NeverScrollableScrollPhysics(),
+              controller: scrollController,
+              physics: FixedExtentScrollPhysics(parent: isScroll ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics()),
               itemExtent: itemExtent /*GetResponsiveDimens.eightyAndSixty(context)*/,
               diameterRatio: 100,
               onSelectedItemChanged: (index) {

@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
@@ -30,7 +30,7 @@ class NxAssetImage extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       constraints: BoxConstraints(
-        maxWidth: maxWidth ?? Dimens.screenWidth,
+        maxWidth: maxWidth ?? Get.width,
         maxHeight: maxHeight ?? Dimens.screenHeight,
       ),
       child: Image.asset(

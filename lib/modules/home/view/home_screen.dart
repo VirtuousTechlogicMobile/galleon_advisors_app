@@ -6,9 +6,10 @@ import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
+import '../../../constant/app_states.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
+import '../../../utility/role_permission.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +25,6 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              // flex: Responsive.isMobile(context) ? 5 : 3,
               child: Container(
                 height: Dimens.screenHeight,
                 margin: EdgeInsets.all(Dimens.twentyFour),
@@ -89,34 +89,36 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven),
-          InkWell(
-            onTap: () {
-              Get.toNamed(AppRoutes.managePositions);
-            },
-            child: Row(
-              children: [
-                CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
-                Text(
-                  StringValues.managePosition.tr,
-                  style: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.fifteen),
-              ],
-            ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.nine, right: Responsive.isMobile(context) ? Dimens.sixty : Dimens.forty),
+          if (hasAccessFeature(Features.viewPositions))
+            InkWell(
+              onTap: () {
+                Get.toNamed(AppRoutes.managePositions);
+              },
+              child: Row(
+                children: [
+                  CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
+                  Text(
+                    StringValues.managePosition.tr,
+                    style: AppStyles.style16Normal,
+                  ).marginOnly(left: Dimens.fifteen),
+                ],
+              ),
+            ).marginOnly(bottom: Dimens.thirty, left: Dimens.nine, right: GetResponsiveDimens.sixtyAndForty(context)),
           GestureDetector(
             onTap: () {
+              currentUserRole = null;
               Get.offAllNamed(AppRoutes.login);
             },
             child: Container(
-              margin: Responsive.isMobile(context) ? EdgeInsets.symmetric(horizontal: Dimens.ten) : EdgeInsets.zero,
+              margin: EdgeInsets.symmetric(horizontal: GetResponsiveDimens.tenAndZero(context)),
               padding: EdgeInsets.all(Dimens.twelve),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: ColorValues.green,
-                  width: Dimens.two,
+                  width: GetResponsiveDimens.threeAndTwo(context),
                 ),
                 borderRadius: BorderRadius.circular(
-                  Dimens.nine,
+                  GetResponsiveDimens.nineAndSeven(context),
                 ),
               ),
               child: Row(

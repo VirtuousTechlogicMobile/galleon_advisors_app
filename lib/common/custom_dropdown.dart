@@ -86,8 +86,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
                     angle: (math.pi / 2),
                     child: CommonWidgets.fromSvg(
                       svgAsset: widget.dropdownIcon ?? SvgAssets.dropdownRightArrowIcon,
-                      height: Responsive.isMobile(context) ? widget.dropDownIconSize?.height ?? Dimens.fourteen : widget.dropDownIconSize?.height ?? Dimens.thirteen,
-                      width: Responsive.isMobile(context) ? widget.dropDownIconSize?.width ?? Dimens.fourteen : widget.dropDownIconSize?.width ?? Dimens.thirteen,
+                      height: widget.dropDownIconSize?.height ?? GetResponsiveDimens.fourteenAndThirteen(context),
+                      width: widget.dropDownIconSize?.width ?? GetResponsiveDimens.fourteenAndThirteen(context),
                       boxFit: BoxFit.fill,
                     ),
                   ),
@@ -140,7 +140,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           ),
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: Responsive.isMobile(context) ? Dimens.screenHeight / 2 : Dimens.screenHeight / 3.3,
+          maxHeight: GetResponsiveDimens.heightDivTwoAndThreePointThree(context),
           padding: EdgeInsets.zero,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

@@ -507,7 +507,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: Dimens.fiftyFive,
+                      reservedSize: Dimens.sixty,
                       interval: 1000,
                       getTitlesWidget: (value, _) {
                         switch (value.toInt()) {

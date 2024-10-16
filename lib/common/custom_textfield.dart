@@ -81,7 +81,6 @@ class CustomTextField extends StatelessWidget {
         inputFormatters: inputFormatters,
         readOnly: isReadOnly,
         autofocus: autofocus ?? false,
-        // style: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor),
         style: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
           if (states.contains(WidgetState.focused)) {
             return textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor);

@@ -38,7 +38,7 @@ class CreateDualStudyScreen extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: SizedBox(
-                  width: MediaQuery.sizeOf(context).width / 3.3,
+                  width: Get.width / 3.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,

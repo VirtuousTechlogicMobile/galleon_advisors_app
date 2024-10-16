@@ -10,6 +10,7 @@ import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
 import '../../../utility/responsive.dart';
+import '../../../utility/role_permission.dart';
 import '../controller/manage_studies_controller.dart';
 
 class ManageStudiesAppbar extends StatelessWidget {
@@ -101,7 +102,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (manageStudiesController.expandedListTileIndex.value != null)
+                  if (manageStudiesController.expandedListTileIndex.value != null && hasAccessFeature(Features.deleteStudies))
                     InkWell(
                       onTap: () {
                         manageStudiesController.isDialogOpen.value = true;

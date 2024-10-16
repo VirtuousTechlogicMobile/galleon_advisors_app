@@ -303,7 +303,7 @@ abstract class Dimens {
   static double sixty = 60.r;
   static double sixtyTwo = 62.r;
   static double sixtyFour = 64.r;
-  static double sixtyFive = 64.r;
+  static double sixtyFive = 65.r;
   static double ten = 10.r;
   static double thirteen = 13.r;
   static double thirty = 30.r;

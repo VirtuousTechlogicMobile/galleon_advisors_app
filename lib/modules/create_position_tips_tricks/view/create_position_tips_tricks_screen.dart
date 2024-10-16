@@ -30,7 +30,7 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
             const CreateNewPositionAppbar(positionName: "Housekeeping - Driver"),
             Expanded(
               child: Container(
-                width: Dimens.screenWidth,
+                width: Get.width,
                 margin: EdgeInsets.only(top: Dimens.twenty, bottom: Dimens.nine, left: Dimens.fourteen, right: Dimens.fifteen),
                 padding: EdgeInsets.only(top: Dimens.ten, left: Dimens.thirty, right: Dimens.twelve),
                 decoration: BoxDecoration(

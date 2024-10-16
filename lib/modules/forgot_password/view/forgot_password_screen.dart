@@ -134,7 +134,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             /// divider
             Container(
               height: Dimens.five,
-              width: MediaQuery.sizeOf(context).width / 3,
+              width: Get.width / 3,
               margin: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.sixTeen),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimens.ten),

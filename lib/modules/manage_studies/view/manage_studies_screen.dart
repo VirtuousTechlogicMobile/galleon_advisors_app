@@ -92,7 +92,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                               // switch between text field and text for rename
                                               child: manageStudiesController.renameStudyById.value == manageStudiesController.studyData[index].studyData[studyIndex].studyId
                                                   ? SizedBox(
-                                                      width: Dimens.screenWidth / 3.5,
+                                                      width: Get.width / 3.5,
                                                       child: CustomTextField(
                                                         controller: manageStudiesController.renameStudyController,
                                                         maxLines: 1,

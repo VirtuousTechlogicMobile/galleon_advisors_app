@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,9 @@ class StudyScreenController extends GetxController {
   Rxn<int> selectedOpportunityTheme = Rxn<int>();
   RxInt selectedVolume = 0.obs;
   RxInt selectedStudyIndex = 0.obs;
+  late FixedExtentScrollController servicesScrollController;
+  late FixedExtentScrollController volumeScrollController;
+  late FixedExtentScrollController oppThemeScrollController;
 
   RxString currentTime = ''.obs;
   Timer? timer;
@@ -23,15 +27,22 @@ class StudyScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    insertVolumeItems();
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       getCurrentDateTime();
     });
+    servicesScrollController = FixedExtentScrollController(initialItem: selectedServiceActivities.value ?? 0);
+    volumeScrollController = FixedExtentScrollController(initialItem: selectedVolume.value);
+    oppThemeScrollController = FixedExtentScrollController(initialItem: selectedOpportunityTheme.value ?? 0);
   }
 
   @override
   void onClose() {
     super.onClose();
     timer?.cancel();
+    servicesScrollController.dispose();
+    volumeScrollController.dispose();
+    oppThemeScrollController.dispose();
   }
 
   RxDouble splitSliderValue = 50.0.obs;
@@ -94,7 +105,16 @@ class StudyScreenController extends GetxController {
   ];
   List<String> dualStudiesList = ['Test', 'Default Study 2', 'Default Study 3', 'Default Study 4'];
   List<String> opportunityThemes = ['learn excel', 'learn export', 'opportunity 1', 'opportunity 2 ', 'Item 1', 'Item 2', "opportunity 3", 'opportunity 4', 'Item 3'];
-  List<String> volumeItems = ['1 7', '2 8', '3 9', '4 1', '5 2', '6 3', '7 4', '8 5', '9 6'];
+  List<String> volumeItems = [];
+
+  insertVolumeItems() {
+    volumeItems = List.generate(99, (index) {
+      int number = index + 1;
+      String formattedNumber = number < 10 ? '0$number' : '$number';
+      // Add spaces between the digits
+      return formattedNumber.split('').join(' ');
+    });
+  }
 
   List<OperationalAnalysisDataModel> tableData = [
     OperationalAnalysisDataModel(analysisName: 'Server Travel Analysis', dataInputs: '•  Capture travel between sections', sample: '<hyperlink to image > or image attachment')
@@ -155,9 +175,23 @@ class StudyScreenController extends GetxController {
     }
   }
 
-  onSubmitStudy() {
-    servicesTapped.value = false;
-    opportunityTapped.value = false;
+  onSubmitStudy() async {
+    volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+    if (servicesTapped.value) {
+      /// if submit value of service
+      servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      await Future.delayed(const Duration(milliseconds: 300));
+      servicesTapped.value = false;
+    } else {
+      /// if submit value of opportunity
+      oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      await Future.delayed(const Duration(milliseconds: 300));
+      opportunityTapped.value = false;
+    }
+    if (opportunityTapped.value || servicesTapped.value) {
+      servicesTapped.value = false;
+      opportunityTapped.value = false;
+    }
   }
 
   RxList<StudyTimelineDataModel> studyTimeLineData = [
@@ -186,8 +220,13 @@ class StudyScreenController extends GetxController {
       currentSelectedStudyTimeline.value = null;
       selectedStudyTimelinesList.clear();
     } else if (servicesTapped.value || opportunityTapped.value) {
-      servicesTapped.value = false;
-      opportunityTapped.value = false;
+      servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      Future.delayed(const Duration(milliseconds: 500)).then(
+        (value) {
+          servicesTapped.value = false;
+          opportunityTapped.value = false;
+        },
+      );
     } else {
       Get.offNamed(AppRoutes.home);
     }

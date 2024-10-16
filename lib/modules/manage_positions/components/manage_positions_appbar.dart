@@ -12,6 +12,7 @@ import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
 import '../../../utility/responsive.dart';
+import '../../../utility/role_permission.dart';
 
 class ManagePositionsAppbar extends StatelessWidget {
   ManagePositionsAppbar({super.key});
@@ -93,32 +94,38 @@ class ManagePositionsAppbar extends StatelessWidget {
                       maxLines: 1,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.createNewPosition);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: Dimens.twentyFive),
-                      padding: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.twentyFour),
-                      decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.ten)),
-                      alignment: Alignment.center,
+                  Visibility(
+                    visible: hasAccessFeature(Features.addPositions),
+                    replacement: SizedBox(
+                      width: Dimens.fifteen,
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.createNewPosition);
+                      },
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.nine),
-                        decoration: BoxDecoration(
-                          color: ColorValues.whiteColor,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorValues.blackColor.withOpacity(0.12),
-                              offset: const Offset(0, 0),
-                              blurRadius: 16,
-                              spreadRadius: 0,
-                            )
-                          ],
-                        ),
+                        margin: EdgeInsets.only(left: Dimens.twentyFive),
+                        padding: EdgeInsets.symmetric(vertical: Dimens.ten, horizontal: Dimens.twentyFour),
+                        decoration: BoxDecoration(color: ColorValues.softGrayColor, borderRadius: BorderRadius.circular(Dimens.ten)),
                         alignment: Alignment.center,
-                        child: CommonWidgets.fromSvg(
-                          svgAsset: SvgAssets.addIcon,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.nine),
+                          decoration: BoxDecoration(
+                            color: ColorValues.whiteColor,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorValues.blackColor.withOpacity(0.12),
+                                offset: const Offset(0, 0),
+                                blurRadius: 16,
+                                spreadRadius: 0,
+                              )
+                            ],
+                          ),
+                          alignment: Alignment.center,
+                          child: CommonWidgets.fromSvg(
+                            svgAsset: SvgAssets.addIcon,
+                          ),
                         ),
                       ),
                     ),
