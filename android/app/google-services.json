@@ -26,9 +26,28 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86176070341:android:e028faaad75255e2dcceac",
+        "mobilesdk_app_id": "1:86176070341:android:59daa639235a9e6edcceac",
         "android_client_info": {
           "package_name": "com.galleon.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRFIYRMhu3yNVzlmDOk-M03n2QSGJgK68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86176070341:android:e028faaad75255e2dcceac",
+        "android_client_info": {
+          "package_name": "com.gelleon_admin"
         }
       },
       "oauth_client": [],
