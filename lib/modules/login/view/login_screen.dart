@@ -10,9 +10,7 @@ import 'package:galleon_user/modules/login/controller/login_controller.dart';
 import 'package:get/get.dart';
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
-import '../../../helper/validators.dart';
 import '../../../routes/app_pages.dart';
-import '../../../utility/utility.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -105,24 +103,7 @@ class LoginScreen extends StatelessWidget {
                                         btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
                                         margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),
-                                        onTap: () {
-                                          if (loginController.emailController.text.trim().isEmpty) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterEmail.tr);
-                                          } else if (loginController.emailController.text.trim().isNotEmpty && !Validators.isValidEmail(loginController.emailController.text)) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterValidEmail.tr);
-                                          } else if (loginController.passwordController.text.trim().isEmpty) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterPassword.tr);
-                                          } else if (loginController.passwordController.text.trim().length < 6) {
-                                            AppUtility.showSnackBar(StringValues.passwordMustBeAtLeast6Characters.tr);
-                                          } else {
-                                            bool loginUser = loginController.setUserRole();
-                                            if (loginUser) {
-                                              Get.offAllNamed(AppRoutes.home);
-                                            } else {
-                                              AppUtility.showSnackBar('invalid email');
-                                            }
-                                          }
-                                        },
+                                        onTap: () => loginController.onLogin(),
                                       ),
                                       InkWell(
                                         onTap: () {

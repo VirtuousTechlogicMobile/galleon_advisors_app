@@ -71,5 +71,9 @@ final Map<String, String> enUs = {
   'add': 'Add',
   'please_select_department': 'Please select department',
   'please_enter_name': 'Please enter name',
+  'user_not_found': 'User not found',
+  'wrong_email_password': 'Wrong email/password',
+  'something_want_wrong': 'Something want wrong!',
+  'No_internet_connection_are_available': 'No internet connection are available',
   'Create': 'Create',
 };

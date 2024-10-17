@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:galleon_user/constant/strings.dart';
 import 'package:galleon_user/services/translations/app_translations.dart';
 import 'package:galleon_user/theme/theme_controller.dart';
@@ -31,6 +32,7 @@ void runApplication() {
 
 Future<void> _initPreAppServices() async {
   AppUtility.log('Initializing PreApp Services');
+  await Firebase.initializeApp();
   await StorageGetterSetters().init();
   await Hive.initFlutter();
 

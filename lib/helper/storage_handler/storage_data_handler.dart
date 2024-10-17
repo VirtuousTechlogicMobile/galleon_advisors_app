@@ -15,8 +15,24 @@ abstract class StorageDataHandler {
     return userId;
   }
 
+  // Set User Role
+  static Future<void> setUserRole({required String role}) async {
+    await storage.setData(StorageSynonyms.userRole, role);
+  }
+
+  // Get User Role
+  static Future<String?> getUserRole() async {
+    String? userRole = storage.getData(StorageSynonyms.userRole);
+    return userRole;
+  }
+
   // Delete User UID
   static Future<void> deleteUserUid() async {
     await storage.clearKey(StorageSynonyms.userId);
+  }
+
+  // Delete User Role
+  static Future<void> deleteUserRole() async {
+    await storage.clearKey(StorageSynonyms.userRole);
   }
 }

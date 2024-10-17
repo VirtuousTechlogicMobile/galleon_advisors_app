@@ -70,4 +70,8 @@ abstract class StringValues {
   static const add = 'add';
   static const pleaseSelectDepartment = 'please_select_department';
   static const pleaseEnterName = 'please_enter_name';
+  static const userNotFound = 'user_not_found';
+  static const wrongEmailPassword = 'wrong_email_password';
+  static const somethingWantWrong = 'something_want_wrong';
+  static const noInternetConnectionAreAvailable = 'No_internet_connection_are_available';
 }
