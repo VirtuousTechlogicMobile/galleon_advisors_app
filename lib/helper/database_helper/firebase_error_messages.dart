@@ -5,4 +5,5 @@ class FirebaseErrorMessages {
   static const String wrongEmailOrPassword = StringValues.wrongEmailPassword;
   static const String somethingWantWrong = StringValues.somethingWantWrong;
   static const String noInternet = StringValues.noInternetConnectionAreAvailable;
+  static const String emailNotExists = StringValues.emailAddressDoesNotExists;
 }

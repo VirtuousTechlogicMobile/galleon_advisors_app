@@ -35,4 +35,9 @@ abstract class StorageDataHandler {
   static Future<void> deleteUserRole() async {
     await storage.clearKey(StorageSynonyms.userRole);
   }
+
+  // Delete All data
+  static Future<void> deleteAllData() async {
+    await storage.clearAll();
+  }
 }

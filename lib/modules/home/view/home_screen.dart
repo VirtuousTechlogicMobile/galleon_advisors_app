@@ -6,14 +6,15 @@ import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-import '../../../constant/app_states.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
 import '../../../utility/role_permission.dart';
+import '../controller/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
+  final homeScreenController = Get.find<HomeScreenController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,10 +106,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ).marginOnly(bottom: Dimens.thirty, left: Dimens.nine, right: GetResponsiveDimens.sixtyAndForty(context)),
           GestureDetector(
-            onTap: () {
-              currentUserRole = null;
-              Get.offAllNamed(AppRoutes.login);
-            },
+            onTap: () => homeScreenController.onLogout(),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: GetResponsiveDimens.tenAndZero(context)),
               padding: EdgeInsets.all(Dimens.twelve),

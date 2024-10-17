@@ -50,7 +50,7 @@ class Example {
   Future getUserData(String docId) async {
     try {
       if (docId.isEmpty) {
-        throw DocumentPathNotEmptyException(); // Handle custom document not found case
+        throw DocumentPathNotEmptyException();
       }
       DocumentSnapshot document = await FirebaseFirestore.instance.collection('users').doc(docId).get();
       if (!document.exists) {

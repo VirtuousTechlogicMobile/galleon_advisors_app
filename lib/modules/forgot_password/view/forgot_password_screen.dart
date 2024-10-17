@@ -92,16 +92,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                             buttonWidth: Responsive.isMobile(context) ? smallConstraints.maxWidth / 1.4 : smallConstraints.maxWidth / 1.8,
                                             contentPadding: EdgeInsets.symmetric(vertical: Dimens.eleven, horizontal: Dimens.twentySix),
                                             margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),
-                                            onTap: () {
-                                              if (forgotPasswordController.emailController.text.trim().isEmpty) {
-                                                AppUtility.showSnackBar(StringValues.pleaseEnterEmail.tr);
-                                              } else if (forgotPasswordController.emailController.text.trim().isNotEmpty &&
-                                                  !Validators.isValidEmail(forgotPasswordController.emailController.text)) {
-                                                AppUtility.showSnackBar(StringValues.pleaseEnterValidEmail.tr);
-                                              } else {
-                                                Get.offAllNamed(AppRoutes.home);
-                                              }
-                                            },
+                                            onTap: () => forgotPasswordController.onResetPassword(),
                                           ),
                                         ],
                                       );

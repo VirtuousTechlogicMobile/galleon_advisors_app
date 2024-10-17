@@ -3,5 +3,6 @@ abstract class DatabaseSynonyms {
   static const usersCollection = 'users';
 
   /// fields
+  static const roleField = 'role';
   static const emailField = 'email';
 }

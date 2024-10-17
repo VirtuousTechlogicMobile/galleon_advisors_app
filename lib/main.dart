@@ -7,6 +7,8 @@ import 'package:galleon_user/utility/utility.dart';
 import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'constant/hive_box_names.dart';
+import 'firebase_options.dart';
+import 'helper/connectivity_helper/connectivity_service.dart';
 import 'helper/storage_handler/storage_getters_setters.dart';
 import 'routes/app_pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +34,7 @@ void runApplication() {
 
 Future<void> _initPreAppServices() async {
   AppUtility.log('Initializing PreApp Services');
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await StorageGetterSetters().init();
   await Hive.initFlutter();
 
@@ -49,6 +51,7 @@ Future<void> _initPreAppServices() async {
   AppUtility.log('Initializing Get Services');
 
   Get.put(AppThemeController(), permanent: true);
+  Get.put(ConnectivityService());
 
   AppUtility.log('Get Services Initialized');
 

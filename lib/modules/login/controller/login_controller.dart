@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:galleon_user/utility/role_permission.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
@@ -17,21 +18,20 @@ class LoginController extends GetxController {
   FocusNode passwordNode = FocusNode();
   RxBool isShowPassword = false.obs;
 
-  bool setUserRole() {
-    if (emailController.text == 'admin@gmail.com') {
-      currentUserRole = UserRole.admin;
-      return true;
-    } else if (emailController.text == 'client@gmail.com') {
-      currentUserRole = UserRole.client;
-      return true;
-    } else if (emailController.text == 'manager@gmail.com') {
-      currentUserRole = UserRole.manager;
-      return true;
-    } else if (emailController.text == 'consultant@gmail.com') {
-      currentUserRole = UserRole.consultant;
-      return true;
-    } else {
-      return false;
+  setUserRole(String? role) {
+    switch (role) {
+      case ('admin'):
+        currentUserRole = UserRole.admin;
+        break;
+      case ('consultant'):
+        currentUserRole = UserRole.consultant;
+        break;
+      case ('client'):
+        currentUserRole = UserRole.client;
+        break;
+      case ('manager'):
+        currentUserRole = UserRole.manager;
+        break;
     }
   }
 
@@ -45,17 +45,27 @@ class LoginController extends GetxController {
     } else if (passwordController.text.trim().length < 6) {
       AppUtility.showSnackBar(StringValues.passwordMustBeAtLeast6Characters.tr);
     } else {
-      await signInUser();
-      bool loginUser = setUserRole();
-      if (loginUser) {
-        Get.offAllNamed(AppRoutes.home);
+      if (await AppUtility.checkNetwork()) {
+        Get.context?.loaderOverlay.show();
+        FirebaseResponseModel<String?> response = await signInUser();
+        if (response.isSuccess) {
+          if (response.data != null) {
+            setUserRole(response.data);
+          }
+          Get.offAllNamed(AppRoutes.home);
+        } else {
+          if (response.errorMessage != null) {
+            AppUtility.showSnackBar(response.errorMessage!.tr);
+          }
+        }
+        Get.context?.loaderOverlay.hide();
       } else {
-        AppUtility.showSnackBar('invalid email');
+        AppUtility.showSnackBar(StringValues.noInternetConnectionAreAvailable.tr);
       }
     }
   }
 
-  Future signInUser() async {
-    FirebaseResponseModel signInResponse = await DatabaseHelper.instance.signInUser(email: emailController.text, password: passwordController.text);
+  Future<FirebaseResponseModel<String?>> signInUser() async {
+    return await DatabaseHelper.instance.signInUser(email: emailController.text, password: passwordController.text);
   }
 }

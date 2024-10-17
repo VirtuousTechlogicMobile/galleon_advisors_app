@@ -10,15 +10,6 @@ abstract class StringValues {
   static const managePosition = 'manage_positions';
   static const logout = 'log_out';
   static const program = 'program';
-  static const selectAll = 'select_all';
-  static const view = 'view';
-  static const deleteStudies = 'delete_studies';
-  static const deleteDesc = 'you_are_about_to_delete_the_studies';
-  static const uploadStudies = 'do_you_want_to_upload';
-  static const uploadDesc = 'you_are_about_to_upload_the_studies_to_lowcode';
-  static const upload = 'upload';
-  static const delete = 'delete';
-  static const cancle = 'cancle';
   static const pleaseEnterEmail = 'please_enter_email';
   static const pleaseEnterValidEmail = 'please_enter_valid_email';
   static const pleaseEnterPassword = 'please_enter_password';
@@ -82,5 +73,7 @@ abstract class StringValues {
   static const userNotFound = 'user_not_found';
   static const wrongEmailPassword = 'wrong_email_password';
   static const somethingWantWrong = 'something_want_wrong';
-  static const noInternetConnectionAreAvailable = 'No_internet_connection_are_available';
+  static const noInternetConnectionAreAvailable = 'no_internet_connection_are_available';
+  static const emailAddressDoesNotExists = 'email_address_does_not_exists';
+  static const aLinkToResetYourPasswordHasBeenSentToYourEmailAddress = 'a_link_to_reset_your_password_has_been_sent_to_your_email_address';
 }
