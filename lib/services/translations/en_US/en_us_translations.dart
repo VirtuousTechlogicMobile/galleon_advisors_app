@@ -84,6 +84,5 @@ final Map<String, String> enUs = {
   'delete_studies': 'Delete Studies',
   'you_are_about_to_delete_the_studies': 'You are about to delete the studies. Are you sure you want to do this? This action cannot be undone.',
   'do_you_want_to_upload': 'Do you want to upload ',
-  'you_are_about_to_upload_the_studies_to_lowcode':
-      'You are about to upload the studies to LowCode. Are you sure you want to do this? This action cannot be undone.',
+  'you_are_about_to_upload_the_studies_to_lowcode': 'You are about to upload the studies to LowCode. Are you sure you want to do this? This action cannot be undone.',
 };
