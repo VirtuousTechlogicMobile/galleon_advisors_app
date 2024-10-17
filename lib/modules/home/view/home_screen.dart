@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/routes/app_pages.dart';
-import 'package:galleon_advisors_app/routes/route_management.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/routes/app_pages.dart';
+import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
+import '../../../constant/app_states.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
+import '../../../utility/role_permission.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,38 +19,41 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorValues.appBgColor,
       body: SafeArea(
-        top: true,
+        left: false,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              flex: 3,
               child: Container(
+                height: Dimens.screenHeight,
                 margin: EdgeInsets.all(Dimens.twentyFour),
                 decoration: BoxDecoration(
                   color: ColorValues.whiteColor,
                   borderRadius: BorderRadius.circular(Dimens.thirtyTwo),
                 ),
-                child: Transform.scale(
-                  scale: 1.5,
-                  child: Image.asset(
-                    AssetValues.leftToRightAppLogo,
-                  ),
-                ),
+                child: Responsive.isMobile(context)
+                    ? Image.asset(
+                        AssetValues.leftToRightAppLogo,
+                      ).paddingSymmetric(horizontal: Dimens.hundred)
+                    : Transform.scale(
+                        scale: 1.5,
+                        child: Image.asset(
+                          AssetValues.leftToRightAppLogo,
+                        ),
+                      ),
               ),
             ),
-            Expanded(flex: 1, child: menuLayout()),
+            IntrinsicWidth(child: menuLayout(context)),
           ],
         ),
       ),
     );
   }
 
-  Widget menuLayout() {
+  Widget menuLayout(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimens.twentyFive,
-      ),
+      padding: EdgeInsets.only(left: Dimens.twenty, right: Dimens.thirty),
       decoration: const BoxDecoration(
         color: ColorValues.whiteColor,
       ),
@@ -57,19 +62,19 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.createNewStudy);
+            },
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.newStudy.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.eighteen),
+                Text(
+                  StringValues.newStudy.tr,
+                  style: AppStyles.style16Normal,
+                ).marginOnly(left: Dimens.twenty),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.fourteen),
           InkWell(
             onTap: () {
               Get.toNamed(AppRoutes.manageStudies);
@@ -77,42 +82,45 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               children: [
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.folderOutlinedIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.manageStudies.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
+                Text(
+                  StringValues.manageStudies.tr,
+                  style: AppStyles.style16Normal,
                 ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
-          InkWell(
-            child: Row(
-              children: [
-                CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
-                CommonWidgets.autoSizeText(
-                  text: StringValues.managePosition.tr,
-                  minFontSize: 12,
-                  maxFontSize: 16,
-                  textStyle: AppStyles.style16Normal,
-                ).marginOnly(left: Dimens.ten),
-              ],
-            ),
-          ).marginOnly(bottom: Dimens.thirty, left: Dimens.seven),
+          ).marginOnly(bottom: Dimens.thirty, left: Dimens.eleven),
+          if (hasAccessFeature(Features.viewPositions))
+            InkWell(
+              onTap: () {
+                Get.toNamed(AppRoutes.managePositions);
+              },
+              child: Row(
+                children: [
+                  CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
+                  Text(
+                    StringValues.managePosition.tr,
+                    style: AppStyles.style16Normal,
+                  ).marginOnly(left: Dimens.fifteen),
+                ],
+              ),
+            ).marginOnly(bottom: Dimens.thirty, left: Dimens.nine, right: GetResponsiveDimens.sixtyAndForty(context)),
           GestureDetector(
             onTap: () {
-              RouteManagement.goToLoginScreen();
+              currentUserRole = null;
+              Get.offAllNamed(AppRoutes.login);
             },
             child: Container(
-              padding: EdgeInsets.all(Dimens.fourteen),
+              margin: EdgeInsets.symmetric(horizontal: GetResponsiveDimens.tenAndZero(context)),
+              padding: EdgeInsets.all(Dimens.twelve),
               decoration: BoxDecoration(
-                  border: Border.all(
-                    color: ColorValues.green,
-                    width: 1.5,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    Dimens.eight,
-                  )),
+                border: Border.all(
+                  color: ColorValues.green,
+                  width: GetResponsiveDimens.threeAndTwo(context),
+                ),
+                borderRadius: BorderRadius.circular(
+                  GetResponsiveDimens.nineAndSeven(context),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

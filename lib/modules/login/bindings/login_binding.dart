@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/modules/login/controller/login_controller.dart';
+import 'package:galleon_user/modules/login/controller/login_controller.dart';
 import 'package:get/get.dart';
 
 class LoginBinding extends Bindings {

@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_advisors_app/common/common_widgets.dart';
-import 'package:galleon_advisors_app/common/custom_primary_button.dart';
-import 'package:galleon_advisors_app/common/custom_textfield.dart';
-import 'package:galleon_advisors_app/constant/assets.dart';
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/strings.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/modules/login/controller/login_controller.dart';
-import 'package:galleon_advisors_app/routes/route_management.dart';
+import 'package:galleon_user/common/common_widgets.dart';
+import 'package:galleon_user/common/custom_primary_button.dart';
+import 'package:galleon_user/common/custom_textfield.dart';
+import 'package:galleon_user/constant/assets.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/modules/login/controller/login_controller.dart';
 import 'package:get/get.dart';
-
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
-import '../../../helper/validators.dart';
-import '../../../utility/utility.dart';
+import '../../../routes/app_pages.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -26,7 +23,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: ColorValues.appBgColor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        top: true,
+        left: false,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,33 +95,24 @@ class LoginScreen extends StatelessWidget {
                                             maxLines: 1,
                                           ),
                                         ),
-                                      ).marginOnly(top: Dimens.sixTeen),
+                                      ).marginOnly(top: Dimens.twentyFour),
                                       CustomPrimaryButton(
                                         btnText: StringValues.logIn.tr,
-                                        buttonWidth: smallConstraints.maxWidth / 1.9,
+                                        buttonWidth: Dimens.oneHundredFiftyEight,
                                         borderRadius: BorderRadius.circular(Dimens.thirty),
                                         btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
-                                        margin: EdgeInsets.symmetric(vertical: Dimens.sixTeen),
-                                        onTap: () {
-                                          if (loginController.emailController.text.trim().isEmpty) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterEmail.tr);
-                                          } else if (loginController.emailController.text.trim().isNotEmpty && !Validators.isValidEmail(loginController.emailController.text)) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterValidEmail.tr);
-                                          } else if (loginController.passwordController.text.trim().isEmpty) {
-                                            AppUtility.showSnackBar(StringValues.pleaseEnterPassword.tr);
-                                          } else if (loginController.passwordController.text.trim().length < 6) {
-                                            AppUtility.showSnackBar(StringValues.passwordMustBeAtLeast6Characters.tr);
-                                          } else {
-                                            RouteManagement.goToHomePageScreen();
-                                          }
-                                        },
+                                        margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),
+                                        onTap: () => loginController.onLogin(),
                                       ),
-                                      CommonWidgets.autoSizeText(
-                                        text: StringValues.forgotPassword.tr,
-                                        textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
-                                        minFontSize: 16,
-                                        maxFontSize: 16,
+                                      InkWell(
+                                        onTap: () {
+                                          Get.toNamed(AppRoutes.forgotPassword);
+                                        },
+                                        child: Text(
+                                          StringValues.forgotPassword.tr,
+                                          style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+                                        ),
                                       )
                                     ],
                                   );
@@ -149,7 +137,7 @@ class LoginScreen extends StatelessWidget {
             /// divider
             Container(
               height: Dimens.five,
-              width: MediaQuery.sizeOf(context).width / 3,
+              width: Get.width / 3,
               margin: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.sixTeen),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimens.ten),

@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/constant/dimens.dart';
+import 'package:galleon_user/constant/dimens.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppStyles {
@@ -78,6 +78,12 @@ abstract class AppStyles {
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
+  static TextStyle style14SemiBold = TextStyle(
+    fontSize: Dimens.fourteen,
+    fontWeight: FontWeight.w600,
+    fontFamily: defaultFontFamily,
+    height: defaultFontHeight,
+  );
 
   static TextStyle style14Normal = TextStyle(
     fontSize: Dimens.fourteen,
@@ -144,6 +150,13 @@ abstract class AppStyles {
 
   static TextStyle style18Normal = TextStyle(
     fontSize: Dimens.eighteen,
+    fontWeight: FontWeight.w400,
+    fontFamily: defaultFontFamily,
+    height: defaultFontHeight,
+  );
+
+  static TextStyle style19Normal = TextStyle(
+    fontSize: Dimens.nineteen,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
@@ -248,42 +261,42 @@ abstract class AppStyles {
   );
 
   static TextStyle style40Black = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w900,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style40Bold = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w700,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style40Normal = TextStyle(
-    fontSize: Dimens.fourty,
+    fontSize: Dimens.forty,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Black = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w900,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Bold = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w700,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,
   );
 
   static TextStyle style48Normal = TextStyle(
-    fontSize: Dimens.fourtyEight,
+    fontSize: Dimens.fortyEight,
     fontWeight: FontWeight.w400,
     fontFamily: defaultFontFamily,
     height: defaultFontHeight,

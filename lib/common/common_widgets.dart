@@ -16,28 +16,6 @@ class CommonWidgets {
     );
   }
 
-  static Widget autoSizeText({
-    required String text,
-    required TextStyle textStyle,
-    TextAlign? textAlign,
-    required double minFontSize,
-    required double maxFontSize,
-    Key? key,
-    int? maxLines,
-  }) {
-    return AutoSizeText(
-      key: key,
-      text,
-      softWrap: true,
-      style: textStyle,
-      textAlign: textAlign,
-      minFontSize: minFontSize,
-      maxFontSize: maxFontSize,
-      maxLines: maxLines ?? 1,
-      overflow: TextOverflow.ellipsis,
-    );
-  }
-
   static Widget autoSizeRichText({
     required List<TextSpan> textSpans,
     TextAlign? textAlign,

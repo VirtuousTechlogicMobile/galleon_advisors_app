@@ -1,4 +1,4 @@
-import 'package:galleon_advisors_app/modules/manage_studies/controller/manage_studies_controller.dart';
+import 'package:galleon_user/modules/manage_studies/controller/manage_studies_controller.dart';
 import 'package:get/get.dart';
 
 class ManageStudiesBinding extends Bindings {

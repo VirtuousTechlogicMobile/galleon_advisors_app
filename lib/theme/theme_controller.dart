@@ -1,7 +1,7 @@
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/dimens.dart';
-import 'package:galleon_advisors_app/constant/styles.dart';
-import 'package:galleon_advisors_app/services/storage/hive_service.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/dimens.dart';
+import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/services/storage/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';

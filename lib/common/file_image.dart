@@ -1,12 +1,12 @@
 import 'dart:io';
-
-import 'package:galleon_advisors_app/constant/colors.dart';
-import 'package:galleon_advisors_app/constant/dimens.dart';
+import 'package:get/get.dart';
+import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/constant/dimens.dart';
 import 'package:flutter/cupertino.dart';
 
 class NxFileImage extends StatelessWidget {
   const NxFileImage({
-    Key? key,
+    super.key,
     required this.file,
     this.width,
     this.height,
@@ -14,7 +14,7 @@ class NxFileImage extends StatelessWidget {
     this.maxHeight,
     this.scale,
     this.fit,
-  }) : super(key: key);
+  });
 
   final File file;
   final double? width;
@@ -30,7 +30,7 @@ class NxFileImage extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       constraints: BoxConstraints(
-        maxWidth: maxWidth ?? Dimens.screenWidth,
+        maxWidth: maxWidth ?? Get.width,
         maxHeight: maxHeight ?? Dimens.screenHeight,
       ),
       child: Image.file(
