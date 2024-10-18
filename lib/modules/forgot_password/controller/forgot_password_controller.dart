@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:galleon_user/helper/database_helper/database_helper.dart';
+import 'package:galleon_user/main.dart';
 import 'package:get/get.dart';
 import '../../../constant/strings.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';
@@ -15,6 +17,7 @@ class ForgotPasswordController extends GetxController {
     } else if (emailController.text.trim().isNotEmpty && !Validators.isValidEmail(emailController.text)) {
       AppUtility.showSnackBar(StringValues.pleaseEnterValidEmail.tr);
     } else {
+      Get.context?.loaderOverlay.show();
       if (await AppUtility.checkNetwork()) {
         FirebaseResponseModel response = await DatabaseHelper.instance.sendPasswordResetEmail(email: emailController.text);
         if (response.isSuccess) {
@@ -27,6 +30,7 @@ class ForgotPasswordController extends GetxController {
       } else {
         AppUtility.showSnackBar(StringValues.noInternetConnectionAreAvailable.tr);
       }
+      Get.context?.loaderOverlay.hide();
     }
   }
 }

@@ -29,6 +29,9 @@ void runApplication() {
     DeviceOrientation.landscapeRight,
   ]);
   runApp(const MyApp());
+
+  Get.put(ConnectivityService());
+
   AppUtility.log('App Initialized');
 }
 
@@ -51,7 +54,6 @@ Future<void> _initPreAppServices() async {
   AppUtility.log('Initializing Get Services');
 
   Get.put(AppThemeController(), permanent: true);
-  Get.put(ConnectivityService());
 
   AppUtility.log('Get Services Initialized');
 
@@ -86,27 +88,20 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(392, 744),
       builder: (ctx, child) {
-        return FutureBuilder(
-            future: Future.delayed(const Duration(milliseconds: 500), () => true),
-            builder: (context, snapshot) {
-              if (!(snapshot.data ?? false)) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return GlobalLoaderOverlay(
-                child: GetMaterialApp(
-                  title: StringValues.appName.tr,
-                  debugShowCheckedModeBanner: false,
-                  themeMode: _handleAppTheme(appController.themeMode),
-                  theme: appController.getLightThemeData(context),
-                  darkTheme: appController.getDarkThemeData(context),
-                  getPages: AppPages.pages,
-                  initialRoute: _handleAppInitialRoute(),
-                  translations: AppTranslation(),
-                  locale: Get.deviceLocale,
-                  fallbackLocale: const Locale('en', 'IN'),
-                ),
-              );
-            });
+        return GlobalLoaderOverlay(
+          child: GetMaterialApp(
+            title: StringValues.appName.tr,
+            debugShowCheckedModeBanner: false,
+            themeMode: _handleAppTheme(appController.themeMode),
+            theme: appController.getLightThemeData(context),
+            darkTheme: appController.getDarkThemeData(context),
+            getPages: AppPages.pages,
+            initialRoute: _handleAppInitialRoute(),
+            translations: AppTranslation(),
+            locale: Get.deviceLocale,
+            fallbackLocale: const Locale('en', 'IN'),
+          ),
+        );
       },
     );
   }

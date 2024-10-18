@@ -26,17 +26,17 @@ class CreateNewPositionController extends GetxController {
   }
 
   List<DropDownMenuItem> deptDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Housekeeping'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Food & Beverage'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Tester'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Developer'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Designer'),
+    DropDownMenuItem(itemName: 'Housekeeping'),
+    DropDownMenuItem(itemName: 'Food & Beverage'),
+    DropDownMenuItem(itemName: 'Tester'),
+    DropDownMenuItem(itemName: 'Developer'),
+    DropDownMenuItem(itemName: 'Designer'),
   ];
   List<DropDownMenuItem> templateDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Housekeeping'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Food & Beverage'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Tester'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Developer'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Designer'),
+    DropDownMenuItem(itemName: 'Housekeeping'),
+    DropDownMenuItem(itemName: 'Food & Beverage'),
+    DropDownMenuItem(itemName: 'Tester'),
+    DropDownMenuItem(itemName: 'Developer'),
+    DropDownMenuItem(itemName: 'Designer'),
   ];
 }

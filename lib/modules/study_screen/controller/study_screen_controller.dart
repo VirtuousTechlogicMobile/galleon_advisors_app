@@ -129,6 +129,8 @@ class StudyScreenController extends GetxController {
   }
 
   onChangeTab(int tabNo) {
+    volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+    oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
     switch (tabNo) {
       case 0:
         selectedTab.value = 'activities';

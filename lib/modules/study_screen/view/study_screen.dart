@@ -491,7 +491,7 @@ class StudyScreen extends StatelessWidget {
           child: Text(
             operationalAnalysisDataModel.analysisName,
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
-            maxLines: 3,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twentySeven, right: Dimens.twenty),
         ),
@@ -500,7 +500,7 @@ class StudyScreen extends StatelessWidget {
           child: Text(
             operationalAnalysisDataModel.dataInputs,
             style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
-            maxLines: 3,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
         ),
@@ -510,7 +510,7 @@ class StudyScreen extends StatelessWidget {
             child: StudyScreenComponents.customListElement(
               text: operationalAnalysisDataModel.sample,
               textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
-              maxLines: 3,
+              maxLines: 2,
             ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
           ),
       ],

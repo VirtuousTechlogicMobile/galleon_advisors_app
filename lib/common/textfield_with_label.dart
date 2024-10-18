@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
 import '../constant/styles.dart';
-import 'common_widgets.dart';
 
 class TextFieldWithLabel extends StatefulWidget {
   final String labelText;

@@ -34,6 +34,7 @@ class ListWheelScrollPicker extends StatelessWidget {
               physics: FixedExtentScrollPhysics(parent: isScroll ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics()),
               itemExtent: itemExtent /*GetResponsiveDimens.eightyAndSixty(context)*/,
               diameterRatio: 100,
+              useMagnifier: true,
               onSelectedItemChanged: (index) {
                 // Use modulo to loop around the index for infinite scrolling
                 onSelectedItemChanged(index % itemsList.length);

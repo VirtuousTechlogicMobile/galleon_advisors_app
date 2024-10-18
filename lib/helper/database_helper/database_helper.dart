@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:galleon_user/helper/database_helper/database_synonyms.dart';
 import 'package:galleon_user/helper/database_helper/firebase_error_messages.dart';
 import 'package:galleon_user/helper/storage_handler/storage_data_handler.dart';
+import 'package:galleon_user/modules/create_new_position/model/program_data_model.dart';
+import 'package:galleon_user/modules/create_new_study/model/department_data_model.dart';
 
 import '../custom_exception_handler.dart';
 import 'firebase_response_model.dart';
@@ -41,7 +44,7 @@ class DatabaseHelper {
       } else if (e.code == 'user-not-found') {
         errorMessage = FirebaseErrorMessages.userNotFound;
       } else {
-        errorMessage = FirebaseErrorMessages.somethingWantWrong;
+        errorMessage = FirebaseErrorMessages.somethingWentWrong;
       }
       return FirebaseResponseModel(isSuccess: false, data: null, errorMessage: errorMessage);
     } on SocketException {
@@ -74,7 +77,7 @@ class DatabaseHelper {
       await firebaseAuth.signOut();
       return FirebaseResponseModel(isSuccess: true, data: null, errorMessage: null);
     } on FirebaseAuthException {
-      return FirebaseResponseModel(isSuccess: false, data: null, errorMessage: FirebaseErrorMessages.somethingWantWrong);
+      return FirebaseResponseModel(isSuccess: false, data: null, errorMessage: FirebaseErrorMessages.somethingWentWrong);
     } on SocketException {
       throw NoInternetException();
     } catch (e) {
@@ -103,6 +106,53 @@ class DatabaseHelper {
       throw NoInternetException();
     } catch (e) {
       throw GenericException("An unknown error occurred: $e");
+    }
+  }
+
+  Future<FirebaseResponseModel<List<ProgramDataModel>?>> getAllProgramsData() async {
+    try {
+      CollectionReference programCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.programCollection);
+
+      List<ProgramDataModel> programsList = [];
+
+      QuerySnapshot querySnapshot = await programCollectionRef.get();
+      if (querySnapshot.docs.isNotEmpty) {
+        programsList.addAll(querySnapshot.docs.map((docs) => ProgramDataModel.fromMap(docs.data() as Map<String, dynamic>, programId: docs.id)).toList());
+      }
+      return FirebaseResponseModel(
+        isSuccess: true,
+        data: programsList.isNotEmpty ? programsList : null,
+        errorMessage: null,
+      );
+    } on SocketException {
+      throw NoInternetException();
+    } catch (e) {
+      log("Exception : $e");
+      throw DataNotFoundException();
+    }
+  }
+
+  Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getProgramsDepartmentData({required List<String> departmentIds}) async {
+    try {
+      CollectionReference departmentCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.departCollection);
+      List<DepartmentDataModel> departmentList = [];
+
+      for (String docId in departmentIds) {
+        DocumentSnapshot docSnapshot = await departmentCollectionRef.doc(docId).get();
+        if (docSnapshot.exists) {
+          departmentList.add(DepartmentDataModel.fromMap(docSnapshot.data() as Map<String, dynamic>, departmentId: docSnapshot.id));
+        }
+      }
+      return FirebaseResponseModel(
+        isSuccess: true,
+        data: departmentList.isNotEmpty ? departmentList : null,
+        errorMessage: null,
+      );
+    } on SocketException {
+      throw NoInternetException();
+    } catch (e) {
+      log("Exception : $e");
+      throw DataNotFoundException();
     }
   }
 }

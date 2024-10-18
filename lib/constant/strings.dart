@@ -72,8 +72,12 @@ abstract class StringValues {
   static const pleaseEnterName = 'please_enter_name';
   static const userNotFound = 'user_not_found';
   static const wrongEmailPassword = 'wrong_email_password';
-  static const somethingWantWrong = 'something_want_wrong';
+  static const somethingWentWrong = 'something_went_wrong';
   static const noInternetConnectionAreAvailable = 'no_internet_connection_are_available';
   static const emailAddressDoesNotExists = 'email_address_does_not_exists';
   static const aLinkToResetYourPasswordHasBeenSentToYourEmailAddress = 'a_link_to_reset_your_password_has_been_sent_to_your_email_address';
+  static const ok = 'ok';
+  static const noInternetFoundCheckYourConnection = 'no_internet_found_check_your_connection';
+  static const oops = 'oops';
+  static const dataNotFound = 'data_not_found';
 }

@@ -63,6 +63,7 @@ class GetResponsiveDimens {
   static double seventyFiveAndOneHundredFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.oneHundredFifty : Dimens.seventyFive;
   static double threeHundredFiftyAndOneHundredFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.threeHundredFifty : Dimens.oneHundredFifty;
   static double twentyNineAndFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.fifty : Dimens.twentyNine;
+  static double hundredAndFifty(BuildContext context) => Responsive.isMobile(context) ? Dimens.hundred : Dimens.fifty;
   static double eightyAndFortySix(BuildContext context) => Responsive.isMobile(context) ? Dimens.eighty : Dimens.fortySix;
   static double sixAndFour(BuildContext context) => Responsive.isMobile(context) ? Dimens.six : Dimens.four;
   static double ninetyAndSixty(BuildContext context) => Responsive.isMobile(context) ? Dimens.ninetyFive : Dimens.sixty;
@@ -76,9 +77,10 @@ class GetResponsiveDimens {
   static double fiftyFiveAndTwentyFour(BuildContext context) => Responsive.isMobile(context) ? Dimens.fiftyFive : Dimens.twentyFour;
   static double oneHundredTwentyAndFiftySix(BuildContext context) => Responsive.isMobile(context) ? Dimens.oneHundredTwenty : Dimens.fiftySix;
   static double twoHundredEightyAndOneHundredFortyOne(BuildContext context) => Responsive.isMobile(context) ? Dimens.twoHundredEighty : Dimens.oneHundredFortyOne;
-  static double twoHundredEightyAndOneHundredSixty(BuildContext context) => Responsive.isMobile(context) ? Dimens.twoHundredEighty : Dimens.oneHundredForty;
+  static double twoHundredEightyAndOneHundredForty(BuildContext context) => Responsive.isMobile(context) ? Dimens.twoHundredEighty : Dimens.oneHundredForty;
   static double widthDivThreeAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Get.width / 3.5 : Dimens.twoHundredForty;
   static double widthDivFourAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Get.width / 4 : Dimens.twoHundredForty;
+  static double widthDivFiveAndTwoHundredForty(BuildContext context) => Responsive.isMobile(context) ? Get.width / 5 : Dimens.twoHundredForty;
   static double widthDivTwoAndOnePointFive(BuildContext context) => Responsive.isMobile(context) ? Get.width / 1.5 : Get.width / 2;
   static double widthDivTwoAndTwoPointEight(BuildContext context) => Responsive.isMobile(context) ? Get.width / 2 : Get.width / 2.8;
   static double heightDivTwoAndThreePointThree(BuildContext context) => Responsive.isMobile(context) ? Dimens.screenHeight / 2 : Dimens.screenHeight / 3.3;

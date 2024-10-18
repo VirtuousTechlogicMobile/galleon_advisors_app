@@ -29,18 +29,18 @@ class CreateDualStudyController extends GetxController {
   }
 
   List<DropDownMenuItem> deptDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Department 1'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Department 2'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Department 3'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Department 4'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Department 5'),
+    DropDownMenuItem(itemName: 'Department 1'),
+    DropDownMenuItem(itemName: 'Department 2'),
+    DropDownMenuItem(itemName: 'Department 3'),
+    DropDownMenuItem(itemName: 'Department 4'),
+    DropDownMenuItem(itemName: 'Department 5'),
   ];
   List<DropDownMenuItem> positionDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Position 1'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Position 2'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Position 3'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Position 4'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Position 5'),
+    DropDownMenuItem(itemName: 'Position 1'),
+    DropDownMenuItem(itemName: 'Position 2'),
+    DropDownMenuItem(itemName: 'Position 3'),
+    DropDownMenuItem(itemName: 'Position 4'),
+    DropDownMenuItem(itemName: 'Position 5'),
   ];
 
   Rx<DropDownMenuItem?> selectedDept = (null as DropDownMenuItem?).obs;

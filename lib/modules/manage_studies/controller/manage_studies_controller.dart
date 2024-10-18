@@ -86,19 +86,19 @@ class ManageStudiesController extends GetxController {
   Rx<DropDownMenuItem?> selectedDept = (null as DropDownMenuItem?).obs;
 
   List<DropDownMenuItem> programDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Program 1'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Program 2'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Program 3'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Program 4'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Program 5'),
+    DropDownMenuItem(itemName: 'Program 1'),
+    DropDownMenuItem(itemName: 'Program 2'),
+    DropDownMenuItem(itemName: 'Program 3'),
+    DropDownMenuItem(itemName: 'Program 4'),
+    DropDownMenuItem(itemName: 'Program 5'),
   ];
 
   List<DropDownMenuItem> deptDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Department 1'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Department 2'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Department 3'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Department 4'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Department 5'),
+    DropDownMenuItem(itemName: 'Department 1'),
+    DropDownMenuItem(itemName: 'Department 2'),
+    DropDownMenuItem(itemName: 'Department 3'),
+    DropDownMenuItem(itemName: 'Department 4'),
+    DropDownMenuItem(itemName: 'Department 5'),
   ];
 
   onSelectedAll(int index) {

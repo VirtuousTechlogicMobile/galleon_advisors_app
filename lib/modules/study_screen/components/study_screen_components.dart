@@ -87,7 +87,7 @@ class StudyScreenComponents {
                           buttonColor: ColorValues.whiteColor,
                           contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.thirteenAndFifteen(context)),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
-                          buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredSixty(context),
+                          buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredForty(context),
                           btnTextStyle: const TextStyle(fontSize: 17, color: ColorValues.primaryGreenColor, fontWeight: FontWeight.w700),
                           margin: EdgeInsets.only(right: Dimens.twenty),
                           onTap: () {
@@ -100,7 +100,7 @@ class StudyScreenComponents {
                           border: Border.all(color: ColorValues.primaryGreenColor, width: Dimens.three),
                           contentPadding: EdgeInsets.symmetric(vertical: Dimens.thirteen),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
-                          buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredSixty(context),
+                          buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredForty(context),
                           btnTextStyle: const TextStyle(fontSize: 17, color: ColorValues.whiteColor, fontWeight: FontWeight.w700),
                           margin: EdgeInsets.only(left: Dimens.twenty),
                           onTap: () => onCompleteButtonTapped(),

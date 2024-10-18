@@ -151,13 +151,13 @@ class StudyScreenBottomBar extends StatelessWidget {
                           ? StringValues.split.tr
                           : StringValues.submit.tr,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
+                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities != null || isSplit || isMerge
                       ? ColorValues.primaryGreenColor
                       : ColorValues.lightGrayColor.withOpacity(0.50),
                   borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                   contentPadding: EdgeInsets.zero,
                   btnTextStyle: AppStyles.style16Normal.copyWith(
-                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
+                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities != null || isSplit || isMerge
                         ? ColorValues.whiteColor
                         : ColorValues.blackColor,
                   ),

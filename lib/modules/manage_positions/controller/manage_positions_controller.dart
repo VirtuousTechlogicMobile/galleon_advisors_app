@@ -6,11 +6,11 @@ import '../model/manage_positions_data_model.dart';
 class ManagePositionsController extends GetxController {
   Rx<DropDownMenuItem?> selectedDept = (null as DropDownMenuItem?).obs;
   List<DropDownMenuItem> deptDropDownItemsList = [
-    DropDownMenuItem(itemIndex: 0, itemName: 'Department 1'),
-    DropDownMenuItem(itemIndex: 1, itemName: 'Department 2'),
-    DropDownMenuItem(itemIndex: 2, itemName: 'Department 3'),
-    DropDownMenuItem(itemIndex: 3, itemName: 'Department 4'),
-    DropDownMenuItem(itemIndex: 4, itemName: 'Department 5'),
+    DropDownMenuItem(itemName: 'Department 1'),
+    DropDownMenuItem(itemName: 'Department 2'),
+    DropDownMenuItem(itemName: 'Department 3'),
+    DropDownMenuItem(itemName: 'Department 4'),
+    DropDownMenuItem(itemName: 'Department 5'),
   ];
 
   List<ManagePositionsDataModel> positionsDataList = [
