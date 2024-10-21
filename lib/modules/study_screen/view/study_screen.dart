@@ -546,20 +546,20 @@ class StudyScreen extends StatelessWidget {
   Widget bottomBar() {
     return Obx(
       () => StudyScreenBottomBar(
-        onTapActivitiesButton: () {
-          studyController.onChangeTab(1);
+        onTapActivitiesButton: () async {
+          await studyController.onChangeTab(1);
         },
-        onTapAddButton: () {
-          Get.toNamed(AppRoutes.createDualStudy);
+        onTapAddButton: () async {
+          await Get.toNamed(AppRoutes.createDualStudy);
         },
-        onTapTipsAndTricksButton: () {
-          studyController.onChangeTab(2);
+        onTapTipsAndTricksButton: () async {
+          await studyController.onChangeTab(2);
         },
-        onTapOperationAnalysisButton: () {
-          studyController.onChangeTab(3);
+        onTapOperationAnalysisButton: () async {
+          await studyController.onChangeTab(3);
         },
-        onTapKeyThemesButton: () {
-          studyController.onChangeTab(4);
+        onTapKeyThemesButton: () async {
+          await studyController.onChangeTab(4);
         },
         onTapSubmitButton: () async {
           if (studyController.selectedStudyTimelinesList.length == 2) {
@@ -643,7 +643,6 @@ class StudyScreen extends StatelessWidget {
                           studyController.selectedStudyTimelinesList.clear();
                         }
                         if (!studyController.servicesTapped.value) {
-                          print("");
                           studyController.servicesTapped.value = true;
                         }
                         studyController.selectedServiceActivities.value = selectedValue;

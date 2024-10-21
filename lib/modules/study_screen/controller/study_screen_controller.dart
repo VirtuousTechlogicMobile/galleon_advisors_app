@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
-import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../model/operational_analysis_data_model.dart';
 import '../model/study_timeline_data_model.dart';
 
@@ -128,9 +125,7 @@ class StudyScreenController extends GetxController {
     }
   }
 
-  onChangeTab(int tabNo) {
-    volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
-    oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+  onChangeTab(int tabNo) async {
     switch (tabNo) {
       case 0:
         selectedTab.value = 'activities';
@@ -146,6 +141,21 @@ class StudyScreenController extends GetxController {
         break;
       default:
         selectedTab.value = 'activities';
+    }
+    if (servicesTapped.value) {
+      await Future.delayed(const Duration(milliseconds: 30)).then(
+        (value) async {
+          await servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+        },
+      );
+    } else {
+      await Future.delayed(const Duration(milliseconds: 30)).then(
+        (value) async {
+          await oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+        },
+      );
     }
   }
 
@@ -214,9 +224,24 @@ class StudyScreenController extends GetxController {
     StudyTimelineDataModel(heading: 'Guest Meeting', fromTime: '10:51:14', toTime: '10:51:26', type: 'opp'),
   ].obs;
 
-  onBackPressed() {
+  onBackPressed() async {
     if (selectedActivitiesSubTab.isNotEmpty) {
       selectedActivitiesSubTab.value = '';
+      if (servicesTapped.value) {
+        await Future.delayed(const Duration(milliseconds: 30)).then(
+          (value) async {
+            await servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          },
+        );
+      } else {
+        await Future.delayed(const Duration(milliseconds: 30)).then(
+          (value) async {
+            await oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          },
+        );
+      }
     } else if (selectedStudyTimelinesList.isNotEmpty) {
       isStudyTimeLineSelected.value = false;
       currentSelectedStudyTimeline.value = null;
@@ -230,7 +255,7 @@ class StudyScreenController extends GetxController {
         },
       );
     } else {
-      Get.offNamed(AppRoutes.home);
+      Get.back();
     }
   }
 

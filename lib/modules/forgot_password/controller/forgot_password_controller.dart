@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:galleon_user/helper/database_helper/database_helper.dart';
-import 'package:galleon_user/main.dart';
 import 'package:get/get.dart';
 import '../../../constant/strings.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';

@@ -34,7 +34,7 @@ class StudyScreenAppbar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             InkWell(
-              onTap: () {
+              onTap: () async {
                 studyController.onBackPressed();
               },
               child: CommonWidgets.fromSvg(svgAsset: studyController.studyStartTime.isNotEmpty ? SvgAssets.backIconOutlined : SvgAssets.closeRoundedIcon)

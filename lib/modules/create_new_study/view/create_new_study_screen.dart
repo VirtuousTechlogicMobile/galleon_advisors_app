@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_user/common/custom_primary_button.dart';
 import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/helper/database_helper/database_helper.dart';
 import 'package:galleon_user/modules/create_new_study/controller/create_new_study_controller.dart';
+import 'package:galleon_user/modules/create_new_study/model/opportunity_flag_data_model.dart';
+import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
 
 import '../../../common/custom_dropdown.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
-import '../../../routes/app_pages.dart';
 import '../../../utility/responsive.dart';
 import '../components/new_study_appbar.dart';
 
@@ -28,7 +30,7 @@ class CreateNewStudyScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NewStudyAppbar(
-              studyNameController: TextEditingController(),
+              studyNameController: createNewStudyController.studyNameController,
               time: '10:49:05 Tue, 30 Apr 24',
             ),
             Expanded(
@@ -50,9 +52,7 @@ class CreateNewStudyScreen extends StatelessWidget {
                         () => CustomDropdown(
                           dropDownItemsList: createNewStudyController.programDropDownItemsList,
                           hintText: StringValues.program.tr,
-                          onItemSelected: (selectedDropDownItem) {
-                            createNewStudyController.selectedProgram.value = selectedDropDownItem;
-                          },
+                          onItemSelected: (selectedDropDownItem) => createNewStudyController.onSelectProgramValue(selectedDropDownItem),
                           selectedItem: createNewStudyController.selectedProgram.value,
                         ).marginOnly(bottom: Dimens.eighteen),
                       ),
@@ -60,21 +60,26 @@ class CreateNewStudyScreen extends StatelessWidget {
                         () => CustomDropdown(
                           dropDownItemsList: createNewStudyController.deptDropDownItemsList,
                           hintText: StringValues.department.tr,
-                          onItemSelected: (selectedDropDownItem) {
-                            createNewStudyController.selectedDept.value = selectedDropDownItem;
-                          },
+                          onItemSelected: (selectedDropDownItem) => createNewStudyController.onSelectDeptValue(selectedDropDownItem),
                           selectedItem: createNewStudyController.selectedDept.value,
                         ).marginOnly(bottom: Dimens.eighteen),
                       ),
-                      Obx(
-                        () => CustomDropdown(
-                          dropDownItemsList: createNewStudyController.positionDropDownItemsList,
-                          hintText: StringValues.position.tr,
-                          onItemSelected: (selectedDropDownItem) {
-                            createNewStudyController.selectedPosition.value = selectedDropDownItem;
+                      GestureDetector(
+                        onTap: () {
+                          if (createNewStudyController.selectedDept.value == null) {
+                            AppUtility.showSnackBar(StringValues.pleaseSelectDepartment);
+                          }
+                        },
+                        child: Obx(
+                          () {
+                            return CustomDropdown(
+                              dropDownItemsList: createNewStudyController.positionDropDownItemsList,
+                              hintText: StringValues.position.tr,
+                              onItemSelected: (selectedDropDownItem) => createNewStudyController.onSelectPositionValue(selectedDropDownItem),
+                              selectedItem: createNewStudyController.selectedPosition.value,
+                            ).marginOnly(bottom: Dimens.eighteen);
                           },
-                          selectedItem: createNewStudyController.selectedPosition.value,
-                        ).marginOnly(bottom: Dimens.eighteen),
+                        ),
                       ),
                       const Spacer(),
                       const Spacer(),
@@ -94,9 +99,7 @@ class CreateNewStudyScreen extends StatelessWidget {
                 contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.twentyFiveAndTwentyOne(context)),
                 buttonColor: ColorValues.primaryGreenColor,
                 border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                onTap: () {
-                  Get.toNamed(AppRoutes.study);
-                },
+                onTap: () => createNewStudyController.onCreateStudy(),
               ),
             ),
           ],

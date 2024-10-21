@@ -46,13 +46,12 @@ class CustomDropdown extends StatefulWidget {
 class _CustomDropdownState extends State<CustomDropdown> {
   final GlobalKey buttonKey = GlobalKey();
   RxDouble buttonHeight = Dimens.forty.obs;
-  DropDownMenuItem? selectedItem;
+  // DropDownMenuItem? selectedItem;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    selectedItem = widget.selectedItem;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final RenderBox? renderBox = buttonKey.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox != null) {
@@ -66,7 +65,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return DropdownButtonHideUnderline(
       child: Obx(
         () => DropdownButton2(
-          items: widget.dropDownItemsList.map<DropdownMenuItem<DropDownMenuItem>>((DropDownMenuItem item) {
+          items: widget.dropDownItemsList.map<DropdownMenuItem<DropDownMenuItem>>((DropDownMenuItem? item) {
             if (widget.dropDownItemsList.first == item) {
               return DropdownMenuItem<DropDownMenuItem>(
                 value: item,
@@ -74,14 +73,15 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Flexible(
-                      child: Text(
-                        item.itemName,
-                        style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                    if (item != null)
+                      Flexible(
+                        child: Text(
+                          item.itemName,
+                          style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
                     Transform.rotate(
                       angle: (math.pi / 2),
                       child: CommonWidgets.fromSvg(
@@ -97,17 +97,16 @@ class _CustomDropdownState extends State<CustomDropdown> {
             } else {
               return DropdownMenuItem<DropDownMenuItem>(
                 value: item,
-                child: Text(item.itemName, style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
+                child: Text(item?.itemName ?? '', style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
               );
             }
           }).toList(),
           barrierDismissible: true,
-          value: selectedItem,
+          value: widget.selectedItem,
           isDense: true,
           isExpanded: true,
           onChanged: (value) {
             widget.onItemSelected(value);
-            selectedItem = value;
           },
           customButton: Container(
             key: buttonKey,
@@ -157,7 +156,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
 }
 
 class DropDownMenuItem {
+  String? itemId;
   String itemName;
 
-  DropDownMenuItem({required this.itemName});
+  DropDownMenuItem({this.itemId, required this.itemName});
 }

@@ -6,8 +6,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:galleon_user/helper/database_helper/database_synonyms.dart';
 import 'package:galleon_user/helper/database_helper/firebase_error_messages.dart';
 import 'package:galleon_user/helper/storage_handler/storage_data_handler.dart';
+import 'package:galleon_user/modules/create_new_position/model/position_data_model.dart';
 import 'package:galleon_user/modules/create_new_position/model/program_data_model.dart';
 import 'package:galleon_user/modules/create_new_study/model/department_data_model.dart';
+import 'package:galleon_user/modules/create_new_study/model/opportunity_flag_data_model.dart';
 
 import '../custom_exception_handler.dart';
 import 'firebase_response_model.dart';
@@ -132,20 +134,19 @@ class DatabaseHelper {
     }
   }
 
-  Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getProgramsDepartmentData({required List<String> departmentIds}) async {
+  Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getAllDepartmentData() async {
     try {
-      CollectionReference departmentCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.departCollection);
-      List<DepartmentDataModel> departmentList = [];
+      CollectionReference deptCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.departmentCollection);
 
-      for (String docId in departmentIds) {
-        DocumentSnapshot docSnapshot = await departmentCollectionRef.doc(docId).get();
-        if (docSnapshot.exists) {
-          departmentList.add(DepartmentDataModel.fromMap(docSnapshot.data() as Map<String, dynamic>, departmentId: docSnapshot.id));
-        }
+      List<DepartmentDataModel> deptList = [];
+
+      QuerySnapshot querySnapshot = await deptCollectionRef.get();
+      if (querySnapshot.docs.isNotEmpty) {
+        deptList.addAll(querySnapshot.docs.map((docs) => DepartmentDataModel.fromMap(docs.data() as Map<String, dynamic>, departmentId: docs.id)).toList());
       }
       return FirebaseResponseModel(
         isSuccess: true,
-        data: departmentList.isNotEmpty ? departmentList : null,
+        data: deptList.isNotEmpty ? deptList : null,
         errorMessage: null,
       );
     } on SocketException {
@@ -153,6 +154,62 @@ class DatabaseHelper {
     } catch (e) {
       log("Exception : $e");
       throw DataNotFoundException();
+    }
+  }
+
+  Future<FirebaseResponseModel<List<PositionDataModel>?>> getPositionsDataById({String? departmentIds}) async {
+    try {
+      CollectionReference positionCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.positionsCollection);
+
+      List<PositionDataModel> positionList = [];
+
+      QuerySnapshot querySnapshot = await positionCollectionRef.where(DatabaseSynonyms.departmentIdField, isEqualTo: departmentIds).get();
+      if (querySnapshot.docs.isNotEmpty) {
+        positionList.addAll(querySnapshot.docs.map((docs) => PositionDataModel.fromMap(docs.data() as Map<String, dynamic>, positionId: docs.id)).toList());
+      }
+
+      return FirebaseResponseModel(
+        isSuccess: true,
+        data: positionList.isNotEmpty ? positionList : null,
+        errorMessage: null,
+      );
+    } on SocketException {
+      throw NoInternetException();
+    } catch (e) {
+      log("Exception : $e");
+      throw DataNotFoundException();
+    }
+  }
+
+  Future createStudy() async {}
+
+  Future<void> insertOppFlagsData(OpportunityFlagDataModel position) async {
+    try {
+      CollectionReference positionsRef = fireStoreInstance.collection(DatabaseSynonyms.opportunityFlagCollection);
+      DocumentReference ref = await positionsRef.add(position.toMap());
+      print("Program inserted successfully!   ${ref.id}");
+    } catch (e) {
+      print("Error inserting program: $e");
+    }
+  }
+
+  Future<void> updateTaskIds() async {
+    try {
+      List<String> taskIds = [
+        "DoknS8YdAOfSA0ddBWAS",
+        "SWt5ilpwfPbBuSVeFAVR",
+        "VSUCPMi9rsBYS2amJoQC",
+        "DY40oSGZP7yBCsrXEgK2",
+        "K701kEUqZzhR0SNGKNnG",
+        "DdeQQZtngaqQk5MRUYMb",
+      ];
+      // Update the 'tasksIds' field in the specific document
+      await fireStoreInstance.collection('positions').doc('KeFvnEDxYw1294nnwK4m').update({
+        'tasks_ids': taskIds,
+      });
+      print("tasksIds updated successfully");
+    } catch (e) {
+      print("Error updating tasksIds: $e");
     }
   }
 }

@@ -69,7 +69,10 @@ abstract class StringValues {
   static const next = 'next';
   static const add = 'add';
   static const pleaseSelectDepartment = 'please_select_department';
+  static const pleaseSelectProgram = 'please_select_program';
+  static const pleaseSelectPosition = 'please_select_position';
   static const pleaseEnterName = 'please_enter_name';
+  static const pleaseEnterStudyName = 'please_enter_study_name';
   static const userNotFound = 'user_not_found';
   static const wrongEmailPassword = 'wrong_email_password';
   static const somethingWentWrong = 'something_went_wrong';
