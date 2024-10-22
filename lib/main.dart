@@ -1,19 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:galleon_user/constant/strings.dart';
+import 'package:galleon_user/helper/local_database_helper/local_database_helper.dart';
 import 'package:galleon_user/services/translations/app_translations.dart';
 import 'package:galleon_user/theme/theme_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:galleon_user/utility/utility.dart';
-import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+
 import 'constant/hive_box_names.dart';
 import 'firebase_options.dart';
 import 'helper/connectivity_helper/connectivity_service.dart';
+import 'helper/database_helper/database_helper.dart';
+import 'helper/storage_handler/storage_data_handler.dart';
 import 'helper/storage_handler/storage_getters_setters.dart';
 import 'routes/app_pages.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +65,10 @@ Future<void> _initPreAppServices() async {
 
   AppUtility.log('Token Checked');
 
+  await LocalDatabaseHelper.instance.openGalleonDatabase();
+
+  AppUtility.log('Gallon Local Database Initialized');
+
   AppUtility.log('PreApp Services Initialized');
 }
 
@@ -68,8 +76,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
-  String _handleAppInitialRoute() {
-    return AppRoutes.login;
+  Future<String> _handleAppInitialRoute() async {
+    String? userId = await StorageDataHandler.getUserId() ?? '';
+    String? login = DatabaseHelper.instance.firebaseAuth.currentUser?.uid ?? '';
+    if (userId != '' && login != '') {
+      return AppRoutes.home;
+    } else {
+      await StorageDataHandler.deleteAllData();
+      return AppRoutes.login;
+    }
   }
 
   ThemeMode _handleAppTheme(String mode) {
@@ -88,19 +103,28 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(392, 744),
       builder: (ctx, child) {
-        return GlobalLoaderOverlay(
-          child: GetMaterialApp(
-            title: StringValues.appName.tr,
-            debugShowCheckedModeBanner: false,
-            themeMode: _handleAppTheme(appController.themeMode),
-            theme: appController.getLightThemeData(context),
-            darkTheme: appController.getDarkThemeData(context),
-            getPages: AppPages.pages,
-            initialRoute: _handleAppInitialRoute(),
-            translations: AppTranslation(),
-            locale: Get.deviceLocale,
-            fallbackLocale: const Locale('en', 'IN'),
-          ),
+        return FutureBuilder(
+          future: _handleAppInitialRoute(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return GlobalLoaderOverlay(
+                child: GetMaterialApp(
+                  title: StringValues.appName.tr,
+                  debugShowCheckedModeBanner: false,
+                  themeMode: _handleAppTheme(appController.themeMode),
+                  theme: appController.getLightThemeData(context),
+                  darkTheme: appController.getDarkThemeData(context),
+                  getPages: AppPages.pages,
+                  initialRoute: snapshot.data,
+                  translations: AppTranslation(),
+                  locale: Get.deviceLocale,
+                  fallbackLocale: const Locale('en', 'IN'),
+                ),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
         );
       },
     );

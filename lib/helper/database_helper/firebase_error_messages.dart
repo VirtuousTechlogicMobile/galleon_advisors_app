@@ -6,4 +6,5 @@ class FirebaseErrorMessages {
   static const String somethingWentWrong = StringValues.somethingWentWrong;
   static const String noInternet = StringValues.noInternetConnectionAreAvailable;
   static const String emailNotExists = StringValues.emailAddressDoesNotExists;
+  static const String dataNotFound = StringValues.dataNotFound;
 }

@@ -9,11 +9,13 @@ import '../model/study_timeline_data_model.dart';
 class StudyScreenController extends GetxController {
   Rxn<int> selectedServiceActivities = Rxn<int>();
   Rxn<int> selectedOpportunityTheme = Rxn<int>();
-  RxInt selectedVolume = 0.obs;
+  RxInt selectedVolume1 = 0.obs;
+  RxInt selectedVolume2 = 0.obs;
   RxInt selectedStudyIndex = 0.obs;
-  late FixedExtentScrollController servicesScrollController;
-  late FixedExtentScrollController volumeScrollController;
-  late FixedExtentScrollController oppThemeScrollController;
+  FixedExtentScrollController? servicesScrollController;
+  FixedExtentScrollController? volume1ScrollController;
+  FixedExtentScrollController? volume2ScrollController;
+  FixedExtentScrollController? oppThemeScrollController;
 
   RxString currentTime = ''.obs;
   Timer? timer;
@@ -24,12 +26,12 @@ class StudyScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    insertVolumeItems();
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       getCurrentDateTime();
     });
     servicesScrollController = FixedExtentScrollController(initialItem: selectedServiceActivities.value ?? 0);
-    volumeScrollController = FixedExtentScrollController(initialItem: selectedVolume.value);
+    volume1ScrollController = FixedExtentScrollController(initialItem: selectedVolume1.value);
+    volume2ScrollController = FixedExtentScrollController(initialItem: selectedVolume2.value);
     oppThemeScrollController = FixedExtentScrollController(initialItem: selectedOpportunityTheme.value ?? 0);
   }
 
@@ -37,9 +39,9 @@ class StudyScreenController extends GetxController {
   void onClose() {
     super.onClose();
     timer?.cancel();
-    servicesScrollController.dispose();
-    volumeScrollController.dispose();
-    oppThemeScrollController.dispose();
+    servicesScrollController?.dispose();
+    volume1ScrollController?.dispose();
+    oppThemeScrollController?.dispose();
   }
 
   RxDouble splitSliderValue = 50.0.obs;
@@ -102,16 +104,8 @@ class StudyScreenController extends GetxController {
   ];
   List<String> dualStudiesList = ['Test', 'Default Study 2', 'Default Study 3', 'Default Study 4'];
   List<String> opportunityThemes = ['learn excel', 'learn export', 'opportunity 1', 'opportunity 2 ', 'Item 1', 'Item 2', "opportunity 3", 'opportunity 4', 'Item 3'];
-  List<String> volumeItems = [];
-
-  insertVolumeItems() {
-    volumeItems = List.generate(99, (index) {
-      int number = index + 1;
-      String formattedNumber = number < 10 ? '0$number' : '$number';
-      // Add spaces between the digits
-      return formattedNumber.split('').join(' ');
-    });
-  }
+  List<int> volumeItems1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  List<int> volumeItems2 = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
   List<OperationalAnalysisDataModel> tableData = [
     OperationalAnalysisDataModel(analysisName: 'Server Travel Analysis', dataInputs: '•  Capture travel between sections', sample: '<hyperlink to image > or image attachment')
@@ -145,15 +139,17 @@ class StudyScreenController extends GetxController {
     if (servicesTapped.value) {
       await Future.delayed(const Duration(milliseconds: 30)).then(
         (value) async {
-          await servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
-          await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await servicesScrollController?.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volume1ScrollController?.animateToItem(selectedVolume1.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volume2ScrollController?.animateToItem(selectedVolume2.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
         },
       );
     } else {
       await Future.delayed(const Duration(milliseconds: 30)).then(
         (value) async {
-          await oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
-          await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await oppThemeScrollController?.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volume1ScrollController?.animateToItem(selectedVolume1.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+          await volume2ScrollController?.animateToItem(selectedVolume2.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
         },
       );
     }
@@ -188,15 +184,16 @@ class StudyScreenController extends GetxController {
   }
 
   onSubmitStudy() async {
-    volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+    volume1ScrollController?.animateToItem(selectedVolume1.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+    volume2ScrollController?.animateToItem(selectedVolume2.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
     if (servicesTapped.value) {
       /// if submit value of service
-      servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      servicesScrollController?.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
       await Future.delayed(const Duration(milliseconds: 300));
       servicesTapped.value = false;
     } else {
       /// if submit value of opportunity
-      oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      oppThemeScrollController?.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
       await Future.delayed(const Duration(milliseconds: 300));
       opportunityTapped.value = false;
     }
@@ -230,15 +227,17 @@ class StudyScreenController extends GetxController {
       if (servicesTapped.value) {
         await Future.delayed(const Duration(milliseconds: 30)).then(
           (value) async {
-            await servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
-            await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await servicesScrollController?.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volume1ScrollController?.animateToItem(selectedVolume1.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volume2ScrollController?.animateToItem(selectedVolume2.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
           },
         );
       } else {
         await Future.delayed(const Duration(milliseconds: 30)).then(
           (value) async {
-            await oppThemeScrollController.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
-            await volumeScrollController.animateToItem(selectedVolume.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await oppThemeScrollController?.animateToItem(selectedOpportunityTheme.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volume1ScrollController?.animateToItem(selectedVolume1.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+            await volume2ScrollController?.animateToItem(selectedVolume2.value, duration: const Duration(milliseconds: 100), curve: Curves.linear);
           },
         );
       }
@@ -247,7 +246,7 @@ class StudyScreenController extends GetxController {
       currentSelectedStudyTimeline.value = null;
       selectedStudyTimelinesList.clear();
     } else if (servicesTapped.value || opportunityTapped.value) {
-      servicesScrollController.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
+      servicesScrollController?.animateToItem(selectedServiceActivities.value ?? 0, duration: const Duration(milliseconds: 100), curve: Curves.linear);
       Future.delayed(const Duration(milliseconds: 500)).then(
         (value) {
           servicesTapped.value = false;

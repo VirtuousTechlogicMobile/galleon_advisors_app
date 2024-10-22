@@ -155,9 +155,10 @@ class _CustomDropdownState extends State<CustomDropdown> {
   }
 }
 
-class DropDownMenuItem {
+class DropDownMenuItem<T> {
   String? itemId;
   String itemName;
+  T? itemField;
 
-  DropDownMenuItem({this.itemId, required this.itemName});
+  DropDownMenuItem({this.itemId, required this.itemName, this.itemField});
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_user/common/custom_primary_button.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/helper/database_helper/database_helper.dart';
 import 'package:galleon_user/modules/create_new_study/controller/create_new_study_controller.dart';
-import 'package:galleon_user/modules/create_new_study/model/opportunity_flag_data_model.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
 
@@ -29,10 +27,7 @@ class CreateNewStudyScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            NewStudyAppbar(
-              studyNameController: createNewStudyController.studyNameController,
-              time: '10:49:05 Tue, 30 Apr 24',
-            ),
+            NewStudyAppbar(),
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(top: Dimens.twenty, left: Dimens.fifteen, right: Dimens.fifteen, bottom: Dimens.six),
@@ -56,13 +51,22 @@ class CreateNewStudyScreen extends StatelessWidget {
                           selectedItem: createNewStudyController.selectedProgram.value,
                         ).marginOnly(bottom: Dimens.eighteen),
                       ),
-                      Obx(
-                        () => CustomDropdown(
-                          dropDownItemsList: createNewStudyController.deptDropDownItemsList,
-                          hintText: StringValues.department.tr,
-                          onItemSelected: (selectedDropDownItem) => createNewStudyController.onSelectDeptValue(selectedDropDownItem),
-                          selectedItem: createNewStudyController.selectedDept.value,
-                        ).marginOnly(bottom: Dimens.eighteen),
+                      GestureDetector(
+                        onTap: () {
+                          if (createNewStudyController.selectedProgram.value == null) {
+                            AppUtility.showSnackBar(StringValues.pleaseSelectProgram.tr);
+                          } else if (createNewStudyController.selectedProgram.value != null && createNewStudyController.deptDropDownItemsList.isEmpty) {
+                            AppUtility.showSnackBar(StringValues.dataNotFound.tr);
+                          }
+                        },
+                        child: Obx(
+                          () => CustomDropdown(
+                            dropDownItemsList: createNewStudyController.deptDropDownItemsList,
+                            hintText: StringValues.department.tr,
+                            onItemSelected: (selectedDropDownItem) => createNewStudyController.onSelectDeptValue(selectedDropDownItem),
+                            selectedItem: createNewStudyController.selectedDept.value,
+                          ).marginOnly(bottom: Dimens.eighteen),
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {

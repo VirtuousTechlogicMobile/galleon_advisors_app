@@ -8,6 +8,7 @@ import '../../../constant/app_states.dart';
 import '../../../constant/strings.dart';
 import '../../../helper/database_helper/database_helper.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';
+import '../../../helper/storage_handler/storage_data_handler.dart';
 import '../../../helper/validators.dart';
 import '../../../routes/app_pages.dart';
 
@@ -17,23 +18,6 @@ class LoginController extends GetxController {
   FocusNode emailNode = FocusNode();
   FocusNode passwordNode = FocusNode();
   RxBool isShowPassword = false.obs;
-
-  setUserRole(String? role) {
-    switch (role) {
-      case ('admin'):
-        currentUserRole = UserRole.admin;
-        break;
-      case ('consultant'):
-        currentUserRole = UserRole.consultant;
-        break;
-      case ('client'):
-        currentUserRole = UserRole.client;
-        break;
-      case ('manager'):
-        currentUserRole = UserRole.manager;
-        break;
-    }
-  }
 
   Future onLogin() async {
     if (emailController.text.trim().isEmpty) {
@@ -50,7 +34,8 @@ class LoginController extends GetxController {
         FirebaseResponseModel<String?> response = await signInUser();
         if (response.isSuccess) {
           if (response.data != null) {
-            setUserRole(response.data);
+            setCurrentUserRole(response.data!);
+            await StorageDataHandler.setUserRole(role: response.data!);
           }
           Get.offAllNamed(AppRoutes.home);
         } else {

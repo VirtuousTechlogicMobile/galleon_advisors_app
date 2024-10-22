@@ -11,12 +11,14 @@ class ListWheelScrollPicker extends StatelessWidget {
   final int selectedIndex;
   final FixedExtentScrollController scrollController;
   final bool isScroll;
+  final AlignmentGeometry? alignment;
   const ListWheelScrollPicker({
     super.key,
     required this.itemsList,
     required this.onSelectedItemChanged,
     required this.selectedIndex,
     this.isScroll = true,
+    this.alignment,
     required this.scrollController,
   });
 
@@ -45,7 +47,7 @@ class ListWheelScrollPicker extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: Dimens.eight),
                     color: ColorValues.softWhiteColor,
                     width: double.infinity,
-                    alignment: Alignment.center,
+                    alignment: alignment ?? Alignment.center,
                     child: Text(
                       textAlign: TextAlign.center,
                       maxLines: 1,

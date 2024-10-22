@@ -7,14 +7,13 @@ import 'package:galleon_user/constant/strings.dart';
 import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
 import '../../../constant/dimens.dart';
+import '../controller/create_new_study_controller.dart';
 
 class NewStudyAppbar extends StatelessWidget {
-  final TextEditingController studyNameController;
-  final String time;
+  NewStudyAppbar({super.key});
 
-  const NewStudyAppbar({super.key, required this.studyNameController, required this.time});
+  final createNewStudyController = Get.find<CreateNewStudyController>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,8 @@ class NewStudyAppbar extends StatelessWidget {
           SizedBox(
             width: Get.width / 3.3,
             child: CustomTextField(
-              controller: studyNameController,
+              controller: createNewStudyController.studyNameController,
+              focusNode: createNewStudyController.studyNameFocusNode,
               fillColor: ColorValues.textFieldLightGrayColor.withOpacity(0.50),
               borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
               borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
@@ -54,7 +54,7 @@ class NewStudyAppbar extends StatelessWidget {
           ).marginOnly(left: GetResponsiveDimens.fortyAndSevenTeen(context)),
           const Spacer(),
           Text(
-            time,
+            '10:49:05 Tue, 30 Apr 24',
             style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
           ),
         ],

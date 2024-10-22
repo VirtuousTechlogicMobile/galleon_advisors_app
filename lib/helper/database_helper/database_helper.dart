@@ -10,7 +10,6 @@ import 'package:galleon_user/modules/create_new_position/model/position_data_mod
 import 'package:galleon_user/modules/create_new_position/model/program_data_model.dart';
 import 'package:galleon_user/modules/create_new_study/model/department_data_model.dart';
 import 'package:galleon_user/modules/create_new_study/model/opportunity_flag_data_model.dart';
-
 import '../custom_exception_handler.dart';
 import 'firebase_response_model.dart';
 
@@ -134,21 +133,35 @@ class DatabaseHelper {
     }
   }
 
-  Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getAllDepartmentData() async {
+  Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getProgramDepartmentData({required List<String> departmentIds}) async {
     try {
       CollectionReference deptCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.departmentCollection);
 
       List<DepartmentDataModel> deptList = [];
 
-      QuerySnapshot querySnapshot = await deptCollectionRef.get();
+      for (var id in departmentIds) {
+        DocumentSnapshot snapshot = await deptCollectionRef.doc(id).get();
+        if (snapshot.exists) {
+          deptList.add(DepartmentDataModel.fromMap(snapshot.data() as Map<String, dynamic>, departmentId: snapshot.id));
+        }
+      }
+      /* QuerySnapshot querySnapshot = await deptCollectionRef.get();
       if (querySnapshot.docs.isNotEmpty) {
         deptList.addAll(querySnapshot.docs.map((docs) => DepartmentDataModel.fromMap(docs.data() as Map<String, dynamic>, departmentId: docs.id)).toList());
+      }*/
+      if (deptList.isNotEmpty) {
+        return FirebaseResponseModel(
+          isSuccess: true,
+          data: deptList.isNotEmpty ? deptList : null,
+          errorMessage: null,
+        );
+      } else {
+        return FirebaseResponseModel(
+          isSuccess: false,
+          data: deptList.isNotEmpty ? deptList : null,
+          errorMessage: FirebaseErrorMessages.dataNotFound,
+        );
       }
-      return FirebaseResponseModel(
-        isSuccess: true,
-        data: deptList.isNotEmpty ? deptList : null,
-        errorMessage: null,
-      );
     } on SocketException {
       throw NoInternetException();
     } catch (e) {

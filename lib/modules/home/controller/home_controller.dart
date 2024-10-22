@@ -5,9 +5,18 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../constant/app_states.dart';
 import '../../../helper/database_helper/database_helper.dart';
+import '../../../helper/storage_handler/storage_data_handler.dart';
 import '../../../routes/app_pages.dart';
+import '../../../utility/role_permission.dart';
 
 class HomeScreenController extends GetxController {
+  @override
+  Future<void> onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    await getUserRole();
+  }
+
   Future onLogout() async {
     Get.context?.loaderOverlay.show();
     FirebaseResponseModel response = await DatabaseHelper.instance.logoutUser();
@@ -20,5 +29,14 @@ class HomeScreenController extends GetxController {
       }
     }
     Get.context?.loaderOverlay.hide();
+  }
+
+  Future getUserRole() async {
+    if (currentUserRole == null) {
+      String? userRole = await StorageDataHandler.getUserRole();
+      if (userRole != null) {
+        setCurrentUserRole(userRole);
+      }
+    }
   }
 }

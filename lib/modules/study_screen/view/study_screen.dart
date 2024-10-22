@@ -630,7 +630,7 @@ class StudyScreen extends StatelessWidget {
                     child: ListWheelScrollPicker(
                       itemsList: studyController.serviceActivitiesItems,
                       selectedIndex: studyController.selectedServiceActivities.value ?? 0,
-                      scrollController: studyController.servicesScrollController,
+                      scrollController: studyController.servicesScrollController ?? FixedExtentScrollController(),
 
                       /// applied condition for is study started and if not split and merge
                       isScroll:
@@ -706,14 +706,35 @@ class StudyScreen extends StatelessWidget {
                 borderRadius: studyController.servicesTapped.value || studyController.opportunityTapped.value
                     ? BorderRadius.circular(Dimens.twenty)
                     : BorderRadius.only(bottomLeft: Radius.circular(Dimens.twenty), bottomRight: Radius.circular(Dimens.twenty)),
-                child: ListWheelScrollPicker(
-                  itemsList: studyController.volumeItems,
-                  selectedIndex: studyController.selectedVolume.value,
-                  scrollController: studyController.volumeScrollController,
-                  isScroll: studyController.isStudyStarted.value,
-                  onSelectedItemChanged: (selectedValue) {
-                    studyController.selectedVolume.value = selectedValue;
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: ListWheelScrollPicker(
+                        itemsList: studyController.volumeItems1.map((e) => e.toString()).toList(),
+                        selectedIndex: studyController.selectedVolume1.value,
+                        scrollController: studyController.volume1ScrollController ?? FixedExtentScrollController(),
+                        isScroll: studyController.isStudyStarted.value,
+                        alignment: Alignment.centerRight,
+                        onSelectedItemChanged: (selectedValue) {
+                          studyController.selectedVolume1.value = selectedValue;
+                        },
+                      ),
+                    ),
+                    Flexible(
+                      child: ListWheelScrollPicker(
+                        itemsList: studyController.volumeItems2.map((e) => e.toString()).toList(),
+                        selectedIndex: studyController.selectedVolume2.value,
+                        scrollController: studyController.volume2ScrollController ?? FixedExtentScrollController(),
+                        isScroll: studyController.isStudyStarted.value,
+                        alignment: Alignment.centerLeft,
+                        onSelectedItemChanged: (selectedValue) {
+                          studyController.selectedVolume2.value = selectedValue;
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -777,7 +798,7 @@ class StudyScreen extends StatelessWidget {
                     child: ListWheelScrollPicker(
                       itemsList: studyController.opportunityThemes,
                       selectedIndex: studyController.selectedOpportunityTheme.value ?? 0,
-                      scrollController: studyController.oppThemeScrollController,
+                      scrollController: studyController.oppThemeScrollController ?? FixedExtentScrollController(),
 
                       /// applied condition for is study started and if not split and merge
                       isScroll:

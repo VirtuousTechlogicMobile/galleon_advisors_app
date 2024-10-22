@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
+import 'package:loader_overlay/loader_overlay.dart';
 import '../../../common/custom_dropdown.dart';
+import '../../../constant/strings.dart';
+import '../../../helper/database_helper/database_helper.dart';
+import '../../../helper/database_helper/firebase_response_model.dart';
+import '../../../utility/utility.dart';
+import '../../create_new_position/model/program_data_model.dart';
+import '../../create_new_study/model/department_data_model.dart';
 import '../model/manage_studies_data_model.dart';
 
 class ManageStudiesController extends GetxController {
@@ -81,25 +87,20 @@ class ManageStudiesController extends GetxController {
       ],
     ),
   ];
-
   Rx<DropDownMenuItem?> selectedProgram = (null as DropDownMenuItem?).obs;
   Rx<DropDownMenuItem?> selectedDept = (null as DropDownMenuItem?).obs;
+  RxList<DropDownMenuItem> programDropDownItemsList = <DropDownMenuItem>[].obs;
+  RxList<DropDownMenuItem> deptDropDownItemsList = <DropDownMenuItem>[].obs;
 
-  List<DropDownMenuItem> programDropDownItemsList = [
-    DropDownMenuItem(itemName: 'Program 1'),
-    DropDownMenuItem(itemName: 'Program 2'),
-    DropDownMenuItem(itemName: 'Program 3'),
-    DropDownMenuItem(itemName: 'Program 4'),
-    DropDownMenuItem(itemName: 'Program 5'),
-  ];
-
-  List<DropDownMenuItem> deptDropDownItemsList = [
-    DropDownMenuItem(itemName: 'Department 1'),
-    DropDownMenuItem(itemName: 'Department 2'),
-    DropDownMenuItem(itemName: 'Department 3'),
-    DropDownMenuItem(itemName: 'Department 4'),
-    DropDownMenuItem(itemName: 'Department 5'),
-  ];
+  @override
+  Future<void> onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+    Get.context?.loaderOverlay.show();
+    await getProgramsDropDownData();
+    // await getDeptDropDownData();
+    Get.context?.loaderOverlay.hide();
+  }
 
   onSelectedAll(int index) {
     if (getTotalUnStartedStudyCount(index) == selectedStudyCheckBoxIndex.length) {
@@ -113,6 +114,40 @@ class ManageStudiesController extends GetxController {
       }
     }
   }
+
+  Future getProgramsDropDownData() async {
+    if (await AppUtility.checkNetwork()) {
+      FirebaseResponseModel<List<ProgramDataModel>?> programsData = await DatabaseHelper.instance.getAllProgramsData();
+      if (programsData.data != null) {
+        programDropDownItemsList.addAll(
+          programsData.data!.where((element) => element.programName != null).map(
+            (element) {
+              return DropDownMenuItem(itemName: element.programName!);
+            },
+          ).toList(),
+        );
+      }
+    } else {
+      AppUtility.showSnackBar(StringValues.noInternetConnectionAreAvailable.tr);
+    }
+  }
+/*
+  Future getDeptDropDownData() async {
+    if (await AppUtility.checkNetwork()) {
+      FirebaseResponseModel<List<DepartmentDataModel>?> departmentData = await DatabaseHelper.instance.getProgramDepartmentData();
+      if (departmentData.data != null) {
+        deptDropDownItemsList.addAll(
+          departmentData.data!.where((element) => element.departmentName != null).map(
+            (element) {
+              return DropDownMenuItem(itemName: element.departmentName!, itemId: element.id);
+            },
+          ).toList(),
+        );
+      }
+    } else {
+      AppUtility.showSnackBar(StringValues.noInternetConnectionAreAvailable.tr);
+    }
+  }*/
 
   int getTotalUnStartedStudyCount(int index) {
     int count = 0;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../constant/app_states.dart';
 
 enum UserRole {
@@ -44,6 +46,14 @@ class RolePermissions {
       Features.manageStudies,
     ],
   };
+}
+
+void setCurrentUserRole(String? role) {
+  try {
+    currentUserRole = UserRole.values.byName(role ?? '');
+  } catch (e) {
+    log("message :- $e");
+  }
 }
 
 bool hasAccessFeature(String featureName) {

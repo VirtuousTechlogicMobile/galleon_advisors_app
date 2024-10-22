@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:galleon_user/helper/database_helper/database_helper.dart';
-import 'package:galleon_user/helper/storage_handler/storage_getters_setters.dart';
 import 'package:galleon_user/modules/create_new_position/model/position_data_model.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import '../../../common/custom_dropdown.dart';
 import '../../../constant/strings.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';
@@ -17,11 +15,13 @@ class CreateNewStudyController extends GetxController {
   Rx<DropDownMenuItem?> selectedProgram = (null as DropDownMenuItem?).obs;
   Rx<DropDownMenuItem?> selectedDept = (null as DropDownMenuItem?).obs;
   Rx<DropDownMenuItem?> selectedPosition = (null as DropDownMenuItem?).obs;
+  List<ProgramDataModel> programsDataList = [];
   RxList<DropDownMenuItem> programDropDownItemsList = <DropDownMenuItem>[].obs;
   RxList<DropDownMenuItem> deptDropDownItemsList = <DropDownMenuItem>[].obs;
   RxList<DropDownMenuItem> positionDropDownItemsList = <DropDownMenuItem>[].obs;
 
   TextEditingController studyNameController = TextEditingController();
+  FocusNode studyNameFocusNode = FocusNode();
 
   @override
   Future<void> onInit() async {
@@ -29,7 +29,6 @@ class CreateNewStudyController extends GetxController {
     super.onInit();
     Get.context?.loaderOverlay.show();
     await getProgramsDropDownData();
-    await getDeptDropDownData();
     Get.context?.loaderOverlay.hide();
   }
 
@@ -46,8 +45,11 @@ class CreateNewStudyController extends GetxController {
     studyNameController.clear();
   }
 
-  onSelectProgramValue(DropDownMenuItem? selectedDropDownItem) {
-    selectedProgram.value = selectedDropDownItem;
+  onSelectProgramValue(DropDownMenuItem? selectedDropDownItem) async {
+    if (selectedDropDownItem != selectedProgram.value) {
+      selectedProgram.value = selectedDropDownItem;
+      await getDeptDropDownData();
+    }
   }
 
   onSelectDeptValue(DropDownMenuItem? selectedDropDownItem) {
@@ -65,10 +67,11 @@ class CreateNewStudyController extends GetxController {
     if (await AppUtility.checkNetwork()) {
       FirebaseResponseModel<List<ProgramDataModel>?> programsData = await DatabaseHelper.instance.getAllProgramsData();
       if (programsData.data != null) {
+        programsDataList = programsData.data!;
         programDropDownItemsList.addAll(
           programsData.data!.where((element) => element.programName != null).map(
             (element) {
-              return DropDownMenuItem(itemName: element.programName!);
+              return DropDownMenuItem(itemId: element.id, itemName: element.programName!);
             },
           ).toList(),
         );
@@ -79,20 +82,30 @@ class CreateNewStudyController extends GetxController {
   }
 
   Future getDeptDropDownData() async {
+    Get.context?.loaderOverlay.show();
     if (await AppUtility.checkNetwork()) {
-      FirebaseResponseModel<List<DepartmentDataModel>?> departmentData = await DatabaseHelper.instance.getAllDepartmentData();
-      if (departmentData.data != null) {
-        deptDropDownItemsList.addAll(
-          departmentData.data!.where((element) => element.departmentName != null).map(
-            (element) {
-              return DropDownMenuItem(itemName: element.departmentName!, itemId: element.id);
-            },
-          ).toList(),
-        );
+      if (selectedProgram.value != null && programsDataList.where((element) => selectedProgram.value?.itemId == element.id).first.departmentIds != null) {
+        FirebaseResponseModel<List<DepartmentDataModel>?> departmentData = await DatabaseHelper.instance
+            .getProgramDepartmentData(departmentIds: programsDataList.where((element) => selectedProgram.value?.itemId == element.id).first.departmentIds!);
+        if (departmentData.data != null) {
+          deptDropDownItemsList.clear();
+          selectedDept.value = null;
+          deptDropDownItemsList.addAll(
+            departmentData.data!.where((element) => element.departmentName != null).map(
+              (element) {
+                return DropDownMenuItem(itemName: element.departmentName!, itemId: element.id);
+              },
+            ).toList(),
+          );
+        }
+      } else {
+        deptDropDownItemsList.clear();
+        selectedDept.value = null;
       }
     } else {
       AppUtility.showSnackBar(StringValues.noInternetConnectionAreAvailable.tr);
     }
+    Get.context?.loaderOverlay.hide();
   }
 
   Future getPositionDropDownData() async {
@@ -122,7 +135,7 @@ class CreateNewStudyController extends GetxController {
   Future onCreateStudy() async {
     if (studyNameController.text.isEmpty) {
       AppUtility.showSnackBar(StringValues.pleaseEnterStudyName.tr);
-      FocusScope.of(Get.context!).requestFocus();
+      studyNameFocusNode.requestFocus();
     } else if (selectedProgram.value == null) {
       AppUtility.showSnackBar(StringValues.pleaseSelectProgram.tr);
     } else if (selectedDept.value == null) {
