@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:galleon_user/common/custom_primary_button.dart';
 import 'package:galleon_user/constant/strings.dart';
@@ -7,22 +6,22 @@ import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
-import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class StudyScreenComponents {
-  static Widget customListElement({required String text, TextStyle? textStyle, int? maxLines}) {
+  static Widget customListElement({required String text, TextStyle? textStyle, int? maxLines, required BuildContext context}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           '•',
-          style: AppStyles.style13Normal.copyWith(color: ColorValues.blackColor),
+          style: GetThemeStyles.getStyle13Normal(Get.context!)?.copyWith(color: ColorValues.blackColor),
         ).marginOnly(top: Dimens.five, right: Dimens.ten),
         Flexible(
           child: Text(
             text,
-            style: textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: textStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             maxLines: maxLines ?? 5,
             overflow: TextOverflow.ellipsis,
           ),
@@ -65,13 +64,13 @@ class StudyScreenComponents {
                     Flexible(
                       child: Text(
                         StringValues.doYouWantToStopStudyName.tr,
-                        style: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle24Bold(context)?.copyWith(color: ColorValues.blackColor),
                       ),
                     ),
                     Flexible(
                       child: Text(
                         "${StringValues.areYouSureYouWantToStopTheStudyYouWillBeUnableToReturnToTheStudyIfYouAreReturningToTheStudyUseThePauseFunction.tr} ",
-                        style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                         maxLines: 5,
                         textAlign: TextAlign.center,
                       ).marginOnly(top: Dimens.fifteen, bottom: GetResponsiveDimens.twentyAndSevenTeen(context)),

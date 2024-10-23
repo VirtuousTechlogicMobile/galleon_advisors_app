@@ -40,7 +40,6 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   flutter_screenutil: ^5.9.3
-  hive: ^2.2.3
   flutter_svg: ^2.0.10+1
   talker_flutter: ^4.2.3
   cached_network_image: ^3.3.1
@@ -48,7 +47,6 @@ dependencies:
   intl: ^0.19.0
   permission_handler: ^11.3.1
   flutter_markdown: ^0.7.1
-  hive_flutter: ^1.1.0
   connectivity_plus: ^6.0.5
   cloud_firestore: ^5.1.0
   firebase_storage: ^12.1.1

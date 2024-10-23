@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:get/get.dart';
-
 import '../constant/dimens.dart';
+import '../theme/get_theme_wise_color.dart';
 
 class Responsive {
   static bool isMobile(BuildContext context) => Get.width < 900 /*850*/;
@@ -13,10 +12,13 @@ class Responsive {
 }
 
 class GetResponsiveFontStyle {
-  static TextStyle getStyle20And18Normal(BuildContext context) => Responsive.isMobile(context) ? AppStyles.style20Normal : AppStyles.style18Normal;
-  static TextStyle getStyle19And18Normal(BuildContext context) => Responsive.isMobile(context) ? AppStyles.style19Normal : AppStyles.style18Normal;
-  static TextStyle getStyle14And16SemiBold(BuildContext context) => Responsive.isMobile(context) ? AppStyles.style14SemiBold : AppStyles.style16SemiBold;
-  static TextStyle getStyle20And18Bold(BuildContext context) => Responsive.isMobile(context) ? AppStyles.style20Bold : AppStyles.style18Bold;
+  static TextStyle? getStyle20And18Normal(BuildContext context) =>
+      Responsive.isMobile(context) ? GetThemeStyles.getStyle18Normal(context) : GetThemeStyles.getStyle18Normal(context);
+  static TextStyle? getStyle19And18Normal(BuildContext context) =>
+      Responsive.isMobile(context) ? GetThemeStyles.getStyle18Normal(context) : GetThemeStyles.getStyle18Normal(context);
+  static TextStyle? getStyle14And16SemiBold(BuildContext context) =>
+      Responsive.isMobile(context) ? GetThemeStyles.getStyle14SemiBold(context) : GetThemeStyles.getStyle16SemiBold(context);
+  static TextStyle? getStyle20And18Bold(BuildContext context) => Responsive.isMobile(context) ? GetThemeStyles.getStyle20Bold(context) : GetThemeStyles.getStyle18Bold(context);
 }
 
 class GetResponsiveDimens {

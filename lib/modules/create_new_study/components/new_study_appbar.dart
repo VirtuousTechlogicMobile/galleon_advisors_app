@@ -8,6 +8,7 @@ import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../controller/create_new_study_controller.dart';
 
 class NewStudyAppbar extends StatelessWidget {
@@ -36,7 +37,7 @@ class NewStudyAppbar extends StatelessWidget {
           ),
           Text(
             StringValues.createNewStudy.tr,
-            style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.blackColor),
           ).marginOnly(left: GetResponsiveDimens.thirtyAndTwentySix(context)),
           SizedBox(
             width: Get.width / 3.3,
@@ -47,7 +48,7 @@ class NewStudyAppbar extends StatelessWidget {
               borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
               borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
               contentPadding: EdgeInsets.symmetric(vertical: GetResponsiveDimens.nineAndEight(context), horizontal: GetResponsiveDimens.fifteenAndFourteen(context)),
-              textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
+              textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
               cursorColor: ColorValues.blackColor,
               maxLines: 1,
             ),
@@ -55,7 +56,7 @@ class NewStudyAppbar extends StatelessWidget {
           const Spacer(),
           Text(
             '10:49:05 Tue, 30 Apr 24',
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
           ),
         ],
       ),

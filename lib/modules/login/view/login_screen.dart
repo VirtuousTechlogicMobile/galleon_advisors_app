@@ -5,12 +5,12 @@ import 'package:galleon_user/common/custom_textfield.dart';
 import 'package:galleon_user/constant/assets.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/modules/login/controller/login_controller.dart';
 import 'package:get/get.dart';
 import '../../../common/textfield_with_label.dart';
 import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                                         btnText: StringValues.logIn.tr,
                                         buttonWidth: Dimens.oneHundredFiftyEight,
                                         borderRadius: BorderRadius.circular(Dimens.thirty),
-                                        btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
+                                        btnTextStyle: GetThemeStyles.getStyle20Normal(context)?.copyWith(color: ColorValues.whiteColor),
                                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
                                         margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),
                                         onTap: () => loginController.onLogin(),
@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                                         },
                                         child: Text(
                                           StringValues.forgotPassword.tr,
-                                          style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+                                          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
                                         ),
                                       )
                                     ],

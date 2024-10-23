@@ -8,6 +8,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/study_screen_controller.dart';
 
@@ -54,19 +55,19 @@ class StudyScreenAppbar extends StatelessWidget {
                     children: [
                       Text(
                         '(00:00:00)',
-                        style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
                       ).marginOnly(right: Dimens.nineteen, left: GetResponsiveDimens.fifteenAndThirteen(context)),
                       Obx(
                         () => Text(
                           studyController.dualStudiesList[studyController.selectedStudyIndex.value],
-                          style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
+                          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
                         ),
                       ),
                       const Spacer(),
                       Obx(
                         () => Text(
                           studyController.currentTime.value,
-                          style: AppStyles.style16Normal.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
+                          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: studyController.isStudyStarted.value ? ColorValues.whiteColor : ColorValues.blackColor),
                         ).marginOnly(
                           right: GetResponsiveDimens.fifteenAndThirteen(context),
                           top: GetResponsiveDimens.twelveAndEight(context),

@@ -5,6 +5,7 @@ abstract class DatabaseSynonyms {
   static const departmentCollection = 'department';
   static const positionsCollection = 'positions';
   static const tasksCollection = 'tasks';
+  static const studyCollection = 'study';
   static const opportunityFlagCollection = 'opportunity_flag';
 
   /// fields

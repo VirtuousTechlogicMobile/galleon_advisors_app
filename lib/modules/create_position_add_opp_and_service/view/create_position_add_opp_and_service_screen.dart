@@ -9,6 +9,7 @@ import '../../../common/custom_textfield.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/create_position_add_opp_and_service_controller.dart';
 
@@ -41,10 +42,10 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: serviceActivitiesLayout(),
+                      child: serviceActivitiesLayout(context),
                     ),
                     Expanded(
-                      child: oppThemesLayout(),
+                      child: oppThemesLayout(context),
                     ),
                   ],
                 ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
@@ -75,7 +76,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceActivitiesLayout() {
+  Widget serviceActivitiesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: Dimens.fourPointFive, bottom: Dimens.nineteen),
       padding: EdgeInsets.only(top: Dimens.eight),
@@ -93,7 +94,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
           Center(
             child: Text(
               StringValues.serviceActivities.tr,
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ).marginOnly(bottom: Dimens.twentyNine, left: Dimens.fifty, right: Dimens.fifty),
@@ -115,7 +116,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
                   contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
-                  textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                  textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
                     createPositionAddOppAndServiceController.addPosition();
@@ -125,7 +126,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                   },
                   maxLines: 1,
                 ).marginOnly(bottom: Dimens.five, left: Dimens.thirteen, right: Dimens.thirteen),
-                child: addButton(),
+                child: addButton(context),
               ),
             ),
           ),
@@ -138,6 +139,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return activitiesOppComponent(
                     name: createPositionAddOppAndServiceController.serviceActivitiesList[index],
+                    context: context,
                     onTapRemove: () {},
                   );
                 },
@@ -149,7 +151,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     );
   }
 
-  Widget oppThemesLayout() {
+  Widget oppThemesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: Dimens.fourPointFive, bottom: Dimens.nineteen),
       padding: EdgeInsets.only(top: Dimens.eight),
@@ -167,7 +169,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
           Center(
             child: Text(
               StringValues.opportunityThemes.tr,
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ).marginOnly(bottom: Dimens.twentyNine, left: Dimens.fifty, right: Dimens.fifty),
@@ -190,7 +192,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
                   contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
-                  textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                  textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
                     createPositionAddOppAndServiceController.addOpportunity();
@@ -200,7 +202,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                   },
                   maxLines: 1,
                 ).marginOnly(bottom: Dimens.five, left: Dimens.thirteen, right: Dimens.thirteen),
-                child: addButton(),
+                child: addButton(context),
               ),
             ),
           ),
@@ -213,6 +215,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return activitiesOppComponent(
                     name: createPositionAddOppAndServiceController.opportunityThemesList[index],
+                    context: context,
                     onTapRemove: () {},
                   );
                 },
@@ -224,7 +227,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     );
   }
 
-  Widget activitiesOppComponent({required String name, required Function() onTapRemove}) {
+  Widget activitiesOppComponent({required String name, required Function() onTapRemove, required BuildContext context}) {
     return Container(
       margin: EdgeInsets.only(bottom: Dimens.five),
       alignment: Alignment.centerLeft,
@@ -239,14 +242,14 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
               name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             ).marginOnly(right: Dimens.fifteen),
           ),
           InkWell(
             onTap: onTapRemove(),
             child: Text(
               '-',
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             ),
           ),
         ],
@@ -254,7 +257,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
     );
   }
 
-  Widget addButton() {
+  Widget addButton(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -267,7 +270,7 @@ class CreatePositionAddOppAndServiceScreen extends StatelessWidget {
             "${StringValues.add.tr} +",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
           ).marginOnly(right: Dimens.fifteen),
         ),
       ],

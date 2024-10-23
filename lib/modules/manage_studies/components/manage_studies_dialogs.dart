@@ -5,6 +5,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 
 class ManageStudiesDialogs {
@@ -44,14 +45,14 @@ class ManageStudiesDialogs {
                     Flexible(
                       child: Text(
                         "${StringValues.doYouWantToUpload.tr}$studyName",
-                        style: AppStyles.style24Bold.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle24Bold(context)?.copyWith(color: ColorValues.blackColor),
                       ),
                     ),
                     Flexible(
                       child: Text(
                         // TODO: add dynamic position name
                         "${StringValues.youAreAboutToUploadTheStudiesTo.tr}$positionName.${StringValues.areYouSureYouWantToDoThisThisActionCannotBeUndone.tr}",
-                        style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                         maxLines: 3,
                         textAlign: TextAlign.center,
                       ).marginOnly(top: Dimens.twentySeven, bottom: Dimens.twentyFour),
@@ -68,7 +69,7 @@ class ManageStudiesDialogs {
                           contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
                           buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
-                          btnTextStyle: AppStyles.style20Bold.copyWith(color: ColorValues.primaryGreenColor),
+                          btnTextStyle: GetThemeStyles.getStyle20Bold(context)?.copyWith(color: ColorValues.primaryGreenColor),
                           margin: EdgeInsets.only(right: Dimens.twenty),
                           onTap: () {
                             Get.back();
@@ -80,7 +81,7 @@ class ManageStudiesDialogs {
                           contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                           borderRadius: BorderRadius.circular(Dimens.twelve),
                           buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
-                          btnTextStyle: AppStyles.style20Bold.copyWith(color: ColorValues.whiteColor),
+                          btnTextStyle: GetThemeStyles.getStyle20Bold(context)?.copyWith(color: ColorValues.whiteColor),
                           margin: EdgeInsets.only(left: Dimens.twenty),
                           onTap: () => onTapUploadButton(),
                         ),
@@ -135,14 +136,14 @@ class ManageStudiesDialogs {
                   Flexible(
                     child: Text(
                       StringValues.deleteStudies.tr,
-                      style: AppStyles.style24Bold.copyWith(color: ColorValues.redColor),
+                      style: GetThemeStyles.getStyle24Bold(context)?.copyWith(color: ColorValues.redColor),
                     ),
                   ),
                   Flexible(
                     child: Text(
                       // TODO: add dynamic position name
                       StringValues.youAreAboutToDeleteTheStudies.tr,
-                      style: AppStyles.style16Normal.copyWith(color: ColorValues.redColor),
+                      style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.redColor),
                       maxLines: 3,
                       textAlign: TextAlign.center,
                     ).marginOnly(top: Dimens.twentySeven, bottom: Dimens.twentyFour),
@@ -159,7 +160,7 @@ class ManageStudiesDialogs {
                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                         borderRadius: BorderRadius.circular(Dimens.twelve),
                         buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
-                        btnTextStyle: AppStyles.style20Bold.copyWith(color: ColorValues.primaryGreenColor),
+                        btnTextStyle: GetThemeStyles.getStyle20Bold(context)?.copyWith(color: ColorValues.primaryGreenColor),
                         margin: EdgeInsets.only(right: Dimens.twenty),
                         onTap: () {
                           Get.back();
@@ -171,7 +172,7 @@ class ManageStudiesDialogs {
                         contentPadding: EdgeInsets.symmetric(vertical: Dimens.fifteen),
                         borderRadius: BorderRadius.circular(Dimens.twelve),
                         buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
-                        btnTextStyle: AppStyles.style20Bold.copyWith(color: ColorValues.whiteColor),
+                        btnTextStyle: GetThemeStyles.getStyle20Bold(context)?.copyWith(color: ColorValues.whiteColor),
                         margin: EdgeInsets.only(left: Dimens.twenty),
                         onTap: () => onTapDeleteButton(),
                       ),

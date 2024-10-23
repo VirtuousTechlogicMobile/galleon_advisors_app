@@ -4,6 +4,7 @@ import 'package:galleon_user/constant/colors.dart';
 
 import '../constant/dimens.dart';
 import '../constant/styles.dart';
+import '../theme/get_theme_wise_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -83,9 +84,13 @@ class CustomTextField extends StatelessWidget {
         autofocus: autofocus ?? false,
         style: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
           if (states.contains(WidgetState.focused)) {
-            return textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor);
+            return textStyle ??
+                GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.primaryGreenColor) ??
+                AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor);
           }
-          return textStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50));
+          return textStyle ??
+              GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)) ??
+              AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50));
         }),
         maxLength: length,
         maxLines: maxLines,
@@ -118,7 +123,7 @@ class CustomTextField extends StatelessWidget {
             return fillColor ?? ColorValues.whiteColor;
           }),
           hintText: hintText ?? '',
-          hintStyle: hintStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
+          hintStyle: hintStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
           focusedBorder: OutlineInputBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(Dimens.seven),
             borderSide: borderSide ?? const BorderSide(color: ColorValues.primaryGreenColor, width: 1.5),

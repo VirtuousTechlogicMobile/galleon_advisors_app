@@ -7,6 +7,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/study_screen_controller.dart';
 
@@ -63,7 +64,7 @@ class StudyScreenBottomBar extends StatelessWidget {
                       btnText: StringValues.activities.tr,
                       borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                       btnTextStyle: GetResponsiveFontStyle.getStyle20And18Normal(context)
-                          .copyWith(color: studyController.selectedTab.value == 'activities' ? ColorValues.whiteColor : ColorValues.blackColor),
+                          ?.copyWith(color: studyController.selectedTab.value == 'activities' ? ColorValues.whiteColor : ColorValues.blackColor),
                       contentPadding: EdgeInsets.zero,
                       buttonColor: studyController.selectedTab.value == 'activities' ? ColorValues.darkSlateGrayColor : ColorValues.softGrayColor,
                       onTap: () => onTapActivitiesButton(),
@@ -107,7 +108,8 @@ class StudyScreenBottomBar extends StatelessWidget {
                 margin: EdgeInsets.only(right: Dimens.nineteen, left: GetResponsiveDimens.sevenAndNine(context)),
                 btnText: StringValues.tipsAndTricksWithSlashN.tr,
                 borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'tips&tricks' ? ColorValues.whiteColor : ColorValues.blackColor),
+                btnTextStyle:
+                    GetThemeStyles.getStyle16Normal(context)?.copyWith(color: studyController.selectedTab.value == 'tips&tricks' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,
                 contentPadding: EdgeInsets.zero,
                 buttonColor: studyController.selectedTab.value == 'tips&tricks' ? ColorValues.darkSlateGrayColor : ColorValues.softGrayColor,
@@ -121,7 +123,8 @@ class StudyScreenBottomBar extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 btnText: StringValues.operationalAnalysis.tr,
                 borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'operationAnalysis' ? ColorValues.whiteColor : ColorValues.blackColor),
+                btnTextStyle: GetThemeStyles.getStyle16Normal(context)
+                    ?.copyWith(color: studyController.selectedTab.value == 'operationAnalysis' ? ColorValues.whiteColor : ColorValues.blackColor),
                 btnTextMaxLines: 2,
                 buttonColor: studyController.selectedTab.value == 'operationAnalysis' ? ColorValues.darkSlateGrayColor : ColorValues.softGrayColor,
                 onTap: () => onTapOperationAnalysisButton(),
@@ -134,7 +137,8 @@ class StudyScreenBottomBar extends StatelessWidget {
                 contentPadding: EdgeInsets.zero,
                 btnText: StringValues.keyBackSlashNThemes.tr,
                 borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
-                btnTextStyle: AppStyles.style16Normal.copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.darkSlateGrayColor),
+                btnTextStyle: GetThemeStyles.getStyle16Normal(context)
+                    ?.copyWith(color: studyController.selectedTab.value == 'keyThemes' ? ColorValues.whiteColor : ColorValues.darkSlateGrayColor),
                 btnTextMaxLines: 2,
                 buttonColor: studyController.selectedTab.value == 'keyThemes' ? ColorValues.darkSlateGrayColor : ColorValues.lightGrayColor.withOpacity(0.80),
                 onTap: () => onTapKeyThemesButton(),
@@ -151,13 +155,13 @@ class StudyScreenBottomBar extends StatelessWidget {
                           ? StringValues.split.tr
                           : StringValues.submit.tr,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities != null || isSplit || isMerge
+                  buttonColor: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
                       ? ColorValues.primaryGreenColor
                       : ColorValues.lightGrayColor.withOpacity(0.50),
                   borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                   contentPadding: EdgeInsets.zero,
-                  btnTextStyle: AppStyles.style16Normal.copyWith(
-                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities != null || isSplit || isMerge
+                  btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(
+                    color: studyController.selectedOpportunityTheme.value != null || studyController.selectedServiceActivities.value != null || isSplit || isMerge
                         ? ColorValues.whiteColor
                         : ColorValues.blackColor,
                   ),

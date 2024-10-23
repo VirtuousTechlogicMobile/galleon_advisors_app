@@ -10,6 +10,7 @@ import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 
 import '../constant/dimens.dart';
+import '../theme/get_theme_wise_color.dart';
 
 class CustomDropdown extends StatefulWidget {
   final List<DropDownMenuItem> dropDownItemsList;
@@ -77,7 +78,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                       Flexible(
                         child: Text(
                           item.itemName,
-                          style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
+                          style: widget.dropDownMenuItemStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.textGrayColor),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -97,7 +98,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
             } else {
               return DropdownMenuItem<DropDownMenuItem>(
                 value: item,
-                child: Text(item?.itemName ?? '', style: widget.dropDownMenuItemStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)),
+                child: Text(item?.itemName ?? '', style: widget.dropDownMenuItemStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.textGrayColor)),
               );
             }
           }).toList(),
@@ -126,8 +127,8 @@ class _CustomDropdownState extends State<CustomDropdown> {
                   widget.selectedItem?.itemName ?? widget.hintText ?? '',
                   // style for separate hint text style and selected item text style
                   style: widget.selectedItem?.itemName != null
-                      ? widget.dropDowButtonTextStyle ?? AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor)
-                      : AppStyles.style16Normal.copyWith(color: ColorValues.textGrayColor),
+                      ? widget.dropDowButtonTextStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.textGrayColor)
+                      : GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.textGrayColor),
                 ),
                 CommonWidgets.fromSvg(
                   svgAsset: widget.dropdownIcon ?? SvgAssets.dropdownRightArrowIcon,

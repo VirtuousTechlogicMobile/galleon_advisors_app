@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
 import '../constant/styles.dart';
+import '../theme/get_theme_wise_color.dart';
 import 'common_widgets.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
@@ -53,7 +54,7 @@ class CustomPrimaryButton extends StatelessWidget {
           padding: contentPadding ?? EdgeInsets.symmetric(vertical: Dimens.fifteen),
           child: Text(
             btnText,
-            style: btnTextStyle ?? AppStyles.style16Normal.copyWith(fontWeight: FontWeight.w500, color: btnTextColor ?? ColorValues.whiteColor),
+            style: btnTextStyle ?? GetThemeStyles.getStyle16Normal(context)?.copyWith(fontWeight: FontWeight.w500, color: btnTextColor ?? ColorValues.whiteColor),
             maxLines: btnTextMaxLines ?? 1,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,

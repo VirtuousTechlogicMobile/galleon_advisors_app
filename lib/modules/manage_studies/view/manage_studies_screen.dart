@@ -11,10 +11,10 @@ import 'package:galleon_user/modules/manage_studies/controller/manage_studies_co
 import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
 import '../../../common/common_widgets.dart';
 import '../../../common/custom_checkbox.dart';
 import '../../../constant/assets.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../components/custom_expansion_tile_widget.dart';
 import '../components/manage_studies_appbar.dart';
 
@@ -71,7 +71,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                     paddingBetween: GetResponsiveDimens.tenAndEight(context),
                                     child: Text(
                                       'Select All',
-                                      style: GetResponsiveFontStyle.getStyle20And18Bold(context).copyWith(color: ColorValues.blackColor),
+                                      style: GetResponsiveFontStyle.getStyle20And18Bold(context)?.copyWith(color: ColorValues.blackColor),
                                     ),
                                     onValueChange: (value) {
                                       manageStudiesController.onSelectedAll(index);
@@ -102,7 +102,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                                         ),
                                                         borderRadius: BorderRadius.circular(GetResponsiveDimens.tenAndEight(context)),
                                                         fillColor: ColorValues.softGrayColor.withOpacity(0.40),
-                                                        textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
+                                                        textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
                                                         borderSide: BorderSide(color: ColorValues.lightGrayColor, width: Dimens.one),
                                                         autofocus: true,
                                                         onSubmit: (p0) {
@@ -129,7 +129,7 @@ class ManageStudiesScreen extends StatelessWidget {
                                                       },
                                                       child: Text(
                                                         manageStudiesController.studyData[index].studyData[studyIndex].studyName,
-                                                        style: GetResponsiveFontStyle.getStyle20And18Normal(context).copyWith(color: ColorValues.darkSlateGrayColor),
+                                                        style: GetResponsiveFontStyle.getStyle20And18Normal(context)?.copyWith(color: ColorValues.darkSlateGrayColor),
                                                       ),
                                                     ),
                                               onValueChange: (value) {
@@ -172,7 +172,7 @@ class ManageStudiesScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(Dimens.eleven),
             contentPadding: EdgeInsets.symmetric(vertical: Dimens.twelve),
             buttonWidth: GetResponsiveDimens.threeHundredFiftyAndOneHundredFifty(context),
-            btnTextStyle: AppStyles.style16Bold.copyWith(color: ColorValues.whiteColor),
+            btnTextStyle: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.whiteColor),
             buttonColor: ColorValues.primaryGreenColor,
             onTap: () {
               Get.toNamed(AppRoutes.endStudySummary, parameters: {'studyId': ''});
@@ -197,7 +197,7 @@ class ManageStudiesScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimens.eleven),
                     contentPadding: EdgeInsets.only(top: Dimens.twelve, bottom: Dimens.twelve, left: Dimens.fifteen),
                     // buttonHeight: Dimens.thirtySix,
-                    btnTextStyle: AppStyles.style16Bold.copyWith(color: ColorValues.whiteColor),
+                    btnTextStyle: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.whiteColor),
                     buttonColor: ColorValues.primaryGreenColor,
                     textAlignment: Alignment.centerLeft,
                     onTap: () {

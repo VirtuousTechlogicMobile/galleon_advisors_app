@@ -11,6 +11,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../../../utility/role_permission.dart';
 
@@ -49,7 +50,7 @@ class ManagePositionsAppbar extends StatelessWidget {
                 ),
                 Text(
                   StringValues.managePosition.tr,
-                  style: AppStyles.style16Bold,
+                  style: GetThemeStyles.getStyle16Bold(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -89,7 +90,7 @@ class ManagePositionsAppbar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Dimens.seven),
                       borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
                       contentPadding: EdgeInsets.only(top: Dimens.seven, bottom: Dimens.seven, right: Dimens.nineteen, left: Dimens.twentyEight),
-                      textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
+                      textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
                       cursorColor: ColorValues.blackColor,
                       maxLines: 1,
                     ),

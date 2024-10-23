@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constant/dimens.dart';
 import '../constant/styles.dart';
+import '../theme/get_theme_wise_color.dart';
 
 class NoDataWidget extends StatelessWidget {
   const NoDataWidget({
@@ -31,7 +32,7 @@ class NoDataWidget extends StatelessWidget {
             Text(
               message!,
               textAlign: TextAlign.center,
-              style: AppStyles.style32Bold.copyWith(
+              style: GetThemeStyles.getStyle32Bold(context)?.copyWith(
                 color: Theme.of(context).textTheme.titleSmall!.color,
               ),
             ),

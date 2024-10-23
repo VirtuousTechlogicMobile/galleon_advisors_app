@@ -4,15 +4,12 @@ import 'package:galleon_user/common/custom_textfield.dart';
 import 'package:galleon_user/constant/assets.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/modules/forgot_password/controller/forgot_password_controller.dart';
 import 'package:get/get.dart';
 import '../../../common/common_widgets.dart';
 import '../../../constant/dimens.dart';
-import '../../../helper/validators.dart';
-import '../../../routes/app_pages.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
-import '../../../utility/utility.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -75,7 +72,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 StringValues.email.tr,
-                                                style: AppStyles.style16Normal.copyWith(color: ColorValues.primaryGreenColor.withOpacity(0.50)),
+                                                style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.primaryGreenColor.withOpacity(0.50)),
                                               ).marginOnly(bottom: Dimens.ten),
                                               CustomTextField(
                                                 controller: forgotPasswordController.emailController,
@@ -88,7 +85,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                                           CustomPrimaryButton(
                                             btnText: StringValues.resetPassword.tr,
                                             borderRadius: BorderRadius.circular(Dimens.thirty),
-                                            btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
+                                            btnTextStyle: GetThemeStyles.getStyle20Normal(context)?.copyWith(color: ColorValues.whiteColor),
                                             buttonWidth: Responsive.isMobile(context) ? smallConstraints.maxWidth / 1.4 : smallConstraints.maxWidth / 1.8,
                                             contentPadding: EdgeInsets.symmetric(vertical: Dimens.eleven, horizontal: Dimens.twentySix),
                                             margin: EdgeInsets.symmetric(vertical: Dimens.twentyFour),

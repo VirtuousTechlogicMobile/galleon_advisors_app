@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../components/manage_positions_appbar.dart';
 
@@ -49,7 +50,7 @@ class ManagePositionsScreen extends StatelessWidget {
                               "${managePositionsController.positionsDataList[index].deptName} - ${managePositionsController.positionsDataList[index].positionName}",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                             ),
                           ),
                           if (managePositionsController.positionsDataList[index].status == 'pending')

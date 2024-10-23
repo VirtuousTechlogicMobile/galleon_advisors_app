@@ -2,7 +2,6 @@ import 'package:galleon_user/helper/database_helper/firebase_response_model.dart
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
 import '../../../constant/app_states.dart';
 import '../../../helper/database_helper/database_helper.dart';
 import '../../../helper/storage_handler/storage_data_handler.dart';
@@ -19,7 +18,7 @@ class HomeScreenController extends GetxController {
 
   Future onLogout() async {
     Get.context?.loaderOverlay.show();
-    FirebaseResponseModel response = await DatabaseHelper.instance.logoutUser();
+    FirebaseResponseModel response = await UserDatabaseHelper.instance.logoutUser();
     if (response.isSuccess) {
       currentUserRole = null;
       Get.offAllNamed(AppRoutes.login);

@@ -4,6 +4,7 @@ import '../constant/colors.dart';
 import '../constant/dimens.dart';
 import '../constant/strings.dart';
 import '../constant/styles.dart';
+import '../theme/get_theme_wise_color.dart';
 import '../utility/responsive.dart';
 import 'custom_primary_button.dart';
 
@@ -42,13 +43,13 @@ class NoInternetDialog {
                 Flexible(
                   child: Text(
                     StringValues.oops.tr,
-                    style: AppStyles.style28Bold.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle28Bold(Get.context!)?.copyWith(color: ColorValues.blackColor),
                   ),
                 ),
                 Flexible(
                   child: Text(
                     StringValues.noInternetFoundCheckYourConnection.tr,
-                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle14Normal(Get.context!)?.copyWith(color: ColorValues.blackColor),
                     maxLines: 3,
                     textAlign: TextAlign.center,
                   ).marginOnly(top: Dimens.fifteen, bottom: GetResponsiveDimens.twentyAndSevenTeen(Get.context!)),

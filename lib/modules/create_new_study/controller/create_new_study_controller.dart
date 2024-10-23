@@ -65,7 +65,7 @@ class CreateNewStudyController extends GetxController {
 
   Future getProgramsDropDownData() async {
     if (await AppUtility.checkNetwork()) {
-      FirebaseResponseModel<List<ProgramDataModel>?> programsData = await DatabaseHelper.instance.getAllProgramsData();
+      FirebaseResponseModel<List<ProgramDataModel>?> programsData = await ProgramsDatabaseHelper.instance.getAllProgramsData();
       if (programsData.data != null) {
         programsDataList = programsData.data!;
         programDropDownItemsList.addAll(
@@ -85,7 +85,7 @@ class CreateNewStudyController extends GetxController {
     Get.context?.loaderOverlay.show();
     if (await AppUtility.checkNetwork()) {
       if (selectedProgram.value != null && programsDataList.where((element) => selectedProgram.value?.itemId == element.id).first.departmentIds != null) {
-        FirebaseResponseModel<List<DepartmentDataModel>?> departmentData = await DatabaseHelper.instance
+        FirebaseResponseModel<List<DepartmentDataModel>?> departmentData = await ProgramsDatabaseHelper.instance
             .getProgramDepartmentData(departmentIds: programsDataList.where((element) => selectedProgram.value?.itemId == element.id).first.departmentIds!);
         if (departmentData.data != null) {
           deptDropDownItemsList.clear();
@@ -111,7 +111,7 @@ class CreateNewStudyController extends GetxController {
   Future getPositionDropDownData() async {
     Get.context?.loaderOverlay.show();
     if (await AppUtility.checkNetwork()) {
-      FirebaseResponseModel<List<PositionDataModel>?> positionData = await DatabaseHelper.instance.getPositionsDataById(departmentIds: selectedDept.value?.itemId);
+      FirebaseResponseModel<List<PositionDataModel>?> positionData = await ProgramsDatabaseHelper.instance.getPositionsDataById(departmentIds: selectedDept.value?.itemId);
       if (positionData.data?.isNotEmpty ?? false) {
         positionDropDownItemsList.clear();
         selectedPosition.value = null;

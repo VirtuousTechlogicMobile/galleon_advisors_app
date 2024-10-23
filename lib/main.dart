@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/helper/local_database_helper/local_database_helper.dart';
+import 'package:galleon_user/helper/sqlite_database_helper/sqlite_database_helper.dart';
 import 'package:galleon_user/services/translations/app_translations.dart';
-import 'package:galleon_user/theme/theme_controller.dart';
+import 'package:galleon_user/theme/app_theme.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-
-import 'constant/hive_box_names.dart';
 import 'firebase_options.dart';
 import 'helper/connectivity_helper/connectivity_service.dart';
 import 'helper/database_helper/database_helper.dart';
@@ -43,21 +40,10 @@ Future<void> _initPreAppServices() async {
   AppUtility.log('Initializing PreApp Services');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await StorageGetterSetters().init();
-  await Hive.initFlutter();
-
-  AppUtility.log('Registering Hive Adapters');
-
-  AppUtility.log('Hive Adapters Registered');
-
-  AppUtility.log('Opening Hive Boxes');
-
-  await Hive.openBox<String>(HiveBoxNames.themeMode);
-
-  AppUtility.log('Hive Boxes Opened');
 
   AppUtility.log('Initializing Get Services');
 
-  Get.put(AppThemeController(), permanent: true);
+  Get.put(AppTheme(), permanent: true);
 
   AppUtility.log('Get Services Initialized');
 
@@ -65,7 +51,7 @@ Future<void> _initPreAppServices() async {
 
   AppUtility.log('Token Checked');
 
-  await LocalDatabaseHelper.instance.openGalleonDatabase();
+  await SqliteDatabaseHelper.instance.openGalleonDatabase();
 
   AppUtility.log('Gallon Local Database Initialized');
 
@@ -87,19 +73,9 @@ class MyApp extends StatelessWidget {
     }
   }
 
-  ThemeMode _handleAppTheme(String mode) {
-    if (mode == kDarkMode) {
-      return ThemeMode.dark;
-    }
-    if (mode == kLightMode) {
-      return ThemeMode.light;
-    }
-    return ThemeMode.system;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final appController = Get.find<AppThemeController>();
+    final appController = Get.find<AppTheme>();
     return ScreenUtilInit(
       designSize: const Size(392, 744),
       builder: (ctx, child) {
@@ -111,7 +87,6 @@ class MyApp extends StatelessWidget {
                 child: GetMaterialApp(
                   title: StringValues.appName.tr,
                   debugShowCheckedModeBanner: false,
-                  themeMode: _handleAppTheme(appController.themeMode),
                   theme: appController.getLightThemeData(context),
                   darkTheme: appController.getDarkThemeData(context),
                   getPages: AppPages.pages,

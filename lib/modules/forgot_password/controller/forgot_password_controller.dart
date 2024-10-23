@@ -18,7 +18,7 @@ class ForgotPasswordController extends GetxController {
     } else {
       Get.context?.loaderOverlay.show();
       if (await AppUtility.checkNetwork()) {
-        FirebaseResponseModel response = await DatabaseHelper.instance.sendPasswordResetEmail(email: emailController.text);
+        FirebaseResponseModel response = await UserDatabaseHelper.instance.sendPasswordResetEmail(email: emailController.text);
         if (response.isSuccess) {
           AppUtility.showSnackBar(StringValues.aLinkToResetYourPasswordHasBeenSentToYourEmailAddress.tr);
         } else {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_user/constant/colors.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/utility/responsive.dart';
 
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class ListWheelScrollPicker extends StatelessWidget {
   final List<String> itemsList;
@@ -54,8 +54,8 @@ class ListWheelScrollPicker extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       itemsList[index % itemsList.length],
                       style: selectedIndex == (index % itemsList.length)
-                          ? AppStyles.style16SemiBold.copyWith(color: ColorValues.primaryGreenColor)
-                          : AppStyles.style16Normal.copyWith(color: ColorValues.fontLightGrayColor),
+                          ? GetThemeStyles.getStyle16SemiBold(context)?.copyWith(color: ColorValues.primaryGreenColor)
+                          : GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.fontLightGrayColor),
                     ),
                   );
                 },

@@ -4,6 +4,7 @@ import 'package:galleon_user/constant/assets.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/strings.dart';
 import 'package:galleon_user/constant/styles.dart';
+import 'package:galleon_user/theme/get_theme_wise_color.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/dimens.dart';
@@ -32,12 +33,12 @@ class CreateNewPositionAppbar extends StatelessWidget {
           ),
           Text(
             StringValues.createNewPosition.tr,
-            style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.blackColor),
           ).marginOnly(left: Dimens.thirtyNine),
           if (positionName != null)
             Text(
               positionName ?? '',
-              style: AppStyles.style16Bold.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.blackColor),
             ).marginOnly(left: Dimens.fortyEight),
         ],
       ),

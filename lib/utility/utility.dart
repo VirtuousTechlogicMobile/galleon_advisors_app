@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:get/get.dart';
 
+import '../theme/get_theme_wise_color.dart';
+
 abstract class AppUtility {
   /// Logger
   static final logger = TalkerFlutter.init();
@@ -53,7 +55,7 @@ abstract class AppUtility {
         borderWidth: Dimens.zero,
         messageText: Text(
           message.toCapitalized(),
-          style: AppStyles.style14Normal.copyWith(
+          style: GetThemeStyles.getStyle14Normal(Get.context!)?.copyWith(
             color: ColorValues.whiteColor,
           ),
         ),

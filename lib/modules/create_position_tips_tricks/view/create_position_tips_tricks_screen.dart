@@ -9,6 +9,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 
 class CreatePositionTipsTricksScreen extends StatelessWidget {
@@ -37,7 +38,7 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
                   color: ColorValues.whiteColor,
                   borderRadius: BorderRadius.circular(Dimens.sixTeen),
                 ),
-                child: tipsAndTricksLayout(),
+                child: tipsAndTricksLayout(context),
               ),
             ),
             // bottom bar
@@ -65,51 +66,51 @@ class CreatePositionTipsTricksScreen extends StatelessWidget {
     );
   }
 
-  Widget tipsAndTricksLayout() {
+  Widget tipsAndTricksLayout(BuildContext context) {
     return ListView(
       children: [
         Text(
           StringValues.tipsAndTricks.tr,
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ).marginOnly(left: Dimens.oneHundredSixty, bottom: Dimens.four),
         CommonWidgets.autoSizeRichText(textSpans: [
           TextSpan(
             text: StringValues.server.tr,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
               decoration: TextDecoration.underline,
             ),
           ),
           TextSpan(
             text: StringValues.role.tr,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
             ),
           ),
         ], minFontSize: 12, maxFontSize: 16),
         Text(
           "- ${StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr}",
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ),
         Text(
           "- ${StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr}",
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ),
         Text(
           StringValues.processOpportunities.tr,
-          style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
         ).marginOnly(top: Dimens.fifteen),
         Text(
           "- ${StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr}",
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ),
         Text(
           "- ${StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr}",
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ),
         Text(
           "- ${StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr}",
-          style: AppStyles.style16Normal,
+          style: GetThemeStyles.getStyle16Normal(context),
         ),
       ],
     );

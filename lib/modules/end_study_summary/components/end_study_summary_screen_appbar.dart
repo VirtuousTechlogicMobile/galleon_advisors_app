@@ -9,6 +9,7 @@ import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class EndStudySummaryScreenAppbar extends StatelessWidget {
   final String time;
@@ -49,11 +50,11 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
             ),
           Text(
             time,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
           ),
           Text(
             programName,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
           ).marginOnly(left: Dimens.sixTeen),
           const Spacer(),
           if (isShowEndButton)
@@ -61,7 +62,7 @@ class EndStudySummaryScreenAppbar extends StatelessWidget {
               buttonWidth: GetResponsiveDimens.twoHundredEightyAndOneHundredFortyOne(context),
               btnText: StringValues.end.tr,
               contentPadding: EdgeInsets.zero,
-              btnTextStyle: AppStyles.style20Normal.copyWith(color: ColorValues.whiteColor),
+              btnTextStyle: GetThemeStyles.getStyle20Normal(context)?.copyWith(color: ColorValues.whiteColor),
               borderRadius: BorderRadius.circular(GetResponsiveDimens.nineAndEight(context)),
               onTap: () => onEndButtonTap(),
             ),

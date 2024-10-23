@@ -6,6 +6,7 @@ import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/styles.dart';
 import 'package:get/get.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/create_dual_study_controller.dart';
 
@@ -37,7 +38,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
           ),
           Text(
             '(00:00:00)',
-            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twenty),
           SizedBox(
@@ -48,7 +49,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
               borderRadius: BorderRadius.circular(Dimens.eight),
               borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
               contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight, horizontal: Dimens.fourteen),
-              textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
+              textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.50)),
               cursorColor: ColorValues.blackColor,
               maxLines: 1,
             ),
@@ -57,7 +58,7 @@ class CreateDualStudyScreenAppbar extends StatelessWidget {
           Obx(
             () => Text(
               createNewStudySameProgramController.currentTime.value,
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             ),
           ),
         ],

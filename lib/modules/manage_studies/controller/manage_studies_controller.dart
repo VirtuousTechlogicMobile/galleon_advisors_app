@@ -7,7 +7,6 @@ import '../../../helper/database_helper/database_helper.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';
 import '../../../utility/utility.dart';
 import '../../create_new_position/model/program_data_model.dart';
-import '../../create_new_study/model/department_data_model.dart';
 import '../model/manage_studies_data_model.dart';
 
 class ManageStudiesController extends GetxController {
@@ -117,7 +116,7 @@ class ManageStudiesController extends GetxController {
 
   Future getProgramsDropDownData() async {
     if (await AppUtility.checkNetwork()) {
-      FirebaseResponseModel<List<ProgramDataModel>?> programsData = await DatabaseHelper.instance.getAllProgramsData();
+      FirebaseResponseModel<List<ProgramDataModel>?> programsData = await ProgramsDatabaseHelper.instance.getAllProgramsData();
       if (programsData.data != null) {
         programDropDownItemsList.addAll(
           programsData.data!.where((element) => element.programName != null).map(

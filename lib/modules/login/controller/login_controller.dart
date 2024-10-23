@@ -3,8 +3,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:galleon_user/utility/role_permission.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
-
-import '../../../constant/app_states.dart';
 import '../../../constant/strings.dart';
 import '../../../helper/database_helper/database_helper.dart';
 import '../../../helper/database_helper/firebase_response_model.dart';
@@ -51,6 +49,6 @@ class LoginController extends GetxController {
   }
 
   Future<FirebaseResponseModel<String?>> signInUser() async {
-    return await DatabaseHelper.instance.signInUser(email: emailController.text, password: passwordController.text);
+    return await UserDatabaseHelper.instance.signInUser(email: emailController.text, password: passwordController.text);
   }
 }

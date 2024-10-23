@@ -5,6 +5,7 @@ import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/manage_position_detail_controller.dart';
 
@@ -41,7 +42,7 @@ class ManagePositionDetailAppbar extends StatelessWidget {
           Expanded(
             child: Text(
               managePositionDetailController.positionData.value?.positionName ?? '',
-              style: AppStyles.style16Bold,
+              style: GetThemeStyles.getStyle16Bold(context),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

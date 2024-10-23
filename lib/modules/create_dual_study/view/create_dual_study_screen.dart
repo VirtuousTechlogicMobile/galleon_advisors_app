@@ -8,6 +8,7 @@ import '../../../common/custom_primary_button.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../controller/create_dual_study_controller.dart';
 
@@ -82,7 +83,7 @@ class CreateDualStudyScreen extends StatelessWidget {
                       ? ColorValues.primaryGreenColor
                       : ColorValues.softGrayColor,
                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
-                  btnTextStyle: AppStyles.style16Normal.copyWith(
+                  btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(
                     color: createDualStudyController.selectedPosition.value != null && createDualStudyController.selectedDept.value != null
                         ? ColorValues.whiteColor
                         : ColorValues.blackColor,

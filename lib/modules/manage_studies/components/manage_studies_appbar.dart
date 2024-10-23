@@ -9,6 +9,7 @@ import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/responsive.dart';
 import '../../../utility/role_permission.dart';
 import '../controller/manage_studies_controller.dart';
@@ -49,7 +50,7 @@ class ManageStudiesAppbar extends StatelessWidget {
                 ),
                 Text(
                   StringValues.manageStudies.tr,
-                  style: AppStyles.style16Bold,
+                  style: GetThemeStyles.getStyle16Normal(context),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

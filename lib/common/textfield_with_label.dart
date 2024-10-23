@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../constant/colors.dart';
 import '../constant/dimens.dart';
-import '../constant/styles.dart';
+import '../theme/get_theme_wise_color.dart';
 
 class TextFieldWithLabel extends StatefulWidget {
   final String labelText;
@@ -51,7 +51,7 @@ class _TextFieldWithLabelState extends State<TextFieldWithLabel> {
       children: [
         Text(
           widget.labelText,
-          style: AppStyles.style16Normal.copyWith(color: isFocused ? ColorValues.primaryGreenColor.withOpacity(0.50) : ColorValues.blackColor.withOpacity(0.50)),
+          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: isFocused ? ColorValues.primaryGreenColor.withOpacity(0.50) : ColorValues.blackColor.withOpacity(0.50)),
         ).marginOnly(bottom: Dimens.ten),
         widget.textField,
       ],

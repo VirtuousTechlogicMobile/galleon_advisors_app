@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
 import '../../../common/common_widgets.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class CustomExpansionTileWidget extends StatelessWidget {
   final bool isExpanded;
@@ -81,7 +80,7 @@ class CustomExpansionTileWidget extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppStyles.style16Normal.copyWith(color: ColorValues.darkSlateGrayColor),
+                  style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.darkSlateGrayColor),
                 ),
                 if (isShowStar)
                   Icon(

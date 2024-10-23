@@ -81,4 +81,26 @@ class StudyDataModel {
       'is_removed_from_app': isRemovedFromApp,
     };
   }
+
+  static Map<String, String> toFields() {
+    return {
+      'id': 'INTEGER PRIMARY KEY',
+      'programId': 'TEXT',
+      'departmentId': 'TEXT',
+      'positionId': 'TEXT',
+      'createdAt': 'TEXT',
+      'startTime': 'TEXT',
+      'pauseTime': 'TEXT',
+      'endTime': 'TEXT',
+      'studyTimelineId': 'TEXT',
+      'studyTaskIds': 'TEXT',
+      'studyBy': 'TEXT',
+      'keyThemesFile': 'TEXT',
+      'isStarted': 'INTEGER',
+      'isCompleted': 'INTEGER',
+      'lastUpdatedAt': 'TEXT',
+      'lastUpdatedBy': 'TEXT',
+      'isRemovedFromApp': 'INTEGER',
+    };
+  }
 }

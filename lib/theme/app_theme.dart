@@ -1,91 +1,18 @@
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/dimens.dart';
 import 'package:galleon_user/constant/styles.dart';
-import 'package:galleon_user/services/storage/hive_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
-const String kThemeModeBox = 'themeMode';
-const String kThemeModeKey = 'themeMode';
-const String kSystemMode = 'system';
-const String kLightMode = 'light';
-const String kDarkMode = 'dark';
-const String kDefaultFontFamily = 'Poppins';
-
-class AppThemeController extends GetxController {
-  final _themeMode = kSystemMode.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    getThemeMode();
-  }
-
-  static AppThemeController get find => Get.find();
-
-  String get themeMode => _themeMode.value;
-
-  void getSystemChromeData() {
-    var themeBrightness = SchedulerBinding.instance.window.platformBrightness;
-
-    if (themeMode == kLightMode) {
-      SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarColor: ColorValues.lightBgColor,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: ColorValues.lightBgColor,
-          systemNavigationBarDividerColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
-      );
-    } else if (themeMode == kDarkMode) {
-      SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(
-          statusBarColor: ColorValues.darkBgColor,
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: ColorValues.darkBgColor,
-          systemNavigationBarDividerColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ),
-      );
-    } else {
-      if (themeBrightness == Brightness.light) {
-        SystemChrome.setSystemUIOverlayStyle(
-          const SystemUiOverlayStyle(
-            statusBarColor: ColorValues.lightBgColor,
-            statusBarBrightness: Brightness.light,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarColor: ColorValues.lightBgColor,
-            systemNavigationBarDividerColor: Colors.transparent,
-            systemNavigationBarIconBrightness: Brightness.dark,
-          ),
-        );
-      } else {
-        SystemChrome.setSystemUIOverlayStyle(
-          const SystemUiOverlayStyle(
-            statusBarColor: ColorValues.darkBgColor,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.light,
-            systemNavigationBarColor: ColorValues.darkBgColor,
-            systemNavigationBarDividerColor: Colors.transparent,
-            systemNavigationBarIconBrightness: Brightness.light,
-          ),
-        );
-      }
-    }
-  }
+class AppTheme {
+  static String get defaultFontFamily => 'SF-Pro';
+  static double get defaultFontHeight => 1.2;
 
   ThemeData getLightThemeData(BuildContext context) {
-    getSystemChromeData();
     return ThemeData(
       useMaterial3: true,
-      colorSchemeSeed: ColorValues.primaryColor,
+      colorSchemeSeed: ColorValues.primaryGreenColor,
       iconTheme: const IconThemeData(color: ColorValues.lightGrayColor),
-      scaffoldBackgroundColor: ColorValues.lightBgColor,
+      scaffoldBackgroundColor: ColorValues.appBgColor,
       appBarTheme: const AppBarTheme(backgroundColor: ColorValues.lightBgColor),
       cardColor: ColorValues.lightDialogColor,
       shadowColor: ColorValues.shadowColor.withAlpha(12),
@@ -174,22 +101,106 @@ class AppThemeController extends GetxController {
           borderRadius: BorderRadius.circular(Dimens.twelve),
         ),
       ),
-      fontFamily: kDefaultFontFamily,
+      fontFamily: defaultFontFamily,
       textTheme: const TextTheme().copyWith(
-        bodyLarge: const TextStyle(
-          color: ColorValues.lightBodyTextColor,
-        ),
-        bodyMedium: const TextStyle(
-          color: ColorValues.lightBodyTextColor,
-        ),
-        bodySmall: const TextStyle(
-          color: ColorValues.lightBodyTextColor,
+        titleLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
         ),
         titleMedium: TextStyle(
-          color: ColorValues.lightBodyTextColor.withAlpha(180),
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w600,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
         ),
         titleSmall: TextStyle(
-          color: ColorValues.lightBodyTextColor.withAlpha(140),
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        bodyLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twentyEight,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        bodyMedium: TextStyle(fontSize: Dimens.fourteen, fontWeight: FontWeight.w600, fontFamily: defaultFontFamily, height: defaultFontHeight, color: ColorValues.blackColor),
+        bodySmall: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.fourteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displayLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twentyFour,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displayMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twenty,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displaySmall: TextStyle(
+          fontSize: Dimens.thirteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+          color: ColorValues.blackColor,
+        ),
+        headlineLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.thirtyTwo,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        headlineMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twenty,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        headlineSmall: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.nineteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.eighteen,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.eighteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelSmall: TextStyle(
+          fontSize: Dimens.twelve,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+          color: ColorValues.blackColor,
         ),
       ),
       brightness: Brightness.light,
@@ -198,12 +209,11 @@ class AppThemeController extends GetxController {
   }
 
   ThemeData getDarkThemeData(BuildContext context) {
-    getSystemChromeData();
     return ThemeData(
       useMaterial3: true,
-      colorSchemeSeed: ColorValues.primaryColor,
+      colorSchemeSeed: ColorValues.primaryGreenColor,
       iconTheme: const IconThemeData(color: ColorValues.darkGrayColor),
-      scaffoldBackgroundColor: ColorValues.darkBgColor,
+      scaffoldBackgroundColor: ColorValues.appBgColor,
       shadowColor: ColorValues.shadowColor.withAlpha(12),
       appBarTheme: const AppBarTheme(backgroundColor: ColorValues.darkBgColor),
       cardColor: ColorValues.darkDialogColor,
@@ -293,67 +303,110 @@ class AppThemeController extends GetxController {
           borderRadius: BorderRadius.circular(Dimens.twelve),
         ),
       ),
-      fontFamily: kDefaultFontFamily,
+      fontFamily: defaultFontFamily,
       textTheme: const TextTheme().copyWith(
-        bodyLarge: const TextStyle(
-          color: ColorValues.darkBodyTextColor,
-        ),
-        bodyMedium: const TextStyle(
-          color: ColorValues.darkBodyTextColor,
-        ),
-        bodySmall: const TextStyle(
-          color: ColorValues.darkBodyTextColor,
+        titleLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
         ),
         titleMedium: TextStyle(
-          color: ColorValues.darkBodyTextColor.withAlpha(180),
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w600,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
         ),
         titleSmall: TextStyle(
-          color: ColorValues.darkBodyTextColor.withAlpha(140),
+          color: ColorValues.blackColor,
+          fontSize: Dimens.sixTeen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        bodyLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twentyEight,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        bodyMedium: TextStyle(fontSize: Dimens.fourteen, fontWeight: FontWeight.w600, fontFamily: defaultFontFamily, height: defaultFontHeight, color: ColorValues.blackColor),
+        bodySmall: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.fourteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displayLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twentyFour,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displayMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twenty,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        displaySmall: TextStyle(
+          fontSize: Dimens.thirteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+          color: ColorValues.blackColor,
+        ),
+        headlineLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.thirtyTwo,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        headlineMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.twenty,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        headlineSmall: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.nineteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelLarge: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.eighteen,
+          fontWeight: FontWeight.w700,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelMedium: TextStyle(
+          color: ColorValues.blackColor,
+          fontSize: Dimens.eighteen,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+        ),
+        labelSmall: TextStyle(
+          fontSize: Dimens.twelve,
+          fontWeight: FontWeight.w400,
+          fontFamily: defaultFontFamily,
+          height: defaultFontHeight,
+          color: ColorValues.blackColor,
         ),
       ),
       brightness: Brightness.dark,
       visualDensity: VisualDensity.adaptivePlatformDensity,
     );
-  }
-
-  void setThemeMode(String mode) async {
-    _themeMode.value = mode;
-    await HiveService.put<String>(kThemeModeBox, kThemeModeKey, mode);
-    switch (themeMode) {
-      case kLightMode:
-        Get.changeThemeMode(ThemeMode.light);
-        _themeMode.value = kLightMode;
-        break;
-      case kDarkMode:
-        Get.changeThemeMode(ThemeMode.dark);
-        _themeMode.value = kDarkMode;
-        break;
-      case kSystemMode:
-      default:
-        Get.changeThemeMode(ThemeMode.system);
-        _themeMode.value = kSystemMode;
-        break;
-    }
-    // update();
-  }
-
-  void getThemeMode() async {
-    var themeMode = await HiveService.get<String>(kThemeModeBox, kThemeModeKey);
-
-    switch (themeMode) {
-      case kSystemMode:
-        _themeMode.value = kSystemMode;
-        break;
-      case kLightMode:
-        _themeMode.value = kLightMode;
-        break;
-      case kDarkMode:
-        _themeMode.value = kDarkMode;
-        break;
-      default:
-        _themeMode.value = kSystemMode;
-        break;
-    }
-    // update();
   }
 }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:galleon_user/common/common_widgets.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/routes/app_pages.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 import '../../../constant/assets.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../../utility/role_permission.dart';
 import '../controller/home_controller.dart';
 
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.addIcon),
                 Text(
                   StringValues.newStudy.tr,
-                  style: AppStyles.style16Normal,
+                  style: GetThemeStyles.getStyle16Normal(context),
                 ).marginOnly(left: Dimens.twenty),
               ],
             ),
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                 CommonWidgets.fromSvg(svgAsset: SvgAssets.folderOutlinedIcon),
                 Text(
                   StringValues.manageStudies.tr,
-                  style: AppStyles.style16Normal,
+                  style: GetThemeStyles.getStyle16Normal(context),
                 ).marginOnly(left: Dimens.sixTeen),
               ],
             ),
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                   CommonWidgets.fromSvg(svgAsset: SvgAssets.peoplesIcon),
                   Text(
                     StringValues.managePosition.tr,
-                    style: AppStyles.style16Normal,
+                    style: GetThemeStyles.getStyle16Normal(context),
                   ).marginOnly(left: Dimens.fifteen),
                 ],
               ),
@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Text(
                     StringValues.logout.tr,
-                    style: AppStyles.style16Bold.copyWith(color: ColorValues.primaryGreenColor),
+                    style: GetThemeStyles.getStyle16Bold(context)?.copyWith(color: ColorValues.primaryGreenColor),
                   ),
                   const SizedBox.shrink(),
                 ],

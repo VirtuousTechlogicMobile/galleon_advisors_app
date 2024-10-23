@@ -24,6 +24,44 @@ class DatabaseHelper {
   final FirebaseFirestore fireStoreInstance = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
+  Future<void> insertOppFlagsData(OpportunityFlagDataModel position) async {
+    try {
+      CollectionReference positionsRef = fireStoreInstance.collection(DatabaseSynonyms.opportunityFlagCollection);
+      DocumentReference ref = await positionsRef.add(position.toMap());
+      print("Program inserted successfully!   ${ref.id}");
+    } catch (e) {
+      print("Error inserting program: $e");
+    }
+  }
+
+  Future<void> updateTaskIds() async {
+    try {
+      List<String> taskIds = [
+        "DoknS8YdAOfSA0ddBWAS",
+        "SWt5ilpwfPbBuSVeFAVR",
+        "VSUCPMi9rsBYS2amJoQC",
+        "DY40oSGZP7yBCsrXEgK2",
+        "K701kEUqZzhR0SNGKNnG",
+        "DdeQQZtngaqQk5MRUYMb",
+      ];
+      // Update the 'tasksIds' field in the specific document
+      await fireStoreInstance.collection('positions').doc('KeFvnEDxYw1294nnwK4m').update({
+        'tasks_ids': taskIds,
+      });
+      print("tasksIds updated successfully");
+    } catch (e) {
+      print("Error updating tasksIds: $e");
+    }
+  }
+}
+
+class UserDatabaseHelper extends DatabaseHelper {
+  UserDatabaseHelper._privateConstructor() : super._privateConstructor();
+
+  static final UserDatabaseHelper _instance = UserDatabaseHelper._privateConstructor();
+
+  static UserDatabaseHelper get instance => _instance;
+
   Future<FirebaseResponseModel<String?>> signInUser({required String email, required String password}) async {
     try {
       UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
@@ -72,20 +110,6 @@ class DatabaseHelper {
     }
   }
 
-  Future<FirebaseResponseModel> logoutUser() async {
-    try {
-      await StorageDataHandler.deleteAllData();
-      await firebaseAuth.signOut();
-      return FirebaseResponseModel(isSuccess: true, data: null, errorMessage: null);
-    } on FirebaseAuthException {
-      return FirebaseResponseModel(isSuccess: false, data: null, errorMessage: FirebaseErrorMessages.somethingWentWrong);
-    } on SocketException {
-      throw NoInternetException();
-    } catch (e) {
-      throw GenericException("An authentication error occurred while Sign In. $e");
-    }
-  }
-
   Future<FirebaseResponseModel> sendPasswordResetEmail({required String email}) async {
     try {
       if (await checkEmailExists(email)) {
@@ -109,6 +133,28 @@ class DatabaseHelper {
       throw GenericException("An unknown error occurred: $e");
     }
   }
+
+  Future<FirebaseResponseModel> logoutUser() async {
+    try {
+      await StorageDataHandler.deleteAllData();
+      await firebaseAuth.signOut();
+      return FirebaseResponseModel(isSuccess: true, data: null, errorMessage: null);
+    } on FirebaseAuthException {
+      return FirebaseResponseModel(isSuccess: false, data: null, errorMessage: FirebaseErrorMessages.somethingWentWrong);
+    } on SocketException {
+      throw NoInternetException();
+    } catch (e) {
+      throw GenericException("An authentication error occurred while Sign In. $e");
+    }
+  }
+}
+
+class ProgramsDatabaseHelper extends DatabaseHelper {
+  ProgramsDatabaseHelper._privateConstructor() : super._privateConstructor();
+
+  static final ProgramsDatabaseHelper _instance = ProgramsDatabaseHelper._privateConstructor();
+
+  static ProgramsDatabaseHelper get instance => _instance;
 
   Future<FirebaseResponseModel<List<ProgramDataModel>?>> getAllProgramsData() async {
     try {
@@ -145,10 +191,7 @@ class DatabaseHelper {
           deptList.add(DepartmentDataModel.fromMap(snapshot.data() as Map<String, dynamic>, departmentId: snapshot.id));
         }
       }
-      /* QuerySnapshot querySnapshot = await deptCollectionRef.get();
-      if (querySnapshot.docs.isNotEmpty) {
-        deptList.addAll(querySnapshot.docs.map((docs) => DepartmentDataModel.fromMap(docs.data() as Map<String, dynamic>, departmentId: docs.id)).toList());
-      }*/
+
       if (deptList.isNotEmpty) {
         return FirebaseResponseModel(
           isSuccess: true,
@@ -191,38 +234,6 @@ class DatabaseHelper {
     } catch (e) {
       log("Exception : $e");
       throw DataNotFoundException();
-    }
-  }
-
-  Future createStudy() async {}
-
-  Future<void> insertOppFlagsData(OpportunityFlagDataModel position) async {
-    try {
-      CollectionReference positionsRef = fireStoreInstance.collection(DatabaseSynonyms.opportunityFlagCollection);
-      DocumentReference ref = await positionsRef.add(position.toMap());
-      print("Program inserted successfully!   ${ref.id}");
-    } catch (e) {
-      print("Error inserting program: $e");
-    }
-  }
-
-  Future<void> updateTaskIds() async {
-    try {
-      List<String> taskIds = [
-        "DoknS8YdAOfSA0ddBWAS",
-        "SWt5ilpwfPbBuSVeFAVR",
-        "VSUCPMi9rsBYS2amJoQC",
-        "DY40oSGZP7yBCsrXEgK2",
-        "K701kEUqZzhR0SNGKNnG",
-        "DdeQQZtngaqQk5MRUYMb",
-      ];
-      // Update the 'tasksIds' field in the specific document
-      await fireStoreInstance.collection('positions').doc('KeFvnEDxYw1294nnwK4m').update({
-        'tasks_ids': taskIds,
-      });
-      print("tasksIds updated successfully");
-    } catch (e) {
-      print("Error updating tasksIds: $e");
     }
   }
 }

@@ -71,7 +71,7 @@ class CreateNewStudyScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           if (createNewStudyController.selectedDept.value == null) {
-                            AppUtility.showSnackBar(StringValues.pleaseSelectDepartment);
+                            AppUtility.showSnackBar(StringValues.pleaseSelectDepartment.tr);
                           }
                         },
                         child: Obx(

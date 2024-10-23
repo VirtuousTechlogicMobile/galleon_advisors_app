@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:galleon_user/modules/end_study_summary/controller/end_study_summary_controller.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/strings.dart';
-import '../../../constant/styles.dart';
 import '../../../routes/app_pages.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../../study_screen/components/study_screen_components.dart';
 import '../components/end_study_summary_screen_appbar.dart';
 
@@ -44,7 +43,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                     flex: 4,
                     child: Column(
                       children: [
-                        serviceVsOppLayout(),
+                        serviceVsOppLayout(context),
                         Expanded(
                           child: chartLayout(context),
                         ),
@@ -63,7 +62,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                         ),
                         Expanded(
                           flex: GetResponsiveFlex.fourAndTwo(context),
-                          child: serviceActivitiesLayout(),
+                          child: serviceActivitiesLayout(context),
                         ),
                       ],
                     ).marginOnly(left: Dimens.thirteen),
@@ -77,7 +76,7 @@ class EndStudySummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceVsOppLayout() {
+  Widget serviceVsOppLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
         top: Dimens.twenty,
@@ -109,7 +108,7 @@ class EndStudySummaryScreen extends StatelessWidget {
             ),
             child: Text(
               StringValues.serviceVsOpportunity.tr,
-              style: AppStyles.style14Normal.copyWith(
+              style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
@@ -125,7 +124,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                     color: ColorValues.deepGreenColor,
                     child: Text(
                       "(${endStudySummaryController.servicePer.toStringAsFixed(1)}%)",
-                      style: AppStyles.style12Normal.copyWith(
+                      style: GetThemeStyles.getStyle12Normal(context)?.copyWith(
                         color: ColorValues.whiteColor,
                       ),
                     ),
@@ -137,7 +136,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                     color: ColorValues.charcoalGrayColor,
                     child: Text(
                       "(${endStudySummaryController.oppPer.toStringAsFixed(1)}%)",
-                      style: AppStyles.style12Normal.copyWith(
+                      style: GetThemeStyles.getStyle12Normal(context)?.copyWith(
                         color: ColorValues.whiteColor,
                       ),
                     ),
@@ -178,7 +177,7 @@ class EndStudySummaryScreen extends StatelessWidget {
             color: ColorValues.primaryGreenColor.withOpacity(0.25),
             child: Text(
               StringValues.keyThemes.tr,
-              style: AppStyles.style14Normal.copyWith(
+              style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
@@ -193,7 +192,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                     endStudySummaryController.keyThemesList.length,
                     (index) {
                       return Flexible(
-                        child: StudyScreenComponents.customListElement(text: endStudySummaryController.keyThemesList[index]),
+                        child: StudyScreenComponents.customListElement(text: endStudySummaryController.keyThemesList[index], context: context),
                       );
                     },
                   ),
@@ -206,7 +205,7 @@ class EndStudySummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceActivitiesLayout() {
+  Widget serviceActivitiesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.nineteen),
       decoration: BoxDecoration(
@@ -235,7 +234,7 @@ class EndStudySummaryScreen extends StatelessWidget {
             ),
             child: Text(
               StringValues.serviceActivities.tr,
-              style: AppStyles.style14Normal.copyWith(
+              style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
@@ -261,7 +260,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               padding: EdgeInsets.only(top: Dimens.one, bottom: Dimens.one, left: Dimens.nine),
                               child: Text(
                                 StringValues.activity.tr,
-                                style: AppStyles.style14Normal.copyWith(
+                                style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
                                 maxLines: 1,
@@ -279,7 +278,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               color: ColorValues.primaryGreenColor.withOpacity(0.25),
                               child: Text(
                                 StringValues.timeObserved.tr,
-                                style: AppStyles.style14Normal.copyWith(
+                                style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
                                 maxLines: 1,
@@ -297,7 +296,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               color: ColorValues.primaryGreenColor.withOpacity(0.25),
                               child: Text(
                                 StringValues.volume.tr,
-                                style: AppStyles.style14Normal.copyWith(
+                                style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
                                 maxLines: 1,
@@ -315,7 +314,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               color: ColorValues.primaryGreenColor.withOpacity(0.25),
                               child: Text(
                                 StringValues.activityDuration.tr,
-                                style: AppStyles.style14Normal.copyWith(
+                                style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                                   color: ColorValues.blackColor,
                                 ),
                                 maxLines: 1,
@@ -338,6 +337,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                                   timeObserved: endStudySummaryController.serviceActivitiesList[index].timeObserved,
                                   activityDuration: endStudySummaryController.serviceActivitiesList[index].activityDuration,
                                   volume: endStudySummaryController.serviceActivitiesList[index].volume,
+                                  context: context,
                                 );
                               },
                             ),
@@ -401,7 +401,7 @@ class EndStudySummaryScreen extends StatelessWidget {
     );
   }
 
-  Widget buildRow({required String activity, required String timeObserved, required String volume, required String activityDuration}) {
+  Widget buildRow({required String activity, required String timeObserved, required String volume, required String activityDuration, required BuildContext context}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -410,7 +410,7 @@ class EndStudySummaryScreen extends StatelessWidget {
           flex: 2,
           child: Text(
             activity,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
             ),
             maxLines: 1,
@@ -421,7 +421,7 @@ class EndStudySummaryScreen extends StatelessWidget {
           flex: 2,
           child: Text(
             timeObserved,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
             ),
             maxLines: 1,
@@ -432,7 +432,7 @@ class EndStudySummaryScreen extends StatelessWidget {
           flex: 1,
           child: Text(
             volume,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
             ),
             maxLines: 1,
@@ -443,7 +443,7 @@ class EndStudySummaryScreen extends StatelessWidget {
           flex: 2,
           child: Text(
             activityDuration,
-            style: AppStyles.style16Normal.copyWith(
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
               color: ColorValues.blackColor,
             ),
             maxLines: 1,
@@ -480,7 +480,7 @@ class EndStudySummaryScreen extends StatelessWidget {
             color: ColorValues.primaryGreenColor.withOpacity(0.25),
             child: Text(
               StringValues.opportunityThemes.tr,
-              style: AppStyles.style14Normal.copyWith(
+              style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
@@ -516,7 +516,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 'Leisure\nArrival',
-                                style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor),
+                                style: GetThemeStyles.getStyle12Normal(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -527,7 +527,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 'Lorem\nIpsum',
-                                style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor),
+                                style: GetThemeStyles.getStyle12Normal(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -539,7 +539,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               child: Text(
                                 'Sched-\nling',
                                 textAlign: TextAlign.center,
-                                style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor),
+                                style: GetThemeStyles.getStyle12Normal(context),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -549,7 +549,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 'Test',
-                                style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor),
+                                style: GetThemeStyles.getStyle12Normal(context),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -577,7 +577,7 @@ class EndStudySummaryScreen extends StatelessWidget {
                       getTitlesWidget: (value, _) {
                         return Text(
                           '${(value / 5000 * 100).round()} %',
-                          style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor),
+                          style: GetThemeStyles.getStyle12Normal(context),
                         ).marginOnly(left: Dimens.six);
                       },
                     ),

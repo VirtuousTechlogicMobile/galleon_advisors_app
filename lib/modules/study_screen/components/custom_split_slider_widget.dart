@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_user/constant/colors.dart';
+import 'package:galleon_user/theme/get_theme_wise_color.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +32,7 @@ class CustomSplitSliderWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 '${(100 - sliderValue).toStringAsFixed(0)} %',
-                style: AppStyles.style16SemiBold.copyWith(color: ColorValues.primaryGreenColor),
+                style: GetThemeStyles.getStyle16SemiBold(context)?.copyWith(color: ColorValues.primaryGreenColor),
               ),
             ),
           ),
@@ -65,7 +66,7 @@ class CustomSplitSliderWidget extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 '${sliderValue.toStringAsFixed(0)} %',
-                style: AppStyles.style16SemiBold.copyWith(color: ColorValues.primaryGreenColor),
+                style: GetThemeStyles.getStyle16SemiBold(context)?.copyWith(color: ColorValues.primaryGreenColor),
               ),
             ),
           ),

@@ -13,6 +13,7 @@ import '../../../constant/assets.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 
 class CreateNewPositionScreen extends StatelessWidget {
   CreateNewPositionScreen({super.key});
@@ -59,7 +60,7 @@ class CreateNewPositionScreen extends StatelessWidget {
                                   onItemSelected: (selectedDropDownItem) {
                                     createNewPositionController.selectedDept.value = selectedDropDownItem;
                                   },
-                                  dropDowButtonTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                                  dropDowButtonTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                                   buttonHeight: GetResponsiveDimens.eightyAndThirtyFive(context),
                                   selectedItem: createNewPositionController.selectedDept.value,
                                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
@@ -81,7 +82,7 @@ class CreateNewPositionScreen extends StatelessWidget {
                                 textAlign: TextAlign.left,
                                 borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
                                 contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
-                                textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                                textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                                 cursorColor: ColorValues.blackColor,
                                 maxLines: 1,
                               ).marginOnly(bottom: Dimens.fiftyFive),
@@ -98,7 +99,7 @@ class CreateNewPositionScreen extends StatelessWidget {
                                     createNewPositionController.selectedTemp.value = selectedDropDownItem;
                                   },
                                   buttonHeight: GetResponsiveDimens.eightyAndThirtyFive(context),
-                                  dropDowButtonTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                                  dropDowButtonTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                                   selectedItem: createNewPositionController.selectedTemp.value,
                                   border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                                   dropdownIcon: SvgAssets.dropdownRightArrowSmallIcon,

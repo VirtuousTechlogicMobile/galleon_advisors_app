@@ -1,15 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:galleon_user/common/common_widgets.dart';
 import 'package:galleon_user/common/custom_primary_button.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/modules/study_screen/components/study_screen_bottom_bar.dart';
 import 'package:galleon_user/modules/study_screen/controller/study_screen_controller.dart';
+import 'package:galleon_user/theme/get_theme_wise_color.dart';
 import 'package:galleon_user/utility/utility.dart';
 import 'package:get/get.dart';
-
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../routes/app_pages.dart';
@@ -60,16 +58,16 @@ class StudyScreen extends StatelessWidget {
                             child: studyController.getCurrentTabIndex() == 0
                                 ? activitiesLayout(context)
                                 : studyController.getCurrentTabIndex() == 2
-                                    ? tipsAndTricksLayout()
+                                    ? tipsAndTricksLayout(context)
                                     : studyController.getCurrentTabIndex() == 3
-                                        ? operationalAnalysisLayout()
-                                        : keyThemesLayout(),
+                                        ? operationalAnalysisLayout(context)
+                                        : keyThemesLayout(context),
                           ),
                         ),
                       ),
                       Flexible(
                         flex: 1,
-                        child: studyTimeLineLayout(),
+                        child: studyTimeLineLayout(context),
                       ),
                     ],
                   ),
@@ -107,12 +105,12 @@ class StudyScreen extends StatelessWidget {
                                 ? SizedBox(width: Dimens.nine)
                                 : Flexible(
                                     flex: 2,
-                                    child: volumeLayout(),
+                                    child: volumeLayout(context),
                                   ),
                           ),
                           Flexible(
                             flex: 3,
-                            child: opportunityThemeLayout(),
+                            child: opportunityThemeLayout(context),
                           ),
                         ],
                       ).marginSymmetric(horizontal: Dimens.fourteen),
@@ -164,7 +162,7 @@ class StudyScreen extends StatelessWidget {
               buttonColor: studyController.selectedActivitiesSubTab.value == 'comment' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
               borderRadius: BorderRadius.circular(GetResponsiveDimens.sevenAndNine(context)),
               contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'comment' ? Dimens.four : Dimens.eight),
-              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
               onTap: () {
                 studyController.onChangeActivitiesSubTab(0);
               },
@@ -189,7 +187,7 @@ class StudyScreen extends StatelessWidget {
                           buttonColor: ColorValues.softWhiteColor,
                           borderRadius: BorderRadius.circular(Dimens.eight),
                           contentPadding: EdgeInsets.symmetric(vertical: Dimens.eight),
-                          btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                          btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                         ),
                       ).marginOnly(left: GetResponsiveDimens.tenAndEight(context), right: Dimens.twentySeven),
                     ),
@@ -204,7 +202,7 @@ class StudyScreen extends StatelessWidget {
                         studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
                     borderRadius: BorderRadius.circular(GetResponsiveDimens.sevenAndNine(context)),
                     contentPadding: EdgeInsets.symmetric(vertical: studyController.selectedActivitiesSubTab.value == 'opportunityFlag' ? Dimens.four : Dimens.eight),
-                    btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                    btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                     onTap: () {
                       studyController.onChangeActivitiesSubTab(1);
                     },
@@ -242,12 +240,12 @@ class StudyScreen extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       child: Text(
                         StringValues.comment.tr,
-                        style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
                       ),
                     ),
                     Text(
                       'Free Text as well as auto-safe.',
-                      style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                      style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                     ).marginOnly(top: Dimens.twentySix, left: GetResponsiveDimens.twentyNineAndFifty(context), right: Dimens.forty),
                   ],
                 ).marginOnly(top: Dimens.sevenTeen, bottom: Dimens.ten);
@@ -273,7 +271,7 @@ class StudyScreen extends StatelessWidget {
                       color: ColorValues.deepYellowColor.withOpacity(0.40),
                       child: Text(
                         StringValues.identifier.tr,
-                        style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                        style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
                       ),
                     ),
                   ],
@@ -316,8 +314,8 @@ class StudyScreen extends StatelessWidget {
                       },
                       border: Border.all(color: ColorValues.lightGrayColor, width: Dimens.one),
                       buttonColor: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenAccentColor.withOpacity(0.25) : ColorValues.whiteColor,
-                      btnTextStyle:
-                          AppStyles.style16Normal.copyWith(color: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
+                      btnTextStyle: GetThemeStyles.getStyle16Normal(context)
+                          ?.copyWith(color: studyController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
                     ),
                   );
                 },
@@ -329,7 +327,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget tipsAndTricksLayout() {
+  Widget tipsAndTricksLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
       padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.ten, left: Dimens.twentyNine, bottom: Dimens.ten),
@@ -343,33 +341,33 @@ class StudyScreen extends StatelessWidget {
           CommonWidgets.autoSizeRichText(textSpans: [
             TextSpan(
               text: StringValues.server.tr,
-              style: AppStyles.style16Normal.copyWith(
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
                 decoration: TextDecoration.underline,
               ),
             ),
             TextSpan(
               text: StringValues.role.tr,
-              style: AppStyles.style16Normal.copyWith(
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
           ], minFontSize: 10, maxFontSize: 16),
-          StudyScreenComponents.customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr),
-          StudyScreenComponents.customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr),
+          StudyScreenComponents.customListElement(text: StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr, context: context),
+          StudyScreenComponents.customListElement(text: StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr, context: context),
           Text(
             StringValues.processOpportunities.tr,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
           ).marginOnly(top: Dimens.fifteen),
-          StudyScreenComponents.customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr),
-          StudyScreenComponents.customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr),
-          StudyScreenComponents.customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr),
+          StudyScreenComponents.customListElement(text: StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr, context: context),
+          StudyScreenComponents.customListElement(text: StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr, context: context),
+          StudyScreenComponents.customListElement(text: StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr, context: context),
         ],
       ),
     );
   }
 
-  Widget operationalAnalysisLayout() {
+  Widget operationalAnalysisLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
       padding: EdgeInsets.only(top: Dimens.sixTeen),
@@ -396,21 +394,21 @@ class StudyScreen extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     'Analysis Name',
-                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
                   ).marginOnly(left: Dimens.twentySeven),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
                     'Data Inputs',
-                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
                   ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
                 ),
                 Expanded(
                   flex: 1,
                   child: Text(
                     'Sample',
-                    style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
                   ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
                 ),
               ],
@@ -440,6 +438,7 @@ class StudyScreen extends StatelessWidget {
                           ),
                           child: buildTableRow(
                             operationalAnalysisDataModel: studyController.tableData[index],
+                            context: context,
                           ),
                         );
                       },
@@ -481,7 +480,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTableRow({required OperationalAnalysisDataModel operationalAnalysisDataModel}) {
+  Widget buildTableRow({required OperationalAnalysisDataModel operationalAnalysisDataModel, required BuildContext context}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -490,7 +489,7 @@ class StudyScreen extends StatelessWidget {
           flex: 1,
           child: Text(
             operationalAnalysisDataModel.analysisName,
-            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twentySeven, right: Dimens.twenty),
@@ -499,7 +498,7 @@ class StudyScreen extends StatelessWidget {
           flex: 1,
           child: Text(
             operationalAnalysisDataModel.dataInputs,
-            style: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
@@ -509,15 +508,16 @@ class StudyScreen extends StatelessWidget {
             flex: 1,
             child: StudyScreenComponents.customListElement(
               text: operationalAnalysisDataModel.sample,
-              textStyle: AppStyles.style14Normal.copyWith(color: ColorValues.blackColor),
+              textStyle: GetThemeStyles.getStyle14Normal(context)?.copyWith(color: ColorValues.blackColor),
               maxLines: 2,
+              context: context,
             ).marginOnly(left: Dimens.twenty, right: Dimens.fifteen),
           ),
       ],
     );
   }
 
-  Widget keyThemesLayout() {
+  Widget keyThemesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: Dimens.five, left: Dimens.twentyTwo, bottom: Dimens.seven, right: Dimens.twentySix),
       padding: EdgeInsets.only(top: Dimens.thirtyFour, right: Dimens.fifteen, left: Dimens.twentyNine, bottom: Dimens.ten),
@@ -530,13 +530,13 @@ class StudyScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
-            child: StudyScreenComponents.customListElement(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+            child: StudyScreenComponents.customListElement(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', context: context),
           ),
           Flexible(
-            child: StudyScreenComponents.customListElement(text: 'Ut in velit a sapien eleifend dictum.'),
+            child: StudyScreenComponents.customListElement(text: 'Ut in velit a sapien eleifend dictum.', context: context),
           ),
           Flexible(
-            child: StudyScreenComponents.customListElement(text: 'Cras convallis leo eu mauris egestas lobortis.'),
+            child: StudyScreenComponents.customListElement(text: 'Cras convallis leo eu mauris egestas lobortis.', context: context),
           ),
         ],
       ),
@@ -617,7 +617,7 @@ class StudyScreen extends StatelessWidget {
                   ),
                   child: Text(
                     StringValues.serviceActivities.tr,
-                    style: AppStyles.style14Normal.copyWith(
+                    style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                       color: ColorValues.blackColor,
                     ),
                   ),
@@ -658,7 +658,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget volumeLayout() {
+  Widget volumeLayout(BuildContext context) {
     return Obx(
       () => Container(
         margin: EdgeInsets.only(
@@ -696,7 +696,7 @@ class StudyScreen extends StatelessWidget {
               ),
               child: Text(
                 StringValues.volume.tr,
-                style: AppStyles.style14Normal.copyWith(
+                style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                   color: ColorValues.blackColor,
                 ),
               ),
@@ -744,7 +744,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget opportunityThemeLayout() {
+  Widget opportunityThemeLayout(BuildContext context) {
     return Obx(
       () => IgnorePointer(
         ignoring: studyController.servicesTapped.value,
@@ -785,7 +785,7 @@ class StudyScreen extends StatelessWidget {
                   ),
                   child: Text(
                     StringValues.opportunityThemes.tr,
-                    style: AppStyles.style14Normal.copyWith(
+                    style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                       color: ColorValues.blackColor,
                     ),
                   ),
@@ -823,7 +823,7 @@ class StudyScreen extends StatelessWidget {
     );
   }
 
-  Widget studyTimeLineLayout() {
+  Widget studyTimeLineLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
         top: studyController.servicesTapped.value ||
@@ -867,7 +867,7 @@ class StudyScreen extends StatelessWidget {
             ),
             child: Text(
               StringValues.studyTimeline.tr,
-              style: AppStyles.style14Normal.copyWith(
+              style: GetThemeStyles.getStyle14Normal(context)?.copyWith(
                 color: ColorValues.whiteColor,
               ),
             ),
@@ -948,12 +948,12 @@ class StudyScreen extends StatelessWidget {
                                         Text(
                                           "${studyController.studyTimeLineData[index].fromTime} - ${studyController.studyTimeLineData[index].toTime} "
                                           "(${AppUtility.getTimeDifference(studyController.studyTimeLineData[index].fromTime, studyController.studyTimeLineData[index].toTime)})",
-                                          style: AppStyles.style12Normal.copyWith(color: ColorValues.blackColor.withOpacity(0.80)),
+                                          style: GetThemeStyles.getStyle12Normal(context)?.copyWith(color: ColorValues.blackColor.withOpacity(0.80)),
                                           maxLines: 1,
                                         ).marginOnly(bottom: Dimens.three),
                                         Text(
                                           studyController.studyTimeLineData[index].heading,
-                                          style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                                          style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                                           maxLines: 1,
                                         ),
                                       ],

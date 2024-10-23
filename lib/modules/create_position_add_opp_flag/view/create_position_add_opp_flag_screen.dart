@@ -9,6 +9,7 @@ import '../../../common/custom_textfield.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
 import '../../../constant/styles.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../controller/create_position_add_opp_flag_controller.dart';
 
 class CreatePositionAddOppFlagScreen extends StatelessWidget {
@@ -86,7 +87,7 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
           Center(
             child: Text(
               StringValues.opportunityFlag.tr,
-              style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ).marginOnly(bottom: Dimens.twentyNine, left: Dimens.fifty, right: Dimens.fifty),
@@ -107,7 +108,7 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                   borderSide: BorderSide(width: Dimens.one, color: ColorValues.lightGrayColor),
                   contentPadding: EdgeInsets.only(top: Dimens.eleven, bottom: Dimens.twelve, left: Dimens.sixTeen, right: Dimens.twelve),
-                  textStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                  textStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                   cursorColor: ColorValues.blackColor,
                   onSubmit: (p0) {
                     createPositionAddOppFlagController.addFlag();
@@ -117,7 +118,7 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
                   },
                   maxLines: 1,
                 ).marginOnly(bottom: Dimens.five, left: Dimens.thirteen, right: Dimens.thirteen),
-                child: addButton(),
+                child: addButton(context),
               ),
             ),
           ),
@@ -142,14 +143,14 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
                             createPositionAddOppFlagController.opportunityFlagList[index],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                           ).marginOnly(right: Dimens.fifteen),
                         ),
                         InkWell(
                           onTap: () {},
                           child: Text(
                             '-',
-                            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                           ),
                         ),
                       ],
@@ -164,7 +165,7 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
     );
   }
 
-  Widget addButton() {
+  Widget addButton(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -177,7 +178,7 @@ class CreatePositionAddOppFlagScreen extends StatelessWidget {
             "${StringValues.add.tr} +",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
           ).marginOnly(right: Dimens.fifteen),
         ),
       ],

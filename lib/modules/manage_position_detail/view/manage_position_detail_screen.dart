@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:galleon_user/constant/strings.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/modules/manage_position_detail/controller/manage_position_detail_controller.dart';
 import 'package:galleon_user/utility/responsive.dart';
 import 'package:get/get.dart';
-
 import '../../../common/common_widgets.dart';
 import '../../../common/custom_primary_button.dart';
 import '../../../constant/colors.dart';
 import '../../../constant/dimens.dart';
+import '../../../theme/get_theme_wise_color.dart';
 import '../components/manage_position_detail_appbar.dart';
 
 class ManagePositionDetailScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
                     Obx(
                       () => Expanded(
                         child: managePositionDetailController.selectedActivityTab.value == 1
-                            ? tipsAndTricksLayout()
+                            ? tipsAndTricksLayout(context)
                             : managePositionDetailController.selectedActivityTab.value == 0
                                 ? opportunityFlagLayout(context)
                                 : Row(
@@ -51,10 +50,10 @@ class ManagePositionDetailScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: serviceActivitiesLayout(),
+                                        child: serviceActivitiesLayout(context),
                                       ),
                                       Expanded(
-                                        child: oppThemesLayout(),
+                                        child: oppThemesLayout(context),
                                       ),
                                     ],
                                   ).marginOnly(top: Dimens.twentyOne, left: Dimens.ten, right: Dimens.twelve),
@@ -76,7 +75,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
                                   managePositionDetailController.selectedActivityTab.value == 0 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
                               borderRadius: BorderRadius.circular(Dimens.eight),
                               contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
-                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                              btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                               onTap: () {
                                 managePositionDetailController.selectedActivityTab.value = 0;
                               },
@@ -94,7 +93,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
                                   managePositionDetailController.selectedActivityTab.value == 1 ? ColorValues.fontLightGrayColor.withOpacity(0.25) : ColorValues.softWhiteColor,
                               borderRadius: BorderRadius.circular(Dimens.eight),
                               contentPadding: EdgeInsets.symmetric(vertical: Dimens.ten),
-                              btnTextStyle: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                              btnTextStyle: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                               onTap: () {
                                 managePositionDetailController.selectedActivityTab.value = 1;
                               },
@@ -113,7 +112,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget serviceActivitiesLayout() {
+  Widget serviceActivitiesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(right: Dimens.five),
       padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.fifteen),
@@ -130,7 +129,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
         children: [
           Text(
             StringValues.serviceActivities.tr,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ).marginOnly(bottom: Dimens.thirtyThree),
@@ -149,7 +148,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
                     managePositionDetailController.positionData.value?.serviceActivities?[index] ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                   ),
                 );
               },
@@ -160,7 +159,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget oppThemesLayout() {
+  Widget oppThemesLayout(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: Dimens.six),
       padding: EdgeInsets.only(top: Dimens.eight, bottom: Dimens.fifteen),
@@ -177,7 +176,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
         children: [
           Text(
             StringValues.opportunityThemes.tr,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ).marginOnly(bottom: Dimens.twentyNine),
@@ -197,7 +196,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
                     managePositionDetailController.positionData.value?.oppThemes?[index] ?? '',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor),
+                    style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor),
                   ),
                 );
               },
@@ -208,7 +207,7 @@ class ManagePositionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget tipsAndTricksLayout() {
+  Widget tipsAndTricksLayout(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: Dimens.twentyOne, right: Dimens.ten, left: Dimens.thirtyTwo, bottom: Dimens.ten),
       decoration: BoxDecoration(
@@ -220,41 +219,41 @@ class ManagePositionDetailScreen extends StatelessWidget {
           CommonWidgets.autoSizeRichText(textSpans: [
             TextSpan(
               text: StringValues.server.tr,
-              style: AppStyles.style16Normal.copyWith(
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
                 decoration: TextDecoration.underline,
               ),
             ),
             TextSpan(
               text: StringValues.role.tr,
-              style: AppStyles.style16Normal.copyWith(
+              style: GetThemeStyles.getStyle16Normal(context)?.copyWith(
                 color: ColorValues.blackColor,
               ),
             ),
           ], minFontSize: 12, maxFontSize: 16),
           Text(
             "- ${StringValues.inThisRoleWhenWeObserveWeAreCountingCovers.tr}",
-            style: AppStyles.style16Normal,
+            style: GetThemeStyles.getStyle16Normal(context),
           ),
           Text(
             "- ${StringValues.coversAreTheNumberOfQuestsThatAreSeatedAtTheTable.tr}",
-            style: AppStyles.style16Normal,
+            style: GetThemeStyles.getStyle16Normal(context),
           ),
           Text(
             StringValues.processOpportunities.tr,
-            style: AppStyles.style16Normal.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
+            style: GetThemeStyles.getStyle16Normal(context)?.copyWith(color: ColorValues.blackColor, decoration: TextDecoration.underline),
           ).marginOnly(top: Dimens.fifteen),
           Text(
             "- ${StringValues.lookOutForHowServersAreNavigatingAcrossSectionsAreTheyClosingStations.tr}",
-            style: AppStyles.style16Normal,
+            style: GetThemeStyles.getStyle16Normal(context),
           ),
           Text(
             "- ${StringValues.takeNoteOfWhereTheBussingStationsAreCanThisBeImproved.tr}",
-            style: AppStyles.style16Normal,
+            style: GetThemeStyles.getStyle16Normal(context),
           ),
           Text(
             "- ${StringValues.doBussingStationsHaveParStocksOrImagesOfWhatTheSetupShouldLookLike.tr}",
-            style: AppStyles.style16Normal,
+            style: GetThemeStyles.getStyle16Normal(context),
           ),
         ],
       ),
@@ -290,8 +289,8 @@ class ManagePositionDetailScreen extends StatelessWidget {
                     border: Border.all(color: ColorValues.lightGrayColor, width: 1),
                     buttonColor:
                         managePositionDetailController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenAccentColor.withOpacity(0.25) : ColorValues.whiteColor,
-                    btnTextStyle: AppStyles.style16Normal
-                        .copyWith(color: managePositionDetailController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
+                    btnTextStyle: GetThemeStyles.getStyle16Normal(context)
+                        ?.copyWith(color: managePositionDetailController.selectedOpportunityFlag.value == index ? ColorValues.primaryGreenColor : ColorValues.blackColor),
                   ),
                 );
               },
