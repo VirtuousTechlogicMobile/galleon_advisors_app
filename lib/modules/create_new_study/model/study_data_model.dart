@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:galleon_user/utility/utility.dart';
 
 class StudyDataModel {
   String? id;
+  String? studyName;
   String? programId;
   String? departmentId;
   String? positionId;
@@ -21,6 +23,7 @@ class StudyDataModel {
 
   StudyDataModel({
     this.id,
+    this.studyName,
     this.programId,
     this.departmentId,
     this.positionId,
@@ -42,6 +45,7 @@ class StudyDataModel {
   factory StudyDataModel.fromMap(Map<String, dynamic> map, {String? studyTimelineId}) {
     return StudyDataModel(
       id: studyTimelineId,
+      studyName: map['study_name'],
       programId: map['program_id'],
       departmentId: map['department_id'],
       positionId: map['position_id'],
@@ -63,6 +67,7 @@ class StudyDataModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'study_name': programId,
       'program_id': programId,
       'department_id': departmentId,
       'position_id': positionId,
@@ -82,25 +87,61 @@ class StudyDataModel {
     };
   }
 
+  Map<String, dynamic> toSqlite() {
+    return {
+      'id': id,
+      'study_name': studyName,
+      'program_id': programId,
+      'department_id': departmentId,
+      'position_id': positionId,
+      'created_at': createdAt != null ? AppUtility.fromDateToString(date: createdAt!) : null,
+      'start_time': startTime != null ? AppUtility.fromDateListToSqliteString(list: startTime!) : null,
+      'pause_time': pauseTime != null ? AppUtility.fromDateListToSqliteString(list: pauseTime!) : null,
+      'end_time': endTime != null ? AppUtility.fromDateToString(date: endTime!) : null,
+      'study_timeline_id': studyTimelineId,
+      'study_task_ids': studyTaskIds?.join(","),
+      'study_by': studyBy,
+      'key_themes_file': keyThemesFile,
+      'is_started': isStarted == true
+          ? 0
+          : isStarted == false
+              ? 1
+              : null,
+      'is_completed': isCompleted == true
+          ? 0
+          : isCompleted == false
+              ? 1
+              : null,
+      'last_updated_at': lastUpdatedAt != null ? AppUtility.fromDateToString(date: lastUpdatedAt!) : null,
+      'last_updated_by': lastUpdatedBy,
+      'is_removed_from_app': isRemovedFromApp == true
+          ? 0
+          : isRemovedFromApp == false
+              ? 1
+              : null,
+    };
+  }
+
   static Map<String, String> toFields() {
     return {
-      'id': 'INTEGER PRIMARY KEY',
-      'programId': 'TEXT',
-      'departmentId': 'TEXT',
-      'positionId': 'TEXT',
-      'createdAt': 'TEXT',
-      'startTime': 'TEXT',
-      'pauseTime': 'TEXT',
-      'endTime': 'TEXT',
-      'studyTimelineId': 'TEXT',
-      'studyTaskIds': 'TEXT',
-      'studyBy': 'TEXT',
-      'keyThemesFile': 'TEXT',
-      'isStarted': 'INTEGER',
-      'isCompleted': 'INTEGER',
-      'lastUpdatedAt': 'TEXT',
-      'lastUpdatedBy': 'TEXT',
-      'isRemovedFromApp': 'INTEGER',
+      'id': 'TEXT',
+      'study_name': 'TEXT',
+      'program_id': 'TEXT',
+      'department_id': 'TEXT',
+      'position_id': 'TEXT',
+      'created_at': 'TEXT',
+      'start_time': 'TEXT',
+      'pause_time': 'TEXT',
+      'end_time': 'TEXT',
+      'study_timeline_id': 'TEXT',
+      'study_task_ids': 'TEXT',
+      'study_by': 'TEXT',
+      'key_themes_file': 'TEXT',
+      'is_started': 'INTEGER',
+      'is_completed': 'INTEGER',
+      'last_updated_at': 'TEXT',
+      'last_updated_by': 'TEXT',
+      'is_removed_from_app': 'INTEGER',
     };
   }
 }

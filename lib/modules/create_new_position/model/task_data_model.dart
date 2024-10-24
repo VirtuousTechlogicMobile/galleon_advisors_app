@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:galleon_user/utility/utility.dart';
 
 class TaskDataModel {
   String? id;
@@ -43,6 +44,36 @@ class TaskDataModel {
       'last_updated_by': lastUpdatedBy,
       'last_updated_at': lastUpdatedAt != null ? Timestamp.fromDate(lastUpdatedAt!) : null,
       'position_template_id': taskTemplateId,
+    };
+  }
+
+  Map<String, dynamic> toSqlite() {
+    return {
+      'id': id,
+      'task_name': taskName,
+      'assign_status': assignStatus,
+      'type': type,
+      'is_active': isActive == true
+          ? 0
+          : isActive == false
+              ? 1
+              : null,
+      'last_updated_by': lastUpdatedBy,
+      'last_updated_at': lastUpdatedAt != null ? AppUtility.fromDateToString(date: lastUpdatedAt!) : null,
+      'position_template_id': taskTemplateId,
+    };
+  }
+
+  static Map<String, String> toFields() {
+    return {
+      'id': 'TEXT',
+      'task_name': 'TEXT',
+      'assign_status': 'TEXT',
+      'type': 'TEXT',
+      'is_active': 'INTEGER',
+      'last_updated_by': 'TEXT',
+      'last_updated_at': 'TEXT',
+      'position_template_id': 'TEXT',
     };
   }
 }

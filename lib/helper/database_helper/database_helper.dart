@@ -8,6 +8,7 @@ import 'package:galleon_user/helper/database_helper/firebase_error_messages.dart
 import 'package:galleon_user/helper/storage_handler/storage_data_handler.dart';
 import 'package:galleon_user/modules/create_new_position/model/position_data_model.dart';
 import 'package:galleon_user/modules/create_new_position/model/program_data_model.dart';
+import 'package:galleon_user/modules/create_new_position/model/task_data_model.dart';
 import 'package:galleon_user/modules/create_new_study/model/department_data_model.dart';
 import 'package:galleon_user/modules/create_new_study/model/opportunity_flag_data_model.dart';
 import '../custom_exception_handler.dart';
@@ -24,9 +25,14 @@ class DatabaseHelper {
   final FirebaseFirestore fireStoreInstance = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
+  String getUniqueDocId() {
+    DocumentReference reference = fireStoreInstance.collection(DatabaseSynonyms.USERSCOLLECTION).doc();
+    return reference.id;
+  }
+
   Future<void> insertOppFlagsData(OpportunityFlagDataModel position) async {
     try {
-      CollectionReference positionsRef = fireStoreInstance.collection(DatabaseSynonyms.opportunityFlagCollection);
+      CollectionReference positionsRef = fireStoreInstance.collection(DatabaseSynonyms.OPPORTUNITYFLAGCOLLECTION);
       DocumentReference ref = await positionsRef.add(position.toMap());
       print("Program inserted successfully!   ${ref.id}");
     } catch (e) {
@@ -95,11 +101,11 @@ class UserDatabaseHelper extends DatabaseHelper {
 
   Future<String?> getUserRoleById(String? userId) async {
     try {
-      DocumentSnapshot documentSnapshot = await fireStoreInstance.collection(DatabaseSynonyms.usersCollection).doc(userId).get();
+      DocumentSnapshot documentSnapshot = await fireStoreInstance.collection(DatabaseSynonyms.USERSCOLLECTION).doc(userId).get();
 
       if (documentSnapshot.exists) {
         final docData = documentSnapshot.data() as Map<String, dynamic>;
-        return docData[DatabaseSynonyms.roleField];
+        return docData[DatabaseSynonyms.ROLEFIELD];
       } else {
         return null;
       }
@@ -125,7 +131,7 @@ class UserDatabaseHelper extends DatabaseHelper {
 
   Future<bool> checkEmailExists(String email) async {
     try {
-      QuerySnapshot querySnapshot = await fireStoreInstance.collection(DatabaseSynonyms.usersCollection).where(DatabaseSynonyms.emailField, isEqualTo: email).get();
+      QuerySnapshot querySnapshot = await fireStoreInstance.collection(DatabaseSynonyms.USERSCOLLECTION).where(DatabaseSynonyms.EMAILFIELD, isEqualTo: email).get();
       return querySnapshot.docs.isNotEmpty;
     } on SocketException {
       throw NoInternetException();
@@ -158,7 +164,7 @@ class ProgramsDatabaseHelper extends DatabaseHelper {
 
   Future<FirebaseResponseModel<List<ProgramDataModel>?>> getAllProgramsData() async {
     try {
-      CollectionReference programCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.programCollection);
+      CollectionReference programCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.PROGRAMCOLLECTION);
 
       List<ProgramDataModel> programsList = [];
 
@@ -181,7 +187,7 @@ class ProgramsDatabaseHelper extends DatabaseHelper {
 
   Future<FirebaseResponseModel<List<DepartmentDataModel>?>> getProgramDepartmentData({required List<String> departmentIds}) async {
     try {
-      CollectionReference deptCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.departmentCollection);
+      CollectionReference deptCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.DEPARTMENTCOLLECTION);
 
       List<DepartmentDataModel> deptList = [];
 
@@ -215,11 +221,11 @@ class ProgramsDatabaseHelper extends DatabaseHelper {
 
   Future<FirebaseResponseModel<List<PositionDataModel>?>> getPositionsDataById({String? departmentIds}) async {
     try {
-      CollectionReference positionCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.positionsCollection);
+      CollectionReference positionCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.POSITIONSCOLLECTION);
 
       List<PositionDataModel> positionList = [];
 
-      QuerySnapshot querySnapshot = await positionCollectionRef.where(DatabaseSynonyms.departmentIdField, isEqualTo: departmentIds).get();
+      QuerySnapshot querySnapshot = await positionCollectionRef.where(DatabaseSynonyms.DEPARTMENTIDFIELD, isEqualTo: departmentIds).get();
       if (querySnapshot.docs.isNotEmpty) {
         positionList.addAll(querySnapshot.docs.map((docs) => PositionDataModel.fromMap(docs.data() as Map<String, dynamic>, positionId: docs.id)).toList());
       }
@@ -227,6 +233,30 @@ class ProgramsDatabaseHelper extends DatabaseHelper {
       return FirebaseResponseModel(
         isSuccess: true,
         data: positionList.isNotEmpty ? positionList : null,
+        errorMessage: null,
+      );
+    } on SocketException {
+      throw NoInternetException();
+    } catch (e) {
+      log("Exception : $e");
+      throw DataNotFoundException();
+    }
+  }
+
+  Future<FirebaseResponseModel<List<TaskDataModel>?>> getTasksById({required List<String> tasksId}) async {
+    try {
+      CollectionReference taskCollectionRef = fireStoreInstance.collection(DatabaseSynonyms.TASKSCOLLECTION);
+
+      List<TaskDataModel> taskData = [];
+      for (var id in tasksId) {
+        DocumentSnapshot doc = await taskCollectionRef.doc(id).get();
+        if (doc.exists) {
+          taskData.add(TaskDataModel.fromMap(doc.data() as Map<String, dynamic>, positionId: doc.id));
+        }
+      }
+      return FirebaseResponseModel(
+        isSuccess: true,
+        data: taskData.isNotEmpty ? taskData : null,
         errorMessage: null,
       );
     } on SocketException {

@@ -1,15 +1,17 @@
+// ignore_for_file: constant_identifier_names
+
 abstract class DatabaseSynonyms {
   /// collections
-  static const usersCollection = 'users';
-  static const programCollection = 'program';
-  static const departmentCollection = 'department';
-  static const positionsCollection = 'positions';
-  static const tasksCollection = 'tasks';
-  static const studyCollection = 'study';
-  static const opportunityFlagCollection = 'opportunity_flag';
+  static const USERSCOLLECTION = 'users';
+  static const PROGRAMCOLLECTION = 'program';
+  static const DEPARTMENTCOLLECTION = 'department';
+  static const POSITIONSCOLLECTION = 'positions';
+  static const TASKSCOLLECTION = 'tasks';
+  static const STUDYCOLLECTION = 'study';
+  static const OPPORTUNITYFLAGCOLLECTION = 'opportunity_flag';
 
   /// fields
-  static const roleField = 'role';
-  static const emailField = 'email';
-  static const departmentIdField = 'department_id';
+  static const ROLEFIELD = 'role';
+  static const EMAILFIELD = 'email';
+  static const DEPARTMENTIDFIELD = 'department_id';
 }

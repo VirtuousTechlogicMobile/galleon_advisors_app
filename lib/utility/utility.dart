@@ -1,13 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:galleon_user/constant/colors.dart';
 import 'package:galleon_user/constant/dimens.dart';
-import 'package:galleon_user/constant/styles.dart';
 import 'package:galleon_user/extension/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:get/get.dart';
-
 import '../theme/get_theme_wise_color.dart';
 
 abstract class AppUtility {
@@ -101,5 +100,44 @@ abstract class AppUtility {
   static Future<bool> checkNetwork() async {
     final connectivityResult = await Connectivity().checkConnectivity();
     return !connectivityResult.contains(ConnectivityResult.none);
+  }
+
+  static String fromTimeStampToString({required Timestamp timeStamp}) {
+    return timeStamp.toString();
+  }
+
+  static Timestamp fromStringToTimestamp({required String timeStampString}) {
+    // Create a DateFormat matching the string format
+    DateFormat dateFormat = DateFormat("MMMM d, y 'at' h:mm:ss a 'UTC'xxx");
+
+    // Convert the string to a DateTime object
+    DateTime dateTime = dateFormat.parse(timeStampString);
+
+    // Convert DateTime to Firestore Timestamp
+    return Timestamp.fromDate(dateTime);
+  }
+
+  static String fromListToString({required List<String> list}) {
+    String formattedString = list.join(',');
+    return formattedString;
+  }
+
+  static List<String> fromStringToList({required String string}) {
+    List<String> formattedList = string.split(",");
+    return formattedList;
+  }
+
+  static String fromDateToString({required DateTime date}) {
+    return date.toString();
+  }
+
+  static String fromDateListToSqliteString({required List<DateTime?> list}) {
+    List<String> formattedList = [];
+    for (var dateTime in list) {
+      if(dateTime != null) {
+        formattedList.add(fromDateToString(date: dateTime));
+      }
+    }
+    return formattedList.join(',');
   }
 }

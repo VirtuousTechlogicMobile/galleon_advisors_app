@@ -1,11 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:galleon_user/helper/database_helper/database_synonyms.dart';
 import 'package:galleon_user/helper/sqlite_database_helper/sqlite_queries_helper.dart';
 import 'package:galleon_user/modules/create_new_study/model/study_data_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
+import '../../modules/create_new_position/model/task_data_model.dart';
 
 class SqliteDatabaseHelper {
   SqliteDatabaseHelper._();
@@ -54,10 +55,35 @@ class SqliteDatabaseHelper {
 
   Future createStudyTable() async {
     try {
-      String createTableQuery = SqliteQueriesHelper.createTableSqlQuery(DatabaseSynonyms.studyCollection, StudyDataModel.toFields());
+      String createTableQuery = SqliteQueriesHelper.createTableSqlQuery(DatabaseSynonyms.STUDYCOLLECTION, StudyDataModel.toFields());
       await databaseReference?.execute(createTableQuery);
     } catch (e) {
       log("Exception: $e", name: tag);
     }
+  }
+
+  Future createTaskTable() async {
+    try {
+      String createTableQuery = SqliteQueriesHelper.createTableSqlQuery(DatabaseSynonyms.TASKSCOLLECTION, TaskDataModel.toFields());
+      await databaseReference?.execute(createTableQuery);
+    } catch (e) {
+      log("Exception: $e", name: tag);
+    }
+  }
+
+  Future insertStudyData({required StudyDataModel studyData}) async {
+    bool? studyTableExists = await isTableExists(DatabaseSynonyms.STUDYCOLLECTION);
+    if (studyTableExists == false) {
+      await createStudyTable();
+    }
+    return await databaseReference?.insert(DatabaseSynonyms.STUDYCOLLECTION, studyData.toSqlite(), conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
+
+  insertTasksData({required TaskDataModel taskData}) async {
+    bool? tasksTableExists = await isTableExists(DatabaseSynonyms.TASKSCOLLECTION);
+    if (tasksTableExists == false) {
+      await createTaskTable();
+    }
+    return await databaseReference?.insert(DatabaseSynonyms.TASKSCOLLECTION, taskData.toSqlite(), conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 }
